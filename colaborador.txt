@@ -1,5 +1,0 @@
-0;31018;Marcos Paulo;13124;contato.marcosPaulo1@gmail.com;94479268;Estagiario;true;
-0;31017;Otavio Mesquita;12329;otavio@gmail.com;999999999;Advogado;true;
-0;31016;Godofredo Alcantara;13128;godofredo@teste.com;98375449;Dono;false;
-0;31019;Junior Lemes;12982;godofredo2@teste.com;983754492;Advogado;false;
-0;31018;Marcos Paulo;13124;contato.marcosPaulo1@gmail.com;94479268;Estagiario;true;
