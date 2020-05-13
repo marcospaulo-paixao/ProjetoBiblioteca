@@ -1,6 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelos.utilidades;
 
-<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -36,8 +40,4 @@ public class GeradorID {
          //fecha o arquivo
          bw.close();		
     }
-=======
-public class GeradorId {
-    
->>>>>>> bc7f8c66e5dcec56cafd849d3f9f0dc39f76d9d4
 }
