@@ -61,7 +61,7 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
         try {
 
             ArrayList<Colaborador> listaDeColaborador = listagem();
-            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
+            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
             BufferedWriter bw = new BufferedWriter(fw);
 
             for (Colaborador colaborador : listaDeColaborador) {
@@ -110,6 +110,21 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    @Override
+    public Colaborador getColaborador(int id) throws Exception {
+        try {
+            ArrayList<Colaborador> listaDeColaboradores = listagem();
+            for (Colaborador colaborador : listaDeColaboradores) {
+                if (colaborador.getId() == id) {
+                    return colaborador;
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
     }
 
 }

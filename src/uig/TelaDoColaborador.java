@@ -372,10 +372,13 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 habilitaFormulario(false);
                 JOptionPane.showMessageDialog(null, "Colaborador salvo com sucesso");
             } else {
-                colaboradorControler.incluir(new Colaborador(0, matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
+                int id = Integer.parseInt(model.getValueAt(jTableColaboradores.getSelectedRow(), 0));
+                colaboradorControler.alterar(colaboradorControler.getColaborador(id),
+                        new Colaborador(0, matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
+                JOptionPane.showMessageDialog(null, "Colaborador alterado com sucesso");
                 habilitaFormulario(false);
                 System.out.println("alterando");
-
+                model.update(colaboradorControler.listagem());
             }
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, erro);

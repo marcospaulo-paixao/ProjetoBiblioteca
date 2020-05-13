@@ -52,7 +52,7 @@ public class Colaborador {
      */
     public Colaborador(int id,int matricula, String nome, int OAB, String email,
             int telefone, String tipoDeColaborador, boolean tipoDeStatus) {
-        this.id = 0;
+        this.id = id;
         this.matricula = matricula;
         this.nome = nome;
         this.OAB = OAB;
@@ -67,7 +67,7 @@ public class Colaborador {
      * @param objeto
      */
     public Colaborador(Colaborador objeto) {
-        this.id = 0;
+        this.id = objeto.id;
         this.matricula = objeto.matricula;
         this.nome = objeto.nome;
         this.OAB = objeto.OAB;

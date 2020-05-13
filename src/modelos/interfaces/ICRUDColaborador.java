@@ -13,24 +13,32 @@ import modelos.classes.Colaborador;
  * @author marcos
  */
 public interface ICRUDColaborador {
+
     /**
-     * 
+     *
      * @param objeto
-     * @throws Exception 
+     * @throws Exception
      */
     void incluir(Colaborador objeto) throws Exception;
+
     /**
-     * 
+     *
      * @param velhoColaborador
      * @param novoColaborador
-     * @throws Exception 
+     * @throws Exception
      */
     void alterar(Colaborador velhoColaborador, Colaborador novoColaborador) throws Exception;
+
     /**
-     * 
-     * @return
-     * @throws Exception 
+     *
+     * @return @throws Exception
      */
     ArrayList<Colaborador> listagem() throws Exception;
-
+    /**
+     * 
+     * @param id
+     * @return Colaborador
+     * @throws Exception 
+     */
+    Colaborador getColaborador(int id) throws Exception;
 }

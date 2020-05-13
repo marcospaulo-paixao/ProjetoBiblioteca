@@ -69,5 +69,19 @@ public class ColaboradorControle implements ICRUDColaborador {
             throw e;
         }
     }
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
+    @Override
+    public Colaborador getColaborador(int id) throws Exception {
+        try {
+            return colaboradorPersistencia.getColaborador(id);
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
 }
