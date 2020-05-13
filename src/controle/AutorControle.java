@@ -1,20 +1,15 @@
-package persistencia;
+
+package controle;
 
 import java.util.ArrayList;
 import modelos.classes.Editora;
 import modelos.interfaces.IcrudEditora;
 
-public class EditoraPersistencia implements IcrudEditora {
-
-    private String nomeDoArquivoNoDisco;
-
-    public EditoraPersistencia(String nomeDoArquivo) {
-        this.nomeDoArquivoNoDisco = nomeDoArquivo;
-    }
+public class AutorControle implements IcrudEditora{
 
     @Override
     public void incluir(Editora editoraObjeto) throws Exception {
-        System.out.println("Estou gravando no arquivo! ");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -26,5 +21,5 @@ public class EditoraPersistencia implements IcrudEditora {
     public ArrayList<Editora> listagem() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }
