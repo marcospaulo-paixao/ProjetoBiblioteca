@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import modelos.classes.Colaborador;
 import modelos.utilidades.ColaboradorTableModel;
 import modelos.interfaces.ICRUDColaborador;
+import modelos.utilidades.GeradorID;
 
 /**
  *
@@ -20,7 +21,6 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     private ColaboradorTableModel model = null;
     ICRUDColaborador colaboradorControler = null;
     private boolean incluir = false;
-
     /**
      * Creates new form TelaDoColaborador
      */
@@ -28,6 +28,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         super("Tela Colaboradores");
         initComponents();
         try {
+            
             colaboradorControler = new ColaboradorControle("colaborador.txt");
             model = new ColaboradorTableModel(new String[]{"id", "Nome", "Matricula", "OAB", "E-mail", "Telefone", "Tipo De Colaborador", "Status"});
             jTableColaboradores.setModel(model);
@@ -357,7 +358,9 @@ public class TelaDoColaborador extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
-        try {
+        try {    
+            GeradorID gId = new GeradorID();
+
             int matricula = Integer.parseInt(jTextFieldMatricula.getText());
             String nome = jTextFieldNome.getText();
             int OAB = Integer.parseInt(jTextFieldOAB.getText());
@@ -367,14 +370,15 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             String tipoDeColaborador = jTextFieldTipoDeColaborador.getText();
             boolean status = (jButtonStatus.getText().equals("Ativo"));
             if (incluir) {
-                colaboradorControler.incluir(new Colaborador(0, matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
+                colaboradorControler.incluir(new Colaborador(gId.getID(), matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
+                gId.finalize();
                 model.update(colaboradorControler.listagem());
                 habilitaFormulario(false);
                 JOptionPane.showMessageDialog(null, "Colaborador salvo com sucesso");
             } else {
                 int id = Integer.parseInt(model.getValueAt(jTableColaboradores.getSelectedRow(), 0));
                 colaboradorControler.alterar(colaboradorControler.getColaborador(id),
-                        new Colaborador(0, matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
+                        new Colaborador(id, matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
                 JOptionPane.showMessageDialog(null, "Colaborador alterado com sucesso");
                 habilitaFormulario(false);
                 System.out.println("alterando");
