@@ -21,6 +21,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     private ColaboradorTableModel model = null;
     ICRUDColaborador colaboradorControler = null;
     private boolean incluir = false;
+
     /**
      * Creates new form TelaDoColaborador
      */
@@ -29,7 +30,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
         try {
-            
+
             colaboradorControler = new ColaboradorControle("colaborador.txt");
             model = new ColaboradorTableModel(new String[]{"id", "Nome", "Matricula", "OAB", "E-mail", "Telefone", "Tipo De Colaborador", "Status"});
             jTableColaboradores.setModel(model);
@@ -375,7 +376,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
-        try {    
+        try {
             GeradorID gId = new GeradorID();
 
             int matricula = Integer.parseInt(jTextFieldMatricula.getText());
@@ -419,7 +420,12 @@ public class TelaDoColaborador extends javax.swing.JFrame {
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        try {
+            Login login = new Login();
+            login.setVisible(true);
+            dispose();
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonlistagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonlistagemActionPerformed

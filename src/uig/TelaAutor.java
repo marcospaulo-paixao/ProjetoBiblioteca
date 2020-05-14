@@ -230,7 +230,12 @@ public class TelaAutor extends javax.swing.JFrame {
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        try {
+            Login login = new Login();
+            login.setVisible(true);
+            dispose();
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
