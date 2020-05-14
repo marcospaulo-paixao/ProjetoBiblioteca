@@ -10,6 +10,7 @@ public class TelaAutor extends javax.swing.JFrame {
      */
     public TelaAutor() {
         initComponents();
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }
 
     /**
