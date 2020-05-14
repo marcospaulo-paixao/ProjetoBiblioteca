@@ -19,6 +19,7 @@ public class TelaEditora extends javax.swing.JFrame {
      */
     public TelaEditora() {
         initComponents();
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }
 
     /**

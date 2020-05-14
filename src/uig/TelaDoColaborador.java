@@ -27,6 +27,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     public TelaDoColaborador() {
         super("Tela Colaboradores");
         initComponents();
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
         try {
             
             colaboradorControler = new ColaboradorControle("colaborador.txt");
