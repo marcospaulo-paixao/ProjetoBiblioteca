@@ -209,6 +209,11 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         });
 
         jButtonlistagem.setText("Listar");
+        jButtonlistagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonlistagemActionPerformed(evt);
+            }
+        });
 
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
@@ -404,6 +409,10 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jButtonlistagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonlistagemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonlistagemActionPerformed
     public void habilitaFormulario(boolean habilita) {
         jTextFieldDddTelefone.setEnabled(false);
         jTextFieldEmail.setEnabled(habilita);

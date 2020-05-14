@@ -70,9 +70,17 @@ public class TelaAutor extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "idAutor ", "Nome Autor"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTableColaboradores);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
