@@ -26,3 +26,4 @@
 26;12342;Vinicius Rodrigues;12342;Vinicius@teste.com;999999999;Advogado;false;
 27;1234214;teste;1234214;contato@teste;777777777;;false;
 28;1234215;teste;1234214;contato@teste.com;888888888;tesste;false;
+29;232342342;Anisberto;66546;asdfasdf;92992929;adsfadsfasd;false;
