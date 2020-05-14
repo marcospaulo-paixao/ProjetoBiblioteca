@@ -51,6 +51,7 @@ public class TelaLivro extends javax.swing.JFrame {
         jTableColaboradores = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Livro");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
 
