@@ -17,7 +17,6 @@ public class ColaboradorTableModel extends AbstractTableModel {
 
     ArrayList<Colaborador> dados = null;
     String[] colunas = null;
-//    String[] colunas = new String[]{"id", "Nome", "Matricula", "OAB", "E-mail", "Telefone", "Tipo De Colaborador", "Status"};
 
     public ColaboradorTableModel(String[] colunas) {
         this.dados = new ArrayList<>();
@@ -49,7 +48,7 @@ public class ColaboradorTableModel extends AbstractTableModel {
     public String getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return dados.get(rowIndex).getId()+"";
+                return String.format("%03d", dados.get(rowIndex).getId());
             case 1:
                 return dados.get(rowIndex).getNome();
             case 2:
@@ -82,6 +81,5 @@ public class ColaboradorTableModel extends AbstractTableModel {
             this.fireTableDataChanged();
         } catch (Exception e) {
         }
-
     }
 }
