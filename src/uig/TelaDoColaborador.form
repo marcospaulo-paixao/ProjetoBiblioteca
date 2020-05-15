@@ -30,7 +30,7 @@
                   <Component id="jPanel4" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="96" max="32767" attributes="0"/>
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -252,7 +252,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButtonlistagem" alignment="0" max="32767" attributes="0"/>
                       <Component id="jButtonVoltar" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jButtonCancelar" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jButtonCancelar" alignment="1" pref="113" max="32767" attributes="0"/>
                       <Component id="jButtonAlterar" alignment="0" max="32767" attributes="0"/>
                       <Component id="jButtonDeletar" max="32767" attributes="0"/>
                       <Component id="jButtonIncluir" alignment="0" max="32767" attributes="0"/>
