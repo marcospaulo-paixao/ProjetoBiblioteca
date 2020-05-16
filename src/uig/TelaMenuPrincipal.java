@@ -84,6 +84,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
 
         jToggleButton1.setText("Emprestar Livro");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Sair");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +221,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        try {
+            TelaEmprestimo emprestimo = new TelaEmprestimo();
+            emprestimo.setVisible(true);
+            dispose();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
