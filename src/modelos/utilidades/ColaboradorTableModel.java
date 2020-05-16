@@ -50,17 +50,20 @@ public class ColaboradorTableModel extends AbstractTableModel {
             case 0:
                 return String.format("%03d", dados.get(rowIndex).getId());
             case 1:
-                return dados.get(rowIndex).getNome();
+//                return dados.get(rowIndex).getNome();
+                return (dados.get(rowIndex).getNome().equals("-"))?"":dados.get(rowIndex).getNome();
             case 2:
                 return dados.get(rowIndex).getMatricula()+"";
             case 3:
                 return dados.get(rowIndex).getOAB()+"";
             case 4:
-                return dados.get(rowIndex).getEmail();
+//                return dados.get(rowIndex).getEmail();
+                return (dados.get(rowIndex).getEmail().equals("-"))?"":dados.get(rowIndex).getEmail();
             case 5:
                 return dados.get(rowIndex).getTelefone()+"";
             case 6:
-                return dados.get(rowIndex).getTipoDeColaborador();
+//                return dados.get(rowIndex).getTipoDeColaborador();
+                return (dados.get(rowIndex).getTipoDeColaborador().equals("-"))?"":dados.get(rowIndex).getTipoDeColaborador();
             case 7:
                 return (dados.get(rowIndex).isTipoDeStatus())?"Ativo":"Inativo";
             default:

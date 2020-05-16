@@ -18,4 +18,5 @@
 17;12345;Élvio Sant'Anna;13124;contato.élvio@gmail.com;94479268;Estagiario;true;
 18;12345;Silvano Angelim;13124;contato.silvano@gmail.com;94479268;Advogado;false;
 19;12345;Ítalo Gravato;13124;contato.ítalo@gmail.com;94479268;Advogado;true;
-20;123;Marcos Paulo;12344;contato.marcospaulo@teste.com;984479520;Advogado;false;
+20;12344;Marcos Paulo;12347;marcos@teste.com;888888888;Estagiario;false;
+21;12344;Jéssica Jesus de souza;32155;contato@jessica.com;999999999;Advogado;false;
