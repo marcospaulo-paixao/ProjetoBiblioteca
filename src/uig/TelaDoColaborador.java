@@ -225,8 +225,13 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+=======
+        jButtonVoltar.setText("Sair");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> 3eaf7001e3e056fa6307bf96baa827dcef0095cc
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSairActionPerformed(evt);
             }
