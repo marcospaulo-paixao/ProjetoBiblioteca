@@ -78,7 +78,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
-        jButtonVoltar = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableColaboradores = new javax.swing.JTable();
@@ -225,13 +225,8 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
-=======
-        jButtonVoltar.setText("Sair");
-        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
->>>>>>> 3eaf7001e3e056fa6307bf96baa827dcef0095cc
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSairActionPerformed(evt);
             }
@@ -251,10 +246,10 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             }
         });
 
-        jButtonVoltar.setText("Voltar");
-        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVoltarActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -272,7 +267,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                     .addComponent(jButtonIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                    .addComponent(jButtonVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -290,8 +285,8 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 .addComponent(jButtonSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonVoltar)
+                .addGap(12, 12, 12)
+                .addComponent(btnVoltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonSair)
                 .addContainerGap())
@@ -449,15 +444,6 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonlistagemActionPerformed
 
-    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
-        try {
-            TelaMenuPrincipal menu = new TelaMenuPrincipal();
-            menu.setVisible(true);
-            dispose();
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButtonVoltarActionPerformed
-
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
         // TODO add your handling code here:
         try {
@@ -475,6 +461,15 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonDeletarActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        try {
+            TelaMenuPrincipal menu = new TelaMenuPrincipal();
+            menu.setVisible(true);
+            dispose();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnVoltarActionPerformed
     public void habilitaFormulario(boolean habilita) {
         jTextFieldDddTelefone.setEnabled(false);
         jTextFieldEmail.setEnabled(habilita);
@@ -549,6 +544,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonDeletar;
@@ -556,7 +552,6 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonStatus;
-    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JButton jButtonlistagem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
