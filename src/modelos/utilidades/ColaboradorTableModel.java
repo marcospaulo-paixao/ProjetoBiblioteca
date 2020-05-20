@@ -50,9 +50,10 @@ public class ColaboradorTableModel extends AbstractTableModel {
             case 0:
                 return (dados.get(rowIndex).getNome().equals("-"))?"":dados.get(rowIndex).getNome();
             case 1:
-                return dados.get(rowIndex).getMatricula()+"";
+                
+                return(dados.get(rowIndex).getMatricula()!=0)? dados.get(rowIndex).getMatricula()+"":" ";
             case 2:
-                return dados.get(rowIndex).getOAB()+"";
+                return(dados.get(rowIndex).getOAB()!=0)? dados.get(rowIndex).getOAB()+"":" ";
             case 3:
                 return (dados.get(rowIndex).getEmail().equals("-"))?"":dados.get(rowIndex).getEmail();
             case 4:

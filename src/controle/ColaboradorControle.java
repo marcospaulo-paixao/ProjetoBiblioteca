@@ -6,6 +6,8 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import modelos.classes.Colaborador;
 import modelos.interfaces.ICRUDColaborador;
 import persistencia.ColaboradorPersistencia;
@@ -64,6 +66,11 @@ public class ColaboradorControle implements ICRUDColaborador {
     @Override
     public ArrayList<Colaborador> listagem() throws Exception {
         try {
+             ArrayList<Colaborador> listaDeContatos = colaboradorPersistencia.listagem();
+             //Comparador de Strings
+            Comparator c = (Comparator<Colaborador>) (Colaborador o1, Colaborador o2) -> o1.getNome().compareToIgnoreCase(o2.getNome());
+            //Biblioteca para ordenar por ordem alfabética
+            Collections.sort(listaDeContatos, c);
             return colaboradorPersistencia.listagem();
         } catch (Exception e) {
             throw e;
