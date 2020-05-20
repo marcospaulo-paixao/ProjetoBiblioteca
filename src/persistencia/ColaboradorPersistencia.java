@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import modelos.classes.Colaborador;
 import modelos.interfaces.ICRUDColaborador;
+import modelos.utilidades.GeradorID;
 import modelos.utilidades.TipoDeColadoradores;
 import modelos.utilidades.TipoDeStatus;
 
@@ -44,6 +45,9 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
     @Override
     public void incluir(Colaborador objeto) throws Exception {
         try {
+            GeradorID gId = new GeradorID();
+            objeto.setId(gId.getID());
+            gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(objeto.toString() + "\n");
@@ -105,8 +109,9 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
                 int telefone = Integer.parseInt(vetor[5]);
                 TipoDeColadoradores tipoDeColaborador = TipoDeColadoradores.valueOf(vetor[6]);
                 TipoDeStatus tipoDeStatus = TipoDeStatus.valueOf(vetor[7]);
-
-                listaDeColaboradores.add(new Colaborador(id, matricula, nome, OAB, email, telefone, tipoDeColaborador, tipoDeStatus));
+                Colaborador c = new Colaborador(matricula, nome, OAB, email, telefone, tipoDeColaborador, tipoDeStatus);
+                c.setId(id);
+                listaDeColaboradores.add(c);
             }
             return listaDeColaboradores;
 
@@ -115,12 +120,20 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
         }
     }
 
-    @Override
-    public Colaborador getColaborador(int id) throws Exception {
-        try {
+    
+    /**
+     * 
+     * @param nome
+     * @param matricula
+     * @return
+     * @throws Exception 
+     */
+    public Colaborador getColaborador(String nome) throws Exception {
+        try {            
+
             ArrayList<Colaborador> listaDeColaboradores = listagem();
             for (Colaborador colaborador : listaDeColaboradores) {
-                if (colaborador.getId() == id) {
+                if (colaborador.getNome().equals(nome)) {
                     return colaborador;
                 }
             }

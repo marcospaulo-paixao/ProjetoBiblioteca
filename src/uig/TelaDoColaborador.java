@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import modelos.classes.Colaborador;
 import modelos.utilidades.ColaboradorTableModel;
 import modelos.interfaces.ICRUDColaborador;
-import modelos.utilidades.GeradorID;
 import modelos.utilidades.TipoDeColadoradores;
 import modelos.utilidades.TipoDeStatus;
 
@@ -34,7 +33,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         try {
 
             colaboradorControler = new ColaboradorControle("colaborador.txt");
-            model = new ColaboradorTableModel(new String[]{"id", "Nome", "Matricula", "OAB", "E-mail", "Telefone", "Tipo De Colaborador", "Status"});
+            model = new ColaboradorTableModel(new String[]{"Nome", "Matricula", "OAB", "E-mail", "Telefone", "Tipo De Colaborador", "Status"});
             jTableColaboradores.setModel(model);
             if (colaboradorControler.listagem() != null) {
                 model.update(colaboradorControler.listagem());
@@ -391,7 +390,6 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         try {
-            GeradorID gId = new GeradorID();
 
             int matricula = Integer.parseInt(jTextFieldMatricula.getText());
             String nome = jTextFieldNome.getText();
@@ -409,18 +407,18 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             
             TipoDeStatus status = (jButtonStatus.getText().equals("Ativo")?TipoDeStatus.ATIVO:TipoDeStatus.INATIVO);
             if (incluir) {
-                colaboradorControler.incluir(new Colaborador(gId.getID(), matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
+                colaboradorControler.incluir(new Colaborador(matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
                 model.update(colaboradorControler.listagem());
                 habilitaFormulario(false);
                 JOptionPane.showMessageDialog(null, "Colaborador salvo com sucesso");
-                gId.finalize();
+                
             } else {
-                int id = Integer.parseInt(model.getValueAt(jTableColaboradores.getSelectedRow(), 0));
-                colaboradorControler.alterar(colaboradorControler.getColaborador(id),
-                        new Colaborador(id, matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
+                String nome_aux = model.getValueAt(jTableColaboradores.getSelectedRow(), 0);
+                
+                colaboradorControler.alterar(colaboradorControler.getColaborador(nome_aux),
+                        new Colaborador(matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
                 JOptionPane.showMessageDialog(null, "Colaborador alterado com sucesso");
                 habilitaFormulario(false);
-                System.out.println("alterando");
                 model.update(colaboradorControler.listagem());
                 jTableColaboradores.setRowSelectionAllowed(true);
             }
@@ -463,8 +461,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Selecione o Colaborador para ser alterado");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja Deletar este Colaborador?", "Cancelar", JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION) {
-                    int id = Integer.parseInt(model.getValueAt(jTableColaboradores.getSelectedRow(), 0));
-                    colaboradorControler.alterar(colaboradorControler.getColaborador(id), new Colaborador(id, 0, "-", 0, "-", 0, TipoDeColadoradores.INDEFINIDO, TipoDeStatus.INATIVO));
+                    colaboradorControler.alterar(colaboradorControler.getColaborador(model.getValueAt(jTableColaboradores.getSelectedRow(), 0)), new Colaborador(0, "-", 0, "-", 0, TipoDeColadoradores.INDEFINIDO, TipoDeStatus.INATIVO));
                     JOptionPane.showMessageDialog(null, "Colaborador deletado com sucesso");
                     model.update(colaboradorControler.listagem());
                     habilitaFormulario(false);
@@ -511,17 +508,16 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     }
 
     public void setValuesJTextFields() {
-        jTextFieldNome.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 1));
-        jTextFieldMatricula.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 2));
-        jTextFieldOAB.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 3));
-        jTextFieldEmail.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 4));
+        jTextFieldNome.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 0));
+        jTextFieldMatricula.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 1));
+        jTextFieldOAB.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 2));
+        jTextFieldEmail.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 3));
 //      jTextFieldDddTelefone.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 0));
-        jTextFieldNumeroTelefone.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 5));
-        jComboBoxTipoDeColaborador.setSelectedItem(model.getValueAt(jTableColaboradores.getSelectedRow(), 6));
-        jButtonStatus.setText((model.getValueAt(jTableColaboradores.getSelectedRow(), 7).equals("Ativo")) ? "Ativo" : "Inativo");
-        if ((model.getValueAt(jTableColaboradores.getSelectedRow(), 7).equals("Ativo")))jButtonStatus.setText("Ativo");
-        if ((model.getValueAt(jTableColaboradores.getSelectedRow(), 7).equals("Inativo")))jButtonStatus.setText("Inativo");
-        if ((model.getValueAt(jTableColaboradores.getSelectedRow(), 7).equals("Indefinido")))jButtonStatus.setText("Inativo");
+        jTextFieldNumeroTelefone.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 4));
+        jComboBoxTipoDeColaborador.setSelectedItem(model.getValueAt(jTableColaboradores.getSelectedRow(), 5));
+        if ((model.getValueAt(jTableColaboradores.getSelectedRow(), 6).equals("Ativo")))jButtonStatus.setText("Ativo");
+        if ((model.getValueAt(jTableColaboradores.getSelectedRow(), 6).equals("Inativo")))jButtonStatus.setText("Inativo");
+        if ((model.getValueAt(jTableColaboradores.getSelectedRow(), 6).equals("Indefinido")))jButtonStatus.setText("Inativo");
             
         
     }

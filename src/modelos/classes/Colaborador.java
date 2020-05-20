@@ -53,9 +53,8 @@ public class Colaborador {
      * @param tipoDeColaborador
      * @param tipoDeStatus
      */
-    public Colaborador(int id, int matricula, String nome, int OAB, String email,
+    public Colaborador(int matricula, String nome, int OAB, String email,
             int telefone, TipoDeColadoradores tipoDeColaborador, TipoDeStatus tipoDeStatus) {
-        this.id = id;
         this.matricula = matricula;
         this.nome = nome;
         this.OAB = OAB;

@@ -48,25 +48,21 @@ public class ColaboradorTableModel extends AbstractTableModel {
     public String getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return String.format("%03d", dados.get(rowIndex).getId());
-            case 1:
-//                return dados.get(rowIndex).getNome();
                 return (dados.get(rowIndex).getNome().equals("-"))?"":dados.get(rowIndex).getNome();
-            case 2:
+            case 1:
                 return dados.get(rowIndex).getMatricula()+"";
-            case 3:
+            case 2:
                 return dados.get(rowIndex).getOAB()+"";
-            case 4:
-//                return dados.get(rowIndex).getEmail();
+            case 3:
                 return (dados.get(rowIndex).getEmail().equals("-"))?"":dados.get(rowIndex).getEmail();
-            case 5:
+            case 4:
                 return dados.get(rowIndex).getTelefone()+"";
-            case 6:
+            case 5:
                 if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.ADVOGADO) return "Advogado";
                 if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.ESTAGIARIO) return "Estagiario";
                 if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.FUNCIONARIO) return "Funcionario";
                 if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.INDEFINIDO) return "Indefinido";
-            case 7:
+            case 6:
                 if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.ATIVO) return "Ativo";
                 if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.INATIVO) return "Inativo";
                 if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.INDEFINIDO) return "Indefinido";
