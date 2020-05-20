@@ -62,10 +62,14 @@ public class ColaboradorTableModel extends AbstractTableModel {
             case 5:
                 return dados.get(rowIndex).getTelefone()+"";
             case 6:
-//                return dados.get(rowIndex).getTipoDeColaborador();
-                return (dados.get(rowIndex).getTipoDeColaborador().equals("-"))?"":dados.get(rowIndex).getTipoDeColaborador();
+                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.ADVOGADO) return "Advogado";
+                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.ESTAGIARIO) return "Estagiario";
+                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.FUNCIONARIO) return "Funcionario";
+                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.INDEFINIDO) return "Indefinido";
             case 7:
-                return (dados.get(rowIndex).isTipoDeStatus())?"Ativo":"Inativo";
+                if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.ATIVO) return "Ativo";
+                if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.INATIVO) return "Inativo";
+                if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.INDEFINIDO) return "Indefinido";
             default:
                 throw new AssertionError();
         }

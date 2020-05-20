@@ -5,6 +5,9 @@
  */
 package modelos.classes;
 
+import modelos.utilidades.TipoDeColadoradores;
+import modelos.utilidades.TipoDeStatus;
+
 /**
  *
  * @author marcos
@@ -20,8 +23,8 @@ public class Colaborador {
     private int OAB = 0;
     private String email = "";
     private int telefone = 0;
-    private String tipoDeColaborador = "";
-    private boolean tipoDeStatus = false;
+    private TipoDeColadoradores tipoDeColaborador = null;
+    private TipoDeStatus tipoDeStatus = null;
 
     /**
      * #Métedos
@@ -36,8 +39,8 @@ public class Colaborador {
         OAB = 0;
         email = "";
         telefone = 0;
-        tipoDeColaborador = "";
-        tipoDeStatus = false;
+        tipoDeColaborador = null;
+        tipoDeStatus = null;
     }
 
     /**
@@ -50,8 +53,8 @@ public class Colaborador {
      * @param tipoDeColaborador
      * @param tipoDeStatus
      */
-    public Colaborador(int id,int matricula, String nome, int OAB, String email,
-            int telefone, String tipoDeColaborador, boolean tipoDeStatus) {
+    public Colaborador(int id, int matricula, String nome, int OAB, String email,
+            int telefone, TipoDeColadoradores tipoDeColaborador, TipoDeStatus tipoDeStatus) {
         this.id = id;
         this.matricula = matricula;
         this.nome = nome;
@@ -165,28 +168,28 @@ public class Colaborador {
     /**
      * @return the tipoDeColaborador
      */
-    public String getTipoDeColaborador() {
+    public TipoDeColadoradores getTipoDeColaborador() {
         return tipoDeColaborador;
     }
 
     /**
      * @param tipoDeColaborador the tipoDeColaborador to set
      */
-    public void setTipoDeColaborador(String tipoDeColaborador) {
+    public void setTipoDeColaborador(TipoDeColadoradores tipoDeColaborador) {
         this.tipoDeColaborador = tipoDeColaborador;
     }
 
     /**
      * @return the tipoDeStatus
      */
-    public boolean isTipoDeStatus() {
+    public TipoDeStatus getTipoDeStatus() {
         return tipoDeStatus;
     }
 
     /**
      * @param tipoDeStatus the tipoDeStatus to set
      */
-    public void setTipoDeStatus(boolean tipoDeStatus) {
+    public void setTipoDeStatus(TipoDeStatus tipoDeStatus) {
         this.tipoDeStatus = tipoDeStatus;
     }
 

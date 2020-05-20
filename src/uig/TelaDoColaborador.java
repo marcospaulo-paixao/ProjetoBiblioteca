@@ -6,13 +6,13 @@
 package uig;
 
 import controle.ColaboradorControle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelos.classes.Colaborador;
 import modelos.utilidades.ColaboradorTableModel;
 import modelos.interfaces.ICRUDColaborador;
 import modelos.utilidades.GeradorID;
+import modelos.utilidades.TipoDeColadoradores;
+import modelos.utilidades.TipoDeStatus;
 
 /**
  *
@@ -54,6 +54,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldMatricula = new javax.swing.JTextField();
@@ -67,9 +68,9 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jTextFieldDddTelefone = new javax.swing.JTextField();
         jTextFieldNumeroTelefone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldTipoDeColaborador = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButtonStatus = new javax.swing.JButton();
+        jComboBoxTipoDeColaborador = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jButtonIncluir = new javax.swing.JButton();
         jButtonDeletar = new javax.swing.JButton();
@@ -82,6 +83,8 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableColaboradores = new javax.swing.JTable();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -126,6 +129,8 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jComboBoxTipoDeColaborador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Advogado", "Estagiario", "Funcionario" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,6 +138,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -148,13 +154,12 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                             .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextFieldTipoDeColaborador, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jComboBoxTipoDeColaborador, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jTextFieldDddTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jTextFieldNumeroTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -189,7 +194,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldTipoDeColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxTipoDeColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -394,8 +399,15 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             String email = jTextFieldEmail.getText();
             int ddd = Integer.parseInt("0");
             int telefone = Integer.parseInt(jTextFieldNumeroTelefone.getText());
-            String tipoDeColaborador = jTextFieldTipoDeColaborador.getText();
-            boolean status = (jButtonStatus.getText().equals("Ativo"));
+            if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Selecione")) {
+                throw new Exception("Selecione o Tipo de colaborador!");
+            }
+            TipoDeColadoradores tipoDeColaborador = null;
+            if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Advogado"))  tipoDeColaborador = TipoDeColadoradores.ADVOGADO;
+            if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Estagiario"))  tipoDeColaborador = TipoDeColadoradores.ESTAGIARIO;
+            if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Funcionario"))  tipoDeColaborador = TipoDeColadoradores.FUNCIONARIO;                
+            
+            TipoDeStatus status = (jButtonStatus.getText().equals("Ativo")?TipoDeStatus.ATIVO:TipoDeStatus.INATIVO);
             if (incluir) {
                 colaboradorControler.incluir(new Colaborador(gId.getID(), matricula, nome, OAB, email, telefone, tipoDeColaborador, status));
                 model.update(colaboradorControler.listagem());
@@ -413,7 +425,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 jTableColaboradores.setRowSelectionAllowed(true);
             }
         } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, erro);
+            JOptionPane.showMessageDialog(null, erro.getMessage());
 
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -452,7 +464,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja Deletar este Colaborador?", "Cancelar", JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION) {
                     int id = Integer.parseInt(model.getValueAt(jTableColaboradores.getSelectedRow(), 0));
-                    colaboradorControler.alterar(colaboradorControler.getColaborador(id), new Colaborador(id, 0, "-", 0, "-", 0, "-", false));
+                    colaboradorControler.alterar(colaboradorControler.getColaborador(id), new Colaborador(id, 0, "-", 0, "-", 0, TipoDeColadoradores.INDEFINIDO, TipoDeStatus.INATIVO));
                     JOptionPane.showMessageDialog(null, "Colaborador deletado com sucesso");
                     model.update(colaboradorControler.listagem());
                     habilitaFormulario(false);
@@ -477,7 +489,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jTextFieldNome.setEnabled(habilita);
         jTextFieldNumeroTelefone.setEnabled(habilita);
         jTextFieldOAB.setEnabled(habilita);
-        jTextFieldTipoDeColaborador.setEnabled(habilita);
+        jComboBoxTipoDeColaborador.setEnabled(habilita);
         jButtonStatus.setEnabled(habilita);
         jButtonAlterar.setEnabled(!habilita);
         jButtonDeletar.setEnabled(!habilita);
@@ -492,7 +504,8 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             jTextFieldNome.setText("");
             jTextFieldNumeroTelefone.setText("");
             jTextFieldOAB.setText("");
-            jTextFieldTipoDeColaborador.setText("");
+            jComboBoxTipoDeColaborador.setSelectedIndex(0);
+            jButtonStatus.setText("Inativo");
         }
 
     }
@@ -504,8 +517,13 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jTextFieldEmail.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 4));
 //      jTextFieldDddTelefone.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 0));
         jTextFieldNumeroTelefone.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 5));
-        jTextFieldTipoDeColaborador.setText(model.getValueAt(jTableColaboradores.getSelectedRow(), 6));
+        jComboBoxTipoDeColaborador.setSelectedItem(model.getValueAt(jTableColaboradores.getSelectedRow(), 6));
         jButtonStatus.setText((model.getValueAt(jTableColaboradores.getSelectedRow(), 7).equals("Ativo")) ? "Ativo" : "Inativo");
+        if ((model.getValueAt(jTableColaboradores.getSelectedRow(), 7).equals("Ativo")))jButtonStatus.setText("Ativo");
+        if ((model.getValueAt(jTableColaboradores.getSelectedRow(), 7).equals("Inativo")))jButtonStatus.setText("Inativo");
+        if ((model.getValueAt(jTableColaboradores.getSelectedRow(), 7).equals("Indefinido")))jButtonStatus.setText("Inativo");
+            
+        
     }
 
     /**
@@ -553,12 +571,14 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonStatus;
     private javax.swing.JButton jButtonlistagem;
+    private javax.swing.JComboBox<String> jComboBoxTipoDeColaborador;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -571,6 +591,5 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldNumeroTelefone;
     private javax.swing.JTextField jTextFieldOAB;
-    private javax.swing.JTextField jTextFieldTipoDeColaborador;
     // End of variables declaration//GEN-END:variables
 }

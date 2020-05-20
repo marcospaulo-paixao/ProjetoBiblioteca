@@ -13,13 +13,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import modelos.classes.Colaborador;
 import modelos.interfaces.ICRUDColaborador;
+import modelos.utilidades.TipoDeColadoradores;
+import modelos.utilidades.TipoDeStatus;
 
 /**
  *
  * @author marcos
  */
 public class ColaboradorPersistencia implements ICRUDColaborador {
-    
+
     /**
      * #Atributos
      */
@@ -27,6 +29,7 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
 
     /**
      * #Métodos
+     *
      * @param nomeDoArquivoNoDisco
      */
     public ColaboradorPersistencia(String nomeDoArquivoNoDisco) {
@@ -87,7 +90,7 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
     public ArrayList<Colaborador> listagem() throws Exception {
         try {
             ArrayList<Colaborador> listaDeColaboradores = new ArrayList<>();
-            
+
             FileReader fr = new FileReader(nomeDoArquivoNoDisco);
             BufferedReader br = new BufferedReader(fr);
 
@@ -100,9 +103,9 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
                 int OAB = Integer.parseInt(vetor[3]);
                 String email = vetor[4];
                 int telefone = Integer.parseInt(vetor[5]);
-                String tipoDeColaborador = vetor[6];
-                boolean tipoDeStatus = Boolean.parseBoolean(vetor[7]);
-                
+                TipoDeColadoradores tipoDeColaborador = TipoDeColadoradores.valueOf(vetor[6]);
+                TipoDeStatus tipoDeStatus = TipoDeStatus.valueOf(vetor[7]);
+
                 listaDeColaboradores.add(new Colaborador(id, matricula, nome, OAB, email, telefone, tipoDeColaborador, tipoDeStatus));
             }
             return listaDeColaboradores;

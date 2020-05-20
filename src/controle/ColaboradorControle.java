@@ -83,5 +83,4 @@ public class ColaboradorControle implements ICRUDColaborador {
         }
         return null;
     }
-
 }
