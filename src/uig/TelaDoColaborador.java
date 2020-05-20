@@ -405,7 +405,6 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Advogado"))  tipoDeColaborador = TipoDeColadoradores.ADVOGADO;
             if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Estagiario"))  tipoDeColaborador = TipoDeColadoradores.ESTAGIARIO;
             if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Funcionario"))  tipoDeColaborador = TipoDeColadoradores.FUNCIONARIO;                
-            
             TipoDeStatus status = (jButtonStatus.getText().equals("Ativo")?TipoDeStatus.ATIVO:TipoDeStatus.INATIVO);
             if (incluir) {
                 colaboradorControler.incluir(new Colaborador(matricula, nome, OAB, email,ddd, telefone, tipoDeColaborador, status));
@@ -448,6 +447,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 dispose();
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());           
         }
     }//GEN-LAST:event_jButtonSairActionPerformed
 
@@ -469,6 +469,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
@@ -478,6 +479,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             menu.setVisible(true);
             dispose();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,  e.getMessage());
         }
     }//GEN-LAST:event_btnVoltarActionPerformed
     public void habilitaFormulario(boolean habilita) {
