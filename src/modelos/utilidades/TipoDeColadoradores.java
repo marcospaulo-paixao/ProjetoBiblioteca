@@ -10,5 +10,16 @@ package modelos.utilidades;
  * @author marcos
  */
 public enum TipoDeColadoradores {
-    ADVOGADO, ESTAGIARIO, FUNCIONARIO,INDEFINIDO;
+    ADVOGADO(1), ESTAGIARIO(2),
+    FUNCIONARIO(3), INDEFINIDO(0);
+
+    int valor;
+
+    TipoDeColadoradores(int valor) {
+        this.valor = valor;
+    }
+
+    public int getValor() {
+        return valor;
+    }
 }

@@ -10,5 +10,29 @@ package modelos.utilidades;
  * @author marcos
  */
 public enum TipoDeStatus {
-    ATIVO,INATIVO,INDEFINIDO;
+    /**
+     * #Atributos
+     */
+    ATIVO(0), INATIVO(1), INDEFINIDO(2);
+    
+    int valor;
+
+    /**
+     * #Metodos
+     */
+    /**
+     *
+     * @param valor
+     */
+    TipoDeStatus(int valor) {
+        this.valor = valor;
+    }
+
+    /**
+     *
+     * @return valor
+     */
+    public int getValor() {
+        return valor;
+    }
 }

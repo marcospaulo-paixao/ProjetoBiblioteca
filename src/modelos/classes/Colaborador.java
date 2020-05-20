@@ -5,6 +5,7 @@
  */
 package modelos.classes;
 
+import modelos.utilidades.Telefone;
 import modelos.utilidades.TipoDeColadoradores;
 import modelos.utilidades.TipoDeStatus;
 
@@ -22,7 +23,7 @@ public class Colaborador {
     private String nome = "";
     private int OAB = 0;
     private String email = "";
-    private int telefone = 0;
+    private Telefone telefone = null;
     private TipoDeColadoradores tipoDeColaborador = null;
     private TipoDeStatus tipoDeStatus = null;
 
@@ -38,7 +39,7 @@ public class Colaborador {
         nome = "";
         OAB = 0;
         email = "";
-        telefone = 0;
+        telefone = null;
         tipoDeColaborador = null;
         tipoDeStatus = null;
     }
@@ -54,12 +55,12 @@ public class Colaborador {
      * @param tipoDeStatus
      */
     public Colaborador(int matricula, String nome, int OAB, String email,
-            int telefone, TipoDeColadoradores tipoDeColaborador, TipoDeStatus tipoDeStatus) {
+            int ddd,int telefone, TipoDeColadoradores tipoDeColaborador, TipoDeStatus tipoDeStatus) {
         this.matricula = matricula;
         this.nome = nome;
         this.OAB = OAB;
         this.email = email;
-        this.telefone = telefone;
+        this.telefone =new Telefone(ddd,telefone);
         this.tipoDeColaborador = tipoDeColaborador;
         this.tipoDeStatus = tipoDeStatus;
     }
@@ -153,15 +154,15 @@ public class Colaborador {
     /**
      * @return the telefone
      */
-    public int getTelefone() {
+    public Telefone getTelefone() {
         return telefone;
     }
 
     /**
      * @param telefone the telefone to set
      */
-    public void setTelefone(int telefone) {
-        this.telefone = telefone;
+    public void setTelefone(int ddd,int telefone) {
+        this.telefone = new Telefone(ddd,telefone);
     }
 
     /**
@@ -199,7 +200,8 @@ public class Colaborador {
         saida += nome + ";";
         saida += OAB + ";";
         saida += email + ";";
-        saida += telefone + ";";
+        saida += telefone.getDdd() + ";";
+        saida += telefone.getNumero() + ";";
         saida += tipoDeColaborador + ";";
         saida += tipoDeStatus + ";";
 

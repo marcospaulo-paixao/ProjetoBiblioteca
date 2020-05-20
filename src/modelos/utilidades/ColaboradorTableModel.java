@@ -56,7 +56,7 @@ public class ColaboradorTableModel extends AbstractTableModel {
             case 3:
                 return (dados.get(rowIndex).getEmail().equals("-"))?"":dados.get(rowIndex).getEmail();
             case 4:
-                return dados.get(rowIndex).getTelefone()+"";
+                return dados.get(rowIndex).getTelefone().getTelefone()+"";
             case 5:
                 if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.ADVOGADO) return "Advogado";
                 if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.ESTAGIARIO) return "Estagiario";
