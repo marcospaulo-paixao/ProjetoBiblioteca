@@ -518,13 +518,10 @@ public class TelaDoColaborador extends javax.swing.JFrame {
       jTextFieldDddTelefone.setText(objeto.getTelefone().getDdd()+"");
         jTextFieldNumeroTelefone.setText(objeto.getTelefone().getNumero()+"");
         jComboBoxTipoDeColaborador.setSelectedItem(objeto.getTipoDeColaborador());
-        int aux =objeto.getTipoDeColaborador().getValor();
         jComboBoxTipoDeColaborador.setSelectedIndex(objeto.getTipoDeColaborador().getValor());
         if ((objeto.getTipoDeStatus().getValor())==0)jButtonStatus.setText("Ativo");
         if ((objeto.getTipoDeStatus().getValor())==1)jButtonStatus.setText("Inativo");
         if ((objeto.getTipoDeStatus().getValor())==2)jButtonStatus.setText("Inativo");
-            
-        
     }
 
     /**
