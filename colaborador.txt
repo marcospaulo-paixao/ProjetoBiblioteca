@@ -1,6 +1,6 @@
 0;31018;Aarão Azeredo;13124;contato.arão@gmail.com;94479268;Advogado;false;
-1;12345;Bartolomeu Villaverde;12468;contato.bartolomeu@gmail.com;94479268;Advogado;true;
-2;12345;Cristóvão Castella;13124;contato.cristóvão@gmail.com;94479268;Estagiario;true;
+1;0;-;0;-;0;-;false;
+2;12345;Cristóvão Castella;13124;contato.cristóvão@gmail.com;94479268;Estagiario;false;
 3;12345;Cátia Felgueiras;13124;contato.cátia@gmail.com;94479268;Advogado;false;
 4;12345;Evaristo Teodoro;13124;contato.evaristo@gmail.com;94479268;Advogado;true;
 5;12345;Gláucia Peroba;13124;contato.gláucia@gmail.com;94479268;Advogado;true;
@@ -20,3 +20,4 @@
 19;12345;Ítalo Gravato;13124;contato.ítalo@gmail.com;94479268;Advogado;true;
 20;12344;Marcos Paulo;12347;marcos@teste.com;888888888;Estagiario;false;
 21;12344;Jéssica Jesus de souza;32155;contato@jessica.com;999999999;Advogado;false;
+22;24564;ANisberto;5465;anis@gmai;546465;teste;false;
