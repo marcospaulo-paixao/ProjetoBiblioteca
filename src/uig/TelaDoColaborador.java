@@ -69,7 +69,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButtonStatus = new javax.swing.JButton();
-<<<<<<< HEAD
+
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jButtonStatusUsuario = new javax.swing.JButton();
@@ -77,9 +77,8 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtNomeUsuario = new javax.swing.JTextField();
         txtSenha = new javax.swing.JPasswordField();
-=======
+
         jComboBoxTipoDeColaborador = new javax.swing.JComboBox<>();
->>>>>>> 2a3bc41510c22ec0d96d442a099d1cbb581d69a5
         jPanel2 = new javax.swing.JPanel();
         jButtonIncluir = new javax.swing.JButton();
         jButtonDeletar = new javax.swing.JButton();
@@ -138,7 +137,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-<<<<<<< HEAD
+
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Usuario"));
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Status Usuario"));
@@ -200,9 +199,8 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
-=======
+
         jComboBoxTipoDeColaborador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Advogado", "Estagiario", "Funcionario" }));
->>>>>>> 2a3bc41510c22ec0d96d442a099d1cbb581d69a5
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -210,14 +208,13 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-<<<<<<< HEAD
+
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
-=======
+
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
->>>>>>> 2a3bc41510c22ec0d96d442a099d1cbb581d69a5
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -233,7 +230,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jTextFieldDddTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-<<<<<<< HEAD
+
                                     .addComponent(jTextFieldNumeroTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jTextFieldNome)
                     .addComponent(jTextFieldEmail)
@@ -241,11 +238,11 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-=======
+
                                     .addComponent(jTextFieldNumeroTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
->>>>>>> 2a3bc41510c22ec0d96d442a099d1cbb581d69a5
+
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,12 +279,12 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-<<<<<<< HEAD
+
                         .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(72, 72, 72))
-=======
+
                         .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,7 +309,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
->>>>>>> 2a3bc41510c22ec0d96d442a099d1cbb581d69a5
+
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
@@ -616,13 +613,13 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jTextFieldNome.setEnabled(habilita);
         jTextFieldNumeroTelefone.setEnabled(habilita);
         jTextFieldOAB.setEnabled(habilita);
-<<<<<<< HEAD
+
         jTextFieldTipoDeColaborador.setEnabled(habilita);
         txtNomeUsuario.setEnabled(habilita);
         txtSenha.setEnabled(habilita);
-=======
+
         jComboBoxTipoDeColaborador.setEnabled(habilita);
->>>>>>> 2a3bc41510c22ec0d96d442a099d1cbb581d69a5
+
         jButtonStatus.setEnabled(habilita);
         jButtonAlterar.setEnabled(!habilita);
         jButtonDeletar.setEnabled(!habilita);
@@ -638,14 +635,14 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             jTextFieldNome.setText("");
             jTextFieldNumeroTelefone.setText("");
             jTextFieldOAB.setText("");
-<<<<<<< HEAD
+
             jTextFieldTipoDeColaborador.setText("");
             txtNomeUsuario.setText("");
             txtSenha.setText("");
-=======
+
             jComboBoxTipoDeColaborador.setSelectedIndex(0);
             jButtonStatus.setText("Inativo");
->>>>>>> 2a3bc41510c22ec0d96d442a099d1cbb581d69a5
+
         }
 
     }
@@ -717,12 +714,9 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-<<<<<<< HEAD
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-=======
     private javax.swing.JMenuItem jMenuItem1;
->>>>>>> 2a3bc41510c22ec0d96d442a099d1cbb581d69a5
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -737,11 +731,9 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldNumeroTelefone;
     private javax.swing.JTextField jTextFieldOAB;
-<<<<<<< HEAD
     private javax.swing.JTextField jTextFieldTipoDeColaborador;
     private javax.swing.JTextField txtNomeUsuario;
     private javax.swing.JPasswordField txtSenha;
-=======
->>>>>>> 2a3bc41510c22ec0d96d442a099d1cbb581d69a5
+
     // End of variables declaration//GEN-END:variables
 }
