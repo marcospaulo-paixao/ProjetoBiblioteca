@@ -5,6 +5,10 @@
  */
 package modelos.classes;
 
+import modelos.utilidades.Telefone;
+import modelos.utilidades.TipoDeColadoradores;
+import modelos.utilidades.TipoDeStatus;
+
 /**
  *
  * @author marcos
@@ -19,9 +23,9 @@ public class Colaborador {
     private String nome = "";
     private int OAB = 0;
     private String email = "";
-    private int telefone = 0;
-    private String tipoDeColaborador = "";
-    private boolean tipoDeStatus = false;
+    private Telefone telefone = null;
+    private TipoDeColadoradores tipoDeColaborador = null;
+    private TipoDeStatus tipoDeStatus = null;
 
     /**
      * #Métedos
@@ -35,9 +39,9 @@ public class Colaborador {
         nome = "";
         OAB = 0;
         email = "";
-        telefone = 0;
-        tipoDeColaborador = "";
-        tipoDeStatus = false;
+        telefone = null;
+        tipoDeColaborador = null;
+        tipoDeStatus = null;
     }
 
     /**
@@ -50,14 +54,13 @@ public class Colaborador {
      * @param tipoDeColaborador
      * @param tipoDeStatus
      */
-    public Colaborador(int id,int matricula, String nome, int OAB, String email,
-            int telefone, String tipoDeColaborador, boolean tipoDeStatus) {
-        this.id = id;
+    public Colaborador(int matricula, String nome, int OAB, String email,
+            int ddd,int telefone, TipoDeColadoradores tipoDeColaborador, TipoDeStatus tipoDeStatus) {
         this.matricula = matricula;
         this.nome = nome;
         this.OAB = OAB;
         this.email = email;
-        this.telefone = telefone;
+        this.telefone =new Telefone(ddd,telefone);
         this.tipoDeColaborador = tipoDeColaborador;
         this.tipoDeStatus = tipoDeStatus;
     }
@@ -151,42 +154,42 @@ public class Colaborador {
     /**
      * @return the telefone
      */
-    public int getTelefone() {
+    public Telefone getTelefone() {
         return telefone;
     }
 
     /**
      * @param telefone the telefone to set
      */
-    public void setTelefone(int telefone) {
-        this.telefone = telefone;
+    public void setTelefone(int ddd,int telefone) {
+        this.telefone = new Telefone(ddd,telefone);
     }
 
     /**
      * @return the tipoDeColaborador
      */
-    public String getTipoDeColaborador() {
+    public TipoDeColadoradores getTipoDeColaborador() {
         return tipoDeColaborador;
     }
 
     /**
      * @param tipoDeColaborador the tipoDeColaborador to set
      */
-    public void setTipoDeColaborador(String tipoDeColaborador) {
+    public void setTipoDeColaborador(TipoDeColadoradores tipoDeColaborador) {
         this.tipoDeColaborador = tipoDeColaborador;
     }
 
     /**
      * @return the tipoDeStatus
      */
-    public boolean isTipoDeStatus() {
+    public TipoDeStatus getTipoDeStatus() {
         return tipoDeStatus;
     }
 
     /**
      * @param tipoDeStatus the tipoDeStatus to set
      */
-    public void setTipoDeStatus(boolean tipoDeStatus) {
+    public void setTipoDeStatus(TipoDeStatus tipoDeStatus) {
         this.tipoDeStatus = tipoDeStatus;
     }
 
@@ -197,7 +200,8 @@ public class Colaborador {
         saida += nome + ";";
         saida += OAB + ";";
         saida += email + ";";
-        saida += telefone + ";";
+        saida += telefone.getDdd() + ";";
+        saida += telefone.getNumero() + ";";
         saida += tipoDeColaborador + ";";
         saida += tipoDeStatus + ";";
 
