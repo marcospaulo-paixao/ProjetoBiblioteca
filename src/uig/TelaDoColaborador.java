@@ -31,7 +31,6 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
         try {
-
             colaboradorControler = new ColaboradorControle("colaborador.txt");
             model = new ColaboradorTableModel(new String[]{"Nome", "Matricula", "OAB", "E-mail", "Telefone", "Tipo De Colaborador", "Status"});
             jTableColaboradores.setModel(model);
@@ -67,6 +66,8 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jTextFieldDddTelefone = new javax.swing.JTextField();
         jTextFieldNumeroTelefone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+<<<<<<< HEAD
+=======
         jPanel3 = new javax.swing.JPanel();
         jButtonStatus = new javax.swing.JButton();
 
@@ -78,7 +79,10 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         txtNomeUsuario = new javax.swing.JTextField();
         txtSenha = new javax.swing.JPasswordField();
 
+>>>>>>> 297da216aa9543893f69a90b324f057a1f0eabb3
         jComboBoxTipoDeColaborador = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jButtonStatus = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButtonIncluir = new javax.swing.JButton();
         jButtonDeletar = new javax.swing.JButton();
@@ -111,7 +115,13 @@ public class TelaDoColaborador extends javax.swing.JFrame {
 
         jLabel6.setText("Tipo De Colaborador");
 
+<<<<<<< HEAD
+        jComboBoxTipoDeColaborador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Advogado", "Estagiario", "Funcionario" }));
+
+        jLabel7.setText("Status");
+=======
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Status Colaborador"));
+>>>>>>> 297da216aa9543893f69a90b324f057a1f0eabb3
 
         jButtonStatus.setText("Ativo");
         jButtonStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +130,8 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
+=======
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -202,6 +214,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
 
         jComboBoxTipoDeColaborador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Advogado", "Estagiario", "Funcionario" }));
 
+>>>>>>> 297da216aa9543893f69a90b324f057a1f0eabb3
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -214,6 +227,29 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                     .addComponent(jLabel4)
 
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldOAB, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonStatus)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jComboBoxTipoDeColaborador, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jTextFieldDddTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTextFieldNumeroTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,6 +279,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
 
+>>>>>>> 297da216aa9543893f69a90b324f057a1f0eabb3
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,10 +343,18 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxTipoDeColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+<<<<<<< HEAD
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonStatus)
+                .addContainerGap(110, Short.MAX_VALUE))
+=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
 
+>>>>>>> 297da216aa9543893f69a90b324f057a1f0eabb3
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
@@ -398,7 +443,11 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 .addComponent(jButtonAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonlistagem)
+<<<<<<< HEAD
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+>>>>>>> 297da216aa9543893f69a90b324f057a1f0eabb3
                 .addComponent(jButtonSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonCancelar)
@@ -458,7 +507,11 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< HEAD
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+>>>>>>> 297da216aa9543893f69a90b324f057a1f0eabb3
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -612,12 +665,16 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jTextFieldMatricula.setEnabled(habilita);
         jTextFieldNome.setEnabled(habilita);
         jTextFieldNumeroTelefone.setEnabled(habilita);
+<<<<<<< HEAD
+        jTextFieldOAB.setEnabled(false);
+=======
         jTextFieldOAB.setEnabled(habilita);
 
         jTextFieldTipoDeColaborador.setEnabled(habilita);
         txtNomeUsuario.setEnabled(habilita);
         txtSenha.setEnabled(habilita);
 
+>>>>>>> 297da216aa9543893f69a90b324f057a1f0eabb3
         jComboBoxTipoDeColaborador.setEnabled(habilita);
 
         jButtonStatus.setEnabled(habilita);
@@ -715,11 +772,13 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+<<<<<<< HEAD
+=======
     private javax.swing.JLabel jLabel8;
+>>>>>>> 297da216aa9543893f69a90b324f057a1f0eabb3
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
