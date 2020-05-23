@@ -13,13 +13,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import modelos.classes.Colaborador;
 import modelos.interfaces.ICRUDColaborador;
+import modelos.utilidades.GeradorID;
+import modelos.utilidades.TipoDeColadoradores;
+import modelos.utilidades.TipoDeStatus;
 
 /**
  *
  * @author marcos
  */
 public class ColaboradorPersistencia implements ICRUDColaborador {
-    
+
     /**
      * #Atributos
      */
@@ -27,6 +30,7 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
 
     /**
      * #Métodos
+     *
      * @param nomeDoArquivoNoDisco
      */
     public ColaboradorPersistencia(String nomeDoArquivoNoDisco) {
@@ -41,6 +45,9 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
     @Override
     public void incluir(Colaborador objeto) throws Exception {
         try {
+            GeradorID gId = new GeradorID();
+            objeto.setId(gId.getID());
+            gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(objeto.toString() + "\n");
@@ -87,7 +94,7 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
     public ArrayList<Colaborador> listagem() throws Exception {
         try {
             ArrayList<Colaborador> listaDeColaboradores = new ArrayList<>();
-            
+
             FileReader fr = new FileReader(nomeDoArquivoNoDisco);
             BufferedReader br = new BufferedReader(fr);
 
@@ -99,11 +106,14 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
                 String nome = vetor[2];
                 int OAB = Integer.parseInt(vetor[3]);
                 String email = vetor[4];
-                int telefone = Integer.parseInt(vetor[5]);
-                String tipoDeColaborador = vetor[6];
-                boolean tipoDeStatus = Boolean.parseBoolean(vetor[7]);
+                int ddd = Integer.parseInt(vetor[5]);
+                int telefone = Integer.parseInt(vetor[6]);
                 
-                listaDeColaboradores.add(new Colaborador(id, matricula, nome, OAB, email, telefone, tipoDeColaborador, tipoDeStatus));
+                TipoDeColadoradores tipoDeColaborador = TipoDeColadoradores.valueOf(vetor[7]);
+                TipoDeStatus tipoDeStatus = TipoDeStatus.valueOf(vetor[8]);
+                Colaborador c = new Colaborador(matricula, nome, OAB, email,ddd, telefone, tipoDeColaborador, tipoDeStatus);
+                c.setId(id);
+                listaDeColaboradores.add(c);
             }
             return listaDeColaboradores;
 
@@ -112,12 +122,20 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
         }
     }
 
-    @Override
-    public Colaborador getColaborador(int id) throws Exception {
-        try {
+    
+    /**
+     * 
+     * @param nome
+     * @param matricula
+     * @return
+     * @throws Exception 
+     */
+    public Colaborador getColaborador(String nome) throws Exception {
+        try {            
+
             ArrayList<Colaborador> listaDeColaboradores = listagem();
             for (Colaborador colaborador : listaDeColaboradores) {
-                if (colaborador.getId() == id) {
+                if (colaborador.getNome().equals(nome)) {
                     return colaborador;
                 }
             }

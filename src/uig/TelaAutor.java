@@ -39,6 +39,7 @@ public class TelaAutor extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Dados Autor");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Autor"));
 

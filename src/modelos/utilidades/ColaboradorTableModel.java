@@ -48,24 +48,25 @@ public class ColaboradorTableModel extends AbstractTableModel {
     public String getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return String.format("%03d", dados.get(rowIndex).getId());
-            case 1:
-//                return dados.get(rowIndex).getNome();
                 return (dados.get(rowIndex).getNome().equals("-"))?"":dados.get(rowIndex).getNome();
+            case 1:
+                
+                return(dados.get(rowIndex).getMatricula()!=0)? dados.get(rowIndex).getMatricula()+"":" ";
             case 2:
-                return dados.get(rowIndex).getMatricula()+"";
+                return(dados.get(rowIndex).getOAB()!=0)? dados.get(rowIndex).getOAB()+"":" ";
             case 3:
-                return dados.get(rowIndex).getOAB()+"";
-            case 4:
-//                return dados.get(rowIndex).getEmail();
                 return (dados.get(rowIndex).getEmail().equals("-"))?"":dados.get(rowIndex).getEmail();
+            case 4:
+                return dados.get(rowIndex).getTelefone().getTelefone()+"";
             case 5:
-                return dados.get(rowIndex).getTelefone()+"";
+                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.ADVOGADO) return "Advogado";
+                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.ESTAGIARIO) return "Estagiario";
+                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.FUNCIONARIO) return "Funcionario";
+                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.INDEFINIDO) return "Indefinido";
             case 6:
-//                return dados.get(rowIndex).getTipoDeColaborador();
-                return (dados.get(rowIndex).getTipoDeColaborador().equals("-"))?"":dados.get(rowIndex).getTipoDeColaborador();
-            case 7:
-                return (dados.get(rowIndex).isTipoDeStatus())?"Ativo":"Inativo";
+                if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.ATIVO) return "Ativo";
+                if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.INATIVO) return "Inativo";
+                if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.INDEFINIDO) return "Indefinido";
             default:
                 throw new AssertionError();
         }

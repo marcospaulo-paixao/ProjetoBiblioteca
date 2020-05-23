@@ -34,11 +34,14 @@ public interface ICRUDColaborador {
      * @return @throws Exception
      */
     ArrayList<Colaborador> listagem() throws Exception;
+
+
     /**
      * 
-     * @param id
-     * @return Colaborador
+     * @param nome
+     * @param matricula
+     * @return
      * @throws Exception 
      */
-    Colaborador getColaborador(int id) throws Exception;
+    Colaborador getColaborador(String nome) throws Exception;
 }
