@@ -9,5 +9,8 @@ public interface IcrudAutor {
 
     void alterar(Autor antigoAuto, Autor autorAtual) throws Exception;
 
+    void excluir(String nome) throws Exception;
+
     ArrayList<Autor> listagem() throws Exception;
+    Autor listarAutorNome(String nome) throws Exception;
 }

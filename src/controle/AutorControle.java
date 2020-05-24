@@ -1,25 +1,69 @@
-
 package controle;
 
 import java.util.ArrayList;
-import modelos.classes.Editora;
-import modelos.interfaces.IcrudEditora;
+import modelos.classes.Autor;
+import modelos.interfaces.IcrudAutor;
+import persistencia.AutorPersistencia;
 
-public class AutorControle implements IcrudEditora{
-    
-    @Override
-    public void incluir(Editora editoraObjeto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+public class AutorControle implements IcrudAutor {
+
+    IcrudAutor autorPersistencia = null;
+
+    public AutorControle(String nomeDoArquivoNoDisco) {
+        autorPersistencia = new AutorPersistencia(nomeDoArquivoNoDisco);
+    }
+
+    public AutorPersistencia getAutorPersistencia() {
+        return (AutorPersistencia) autorPersistencia;
+    }
+
+    public void setAutorPersistencia(AutorPersistencia autorPersistencia) {
+        this.autorPersistencia = autorPersistencia;
     }
 
     @Override
-    public void alterar(Editora antigoEditora, Editora atualEditora) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void incluir(Autor autorObj) throws Exception {
+        try {
+            autorPersistencia.incluir(autorObj);
+        } catch (Exception errorApi) {
+            throw errorApi;
+        }
     }
 
     @Override
-    public ArrayList<Editora> listagem() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void alterar(Autor antigoAuto, Autor autorAtual) throws Exception {
+        try {
+            autorPersistencia.alterar(antigoAuto, autorAtual);
+        } catch (Exception errorApa) {
+            throw errorApa;
+        }
     }
-    
+
+    @Override
+    public ArrayList<Autor> listagem() throws Exception {
+        try {
+            return autorPersistencia.listagem();
+        } catch (Exception errorApl) {
+            throw errorApl;
+        }
+    }
+
+    @Override
+    public void excluir(String nome) throws Exception {
+        try {
+            autorPersistencia.excluir(nome);
+        } catch (Exception erroExcluir) {
+            throw erroExcluir;
+        }
+    }
+
+    @Override
+    public Autor listarAutorNome(String nome) throws Exception {
+        try {
+            return autorPersistencia.listarAutorNome(nome);
+        } catch (Exception errorL) {
+            throw errorL;
+        }
+    }
+
 }

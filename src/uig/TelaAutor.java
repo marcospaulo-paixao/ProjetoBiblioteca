@@ -1,15 +1,29 @@
 package uig;
 
+import controle.AutorControle;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelos.classes.Autor;
+import modelos.interfaces.IcrudAutor;
 import modelos.utilidades.GeradorID;
 
 public class TelaAutor extends javax.swing.JFrame {
+
+    boolean incluirOr = true;
+    IcrudAutor autor = null;
 
     /**
      * Creates new form TelaAutor
      */
     public TelaAutor() {
         initComponents();
+        try {
+            autor = new AutorControle("autor.txt");
+        } catch (Exception e) {
+        }
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }
 
@@ -24,10 +38,10 @@ public class TelaAutor extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
+        txtNomeAutor = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableColaboradores = new javax.swing.JTable();
+        gridAutor = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButtonIncluir = new javax.swing.JButton();
         jButtonDeletar = new javax.swing.JButton();
@@ -40,10 +54,17 @@ public class TelaAutor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dados Autor");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Autor"));
 
         jLabel2.setText("Nome");
+
+        txtNomeAutor.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -53,7 +74,7 @@ public class TelaAutor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -62,13 +83,13 @@ public class TelaAutor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNomeAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Autores"));
 
-        jTableColaboradores.setModel(new javax.swing.table.DefaultTableModel(
+        gridAutor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -84,7 +105,12 @@ public class TelaAutor extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTableColaboradores);
+        gridAutor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridAutorMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(gridAutor);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -113,6 +139,11 @@ public class TelaAutor extends javax.swing.JFrame {
         });
 
         jButtonDeletar.setText("Deletar");
+        jButtonDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeletarActionPerformed(evt);
+            }
+        });
 
         jButtonAlterar.setText("Alterar");
         jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +153,11 @@ public class TelaAutor extends javax.swing.JFrame {
         });
 
         jButtonlistagem.setText("Listar");
+        jButtonlistagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonlistagemActionPerformed(evt);
+            }
+        });
 
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +174,7 @@ public class TelaAutor extends javax.swing.JFrame {
         });
 
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.setEnabled(false);
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalvarActionPerformed(evt);
@@ -221,12 +258,17 @@ public class TelaAutor extends javax.swing.JFrame {
 
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
         // TODO add your handling code here:
-
+        habilitaFormulario(true);
+        incluirOr = true;
     }//GEN-LAST:event_jButtonIncluirActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        // TODO add your handling code here:
-
+        try {
+            incluirOr = false;
+            txtNomeAutor.setEnabled(true);
+            jButtonSalvar.setEnabled(true);
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
@@ -247,24 +289,114 @@ public class TelaAutor extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         try {
-            GeradorID gId = new GeradorID();
+            if (incluirOr) {
+                String nome = txtNomeAutor.getText();
+                if (!txtNomeAutor.getText().isEmpty()) {
+                    GeradorID gId = new GeradorID();
+                    int id = gId.getID();
+                    autor.incluir(new Autor(id, nome));
+                    gId.finalize();
+                    txtNomeAutor.setText("");
+                } else {
+
+                    String nomealtear = txtNomeAutor.getText();
+                    if (!txtNomeAutor.getText().isEmpty()) {
+                        Autor antigoAuto = autor.listarAutorNome(nomealtear);
+                        Autor autorAtual = new Autor(antigoAuto.getId(), txtNomeAutor.getText());
+                        autor.alterar(antigoAuto, autorAtual);
+                        JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "O campo nome dever ser preenchido!");
+                txtNomeAutor.setText("");
+            }
+            imprimirNaGrid();
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, erro);
         }
+        habilitaFormulario(false);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       try {
-           TelaMenuPrincipal menu = new TelaMenuPrincipal();
-           menu.setVisible(true);
-           dispose();
+        try {
+            TelaMenuPrincipal menu = new TelaMenuPrincipal();
+            menu.setVisible(true);
+            dispose();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-    public void habilitaFormulario(boolean habilita) {
-        
-        txtNome.setEditable(habilita);
+    public void limparDadosGrid(ArrayList<Autor> contatos) {
+        DefaultTableModel tabela = (DefaultTableModel) gridAutor.getModel();
+        tabela.setRowCount(0);
     }
+    private void jButtonlistagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonlistagemActionPerformed
+        imprimirNaGrid();
+    }//GEN-LAST:event_jButtonlistagemActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        imprimirNaGrid();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
+        try {
+            DefaultTableModel tabela = (DefaultTableModel) gridAutor.getModel();
+            if (gridAutor.getSelectedRow() != 1) {
+                String nomeExcluir = gridAutor.getValueAt(gridAutor.getSelectedRow(), gridAutor.getSelectedColumn()).toString();
+                int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Exclusão de: " + nomeExcluir, nomeExcluir, 0);
+
+                if (config == 0) {
+                    autor.excluir(nomeExcluir);
+                    imprimirNaGrid();
+                    txtNomeAutor.setText("");
+                    JOptionPane.showMessageDialog(rootPane, "Exclusão Concluida!");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Exclusão Cancelada!");
+                }
+            }
+        } catch (Exception erroNaExclusao) {
+            JOptionPane.showMessageDialog(null, erroNaExclusao);
+        }
+    }//GEN-LAST:event_jButtonDeletarActionPerformed
+
+    private void gridAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridAutorMouseClicked
+        transferirDadosDaGrid();
+    }//GEN-LAST:event_gridAutorMouseClicked
+    public void transferirDadosDaGrid() {
+        if (gridAutor.getSelectedRow() != 1) {
+            String nomeExcluir = gridAutor.getValueAt(gridAutor.getSelectedRow(), gridAutor.getSelectedColumn()).toString();
+            txtNomeAutor.setText(nomeExcluir);
+        }
+    }
+
+    public void habilitaFormulario(boolean habilita) {
+        jButtonSalvar.setEnabled(habilita);
+        txtNomeAutor.setEnabled(habilita);
+        if (habilita) {
+            txtNomeAutor.setRequestFocusEnabled(true);
+        }
+    }
+
+    public void imprimirNaGrid() {
+        DefaultTableModel tabela = (DefaultTableModel) gridAutor.getModel();
+        try {
+            limparDadosGrid(autor.listagem());
+            ArrayList<Autor> autoresList = autor.listagem();
+            String[] autores = new String[1];
+
+            for (int pos = 0; pos < autoresList.size(); pos++) {
+                Autor aux = autoresList.get(pos);
+
+                autores[0] = aux.getNome();
+                tabela.addRow(autores);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(TelaAutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -301,6 +433,7 @@ public class TelaAutor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable gridAutor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
@@ -314,7 +447,6 @@ public class TelaAutor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableColaboradores;
-    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtNomeAutor;
     // End of variables declaration//GEN-END:variables
 }

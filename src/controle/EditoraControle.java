@@ -6,26 +6,45 @@ import modelos.interfaces.IcrudEditora;
 import persistencia.EditoraPersistencia;
 
 public class EditoraControle implements IcrudEditora {
-    
+
     private IcrudEditora objEditora = null;
-    
-    public EditoraControle() {
-        objEditora = new EditoraPersistencia("Nome");
+
+    public EditoraControle(String nomeDoArquivoNoDisco) {
+        objEditora = new EditoraPersistencia(nomeDoArquivoNoDisco);
     }
-    
+
+    public IcrudEditora getObjEditora() {
+        return objEditora;
+    }
+
+    public void setObjEditora(IcrudEditora objEditora) {
+        this.objEditora = objEditora;
+    }
+
     @Override
     public void incluir(Editora editoraObjeto) throws Exception {
-        this.objEditora.incluir(editoraObjeto);
+        try {
+            objEditora.incluir(editoraObjeto);
+        } catch (Exception erroEditora) {
+            throw erroEditora;
+        }
     }
 
     @Override
     public void alterar(Editora antigoEditora, Editora atualEditora) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            objEditora.alterar(antigoEditora, atualEditora);
+        } catch (Exception erro) {
+            throw erro;
+        }
     }
 
     @Override
     public ArrayList<Editora> listagem() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return objEditora.listagem();
+        } catch (Exception erro) {
+            throw erro;
+        }
     }
-    
 }
