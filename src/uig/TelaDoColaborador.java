@@ -34,7 +34,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             colaboradorControler = new ColaboradorControle("colaborador.txt");
             model = new ColaboradorTableModel(new String[]{"Nome", "Matricula", "OAB", "E-mail", "Telefone", "Tipo De Colaborador", "Status"});
             jTableColaboradores.setModel(model);
-            
+
             if (colaboradorControler.listagem() != null) {
                 model.update(colaboradorControler.listagem());
             }
@@ -368,7 +368,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (JOptionPane.showConfirmDialog(null, "Deseja Cancelar?", "Cancelar", JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION) {
             habilitaFormulario(false);
-                            jTableColaboradores.setRowSelectionAllowed(true);
+            jTableColaboradores.setRowSelectionAllowed(true);
         }
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -402,22 +402,28 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 throw new Exception("Selecione o Tipo de colaborador!");
             }
             TipoDeColadoradores tipoDeColaborador = null;
-            if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Advogado"))  tipoDeColaborador = TipoDeColadoradores.ADVOGADO;
-            if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Estagiario"))  tipoDeColaborador = TipoDeColadoradores.ESTAGIARIO;
-            if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Funcionario"))  tipoDeColaborador = TipoDeColadoradores.FUNCIONARIO;                
-            
-            TipoDeStatus status = (jButtonStatus.getText().equals("Ativo")?TipoDeStatus.ATIVO:TipoDeStatus.INATIVO);
+            if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Advogado")) {
+                tipoDeColaborador = TipoDeColadoradores.ADVOGADO;
+            }
+            if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Estagiario")) {
+                tipoDeColaborador = TipoDeColadoradores.ESTAGIARIO;
+            }
+            if (jComboBoxTipoDeColaborador.getSelectedItem().equals("Funcionario")) {
+                tipoDeColaborador = TipoDeColadoradores.FUNCIONARIO;
+            }
+
+            TipoDeStatus status = (jButtonStatus.getText().equals("Ativo") ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
             if (incluir) {
-                colaboradorControler.incluir(new Colaborador(matricula, nome, OAB, email,ddd, telefone, tipoDeColaborador, status));
+                colaboradorControler.incluir(new Colaborador(matricula, nome, OAB, email, ddd, telefone, tipoDeColaborador, status));
                 model.update(colaboradorControler.listagem());
                 habilitaFormulario(false);
                 JOptionPane.showMessageDialog(null, "Colaborador salvo com sucesso");
-                
+
             } else {
                 String nome_aux = model.getValueAt(jTableColaboradores.getSelectedRow(), 0);
-                
+
                 colaboradorControler.alterar(colaboradorControler.getColaborador(nome_aux),
-                        new Colaborador(matricula, nome, OAB, email,ddd, telefone, tipoDeColaborador, status));
+                        new Colaborador(matricula, nome, OAB, email, ddd, telefone, tipoDeColaborador, status));
                 JOptionPane.showMessageDialog(null, "Colaborador alterado com sucesso");
                 habilitaFormulario(false);
                 model.update(colaboradorControler.listagem());
@@ -462,7 +468,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Selecione o Colaborador para ser alterado");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja Deletar este Colaborador?", "Cancelar", JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION) {
-                    colaboradorControler.alterar(colaboradorControler.getColaborador(model.getValueAt(jTableColaboradores.getSelectedRow(), 0)), new Colaborador(0, "-", 0, "-",0, 0, TipoDeColadoradores.INDEFINIDO, TipoDeStatus.INATIVO));
+                    colaboradorControler.alterar(colaboradorControler.getColaborador(model.getValueAt(jTableColaboradores.getSelectedRow(), 0)), new Colaborador(0, "-", 0, "-", 0, 0, TipoDeColadoradores.INDEFINIDO, TipoDeStatus.INATIVO));
                     JOptionPane.showMessageDialog(null, "Colaborador deletado com sucesso");
                     model.update(colaboradorControler.listagem());
                     habilitaFormulario(false);
@@ -510,19 +516,24 @@ public class TelaDoColaborador extends javax.swing.JFrame {
 
     public void setValuesJTextFields(Colaborador objeto) {
         jTextFieldNome.setText(objeto.getNome());
-        jTextFieldMatricula.setText(objeto.getMatricula()+"");
-        jTextFieldOAB.setText(objeto.getOAB()+"");
+        jTextFieldMatricula.setText(objeto.getMatricula() + "");
+        jTextFieldOAB.setText(objeto.getOAB() + "");
         jTextFieldEmail.setText(objeto.getEmail());
-      jTextFieldDddTelefone.setText(objeto.getTelefone().getDdd()+"");
-        jTextFieldNumeroTelefone.setText(objeto.getTelefone().getNumero()+"");
+        jTextFieldDddTelefone.setText(objeto.getTelefone().getDdd() + "");
+        jTextFieldNumeroTelefone.setText(objeto.getTelefone().getNumero() + "");
         jComboBoxTipoDeColaborador.setSelectedItem(objeto.getTipoDeColaborador());
-        int aux =objeto.getTipoDeColaborador().getValor();
+        int aux = objeto.getTipoDeColaborador().getValor();
         jComboBoxTipoDeColaborador.setSelectedIndex(objeto.getTipoDeColaborador().getValor());
-        if ((objeto.getTipoDeStatus().getValor())==0)jButtonStatus.setText("Ativo");
-        if ((objeto.getTipoDeStatus().getValor())==1)jButtonStatus.setText("Inativo");
-        if ((objeto.getTipoDeStatus().getValor())==2)jButtonStatus.setText("Inativo");
-            
-        
+        if ((objeto.getTipoDeStatus().getValor()) == 0) {
+            jButtonStatus.setText("Ativo");
+        }
+        if ((objeto.getTipoDeStatus().getValor()) == 1) {
+            jButtonStatus.setText("Inativo");
+        }
+        if ((objeto.getTipoDeStatus().getValor()) == 2) {
+            jButtonStatus.setText("Inativo");
+        }
+
     }
 
     /**
