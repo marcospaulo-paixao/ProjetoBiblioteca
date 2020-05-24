@@ -71,7 +71,7 @@ public class ColaboradorControle implements ICRUDColaborador {
             Comparator c = (Comparator<Colaborador>) (Colaborador o1, Colaborador o2) -> o1.getNome().compareToIgnoreCase(o2.getNome());
             //Biblioteca para ordenar por ordem alfabética
             Collections.sort(listaDeContatos, c);
-            return colaboradorPersistencia.listagem();
+            return listaDeContatos;
         } catch (Exception e) {
             throw e;
         }
