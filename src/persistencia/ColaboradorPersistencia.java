@@ -70,7 +70,7 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
             ArrayList<Colaborador> listaDeColaborador = listagem();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
             BufferedWriter bw = new BufferedWriter(fw);
-
+            novoColaborador.setId(velhoColaborador.getId());
             for (Colaborador colaborador : listaDeColaborador) {
                 if (colaborador.getId() != velhoColaborador.getId()) {
                     bw.write(colaborador.toString() + "\n");
