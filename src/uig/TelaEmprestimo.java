@@ -334,12 +334,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            Login telaDeLogin = new Login();
-            telaDeLogin.setVisible(true);
-            dispose();
-        } catch (Exception e) {
-        }
+        System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

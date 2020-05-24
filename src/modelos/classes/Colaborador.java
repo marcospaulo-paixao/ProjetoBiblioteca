@@ -159,7 +159,6 @@ public class Colaborador {
     }
 
     /**
-     * @param ddd
      * @param telefone the telefone to set
      */
     public void setTelefone(int ddd,int telefone) {
