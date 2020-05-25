@@ -22,6 +22,18 @@ public class UsuarioTableModel extends AbstractTableModel {
     String[] colunas = null;
 
     /**
+     * #Métodos
+     */
+    /**
+     * 
+     * @param colunas 
+     */
+    public UsuarioTableModel(String[] colunas) {
+        this.colunas = colunas;
+        this.dados = new ArrayList<>();
+    }
+
+    /**
      *
      * @param column
      * @return
@@ -72,9 +84,9 @@ public class UsuarioTableModel extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
-    public void update() {
+    public void update(ArrayList<Usuario> listaDeUsuarios) {
         dados.removeAll(dados);
-        
+
     }
 
 }
