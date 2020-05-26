@@ -5,6 +5,7 @@
  */
 package uig;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelos.utilidades.GeradorID;
 
@@ -15,7 +16,8 @@ public class TelaEditora extends javax.swing.JFrame {
      */
     public TelaEditora() {
         initComponents();
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
+        ImageIcon icone = new ImageIcon("src/icons/livro.png");
+        this.setIconImage(icone.getImage());
     }
 
     /**
@@ -50,6 +52,7 @@ public class TelaEditora extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dados da Editora");
+        setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
 
@@ -259,6 +262,7 @@ public class TelaEditora extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
