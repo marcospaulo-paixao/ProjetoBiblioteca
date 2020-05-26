@@ -5,6 +5,7 @@
  */
 package uig;
 
+import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,9 +32,10 @@ public class TelaLivro extends javax.swing.JFrame {
      */
     public TelaLivro() {
         initComponents();
+        ImageIcon icone = new ImageIcon("src/icons/livro.png");
+        this.setIconImage(icone.getImage());
         autor = new AutorPersistencia("autor.txt");
         editora = new EditoraPersistencia("editora.txt");
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }
 
     /**
@@ -69,6 +71,7 @@ public class TelaLivro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Livro");
+        setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
 
@@ -317,6 +320,7 @@ public class TelaLivro extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed

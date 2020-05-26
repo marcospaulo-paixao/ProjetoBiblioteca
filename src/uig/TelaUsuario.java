@@ -6,6 +6,7 @@
 package uig;
 
 import controle.UsuarioControle;
+import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import modelos.interfaces.ICRUDUsuario;
 import modelos.utilidades.UsuarioTableModel;
@@ -25,13 +26,14 @@ public class TelaUsuario extends javax.swing.JFrame {
     public TelaUsuario() throws Exception {
         super("Tela Usuários");
         initComponents();
-        
+        ImageIcon icone = new ImageIcon("src/icons/livro.png");
+        this.setIconImage(icone.getImage());
         try {
 
         } catch (Exception e) {
         }
         usuarioControle = new UsuarioControle("usuario.txt");
-        model = new UsuarioTableModel(new String[]{"Nome", "Login","Status"});
+        model = new UsuarioTableModel(new String[]{"Nome", "Login", "Status"});
         jTable1.setModel(model);
 //        model.update(usuarioControle.listar());
     }
@@ -313,9 +315,9 @@ public class TelaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jButtonStatus.getText().equals("Inativo")) {
             jButtonStatus.setText("Ativo");
-        }else{
+        } else {
             jButtonStatus.setText("Inativo");
-        
+
         }
     }//GEN-LAST:event_jButtonStatusActionPerformed
     public void habilitaFormulario() {

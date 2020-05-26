@@ -5,6 +5,7 @@
  */
 package uig;
 
+import javax.swing.ImageIcon;
 import controle.EditoraControle;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -26,12 +27,13 @@ public class TelaEditora extends javax.swing.JFrame {
      */
     public TelaEditora() {
         initComponents();
+        ImageIcon icone = new ImageIcon("src/icons/livro.png");
+        this.setIconImage(icone.getImage());
         try {
             editora = new EditoraControle("editora.txt");
         } catch (Exception errer) {
             JOptionPane.showMessageDialog(null, errer.getMessage());
         }
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }
 
     /**
@@ -72,7 +74,6 @@ public class TelaEditora extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
-
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
 
         jButtonIncluir.setText("Incluir");

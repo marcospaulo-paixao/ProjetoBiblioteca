@@ -4,6 +4,7 @@ import controle.AutorControle;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelos.classes.Autor;
@@ -24,7 +25,8 @@ public class TelaAutor extends javax.swing.JFrame {
             autor = new AutorControle("autor.txt");
         } catch (Exception e) {
         }
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
+        ImageIcon icone = new ImageIcon("src/icons/livro.png");
+        this.setIconImage(icone.getImage());
     }
 
     /**
@@ -54,7 +56,6 @@ public class TelaAutor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dados Autor");
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);

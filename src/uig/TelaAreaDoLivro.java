@@ -5,6 +5,8 @@
  */
 package uig;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Anisb
@@ -17,7 +19,8 @@ public class TelaAreaDoLivro extends javax.swing.JFrame {
     public TelaAreaDoLivro() {
         super("Tela Area do Livro");
         initComponents();
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
+         ImageIcon icone = new ImageIcon("src/icons/livro.png");
+        this.setIconImage(icone.getImage());
     }
 
     /**

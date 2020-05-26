@@ -6,6 +6,7 @@
 package uig;
 
 import controle.ColaboradorControle;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelos.classes.Colaborador;
 import modelos.utilidades.ColaboradorTableModel;
@@ -29,7 +30,8 @@ public class TelaDoColaborador extends javax.swing.JFrame {
     public TelaDoColaborador() {
         super("Tela Colaboradores");
         initComponents();
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
+        ImageIcon icone = new ImageIcon("src/icons/livro.png");
+        this.setIconImage(icone.getImage());
         try {
             colaboradorControler = new ColaboradorControle("colaborador.txt");
             model = new ColaboradorTableModel(new String[]{"Nome", "Matricula", "OAB", "E-mail", "Telefone", "Tipo De Colaborador", "Status"});
