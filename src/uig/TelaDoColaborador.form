@@ -279,7 +279,7 @@
         <Component class="javax.swing.JButton" name="jButtonIncluir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/CRUDUsuario/user_add_12818.png"/>
+              <Image iconType="3" name="/icons/Crud/mais.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Incluir"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -292,7 +292,7 @@
         <Component class="javax.swing.JButton" name="jButtonDeletar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/CRUDUsuario/delete_delete_deleteusers_delete_male_user_maleclient_2348.png"/>
+              <Image iconType="3" name="/icons/Crud/lixo.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Deletar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -305,7 +305,7 @@
         <Component class="javax.swing.JButton" name="jButtonAlterar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/CRUDUsuario/businessapplication_edit_male_user_thepencil_theclient_negocio_2321.png"/>
+              <Image iconType="3" name="/icons/Crud/papel.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Alterar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -318,7 +318,7 @@
         <Component class="javax.swing.JButton" name="jButtonlistagem">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/CRUDUsuario/listing-option_icon-icons.com_73504.png"/>
+              <Image iconType="3" name="/icons/Crud/listing-option_icon-icons.com_73504.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Listar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -331,7 +331,7 @@
         <Component class="javax.swing.JButton" name="jButtonSalvar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/Crud/salve-.png"/>
+              <Image iconType="3" name="/icons/Crud/salve-.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -344,7 +344,7 @@
         <Component class="javax.swing.JButton" name="jButtonCancelar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/CRUDUsuario/cancel_77947.png"/>
+              <Image iconType="3" name="/icons/Crud/cancel_77947.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -357,7 +357,7 @@
         <Component class="javax.swing.JButton" name="btnVoltar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/CRUDUsuario/1491254395-returnbackredoarrow_82934.png"/>
+              <Image iconType="3" name="/icons/Crud/1491254395-returnbackredoarrow_82934.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Voltar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -372,7 +372,7 @@
         <Component class="javax.swing.JButton" name="jButtonSair">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/CRUDUsuario/Logout_37127.png"/>
+              <Image iconType="3" name="/icons/Crud/Logout_37127.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sair"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
