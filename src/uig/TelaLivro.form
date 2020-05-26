@@ -107,9 +107,6 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonIncluir">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/Crud/mais.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Incluir"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -120,9 +117,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonDeletar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/Crud/lixo.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Deletar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -130,9 +124,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAlterar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/Crud/papel.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Alterar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -143,9 +134,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonlistagem">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/Crud/listing-option_icon-icons.com_73504.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Listar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -153,9 +141,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSalvar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/Crud/salve-.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -166,9 +151,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/Crud/1491254395-returnbackredoarrow_82934.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Voltar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="iconTextGap" type="int" value="12"/>
@@ -180,9 +162,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonCancelar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/Crud/cancel_77947.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -193,9 +172,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSair">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/Crud/Logout_37127.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Sair"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -236,15 +212,14 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jComboBox2" min="-2" pref="252" max="-2" attributes="0"/>
+                          <Component id="jComboBoxEditora" min="-2" pref="252" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="txtNome2" min="-2" pref="240" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" pref="44" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" min="-2" pref="230" max="-2" attributes="0"/>
+                      <Component id="jComboBoxAutor" min="-2" pref="230" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
@@ -253,15 +228,14 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtNome" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -275,8 +249,8 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxEditora" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxAutor" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -305,7 +279,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtNome2">
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="jComboBoxAutor">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
@@ -313,11 +287,14 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="popupMenuWillBecomeVisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="jComboBoxAutorPopupMenuWillBecomeVisible"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox2">
+        <Component class="javax.swing.JComboBox" name="jComboBoxEditora">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
@@ -325,6 +302,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="popupMenuWillBecomeVisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="jComboBoxEditoraPopupMenuWillBecomeVisible"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
