@@ -5,8 +5,17 @@
  */
 package uig;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelos.classes.Autor;
+import modelos.classes.Editora;
+import modelos.interfaces.IcrudAutor;
+import modelos.interfaces.IcrudEditora;
 import modelos.utilidades.GeradorID;
+import persistencia.AutorPersistencia;
+import persistencia.EditoraPersistencia;
 
 /**
  *
@@ -47,8 +56,8 @@ public class TelaLivro extends javax.swing.JFrame {
         txtNome1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtNome2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBoxAutor = new javax.swing.JComboBox<>();
+        jComboBoxEditora = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableColaboradores = new javax.swing.JTable();
@@ -151,9 +160,43 @@ public class TelaLivro extends javax.swing.JFrame {
 
         jLabel4.setText("ISBN");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Autor" }));
+        jComboBoxAutor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Autor" }));
+        jComboBoxAutor.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jComboBoxAutorComponentAdded(evt);
+            }
+        });
+        jComboBoxAutor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxAutorItemStateChanged(evt);
+            }
+        });
+        jComboBoxAutor.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBoxAutorPopupMenuWillBecomeVisible(evt);
+            }
+        });
+        jComboBoxAutor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxAutorMouseClicked(evt);
+            }
+        });
+        jComboBoxAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAutorActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Editora" }));
+        jComboBoxEditora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Editora" }));
+        jComboBoxEditora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEditoraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -177,9 +220,9 @@ public class TelaLivro extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -201,8 +244,8 @@ public class TelaLivro extends javax.swing.JFrame {
                         .addComponent(txtNome2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -312,6 +355,44 @@ public class TelaLivro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBoxEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEditoraActionPerformed
+        IcrudEditora editora = new EditoraPersistencia("editora.txt");
+        try {
+            ArrayList<Editora> editors = editora.listagem();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaLivro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jComboBoxEditoraActionPerformed
+
+    private void jComboBoxAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAutorActionPerformed
+
+    }//GEN-LAST:event_jComboBoxAutorActionPerformed
+    private void jComboBoxAutorPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxAutorPopupMenuWillBecomeVisible
+        try {
+            IcrudAutor autor = new AutorPersistencia("autor.txt");
+            ArrayList<Autor> autores = autor.listagem();
+            jComboBoxAutor.removeAllItems();
+            for (int autInList = 0; autInList < autores.size(); autInList++) {
+                Autor auxAutor = autores.get(autInList);
+                jComboBoxAutor.addItem(auxAutor.getNome());
+            }
+            jComboBoxAutor.removeAll();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jComboBoxAutorPopupMenuWillBecomeVisible
+
+    private void jComboBoxAutorComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jComboBoxAutorComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxAutorComponentAdded
+
+    private void jComboBoxAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxAutorMouseClicked
+
+    }//GEN-LAST:event_jComboBoxAutorMouseClicked
+
+    private void jComboBoxAutorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxAutorItemStateChanged
+
+    }//GEN-LAST:event_jComboBoxAutorItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -356,8 +437,8 @@ public class TelaLivro extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonlistagem;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxAutor;
+    private javax.swing.JComboBox<String> jComboBoxEditora;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
