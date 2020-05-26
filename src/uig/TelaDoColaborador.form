@@ -33,21 +33,21 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jPanel4" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel2" max="32767" attributes="0"/>
                   <Component id="jPanel1" max="32767" attributes="0"/>
-                  <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
@@ -251,7 +251,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnVoltar" min="-2" pref="77" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButtonSair" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonSair" pref="68" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -262,15 +262,13 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jButtonSair" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnVoltar" max="32767" attributes="0"/>
-                          <Component id="jButtonCancelar" max="32767" attributes="0"/>
-                          <Component id="jButtonSalvar" max="32767" attributes="0"/>
-                          <Component id="jButtonlistagem" max="32767" attributes="0"/>
-                          <Component id="jButtonAlterar" max="32767" attributes="0"/>
-                          <Component id="jButtonDeletar" max="32767" attributes="0"/>
-                          <Component id="jButtonIncluir" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnVoltar" max="32767" attributes="0"/>
+                      <Component id="jButtonCancelar" max="32767" attributes="0"/>
+                      <Component id="jButtonSalvar" max="32767" attributes="0"/>
+                      <Component id="jButtonlistagem" max="32767" attributes="0"/>
+                      <Component id="jButtonAlterar" max="32767" attributes="0"/>
+                      <Component id="jButtonDeletar" max="32767" attributes="0"/>
+                      <Component id="jButtonIncluir" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -333,7 +331,7 @@
         <Component class="javax.swing.JButton" name="jButtonSalvar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/CRUDUsuario/Save_37110.png"/>
+              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/Crud/salve-.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
