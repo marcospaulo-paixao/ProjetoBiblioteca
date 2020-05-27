@@ -20,6 +20,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
      * Creates new form TelaMenuPrincipal
      */
     public TelaMenuPrincipal() {
+        super("Biblioteca System");
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
@@ -40,7 +41,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jPanel2 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
-        jButton7 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -78,21 +78,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Reserva.png"))); // NOI18N
-        jButton7.setText("Reservar");
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton7MouseClicked(evt);
-            }
-        });
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
             }
         });
 
@@ -163,7 +148,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -179,8 +163,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
@@ -189,10 +171,10 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(73, 73, 73)
                 .addComponent(jButton5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/TelaBiblioteca2.png"))); // NOI18N
@@ -305,19 +287,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try {
-            TelaReserva reserva = new TelaReserva();
-            reserva.setVisible(true);
-            dispose();
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
-
-    }//GEN-LAST:event_jButton7MouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -361,7 +330,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

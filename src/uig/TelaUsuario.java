@@ -7,7 +7,6 @@ package uig;
 
 import controle.UsuarioControle;
 import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
 import modelos.interfaces.ICRUDUsuario;
 import modelos.utilidades.UsuarioTableModel;
 
@@ -23,15 +22,12 @@ public class TelaUsuario extends javax.swing.JFrame {
     /**
      * Creates new form TelaUsuario
      */
-    public TelaUsuario() throws Exception {
-        super("Tela Usuários");
+    public TelaUsuario() {
+        super("Biblioteca System - Usuários");
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
-        try {
-
-        } catch (Exception e) {
-        }
+     
         usuarioControle = new UsuarioControle("usuario.txt");
         model = new UsuarioTableModel(new String[]{"Nome", "Login", "Status"});
         jTable1.setModel(model);
@@ -98,14 +94,15 @@ public class TelaUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPasswordFieldConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPasswordFieldConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelNomdeDoUsuario)
                             .addComponent(jLabelSenha)
-                            .addComponent(jLabel4)
                             .addComponent(jTextFieldNomdeDoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelLogin)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -178,6 +175,11 @@ public class TelaUsuario extends javax.swing.JFrame {
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setIconTextGap(12);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/listing-option_icon-icons.com_73504.png"))); // NOI18N
         jButton2.setText("Listar");
@@ -315,6 +317,13 @@ public class TelaUsuario extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButtonStatusActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
     public void habilitaFormulario() {
 
     }

@@ -15,6 +15,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
      * Creates new form TelaEmprestimo
      */
     public TelaEmprestimo() {
+        super("Biblioteca System - Emprestimo de Livro");
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }
@@ -69,7 +70,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Emprestimo de Livro");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Dados do Emprestimo"));

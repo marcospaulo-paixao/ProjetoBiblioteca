@@ -20,6 +20,7 @@ public class TelaAutor extends javax.swing.JFrame {
      * Creates new form TelaAutor
      */
     public TelaAutor() {
+        super("Biblioteca System - Autor");
         initComponents();
         try {
             autor = new AutorControle("autor.txt");
@@ -55,7 +56,6 @@ public class TelaAutor extends javax.swing.JFrame {
         jButtonDeletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Dados Autor");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);

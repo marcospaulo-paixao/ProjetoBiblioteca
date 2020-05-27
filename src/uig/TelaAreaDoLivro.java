@@ -17,7 +17,7 @@ public class TelaAreaDoLivro extends javax.swing.JFrame {
      * Creates new form TelaAreaDoLivro
      */
     public TelaAreaDoLivro() {
-        super("Tela Area do Livro");
+        super("Biblioteca System - Area do Livro");
         initComponents();
          ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());

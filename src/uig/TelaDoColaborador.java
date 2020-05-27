@@ -28,7 +28,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
      * Creates new form TelaDoColaborador
      */
     public TelaDoColaborador() {
-        super("Tela Colaboradores");
+        super("Biblioteca System - Colaboradores");
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());

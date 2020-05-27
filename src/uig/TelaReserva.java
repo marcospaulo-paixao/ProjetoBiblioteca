@@ -15,6 +15,8 @@ public class TelaReserva extends javax.swing.JFrame {
      * Creates new form TelaReserva
      */
     public TelaReserva() {
+        super("Biblioteca System - Reserva de Exemplares");
+        
         initComponents();
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }

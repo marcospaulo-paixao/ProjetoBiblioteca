@@ -5,21 +5,22 @@
  */
 package uig;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import modelos.classes.Colaborador;
-import modelos.interfaces.ICRUDColaborador;
-import persistencia.ColaboradorPersistencia;
+//import .itextpdf.text.Document;
+//import com.itextpdf.text.DocumentException;
+//import com.itextpdf.text.Paragraph;
+//import com.itextpdf.text.pdf.PdfWriter;
+//import java.awt.Desktop;
+//import java.io.File;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
+//import java.util.ArrayList;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+//import javax.swing.text.Document;
+//import modelos.classes.Colaborador;
+//import modelos.interfaces.ICRUDColaborador;
+//import persistencia.ColaboradorPersistencia;
 
 /**
  *
@@ -31,6 +32,7 @@ public class TelaMenuLivros extends javax.swing.JFrame {
      * Creates new form TelaMenuLivros
      */
     public TelaMenuLivros() {
+        super("Biblioteca System - Menu Livros");
         initComponents();
     }
 
@@ -188,32 +190,32 @@ public class TelaMenuLivros extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void relaColaboradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relaColaboradoresActionPerformed
-        Document documentoColaboradores = new Document();
-        try {
-            PdfWriter.getInstance(documentoColaboradores, new FileOutputStream("Documento.pdf"));
-            documentoColaboradores.open();
-            documentoColaboradores.add(new Paragraph("Lista de Colaboradores"));
-            documentoColaboradores.add(new Paragraph("Nome:"));
-            ICRUDColaborador colaborador = new ColaboradorPersistencia("colaborador.txt");
-            for (int i = 0; i < colaborador.listagem().size(); i++) {
-                ArrayList<Colaborador> auxLista = colaborador.listagem();
-                Colaborador aux = new Colaborador(auxLista.get(i));
-                String colaboradoresLista = aux.getNome();
-                documentoColaboradores.add(new Paragraph(colaboradoresLista));
-            }
-        } catch (FileNotFoundException | DocumentException ex) {
-            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            documentoColaboradores.close();
-        }
-
-        try {
-            Desktop.getDesktop().open(new File("Documento.pdf"));
-        } catch (IOException ex) {
-            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        Document documentoColaboradores = new Document();
+//        try {
+//            PdfWriter.getInstance(documentoColaboradores, new FileOutputStream("Documento.pdf"));
+//            documentoColaboradores.open();
+//            documentoColaboradores.add(new Paragraph("Lista de Colaboradores"));
+//            documentoColaboradores.add(new Paragraph("Nome:"));
+//            ICRUDColaborador colaborador = new ColaboradorPersistencia("colaborador.txt");
+//            for (int i = 0; i < colaborador.listagem().size(); i++) {
+//                ArrayList<Colaborador> auxLista = colaborador.listagem();
+//                Colaborador aux = new Colaborador(auxLista.get(i));
+//                String colaboradoresLista = aux.getNome();
+//                documentoColaboradores.add(new Paragraph(colaboradoresLista));
+//            }
+//        } catch (FileNotFoundException | DocumentException ex) {
+//            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            documentoColaboradores.close();
+//        }
+//
+//        try {
+//            Desktop.getDesktop().open(new File("Documento.pdf"));
+//        } catch (IOException ex) {
+//            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_relaColaboradoresActionPerformed
 
     /**

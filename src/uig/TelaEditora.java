@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelos.classes.Autor;
 import modelos.classes.Editora;
 import modelos.interfaces.IcrudEditora;
 import modelos.utilidades.GeradorID;
@@ -26,6 +25,7 @@ public class TelaEditora extends javax.swing.JFrame {
      * Creates new form TelaEditora
      */
     public TelaEditora() {
+        super("Biblioteca System - Editora");
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
@@ -67,7 +67,6 @@ public class TelaEditora extends javax.swing.JFrame {
         jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Dados da Editora");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -384,7 +383,7 @@ public class TelaEditora extends javax.swing.JFrame {
     }//GEN-LAST:event_gridEditoraMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       imprimirNaGrid();
+        imprimirNaGrid();
     }//GEN-LAST:event_formWindowOpened
     public void habilitarBott(boolean habilitar) {
 

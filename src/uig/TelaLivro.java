@@ -31,6 +31,7 @@ public class TelaLivro extends javax.swing.JFrame {
      * Creates new form TelaLivro
      */
     public TelaLivro() {
+        super("Biblioteca System - Livro");
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
@@ -70,7 +71,6 @@ public class TelaLivro extends javax.swing.JFrame {
         jTableColaboradores = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Livro");
         setResizable(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
@@ -196,23 +196,23 @@ public class TelaLivro extends javax.swing.JFrame {
 
         jComboBoxAutor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Autor" }));
         jComboBoxAutor.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBoxAutorPopupMenuWillBecomeVisible(evt);
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                jComboBoxAutorPopupMenuWillBecomeVisible(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
 
         jComboBoxEditora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Editora" }));
         jComboBoxEditora.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBoxEditoraPopupMenuWillBecomeVisible(evt);
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                jComboBoxEditoraPopupMenuWillBecomeVisible(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
 
