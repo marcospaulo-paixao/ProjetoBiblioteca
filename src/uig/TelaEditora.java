@@ -53,7 +53,7 @@ public class TelaEditora extends javax.swing.JFrame {
         jButtonlistagem = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonVoltar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -133,14 +133,14 @@ public class TelaEditora extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/1491254395-returnbackredoarrow_82934.png"))); // NOI18N
-        jButton1.setText("Voltar");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setIconTextGap(12);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/1491254395-returnbackredoarrow_82934.png"))); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonVoltar.setIconTextGap(12);
+        jButtonVoltar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonVoltarActionPerformed(evt);
             }
         });
 
@@ -172,7 +172,7 @@ public class TelaEditora extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonVoltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -188,7 +188,7 @@ public class TelaEditora extends javax.swing.JFrame {
                     .addComponent(jButtonDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -342,6 +342,9 @@ public class TelaEditora extends javax.swing.JFrame {
                     txtNomeEditora.setText("");
                     JOptionPane.showMessageDialog(null, "Editora: " + nomeEditora + " Incluida! ");
                     imprimirNaGrid();
+                    jButtonCancelar.setEnabled(false);
+                    jButtonSair.setEnabled(true);
+                    jButtonVoltar.setEnabled(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos! ");
                     txtDescricaoEditora.setText("");
@@ -359,14 +362,14 @@ public class TelaEditora extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         try {
             TelaMenuPrincipal menu = new TelaMenuPrincipal();
             menu.setVisible(true);
             dispose();
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonlistagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonlistagemActionPerformed
         try {
@@ -391,9 +394,9 @@ public class TelaEditora extends javax.swing.JFrame {
         txtNomeEditora.setRequestFocusEnabled(habilitar);
 
         if (habilitar) {
-            jButtonCancelar.setEnabled(!habilitar);
+            jButtonCancelar.setEnabled(habilitar);
             jButtonSair.setEnabled(!habilitar);
-            jButton1.setEnabled(!habilitar);
+            jButtonVoltar.setEnabled(!habilitar);
         }
     }
 
@@ -477,13 +480,13 @@ public class TelaEditora extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable gridEditora;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonDeletar;
     private javax.swing.JButton jButtonIncluir;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JButton jButtonlistagem;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
