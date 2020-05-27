@@ -5,6 +5,22 @@
  */
 package uig;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelos.classes.Colaborador;
+import modelos.interfaces.ICRUDColaborador;
+import persistencia.ColaboradorPersistencia;
+
 /**
  *
  * @author Anisb
@@ -33,6 +49,7 @@ public class TelaMenuLivros extends javax.swing.JFrame {
         jToggleButton3 = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        relaColaboradores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -91,15 +108,28 @@ public class TelaMenuLivros extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Estatística dos Livros"));
 
+        relaColaboradores.setText("Relação de Colaboradores");
+        relaColaboradores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relaColaboradoresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(relaColaboradores)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(relaColaboradores)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,6 +187,35 @@ public class TelaMenuLivros extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
+    private void relaColaboradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relaColaboradoresActionPerformed
+        Document documentoColaboradores = new Document();
+        try {
+            PdfWriter.getInstance(documentoColaboradores, new FileOutputStream("Documento.pdf"));
+            documentoColaboradores.open();
+            documentoColaboradores.add(new Paragraph("Lista de Colaboradores"));
+            documentoColaboradores.add(new Paragraph("Nome:"));
+            ICRUDColaborador colaborador = new ColaboradorPersistencia("colaborador.txt");
+            for (int i = 0; i < colaborador.listagem().size(); i++) {
+                ArrayList<Colaborador> auxLista = colaborador.listagem();
+                Colaborador aux = new Colaborador(auxLista.get(i));
+                String colaboradoresLista = aux.getNome();
+                documentoColaboradores.add(new Paragraph(colaboradoresLista));
+            }
+        } catch (FileNotFoundException | DocumentException ex) {
+            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            documentoColaboradores.close();
+        }
+
+        try {
+            Desktop.getDesktop().open(new File("Documento.pdf"));
+        } catch (IOException ex) {
+            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_relaColaboradoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -199,5 +258,6 @@ public class TelaMenuLivros extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JButton relaColaboradores;
     // End of variables declaration//GEN-END:variables
 }
