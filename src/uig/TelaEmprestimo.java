@@ -103,7 +103,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados Colaborador"));
@@ -116,6 +116,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscaReduzida.png"))); // NOI18N
         jButton5.setText("Buscar Colaborador");
 
         jLabel3.setText("Matricula");
@@ -230,6 +231,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados Exemplar"));
 
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscaReduzida.png"))); // NOI18N
         jButton6.setText("Buscar Exemplar");
 
         jLabel6.setText("Descrição");

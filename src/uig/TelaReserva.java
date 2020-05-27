@@ -55,6 +55,7 @@ public class TelaReserva extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados Exemplar"));
 
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscaReduzida.png"))); // NOI18N
         jButton6.setText("Buscar Exemplar");
 
         jLabel6.setText("Descrição");
@@ -84,7 +85,7 @@ public class TelaReserva extends javax.swing.JFrame {
                             .addComponent(jTextField6))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
+                .addContainerGap(65, Short.MAX_VALUE)
                 .addComponent(jButton6)
                 .addGap(94, 94, 94))
         );
@@ -118,6 +119,7 @@ public class TelaReserva extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscaReduzida.png"))); // NOI18N
         jButton5.setText("Buscar Colaborador");
 
         jLabel3.setText("Matricula");
