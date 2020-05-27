@@ -42,6 +42,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Principal");
+        setResizable(false);
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Entrar.png"))); // NOI18N
         jToggleButton1.setText("Acessar");
@@ -152,6 +153,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed

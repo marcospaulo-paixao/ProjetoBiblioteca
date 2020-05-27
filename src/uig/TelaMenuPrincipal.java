@@ -280,8 +280,8 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try {
-            TelaLivro livro = new TelaLivro();
-            livro.setVisible(true);
+            TelaMenuLivros livroMenu = new TelaMenuLivros();
+            livroMenu.setVisible(true);
             dispose();
         } catch (Exception e) {
         }

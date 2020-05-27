@@ -367,8 +367,8 @@ public class TelaLivro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            TelaMenuPrincipal menu = new TelaMenuPrincipal();
-            menu.setVisible(true);
+            TelaMenuLivros livroMenu = new TelaMenuLivros();
+            livroMenu.setVisible(true);
             dispose();
         } catch (Exception e) {
         }
