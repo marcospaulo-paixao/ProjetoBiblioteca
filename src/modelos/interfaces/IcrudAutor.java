@@ -7,10 +7,11 @@ public interface IcrudAutor {
 
     void incluir(Autor autorObj) throws Exception;
 
-    void alterar(Autor antigoAuto, Autor autorAtual) throws Exception;
+    void alterar(Autor antigoAutor, Autor autorAtual) throws Exception;
 
     void excluir(String nome) throws Exception;
 
+    Autor getNomeAutor(String nomeAutor) throws Exception;
+
     ArrayList<Autor> listagem() throws Exception;
-    Autor listarAutorNome(String nome) throws Exception;
 }

@@ -9,14 +9,14 @@ package uig;
 //import com.itextpdf.text.DocumentException;
 //import com.itextpdf.text.Paragraph;
 //import com.itextpdf.text.pdf.PdfWriter;
-//import java.awt.Desktop;
-//import java.io.File;
+import java.awt.Desktop;
+import java.io.File;
 //import java.io.FileNotFoundException;
 //import java.io.FileOutputStream;
-//import java.io.IOException;
+import java.io.IOException;
 //import java.util.ArrayList;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import javax.swing.text.Document;
 //import modelos.classes.Colaborador;
 //import modelos.interfaces.ICRUDColaborador;
@@ -210,12 +210,12 @@ public class TelaMenuLivros extends javax.swing.JFrame {
 //        } finally {
 //            documentoColaboradores.close();
 //        }
-//
-//        try {
-//            Desktop.getDesktop().open(new File("Documento.pdf"));
-//        } catch (IOException ex) {
-//            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
+        try {
+            Desktop.getDesktop().open(new File("Documento.pdf"));
+        } catch (IOException ex) {
+            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_relaColaboradoresActionPerformed
 
     /**

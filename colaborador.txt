@@ -1,3 +1,5 @@
 2;2020;Anisberto Reis;125;anisbertoos@gmail.com;62;92947507;ESTAGIARIO;ATIVO;
 5;202025;Marcos Paulo;6555;marcos@gmail.com;62;598595;ADVOGADO;ATIVO;
 12;2021;Daniel Elyads;0;daniel@contato.com;61;983764255;FUNCIONARIO;INATIVO;
+18;45445;Gabriel Anadinho;5464;gabriel@;62;45456;ADVOGADO;ATIVO;
+19;252454;Eugenio Messala;545645;eugenio@gmail.com;62;5655654;ESTAGIARIO;INATIVO;

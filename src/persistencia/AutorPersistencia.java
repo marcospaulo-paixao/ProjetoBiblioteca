@@ -35,16 +35,15 @@ public class AutorPersistencia implements IcrudAutor {
     }
 
     @Override
-    public void alterar(Autor antigoAuto, Autor autorAtual) throws Exception {
+    public void alterar(Autor antigoAutor, Autor autorAtual) throws Exception {
         try {
-
-            ArrayList<Autor> listaDeAutores = listagem();
+            ArrayList<Autor> listaDeAutor = listagem();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
             BufferedWriter bw = new BufferedWriter(fw);
-
-            for (Autor autor : listaDeAutores) {
-                if (autor.getNome() != antigoAuto.getNome()) {
-                    bw.write(autor.toString() + "\n");
+            autorAtual.setId(antigoAutor.getId());
+            for (Autor autores : listaDeAutor) {
+                if (!antigoAutor.getNome().equalsIgnoreCase(autores.getNome())) {
+                    bw.write(autores.toString() + "\n");
                 } else {
                     bw.write(autorAtual.toString() + "\n");
                 }
@@ -97,31 +96,19 @@ public class AutorPersistencia implements IcrudAutor {
         }
     }
 
-    public Autor listarAutorNome(String nome) throws Exception {
+    @Override
+    public Autor getNomeAutor(String nomeAutor) throws Exception {
         try {
-            ArrayList<Autor> listaDeAutores = new ArrayList<>();
-
-            FileReader fr = new FileReader(nomeDoArquivoNoDisco);
-            BufferedReader br = new BufferedReader(fr);
-
-            String linha = "";
-            while ((linha = br.readLine()) != null) {
-                String[] vetor = linha.split(";");
-                int id = Integer.parseInt(vetor[0]);
-                String nomearq = vetor[1];
-                Autor autorList = new Autor(id, nomearq);
-                listaDeAutores.add(autorList);
-            }
-
-            for (int aut = 0; aut < listaDeAutores.size(); aut++) {
-                if (nome.equalsIgnoreCase(listaDeAutores.get(aut).getNome())) {
-                    return listaDeAutores.get(aut);
+            ArrayList<Autor> autores = listagem();
+            for (Autor autoresNaLista : autores) {
+                if (nomeAutor.equalsIgnoreCase(autoresNaLista.getNome())) {
+                    return autoresNaLista;
                 }
             }
-            return null;
-        } catch (Exception erroConsultaAutor) {
-            throw erroConsultaAutor;
+        } catch (Exception ErroListarNomeAutor) {
+            throw ErroListarNomeAutor;
         }
+        return null;
     }
 
 }

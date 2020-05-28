@@ -131,7 +131,7 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/entrar.png"/>
+              <Image iconType="3" name="/icons/entrar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Entrar"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
@@ -144,9 +144,6 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="18" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/g99-3.png"/>
             </Property>
           </Properties>
         </Component>
@@ -173,7 +170,7 @@
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/excluir.png"/>
+              <Image iconType="3" name="/icons/excluir.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>

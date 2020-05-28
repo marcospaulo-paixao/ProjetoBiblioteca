@@ -58,12 +58,11 @@ public class AutorControle implements IcrudAutor {
     }
 
     @Override
-    public Autor listarAutorNome(String nome) throws Exception {
+    public Autor getNomeAutor(String nomeAutor) throws Exception {
         try {
-            return autorPersistencia.listarAutorNome(nome);
-        } catch (Exception errorL) {
-            throw errorL;
+            return autorPersistencia.getNomeAutor(nomeAutor);
+        } catch (Exception erroControleAutorListarNome) {
+            throw erroControleAutorListarNome;
         }
     }
-
 }

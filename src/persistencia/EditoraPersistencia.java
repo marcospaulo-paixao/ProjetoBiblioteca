@@ -2,6 +2,7 @@ package persistencia;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class EditoraPersistencia implements IcrudEditora {
             BufferedWriter bw = new BufferedWriter(fw);
 
             for (Editora editora : listaDeAutores) {
-                if (editora.getId() != antigoEditora.getId()) {
+                if (!editora.getNome().equalsIgnoreCase(antigoEditora.getNome())) {
                     bw.write(editora.toString() + "\n");
                 } else {
                     bw.write(atualEditora.toString() + "\n");
@@ -77,4 +78,34 @@ public class EditoraPersistencia implements IcrudEditora {
         }
     }
 
+    @Override
+    public void excluir(String nome) throws Exception {
+        try {
+            ArrayList<Editora> listaDeEditoras = listagem();
+            FileWriter fr = new FileWriter(nomeDoArquivoNoDisco);
+            BufferedWriter br = new BufferedWriter(fr);
+
+            for (int pos = 0; pos < listaDeEditoras.size(); pos++) {
+                Editora aux = listaDeEditoras.get(pos);
+
+                if (!nome.equalsIgnoreCase(aux.getNome())) {
+                    br.write(aux.toString() + "\n");
+                }
+            }
+            br.close();
+        } catch (FileNotFoundException editoraError) {
+            throw editoraError;
+        }
+    }
+
+    @Override
+    public Editora getEditoraNome(String nomeEditora) throws Exception {
+        ArrayList<Editora> editoras = listagem();
+        for (Editora editoraNaLista : editoras) {
+            if (editoraNaLista.getNome().equalsIgnoreCase(nomeEditora)) {
+                return editoraNaLista;
+            }
+        }
+        return null;
+    }
 }

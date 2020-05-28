@@ -47,4 +47,22 @@ public class EditoraControle implements IcrudEditora {
             throw erro;
         }
     }
+
+    @Override
+    public void excluir(String nome) throws Exception {
+        try {
+            objEditora.excluir(nome);
+        } catch (Exception errorExcluirEditora) {
+            throw errorExcluirEditora;
+        }
+    }
+
+    @Override
+    public Editora getEditoraNome(String nomeEditora) throws Exception {
+        try {
+            return objEditora.getEditoraNome(nomeEditora);
+        } catch (Exception erroEditora) {
+            throw erroEditora;
+        }
+    }
 }

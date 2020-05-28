@@ -90,6 +90,11 @@ public class TelaEditora extends javax.swing.JFrame {
         jButtonDeletar.setText("Deletar");
         jButtonDeletar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonDeletar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeletarActionPerformed(evt);
+            }
+        });
 
         jButtonAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/papel.png"))); // NOI18N
         jButtonAlterar.setText("Alterar");
@@ -124,6 +129,7 @@ public class TelaEditora extends javax.swing.JFrame {
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/cancel_77947.png"))); // NOI18N
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setEnabled(false);
         jButtonCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -304,13 +310,21 @@ public class TelaEditora extends javax.swing.JFrame {
             txtDescricaoEditora.setText("");
             txtNomeEditora.setText("");
             habilitarBott(true);
+            jButtonDeletar.setEnabled(false);
+            jButtonAlterar.setEnabled(false);
+            jButtonlistagem.setEnabled(false);
             incluirOn = true;
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonIncluirActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        // TODO add your handling code here:
+        incluirOn = false;
+        habilitarBott(true);
+        jButtonlistagem.setEnabled(false);
+        jButtonDeletar.setEnabled(false);
+        jButtonIncluir.setEnabled(false);
+        jButtonAlterar.setEnabled(false);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
@@ -324,7 +338,20 @@ public class TelaEditora extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
+        txtDescricaoEditora.setText("");
+        txtNomeEditora.setText("");
+        txtDescricaoEditora.setEnabled(false);
+        txtNomeEditora.setEnabled(false);
+
+        jButtonlistagem.setEnabled(true);
+        jButtonDeletar.setEnabled(true);
+        jButtonIncluir.setEnabled(true);
+        jButtonAlterar.setEnabled(true);
+        jButtonVoltar.setEnabled(true);
+        jButtonSair.setEnabled(true);
+
+        jButtonCancelar.setEnabled(false);
+        jButtonSalvar.setEnabled(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
@@ -341,22 +368,32 @@ public class TelaEditora extends javax.swing.JFrame {
                     txtNomeEditora.setText("");
                     JOptionPane.showMessageDialog(null, "Editora: " + nomeEditora + " Incluida! ");
                     imprimirNaGrid();
-                    jButtonCancelar.setEnabled(false);
-                    jButtonSair.setEnabled(true);
-                    jButtonVoltar.setEnabled(true);
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos! ");
                     txtDescricaoEditora.setText("");
                     txtNomeEditora.setText("");
                 }
             } else {
-
+                String nomeEditora = gridEditora.getValueAt(gridEditora.getSelectedRow(), gridEditora.getSelectedColumn()).toString();
+                Editora antigoEditora = editora.getEditoraNome(nomeEditora);
+                editora.alterar(antigoEditora, new Editora(antigoEditora.getId(), txtNomeEditora.getText(), txtDescricaoEditora.getText()));
+                txtDescricaoEditora.setText("");
+                txtNomeEditora.setText("");
+                imprimirNaGrid();
             }
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, erro);
         } finally {
             txtNomeEditora.setEnabled(false);
             txtDescricaoEditora.setEnabled(false);
+            jButtonIncluir.setEnabled(true);
+            jButtonDeletar.setEnabled(true);
+            jButtonAlterar.setEnabled(true);
+            jButtonlistagem.setEnabled(true);
+            jButtonCancelar.setEnabled(false);
+            jButtonVoltar.setEnabled(true);
+            jButtonSair.setEnabled(true);
             jButtonSalvar.setEnabled(false);
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -385,6 +422,27 @@ public class TelaEditora extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         imprimirNaGrid();
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
+        try {
+            DefaultTableModel tabela = (DefaultTableModel) gridEditora.getModel();
+            if (gridEditora.getSelectedRow() != 1) {
+                String nomeExcluir = gridEditora.getValueAt(gridEditora.getSelectedRow(), gridEditora.getSelectedColumn()).toString();
+                int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Exclusão de: " + nomeExcluir, nomeExcluir, 0);
+                if (config == 0) {
+                    editora.excluir(nomeExcluir);
+                    imprimirNaGrid();
+                    txtNomeEditora.setText("");
+                    txtDescricaoEditora.setText("");
+                    JOptionPane.showMessageDialog(rootPane, "Exclusão Concluida!");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Exclusão Cancelada!");
+                }
+            }
+        } catch (Exception erroNaExclusao) {
+            JOptionPane.showMessageDialog(null, erroNaExclusao);
+        }
+    }//GEN-LAST:event_jButtonDeletarActionPerformed
     public void habilitarBott(boolean habilitar) {
 
         jButtonSalvar.setEnabled(habilitar);

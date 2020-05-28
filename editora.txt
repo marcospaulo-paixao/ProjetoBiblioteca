@@ -1,9 +1,3 @@
-6;Anisberto Reis;Livros SA
-7;Marcos Paixão;Marcos SA
-8;adfadsfasdfa;adfasdfadsf
-9;Daniel kkkk;Daniel SA
-11;Brasil Leitura;Empresa de Livros Brasil
-14;asdfsdfa;asdfasd
-15;xcvzxcz;asfdsdfafds
-16;asdfasdfasdf;asdfasdfas
-17;asdfasdf;asdfasdfs
+31;Marcos Paulo Paixão;Paixão Brasil
+36;Senai Fatesg;Faculdade SEnai
+43;Eugenio Messala;Messala Books Brasil

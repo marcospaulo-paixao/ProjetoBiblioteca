@@ -49,7 +49,7 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
 
         jToggleButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jToggleButton1.setIcon(new javax.swing.ImageIcon("/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/entrar.png")); // NOI18N
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/entrar.png"))); // NOI18N
         jToggleButton1.setText("Entrar");
         jToggleButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -59,7 +59,6 @@ public class Login extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon("/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/g99-3.png")); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Login");
@@ -67,7 +66,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Senha");
 
-        jButton1.setIcon(new javax.swing.ImageIcon("/home/marcos/NetBeansProjects/ProjetoBiblioteca/src/icons/excluir.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/excluir.png"))); // NOI18N
         jButton1.setText("Cancelar");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
