@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import modelos.classes.Usuario;
 import modelos.interfaces.ICRUDUsuario;
+import modelos.utilidades.GeradorID;
 
 /**
  *
@@ -38,9 +39,12 @@ public class UsuarioPersistencia implements ICRUDUsuario {
      */
     @Override
     public void incluir(Usuario objeto) throws Exception {
+        GeradorID id = new GeradorID();
         FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
         BufferedWriter bw = new BufferedWriter(fw);
+        objeto.setId(id.getID());
         bw.write(objeto.toString() + "\n");
+        id.finalize();
         bw.close();
     }
 
@@ -100,7 +104,7 @@ public class UsuarioPersistencia implements ICRUDUsuario {
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
             BufferedWriter bw = new BufferedWriter(fw);
             for (Usuario usuario : listaDeUsuario) {
-                if (!usuario.getNomeDoUsuario().equals(nomeDoUsuario)) {
+                if (usuario.getNomeDoUsuario().equals(nomeDoUsuario)) {
                     return usuario;
                 }
             }
@@ -109,5 +113,22 @@ public class UsuarioPersistencia implements ICRUDUsuario {
             throw e;
         }
         return null;
+    }
+
+    /**
+     *
+     * @param objeto
+     * @throws Exception
+     */
+    @Override
+    public void deletar(Usuario objeto) throws Exception {
+        ArrayList<Usuario> listaDeUsuario = listar();
+        FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
+        BufferedWriter bw = new BufferedWriter(fw);
+        for (Usuario usuario : listaDeUsuario) {
+            if (usuario.getId() != objeto.getId()) {
+                bw.write(usuario.toString());
+            }
+        }
     }
 }
