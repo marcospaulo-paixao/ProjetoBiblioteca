@@ -1,6 +1,5 @@
 package uig;
 
-import java.io.IOException;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -8,7 +7,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelos.classes.Autor;
 import modelos.classes.Editora;
-import modelos.classes.Livro;
 import modelos.interfaces.IcrudAutor;
 import modelos.interfaces.IcrudEditora;
 import modelos.interfaces.IcrudLivro;
@@ -49,7 +47,7 @@ public class TelaLivro extends javax.swing.JFrame {
         jButtonAlterar = new javax.swing.JButton();
         jButtonlistagem = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonVoltar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -103,6 +101,7 @@ public class TelaLivro extends javax.swing.JFrame {
 
         jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/salve-.png"))); // NOI18N
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.setEnabled(false);
         jButtonSalvar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonSalvar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,19 +110,20 @@ public class TelaLivro extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/1491254395-returnbackredoarrow_82934.png"))); // NOI18N
-        jButton1.setText("Voltar");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setIconTextGap(12);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/1491254395-returnbackredoarrow_82934.png"))); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonVoltar.setIconTextGap(12);
+        jButtonVoltar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonVoltarActionPerformed(evt);
             }
         });
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/cancel_77947.png"))); // NOI18N
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setEnabled(false);
         jButtonCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +160,7 @@ public class TelaLivro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonVoltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSair)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -178,7 +178,7 @@ public class TelaLivro extends javax.swing.JFrame {
                         .addComponent(jButtonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -186,11 +186,19 @@ public class TelaLivro extends javax.swing.JFrame {
 
         jLabel2.setText("Titulo do Livro");
 
+        txtTitulo.setEnabled(false);
+
         jLabel3.setText("Código do Livro");
+
+        txtCodigo.setEnabled(false);
 
         jLabel4.setText("ISBN");
 
+        txtIsbn.setEnabled(false);
+
+        jComboBoxAutor.setMaximumRowCount(100);
         jComboBoxAutor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Autor" }));
+        jComboBoxAutor.setEnabled(false);
         jComboBoxAutor.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -202,6 +210,7 @@ public class TelaLivro extends javax.swing.JFrame {
         });
 
         jComboBoxEditora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Editora" }));
+        jComboBoxEditora.setEnabled(false);
         jComboBoxEditora.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -213,6 +222,7 @@ public class TelaLivro extends javax.swing.JFrame {
         });
 
         jComboBoxAreaDoLivro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Area do Livro" }));
+        jComboBoxAreaDoLivro.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -261,10 +271,11 @@ public class TelaLivro extends javax.swing.JFrame {
                             .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAreaDoLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxAreaDoLivro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -334,7 +345,7 @@ public class TelaLivro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
-        // TODO add your handling code here:
+        habilitarBott(true);
     }//GEN-LAST:event_jButtonIncluirActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
@@ -352,40 +363,39 @@ public class TelaLivro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
+        habilitarBott(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
-            if (!txtTitulo.getText().isEmpty() && !txtCodigo.getText().isEmpty() && jComboBoxAutor.getSelectedItem() != "Autor" && jComboBoxAreaDoLivro.getSelectedItem() != "Area do Livro" && jComboBoxEditora.getSelectedItem() != "Editora") {
-                if (incluirOn) {
-                    GeradorID gId = new GeradorID();
-                    //Livro livroIncluir = new Livro(gId.getID(), Integer.parseInt(txtCodigo.getText()), txtTitulo.getText(), editora, autor, areaDoLivro);
-                    //livro.incluir(livroIncluir);
-                    gId.finalize();
-                } else {
-
-                }
-
+            //if (!txtTitulo.getText().isEmpty() && !txtCodigo.getText().isEmpty() && jComboBoxAutor.getSelectedItem() != "Autor" && jComboBoxAreaDoLivro.getSelectedItem() != "Area do Livro" && jComboBoxEditora.getSelectedItem() != "Editora") {
+            if (incluirOn) {
+                GeradorID gId = new GeradorID();
+                //Livro livroIncluir = new Livro(gId.getID(), Integer.parseInt(txtCodigo.getText()), txtTitulo.getText(), editora, autor, areaDoLivro);
+                //livro.incluir(livroIncluir);
+                gId.finalize();
+                habilitarBott(true);
             } else {
-                JOptionPane.showMessageDialog(null, "Todos os campos devem ser setados ou preenchidos!");
+
             }
 
+            //} else {
+            //JOptionPane.showMessageDialog(null, "Todos os campos devem ser setados e preenchidos!");
+            //}
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, erro);
         } finally {
-
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         try {
             TelaMenuLivros livroMenu = new TelaMenuLivros();
             livroMenu.setVisible(true);
             dispose();
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jComboBoxAutorPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxAutorPopupMenuWillBecomeVisible
         try {
@@ -413,11 +423,54 @@ public class TelaLivro extends javax.swing.JFrame {
                 Editora aux = editoraRList.get(pos);
                 jComboBoxEditora.addItem(editoraAdd[0] = aux.getNome());
             }
-
         } catch (Exception ex) {
             Logger.getLogger(TelaAutor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jComboBoxEditoraPopupMenuWillBecomeVisible
+
+    public void habilitarBott(boolean habilitar) {
+        jButtonIncluir.setEnabled(!habilitar);
+        jButtonDeletar.setEnabled(!habilitar);
+        jButtonAlterar.setEnabled(!habilitar);
+        jButtonlistagem.setEnabled(!habilitar);
+        jButtonVoltar.setEnabled(!habilitar);
+        jButtonSalvar.setEnabled(habilitar);
+        jButtonCancelar.setEnabled(habilitar);
+        jButtonSair.setEnabled(!habilitar);
+
+        if (habilitar) {
+            txtCodigo.setEnabled(habilitar);
+            txtTitulo.setEnabled(habilitar);
+            txtIsbn.setEnabled(habilitar);
+            jComboBoxEditora.setEnabled(habilitar);
+            jComboBoxAreaDoLivro.setEnabled(habilitar);
+            jComboBoxAutor.setEnabled(habilitar);
+        } else {
+            txtCodigo.setEnabled(false);
+            txtTitulo.setEnabled(false);
+            txtIsbn.setEnabled(false);
+            jComboBoxEditora.setEnabled(false);
+            jComboBoxAreaDoLivro.setEnabled(false);
+            jComboBoxAutor.setEnabled(false);
+            jButtonIncluir.setEnabled(!habilitar);
+            jButtonDeletar.setEnabled(!habilitar);
+            jButtonAlterar.setEnabled(!habilitar);
+            jButtonlistagem.setEnabled(!habilitar);
+            jButtonVoltar.setEnabled(!habilitar);
+            jButtonSalvar.setEnabled(habilitar);
+            jButtonCancelar.setEnabled(false);
+            jButtonSair.setEnabled(!habilitar);
+            txtTitulo.setText("");
+            txtCodigo.setText("");
+            txtIsbn.setText("");
+            jComboBoxAreaDoLivro.removeAll();
+            jComboBoxAreaDoLivro.addItem("Area do Livro");
+            jComboBoxEditora.removeAllItems();
+            jComboBoxEditora.addItem("Editora");
+            jComboBoxAutor.removeAllItems();
+            jComboBoxAutor.addItem("Autor");
+        }
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -452,13 +505,13 @@ public class TelaLivro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonDeletar;
     private javax.swing.JButton jButtonIncluir;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JButton jButtonlistagem;
     private javax.swing.JComboBox<String> jComboBoxAreaDoLivro;
     private javax.swing.JComboBox<String> jComboBoxAutor;
