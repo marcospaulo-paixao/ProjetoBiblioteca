@@ -6,6 +6,12 @@ import modelos.interfaces.IcrudAreaDoLivro;
 
 public class AreaDoLivroPersistencia implements IcrudAreaDoLivro {
 
+    private String nomeDoArquivoNoDisco = "";
+
+    public AreaDoLivroPersistencia(String nomeDoArquivoNoDisco) {
+        this.nomeDoArquivoNoDisco = nomeDoArquivoNoDisco;
+    }
+
     @Override
     public void incluir(AreaDoLivro areaDoLivro) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

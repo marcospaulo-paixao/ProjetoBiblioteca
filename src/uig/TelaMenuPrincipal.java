@@ -7,8 +7,10 @@ package uig;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.net.URL;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -144,6 +146,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/estante-de-livros.png"))); // NOI18N
         jButton7.setText("Exemplar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -293,6 +300,16 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+            Window exemplar = new TelaExemplar();
+            exemplar.setVisible(true);
+            dispose();
+        } catch (Exception errorTela) {
+            JOptionPane.showMessageDialog(rootPane, errorTela.getMessage());
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -7,20 +7,24 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelos.classes.Autor;
 import modelos.classes.Editora;
+import modelos.classes.Livro;
+import modelos.interfaces.IcrudAreaDoLivro;
 import modelos.interfaces.IcrudAutor;
 import modelos.interfaces.IcrudEditora;
 import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorID;
+import persistencia.AreaDoLivroPersistencia;
 import persistencia.AutorPersistencia;
 import persistencia.EditoraPersistencia;
 import persistencia.LivroPersistencia;
 
 public class TelaLivro extends javax.swing.JFrame {
 
-    IcrudAutor autor = null;
+    IcrudAutor autor = new AutorPersistencia("autor.txt");
     boolean incluirOn = false;
     IcrudLivro livro = null;
     IcrudEditora editora = null;
+    IcrudAreaDoLivro areaDoLivro = null;
 
     public TelaLivro() {
         super("Biblioteca System - Livro");
@@ -30,6 +34,8 @@ public class TelaLivro extends javax.swing.JFrame {
         livro = new LivroPersistencia("livro.txt");
         autor = new AutorPersistencia("autor.txt");
         editora = new EditoraPersistencia("editora.txt");
+        areaDoLivro = new AreaDoLivroPersistencia("areaDoLivro.txt");
+
     }
 
     /**
@@ -220,6 +226,11 @@ public class TelaLivro extends javax.swing.JFrame {
                 jComboBoxEditoraPopupMenuWillBecomeVisible(evt);
             }
         });
+        jComboBoxEditora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEditoraActionPerformed(evt);
+            }
+        });
 
         jComboBoxAreaDoLivro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Area do Livro" }));
         jComboBoxAreaDoLivro.setEnabled(false);
@@ -368,20 +379,20 @@ public class TelaLivro extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
-            //if (!txtTitulo.getText().isEmpty() && !txtCodigo.getText().isEmpty() && jComboBoxAutor.getSelectedItem() != "Autor" && jComboBoxAreaDoLivro.getSelectedItem() != "Area do Livro" && jComboBoxEditora.getSelectedItem() != "Editora") {
-            if (incluirOn) {
-                GeradorID gId = new GeradorID();
-                //Livro livroIncluir = new Livro(gId.getID(), Integer.parseInt(txtCodigo.getText()), txtTitulo.getText(), editora, autor, areaDoLivro);
-                //livro.incluir(livroIncluir);
-                gId.finalize();
-                habilitarBott(true);
+            if (!txtTitulo.getText().isEmpty() && !txtCodigo.getText().isEmpty() && jComboBoxAutor.getSelectedItem() != "Autor" && jComboBoxAreaDoLivro.getSelectedItem() != "Area do Livro" && jComboBoxEditora.getSelectedItem() != "Editora") {
+                if (incluirOn) {
+                    GeradorID gId = new GeradorID();
+                    //Livro livroIncluir = new Livro(gId.getID(), Integer.parseInt(txtCodigo.getText()), txtTitulo.getText(), editoraLivro, autor, areaDoLivro);
+
+                    gId.finalize();
+                    habilitarBott(true);
+                } else {
+
+                }
+
             } else {
-
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser setados e preenchidos!");
             }
-
-            //} else {
-            //JOptionPane.showMessageDialog(null, "Todos os campos devem ser setados e preenchidos!");
-            //}
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, erro);
         } finally {
@@ -427,6 +438,10 @@ public class TelaLivro extends javax.swing.JFrame {
             Logger.getLogger(TelaAutor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jComboBoxEditoraPopupMenuWillBecomeVisible
+
+    private void jComboBoxEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEditoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxEditoraActionPerformed
 
     public void habilitarBott(boolean habilitar) {
         jButtonIncluir.setEnabled(!habilitar);
