@@ -37,7 +37,6 @@ public class TelaUsuario extends javax.swing.JFrame {
             model = new UsuarioTableModel(new String[]{"Nome", "Login", "Status"});
             jTableUsuarios.setModel(model);
             model.update(usuarioControle.listar());
-            System.out.println("" + usuarioControle.listar().get(0));
         } catch (Exception e) {
             System.out.println("erro!");
         }
@@ -62,6 +61,8 @@ public class TelaUsuario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPasswordFieldConfirmarSenha = new javax.swing.JPasswordField();
         jButtonStatus = new javax.swing.JButton();
+        jRadioButtonShowSenha = new javax.swing.JRadioButton();
+        jRadioButtonShowConfirmarSenha = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jButtonSalvar = new javax.swing.JButton();
         jButtonIncluir = new javax.swing.JButton();
@@ -95,6 +96,20 @@ public class TelaUsuario extends javax.swing.JFrame {
             }
         });
 
+        jRadioButtonShowSenha.setText("show");
+        jRadioButtonShowSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonShowSenhaActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonShowConfirmarSenha.setText("show");
+        jRadioButtonShowConfirmarSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonShowConfirmarSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -104,7 +119,10 @@ public class TelaUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordFieldConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPasswordFieldConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonShowConfirmarSenha))
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -114,9 +132,12 @@ public class TelaUsuario extends javax.swing.JFrame {
                             .addComponent(jLabelSenha)
                             .addComponent(jTextFieldNomdeDoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelLogin)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextFieldLogin, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextFieldLogin, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonShowSenha)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -131,16 +152,19 @@ public class TelaUsuario extends javax.swing.JFrame {
                 .addComponent(jLabelLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jLabelSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonShowSenha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPasswordFieldConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonStatus))
+                    .addComponent(jButtonStatus)
+                    .addComponent(jRadioButtonShowConfirmarSenha))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -176,6 +200,11 @@ public class TelaUsuario extends javax.swing.JFrame {
         jButtonSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonSair.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jButtonSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSairActionPerformed(evt);
+            }
+        });
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/cancel_77947.png"))); // NOI18N
         jButtonCancelar.setText("Cancelar");
@@ -297,7 +326,7 @@ public class TelaUsuario extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -337,9 +366,9 @@ public class TelaUsuario extends javax.swing.JFrame {
         try {
             incluir = true;
             habilitaFormulario(true);
+            jTableUsuarios.setRowSelectionAllowed(false);
         } catch (Exception e) {
         }
-
     }//GEN-LAST:event_jButtonIncluirActionPerformed
 
     private void jButtonStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStatusActionPerformed
@@ -348,7 +377,6 @@ public class TelaUsuario extends javax.swing.JFrame {
             jButtonStatus.setText("Ativo");
         } else {
             jButtonStatus.setText("Inativo");
-
         }
     }//GEN-LAST:event_jButtonStatusActionPerformed
 
@@ -363,6 +391,14 @@ public class TelaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (JOptionPane.showConfirmDialog(null, "Deseja Cancelar?", "Cancelar", JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION) {
             habilitaFormulario(false);
+            if (jPasswordFieldSenha.getEchoChar() != '*') {
+                jPasswordFieldSenha.setEchoChar('*');
+            }
+            if (jPasswordFieldConfirmarSenha.getEchoChar() != '*') {
+                jPasswordFieldConfirmarSenha.setEchoChar('*');
+            }
+            jRadioButtonShowSenha.setSelected(false);
+            jRadioButtonShowConfirmarSenha.setSelected(false);
         }
 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
@@ -370,21 +406,29 @@ public class TelaUsuario extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         try {
-            String nomeDoUsuario = jTextFieldNomdeDoUsuario.getText();
+            String nome = jTextFieldNomdeDoUsuario.getText();
             String login = jTextFieldLogin.getText();
-            String senha = new String(jPasswordFieldSenha.getPassword());
-            String ConfirmarSenha = new String(jPasswordFieldConfirmarSenha.getPassword());
             if (!(new String(jPasswordFieldConfirmarSenha.getPassword())).equals(new String(jPasswordFieldSenha.getPassword()))) {
                 throw new Exception("Senhas não coincidem, Tente novamente!");
             }
+            String senha = new String(jPasswordFieldSenha.getPassword());
             if (incluir) {
-                Usuario usuario = new Usuario(nomeDoUsuario, login, senha, (jButtonStatus.getText().equals("Ativo")) ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
+                Usuario usuario = new Usuario(nome, login, senha, (jButtonStatus.getText().equals("Ativo")) ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
                 usuarioControle.incluir(usuario);
-                JOptionPane.showMessageDialog(null, "Usuário incluido com sucesso!");
                 model.update(usuarioControle.listar());
+                JOptionPane.showMessageDialog(null, "Usuário incluido com sucesso!");
                 habilitaFormulario(false);
+                jTableUsuarios.setRowSelectionAllowed(true);
             } else {
-
+                Usuario novoUsuario = new Usuario(nome, login, senha, (jButtonStatus.getText().equals("Ativo")) ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
+                String nomeDoUsuario = (String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0);
+                Usuario velhoUsuario = usuarioControle.getUsuario(nomeDoUsuario);
+                novoUsuario.setId(velhoUsuario.getId());
+                usuarioControle.alterar(velhoUsuario, novoUsuario);
+                model.update(usuarioControle.listar());
+                JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso!");
+                habilitaFormulario(false);
+                jTableUsuarios.setRowSelectionAllowed(true);
             }
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
@@ -394,7 +438,16 @@ public class TelaUsuario extends javax.swing.JFrame {
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         // TODO add your handling code here:
         try {
-            incluir = false;
+            if (jTableUsuarios.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(null, "Selecione o usuario para alterar!");
+            } else {
+                incluir = false;
+                habilitaFormulario(true);
+                String nomeDoUsuario = (String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0);
+                Usuario usuario = usuarioControle.getUsuario(nomeDoUsuario);
+                preencherForm(usuario);
+                jTableUsuarios.setRowSelectionAllowed(false);
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
@@ -403,25 +456,53 @@ public class TelaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (jTableUsuarios.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(null, "Selecione o usario para deletar!");
+                JOptionPane.showMessageDialog(null, "Selecione o usuario para deletar!");
             } else {
-                if (JOptionPane.showConfirmDialog(null, "Deseja Deletar este usuario?", "Deletar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    Usuario obj = usuarioControle.getUsuario((String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0));
-                    System.out.println("" + obj.getNomeDoUsuario());
-//                    usuarioControle.deletar(obj);
-//                    JOptionPane.showMessageDialog(null, "Usuario deletado com sucesso!");
-//                    model.update(usuarioControle.listar());
+                if (JOptionPane.showConfirmDialog(null, "Deseja Deletar este usuário?", "Deletar Usuário", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    String nomeDoUsuario = (String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0);
+                    Usuario usuario = usuarioControle.getUsuario(nomeDoUsuario);
+                    usuarioControle.deletar(usuario);
+                    model.update(usuarioControle.listar());
+                    JOptionPane.showMessageDialog(null, "Usuario Deletado com Sucesso!");
                 }
             }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonDeletarActionPerformed
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Deseja sair do sistema?", "Sair do sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            dispose();
+        }
+    }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jRadioButtonShowSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonShowSenhaActionPerformed
+        // TODO add your handling code here:
+        if (jPasswordFieldSenha.getEchoChar() == '*') {
+            jPasswordFieldSenha.setEchoChar((char) 0);
+        } else {
+            jPasswordFieldSenha.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jRadioButtonShowSenhaActionPerformed
+
+    private void jRadioButtonShowConfirmarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonShowConfirmarSenhaActionPerformed
+        // TODO add your handling code here:
+        if (jPasswordFieldConfirmarSenha.getEchoChar() == '*') {
+            jPasswordFieldConfirmarSenha.setEchoChar((char) 0);
+        } else {
+            jPasswordFieldConfirmarSenha.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jRadioButtonShowConfirmarSenhaActionPerformed
+
     public void habilitaFormulario(boolean habilita) {
         jTextFieldLogin.setEnabled(habilita);
         jTextFieldNomdeDoUsuario.setEnabled(habilita);
         jPasswordFieldConfirmarSenha.setEnabled(habilita);
         jPasswordFieldSenha.setEnabled(habilita);
         jButtonStatus.setEnabled(habilita);
+        jRadioButtonShowSenha.setEnabled(habilita);
+        jRadioButtonShowConfirmarSenha.setEnabled(habilita);
         jButtonIncluir.setEnabled(!habilita);
         jButtonAlterar.setEnabled(!habilita);
         jButtonDeletar.setEnabled(!habilita);
@@ -436,6 +517,15 @@ public class TelaUsuario extends javax.swing.JFrame {
             jPasswordFieldConfirmarSenha.setText("");
             jPasswordFieldSenha.setText("");
         }
+    }
+
+    private void preencherForm(Usuario usuario) {
+        jTextFieldLogin.setText("" + usuario.getLogin());
+        jTextFieldNomdeDoUsuario.setText("" + usuario.getNomeDoUsuario());
+        jPasswordFieldConfirmarSenha.setText("" + usuario.getSenha());
+        jPasswordFieldSenha.setText("" + usuario.getSenha());
+        jButtonStatus.setText((usuario.getStatus().equals(TipoDeStatus.ATIVO)) ? "Ativo" : "Inativo");
+
     }
 
     /**
@@ -497,6 +587,8 @@ public class TelaUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordFieldConfirmarSenha;
     private javax.swing.JPasswordField jPasswordFieldSenha;
+    private javax.swing.JRadioButton jRadioButtonShowConfirmarSenha;
+    private javax.swing.JRadioButton jRadioButtonShowSenha;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableUsuarios;
     private javax.swing.JTextField jTextFieldLogin;

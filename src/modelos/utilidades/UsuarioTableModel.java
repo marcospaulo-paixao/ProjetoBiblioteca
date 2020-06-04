@@ -75,7 +75,7 @@ public class UsuarioTableModel extends AbstractTableModel {
             case 1:
                 return dados.get(rowIndex).getLogin();
             case 2:
-                return dados.get(rowIndex).getStatus();
+                return (dados.get(rowIndex).getStatus());
             default:
                 throw new AssertionError();
         }

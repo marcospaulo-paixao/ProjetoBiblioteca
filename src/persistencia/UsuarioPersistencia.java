@@ -99,16 +99,13 @@ public class UsuarioPersistencia implements ICRUDUsuario {
     @Override
     public Usuario getUsuario(String nomeDoUsuario) throws Exception {
         try {
-
             ArrayList<Usuario> listaDeUsuario = listar();
-            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
-            BufferedWriter bw = new BufferedWriter(fw);
+
             for (Usuario usuario : listaDeUsuario) {
                 if (usuario.getNomeDoUsuario().equals(nomeDoUsuario)) {
                     return usuario;
                 }
             }
-            bw.close();
         } catch (Exception e) {
             throw e;
         }
@@ -123,12 +120,18 @@ public class UsuarioPersistencia implements ICRUDUsuario {
     @Override
     public void deletar(Usuario objeto) throws Exception {
         ArrayList<Usuario> listaDeUsuario = listar();
-        FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
-        BufferedWriter bw = new BufferedWriter(fw);
-        for (Usuario usuario : listaDeUsuario) {
-            if (usuario.getId() != objeto.getId()) {
-                bw.write(usuario.toString());
+        try {
+
+            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (Usuario usuario : listaDeUsuario) {
+                if (usuario.getId() != objeto.getId()) {
+                    bw.write(usuario.toString() + "\n");
+                }
             }
+            bw.close();
+        } catch (Exception e) {
         }
     }
 }
