@@ -104,6 +104,11 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         jLabel6.setText("Tipo De Colaborador");
 
         jComboBoxTipoDeColaborador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Advogado", "Estagiario", "Funcionario" }));
+        jComboBoxTipoDeColaborador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoDeColaboradorActionPerformed(evt);
+            }
+        });
 
         jButtonStatus.setText("INATIVO");
         jButtonStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -494,6 +499,10 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void jComboBoxTipoDeColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoDeColaboradorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoDeColaboradorActionPerformed
     public void habilitaFormulario(boolean habilita) {
         jTextFieldDddTelefone.setEnabled(habilita);
         jTextFieldEmail.setEnabled(habilita);
