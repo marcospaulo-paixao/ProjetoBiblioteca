@@ -50,4 +50,12 @@ public interface ICRUDUsuario {
      * @throws Exception
      */
     Usuario getUsuario(String nomeDoUsuario) throws Exception;
+    
+    /**
+     * 
+     * @param login
+     * @param senha
+     * @return 
+     */
+    boolean validaUsuario(String login,String senha)throws Exception;
 }
