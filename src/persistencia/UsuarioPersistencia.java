@@ -27,6 +27,8 @@ public class UsuarioPersistencia implements ICRUDUsuario {
 
     /**
      * #Métodos
+     *
+     * @param nomeDoArquivoNoDisco
      */
     public UsuarioPersistencia(String nomeDoArquivoNoDisco) {
         this.nomeDoArquivoNoDisco = nomeDoArquivoNoDisco;
@@ -133,5 +135,31 @@ public class UsuarioPersistencia implements ICRUDUsuario {
             bw.close();
         } catch (Exception e) {
         }
+    }
+
+    /**
+     *
+     * @param login
+     * @param senha
+     * @return
+     * @throws java.lang.Exception
+     */
+    @Override
+    public boolean validaUsuario(String login, String senha) throws Exception {
+        try {
+            ArrayList<Usuario> lista = listar();
+            String l = login;
+            String s = senha;
+            for (Usuario usuario : lista) {
+                if (usuario.getLogin().equals(login)) {
+                    if (usuario.getSenha().equals(senha)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return false;
     }
 }

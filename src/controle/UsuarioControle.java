@@ -98,4 +98,13 @@ public class UsuarioControle implements ICRUDUsuario {
             throw e;
         }
     }
+
+    @Override
+    public boolean validaUsuario(String login, String senha)throws Exception  {
+        try {
+            return  usuarioPersistencia.validaUsuario(login, senha);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
