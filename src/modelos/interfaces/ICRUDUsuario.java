@@ -23,6 +23,13 @@ public interface ICRUDUsuario {
 
     /**
      *
+     * @param obejeto
+     * @throws Exception
+     */
+    void deletar(Usuario objeto) throws Exception;
+
+    /**
+     *
      * @param velhoObjeto
      * @param novoObjeto
      * @throws Exception

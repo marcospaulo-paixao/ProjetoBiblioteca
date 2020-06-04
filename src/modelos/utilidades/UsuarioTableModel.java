@@ -25,8 +25,8 @@ public class UsuarioTableModel extends AbstractTableModel {
      * #Métodos
      */
     /**
-     * 
-     * @param colunas 
+     *
+     * @param colunas
      */
     public UsuarioTableModel(String[] colunas) {
         this.colunas = colunas;
@@ -74,6 +74,8 @@ public class UsuarioTableModel extends AbstractTableModel {
                 return dados.get(rowIndex).getNomeDoUsuario();
             case 1:
                 return dados.get(rowIndex).getLogin();
+            case 2:
+                return (dados.get(rowIndex).getStatus());
             default:
                 throw new AssertionError();
         }
@@ -81,12 +83,14 @@ public class UsuarioTableModel extends AbstractTableModel {
 
     public void addRow(Usuario usuario) {
         dados.add(usuario);
-        this.fireTableDataChanged();
     }
 
     public void update(ArrayList<Usuario> listaDeUsuarios) {
         dados.removeAll(dados);
-
+        for (Usuario usuario : listaDeUsuarios) {
+            dados.add(usuario);
+        }
+        this.fireTableDataChanged();
     }
 
 }
