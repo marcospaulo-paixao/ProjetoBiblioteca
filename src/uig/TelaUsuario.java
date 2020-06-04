@@ -439,7 +439,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (jTableUsuarios.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(null, "Selecione o usuario para alterar!");
+                JOptionPane.showMessageDialog(null, "Selecione o usuário para alterar!");
             } else {
                 incluir = false;
                 habilitaFormulario(true);
@@ -456,7 +456,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (jTableUsuarios.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(null, "Selecione o usuario para deletar!");
+                JOptionPane.showMessageDialog(null, "Selecione o usuário para deletar!");
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja Deletar este usuário?", "Deletar Usuário", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     String nomeDoUsuario = (String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0);
