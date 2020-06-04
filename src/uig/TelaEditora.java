@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uig;
 
 import javax.swing.ImageIcon;
@@ -310,6 +305,7 @@ public class TelaEditora extends javax.swing.JFrame {
             txtDescricaoEditora.setText("");
             txtNomeEditora.setText("");
             habilitarBott(true);
+            jButtonIncluir.setEnabled(false);
             jButtonDeletar.setEnabled(false);
             jButtonAlterar.setEnabled(false);
             jButtonlistagem.setEnabled(false);

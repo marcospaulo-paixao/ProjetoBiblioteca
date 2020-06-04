@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uig;
 
 import controle.UsuarioControle;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Anisb
- */
 public class Login extends javax.swing.JFrame {
 
     UsuarioControle uc = null;
@@ -144,7 +135,9 @@ public class Login extends javax.swing.JFrame {
                 jMenuItemUsuáriosActionPerformed(evt);
             }
         });
+
         jMenuTelaLogin.add(jMenuItemUsuários);
+
 
         jMenuBar1.add(jMenuTelaLogin);
 
@@ -195,6 +188,10 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Senha inválida!");
         }
     }//GEN-LAST:event_jMenuItemUsuáriosActionPerformed
+
+    private void jMenuItem1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenuItem1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1KeyPressed
 
     /**
      * @param args the command line arguments

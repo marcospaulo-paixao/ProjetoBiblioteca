@@ -286,6 +286,7 @@ public class TelaAutor extends javax.swing.JFrame {
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
         // TODO add your handling code here:
         habilitaFormulario(true);
+        jButtonIncluir.setEnabled(false);
         jButtonDeletar.setEnabled(false);
         jButtonAlterar.setEnabled(false);
         jButtonlistagem.setEnabled(false);
