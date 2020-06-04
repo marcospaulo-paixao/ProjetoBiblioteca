@@ -8,3 +8,4 @@
 97;Alexandre Valle;alexandre;1234;INATIVO;
 98;Severino Bento;severino;1234;INATIVO;
 99;Zeferino Sotomayor;zeferino;1234;ATIVO;
+101;Anisberto dos Reis;anisberto;anisberto;ATIVO;
