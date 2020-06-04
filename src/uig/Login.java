@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uig;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Anisb
- */
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -140,6 +131,11 @@ public class Login extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
+        jMenuItem1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMenuItem1KeyPressed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -179,14 +175,18 @@ public class Login extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         int senha = 1234;
-        if (JOptionPane.showInputDialog("Senha Admin").equals(""+senha)) {
-        TelaUsuario telaUsuario = new TelaUsuario();
-        telaUsuario.setVisible(true);
-        this.dispose();
-        }else{
+        if (JOptionPane.showInputDialog("Senha Admin").equals("" + senha)) {
+            TelaUsuario telaUsuario = new TelaUsuario();
+            telaUsuario.setVisible(true);
+            this.dispose();
+        } else {
             JOptionPane.showMessageDialog(null, "Senha inválida!");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenuItem1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1KeyPressed
 
     /**
      * @param args the command line arguments

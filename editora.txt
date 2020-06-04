@@ -1,3 +1,5 @@
-31;Marcos Paulo Paixão;Paixão Brasil
+31;Marcos Paulo Paixão;Editora Paixão Brasil
 36;Senai Fatesg;Faculdade SEnai
 43;Eugenio Messala;Messala Books Brasil
+66;Anisberto Reis;Of The King
+69;Maria das Coves;Coves Books
