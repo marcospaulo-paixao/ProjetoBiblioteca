@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="resizable" type="boolean" value="false"/>
@@ -367,11 +367,13 @@
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jComboBoxLivro" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="txtDataDeAquisicao" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="txtEdicao" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="txtpreco" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtDataDeAquisicao" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtEdicao" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtpreco" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">

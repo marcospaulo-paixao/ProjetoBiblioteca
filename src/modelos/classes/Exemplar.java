@@ -22,7 +22,7 @@ public class Exemplar {
         this.edicao = edicao;
         this.tipoDeStatus = tipoDeStatus;
         this.descricao = descricao;
-        this.livro = new Livro(livro.getId(), livro.getCodigo(), livro.getTitulo(),
+        this.livro = new Livro(livro.getId(), livro.getCodigo(), livro.getIsbn(), livro.getTitulo(),
                 livro.getEditora(), livro.getAutor(), livro.getAreaDoLivro());
     }
 

@@ -9,6 +9,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -66,7 +69,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNome" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                      <Component id="txtDescricao" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -78,7 +81,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtNome" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDescricao" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -90,7 +93,10 @@
             <Property name="text" type="java.lang.String" value="Area do Livro"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNome">
+        <Component class="javax.swing.JTextField" name="txtDescricao">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -131,7 +137,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTableColaboradores">
+            <Component class="javax.swing.JTable" name="jTableAreaLivro">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="1" rowCount="0">
@@ -151,6 +157,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableAreaLivroMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -231,6 +240,9 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDeletarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAlterar">
           <Properties>
@@ -254,6 +266,9 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonlistagemActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSalvar">
           <Properties>
@@ -261,6 +276,7 @@
               <Image iconType="3" name="/icons/Crud/salve-.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Salvar"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -274,6 +290,7 @@
               <Image iconType="3" name="/icons/Crud/cancel_77947.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>

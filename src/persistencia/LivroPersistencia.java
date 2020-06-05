@@ -2,14 +2,22 @@ package persistencia;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import modelos.classes.AreaDoLivro;
+import modelos.classes.Autor;
+import modelos.classes.Editora;
 import modelos.classes.Livro;
 import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorID;
 
 public class LivroPersistencia implements IcrudLivro {
+
+    AutorPersistencia autor = new AutorPersistencia("autor.txt");
+    EditoraPersistencia editora = new EditoraPersistencia("editora.txt");
+    AreaDoLivroPersistencia areaDoLivro = new AreaDoLivroPersistencia("areaDoLivro.txt");
 
     String nomeDoArquivoNoDisco = "";
 
@@ -58,7 +66,22 @@ public class LivroPersistencia implements IcrudLivro {
 
     @Override
     public void excluir(String titulo) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            ArrayList<Livro> listaLivro = listagem();
+            FileWriter fr = new FileWriter(nomeDoArquivoNoDisco);
+            BufferedWriter br = new BufferedWriter(fr);
+
+            for (int pos = 0; pos < listaLivro.size(); pos++) {
+                Livro aux = listaLivro.get(pos);
+
+                if (!titulo.equalsIgnoreCase(aux.getTitulo())) {
+                    br.write(aux.toString() + "\n");
+                }
+            }
+            br.close();
+        } catch (FileNotFoundException other) {
+            throw other;
+        }
     }
 
     @Override
@@ -82,12 +105,19 @@ public class LivroPersistencia implements IcrudLivro {
             ArrayList<Livro> listaDeLivros = new ArrayList();
             FileReader fr = new FileReader(nomeDoArquivoNoDisco);
             BufferedReader br = new BufferedReader(fr);
+
             String linha = "";
-
             while ((linha = br.readLine()) != null) {
-                linha = br.readLine();
+                String[] vetor = linha.split(";");
+                int id = Integer.parseInt(vetor[0]);
+                int codigo = Integer.parseInt(vetor[1]);
+                int isbn = Integer.parseInt(vetor[2]);
+                String titulo = vetor[3];
+                Editora editoraIncluir = editora.getEditoraId(Integer.parseInt(vetor[4]));
+                Autor autorIncluir = autor.getIdAutor(Integer.parseInt(vetor[5]));
+                AreaDoLivro areaIncluir = areaDoLivro.getIdLivro(Integer.parseInt(vetor[6]));
+                listaDeLivros.add(new Livro(id, codigo, isbn, titulo, editoraIncluir, autorIncluir, areaIncluir));
             }
-
             return listaDeLivros;
         } catch (Exception listarLivros) {
             throw listarLivros;

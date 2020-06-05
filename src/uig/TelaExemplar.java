@@ -312,11 +312,12 @@ public class TelaExemplar extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBoxLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -487,37 +488,21 @@ public class TelaExemplar extends javax.swing.JFrame {
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JButton jButtonlistagem;
     private javax.swing.JComboBox<String> jComboBoxAnoPublicacao;
-    private javax.swing.JComboBox<String> jComboBoxAutor;
-    private javax.swing.JComboBox<String> jComboBoxAutor1;
     private javax.swing.JComboBox<String> jComboBoxLivro;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableColaboradores;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtCodigo1;
     private javax.swing.JTextField txtDataDeAquisicao;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtEdicao;
-    private javax.swing.JTextField txtIsbn;
-    private javax.swing.JTextField txtIsbn1;
-    private javax.swing.JTextField txtTitulo;
-    private javax.swing.JTextField txtTitulo1;
     private javax.swing.JTextField txtpreco;
     // End of variables declaration//GEN-END:variables
 

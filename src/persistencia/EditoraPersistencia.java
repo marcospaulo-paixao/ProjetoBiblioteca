@@ -108,4 +108,14 @@ public class EditoraPersistencia implements IcrudEditora {
         }
         return null;
     }
+
+    public Editora getEditoraId(int idEditora) throws Exception {
+        ArrayList<Editora> editoras = listagem();
+        for (Editora editoraNaLista : editoras) {
+            if (editoraNaLista.getId() == idEditora) {
+                return editoraNaLista;
+            }
+        }
+        return null;
+    }
 }

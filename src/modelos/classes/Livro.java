@@ -4,14 +4,16 @@ public class Livro {
 
     int id = 0;
     int codigo = 0;
+    int isbn = 0;
     String titulo = "";
     Editora editora = null;
     Autor autor = null;
     AreaDoLivro areaDoLivro = null;
 
-    public Livro(int id, int codigo, String titulo, Editora editora, Autor autor, AreaDoLivro areaDoLivro) {
+    public Livro(int id, int codigo, int isbn, String titulo, Editora editora, Autor autor, AreaDoLivro areaDoLivro) {
         this.id = id;
         this.codigo = codigo;
+        this.isbn = isbn;
         this.titulo = titulo;
         this.editora = new Editora(editora.getId(), editora.getNome(), editora.getDescricao());
         this.autor = new Autor(autor.getId(), autor.getNome());
@@ -25,6 +27,7 @@ public class Livro {
     public Livro(Livro livro) {
         this.id = livro.getId();
         this.codigo = livro.getCodigo();
+        this.isbn = livro.getIsbn();
         this.titulo = livro.getTitulo();
         this.editora = livro.getEditora();
         this.autor = livro.getAutor();
@@ -41,6 +44,14 @@ public class Livro {
 
     public int getCodigo() {
         return codigo;
+    }
+
+    public int getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(int isbn) {
+        this.isbn = isbn;
     }
 
     public void setCodigo(int codigo) {
@@ -81,7 +92,7 @@ public class Livro {
 
     @Override
     public String toString() {
-        return id + ";" + codigo + ";" + titulo + ";"
+        return id + ";" + codigo + ";" + isbn + ";" + titulo + ";"
                 + editora.getId() + ";" + autor.getId()
                 + ";" + areaDoLivro.getId() + ";";
     }

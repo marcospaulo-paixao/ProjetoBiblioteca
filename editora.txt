@@ -3,3 +3,4 @@
 43;Eugenio Messala;Messala Books Brasil
 66;Anisberto Reis;Of The King
 69;Maria das Coves;Coves Books
+10;SENAI FATESG;FACULDADE SENAI
