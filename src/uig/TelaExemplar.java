@@ -1,17 +1,29 @@
 package uig;
 
+import controle.ExemplarControle;
+import controle.LivroControle;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import modelos.classes.Exemplar;
+import modelos.classes.Livro;
+import modelos.interfaces.IcrudExemplar;
+import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorID;
+import modelos.utilidades.TipoDeStatus;
 
 public class TelaExemplar extends javax.swing.JFrame {
 
+    IcrudLivro livro = null;
+    IcrudExemplar exemplar = null;
     boolean incluirOn = true;
 
     public TelaExemplar() {
         super("Biblioteca System - Exemplares");
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
+        livro = new LivroControle("livro.txt");
+        exemplar = new ExemplarControle("exemplar.txt");
         this.setIconImage(icone.getImage());
     }
 
@@ -70,6 +82,11 @@ public class TelaExemplar extends javax.swing.JFrame {
         jButtonDeletar.setText("Deletar");
         jButtonDeletar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonDeletar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeletarActionPerformed(evt);
+            }
+        });
 
         jButtonAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/papel.png"))); // NOI18N
         jButtonAlterar.setText("Alterar");
@@ -297,9 +314,8 @@ public class TelaExemplar extends javax.swing.JFrame {
                             .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(txtDescricao)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonStatus)
-                        .addGap(22, 22, 22)))
+                        .addGap(29, 29, 29)
+                        .addComponent(jButtonStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -361,6 +377,7 @@ public class TelaExemplar extends javax.swing.JFrame {
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
         try {
             habilitarBott(true);
+            incluirOn = true;
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonIncluirActionPerformed
@@ -374,20 +391,22 @@ public class TelaExemplar extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
-            //if (!txtTitulo.getText().isEmpty() && !txtCodigo.getText().isEmpty() && jComboBoxAutor.getSelectedItem() != "Autor" && jComboBoxAreaDoLivro.getSelectedItem() != "Area do Livro" && jComboBoxEditora.getSelectedItem() != "Editora") {
-            if (incluirOn) {
-                GeradorID gId = new GeradorID();
-                //Livro livroIncluir = new Livro(gId.getID(), Integer.parseInt(txtCodigo.getText()), txtTitulo.getText(), editora, autor, areaDoLivro);
-                //livro.incluir(livroIncluir);
-                gId.finalize();
-                habilitarBott(true);
+            if (jComboBoxLivro.getSelectedItem() != "Selecione" && jComboBoxAnoPublicacao.getSelectedItem() != "jComboBoxLivro" && !txtpreco.getText().isEmpty() && !txtEdicao.getText().isEmpty() && !txtDataDeAquisicao.getText().isEmpty() && !txtDescricao.getText().isEmpty()) {
+                if (incluirOn) {
+                    TipoDeStatus status = (jButtonStatus.getText().equals("Ativo") ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
+                    GeradorID gId = new GeradorID();
+                    Livro livroExemplar = livro.getTituloLivro(jComboBoxLivro.getSelectedItem().toString());
+                    exemplar.incluir(new Exemplar(gId.getID(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, txtDescricao.getText(), livroExemplar));
+                    gId.finalize();
+                    habilitarBott(false);
+                    JOptionPane.showMessageDialog(null, "Exemplar Incluido!");
+                } else {
+
+                }
+
             } else {
-
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser setados e preenchidos!");
             }
-
-            //} else {
-            //JOptionPane.showMessageDialog(null, "Todos os campos devem ser setados e preenchidos!");
-            //}
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, erro);
         } finally {
@@ -419,9 +438,16 @@ public class TelaExemplar extends javax.swing.JFrame {
 
     private void jComboBoxLivroPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxLivroPopupMenuWillBecomeVisible
         try {
+            jComboBoxLivro.removeAllItems();
+            ArrayList<Livro> livrosNaLista = livro.listagem();
+            String[] livroSet = new String[1];
 
+            for (int pos = 0; pos < livrosNaLista.size(); pos++) {
+                Livro aux = livrosNaLista.get(pos);
+                jComboBoxLivro.addItem(livroSet[0] = aux.getTitulo());
+            }
         } catch (Exception ex) {
-
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jComboBoxLivroPopupMenuWillBecomeVisible
 
@@ -444,6 +470,10 @@ public class TelaExemplar extends javax.swing.JFrame {
             jComboBoxAnoPublicacao.addItem("" + i);
         }
     }//GEN-LAST:event_jComboBoxAnoPublicacaoPopupMenuWillBecomeVisible
+
+    private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonDeletarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -526,6 +556,8 @@ public class TelaExemplar extends javax.swing.JFrame {
             txtEdicao.setText("");
             txtDataDeAquisicao.setText("");
             txtDescricao.setText("");
+            jComboBoxLivro.removeAllItems();
+            jComboBoxLivro.addItem("Selecione");
             jComboBoxAnoPublicacao.setSelectedIndex(0);
             jButtonStatus.setText("Inativo");
         }

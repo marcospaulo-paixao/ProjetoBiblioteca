@@ -14,4 +14,6 @@ public interface IcrudEditora {
     Editora getEditoraNome(String nomeEditora) throws Exception;
 
     ArrayList<Editora> listagem() throws Exception;
+
+    public Editora getEditoraId(int idEditora) throws Exception;
 }

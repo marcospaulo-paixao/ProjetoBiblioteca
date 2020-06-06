@@ -8,8 +8,9 @@ public class GeradorDeEtiquetas {
     String armario = "";
     Livro livro = null;
 
-    public GeradorDeEtiquetas(Livro livro, String numeroDaEtiqueta, String armario) {
-        this.numeroDaEtiqueta = livro.getCodigo() + "." + armario;
+    public GeradorDeEtiquetas(Livro livro, String armario) {
+        this.numeroDaEtiqueta = "00" + livro.getAreaDoLivro().getId() + "-"
+                + armario + "-" + livro.getIsbn().toString();
     }
 
     public GeradorDeEtiquetas(GeradorDeEtiquetas obj) {
@@ -46,7 +47,21 @@ public class GeradorDeEtiquetas {
 
     @Override
     public String toString() {
-        return this.numeroDaEtiqueta;
+        return "\n\n\n\n"
+                + "+--------------------------------------------------------------------+\n"
+                + "|      " + this.numeroDaEtiqueta + "             |\n"
+                + "+--------------------------------------------------------------------+";
     }
 
 }
+
+/*
+Área de conhecimento-000 ok
+Edição do livro-111
+Localização estante-222 ok
+Ano de edição-33333333
+ID livro - 4444 ok
+ISBN - 12121 OK
+numeração final exemplo = 000-111-222-33333333-4444 - 12121
+
+ */

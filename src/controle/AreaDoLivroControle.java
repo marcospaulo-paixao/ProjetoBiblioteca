@@ -51,20 +51,27 @@ public class AreaDoLivroControle implements IcrudAreaDoLivro {
     @Override
     public AreaDoLivro getDescricaoLivro(String descricao) throws Exception {
         try {
-            areaDoLivro.getDescricaoLivro(descricao);
+            return areaDoLivro.getDescricaoLivro(descricao);
         } catch (Exception e) {
             throw e;
         }
-        return null;
     }
 
     @Override
     public ArrayList<AreaDoLivro> listagem() throws Exception {
         try {
-            areaDoLivro.listagem();
+            return areaDoLivro.listagem();
         } catch (Exception e) {
             throw e;
         }
-        return null;
+    }
+
+    @Override
+    public AreaDoLivro getIdLivro(int idArea) throws Exception {
+        try {
+            return areaDoLivro.getIdLivro(idArea);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 }

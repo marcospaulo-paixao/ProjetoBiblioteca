@@ -109,6 +109,7 @@ public class AreaDoLivroPersistencia implements IcrudAreaDoLivro {
         }
     }
 
+    @Override
     public AreaDoLivro getIdLivro(int idArea) throws Exception {
         try {
             ArrayList<AreaDoLivro> AreasDosLivros = listagem();

@@ -1,5 +1,8 @@
 package persistencia;
 
+import controle.AreaDoLivroControle;
+import controle.AutorControle;
+import controle.EditoraControle;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -10,14 +13,17 @@ import modelos.classes.AreaDoLivro;
 import modelos.classes.Autor;
 import modelos.classes.Editora;
 import modelos.classes.Livro;
+import modelos.interfaces.IcrudAreaDoLivro;
+import modelos.interfaces.IcrudAutor;
+import modelos.interfaces.IcrudEditora;
 import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorID;
 
 public class LivroPersistencia implements IcrudLivro {
 
-    AutorPersistencia autor = new AutorPersistencia("autor.txt");
-    EditoraPersistencia editora = new EditoraPersistencia("editora.txt");
-    AreaDoLivroPersistencia areaDoLivro = new AreaDoLivroPersistencia("areaDoLivro.txt");
+    IcrudAutor autor = new AutorControle("autor.txt");
+    IcrudEditora editora = new EditoraControle("editora.txt");
+    IcrudAreaDoLivro areaDoLivro = new AreaDoLivroControle("areaDoLivro.txt");
 
     String nomeDoArquivoNoDisco = "";
 
@@ -111,7 +117,7 @@ public class LivroPersistencia implements IcrudLivro {
                 String[] vetor = linha.split(";");
                 int id = Integer.parseInt(vetor[0]);
                 int codigo = Integer.parseInt(vetor[1]);
-                int isbn = Integer.parseInt(vetor[2]);
+                String isbn = "" + vetor[2];
                 String titulo = vetor[3];
                 Editora editoraIncluir = editora.getEditoraId(Integer.parseInt(vetor[4]));
                 Autor autorIncluir = autor.getIdAutor(Integer.parseInt(vetor[5]));
@@ -122,6 +128,18 @@ public class LivroPersistencia implements IcrudLivro {
         } catch (Exception listarLivros) {
             throw listarLivros;
         }
+    }
+
+    @Override
+    public Livro getIdDoLivro(int iLivro) throws Exception {
+        ArrayList<Livro> livros = listagem();
+        for (Livro livrosNaLista : livros) {
+            if (livrosNaLista.getId() == iLivro) {
+                return livrosNaLista;
+            }
+        }
+        return null;
+
     }
 
 }

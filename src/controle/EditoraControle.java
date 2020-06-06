@@ -65,4 +65,13 @@ public class EditoraControle implements IcrudEditora {
             throw erroEditora;
         }
     }
+
+    @Override
+    public Editora getEditoraId(int idEditora) throws Exception {
+        try {
+            return objEditora.getEditoraId(idEditora);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }

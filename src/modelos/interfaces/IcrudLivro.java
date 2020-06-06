@@ -14,4 +14,6 @@ public interface IcrudLivro {
     Livro getTituloLivro(String tituloLivro) throws Exception;
 
     ArrayList<Livro> listagem() throws Exception;
+
+    public Livro getIdDoLivro(int iLivro) throws Exception;
 }

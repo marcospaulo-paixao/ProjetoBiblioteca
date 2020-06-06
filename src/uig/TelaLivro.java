@@ -1,5 +1,9 @@
 package uig;
 
+import controle.AreaDoLivroControle;
+import controle.AutorControle;
+import controle.EditoraControle;
+import controle.LivroControle;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -15,10 +19,7 @@ import modelos.interfaces.IcrudAutor;
 import modelos.interfaces.IcrudEditora;
 import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorID;
-import persistencia.AreaDoLivroPersistencia;
 import persistencia.AutorPersistencia;
-import persistencia.EditoraPersistencia;
-import persistencia.LivroPersistencia;
 
 public class TelaLivro extends javax.swing.JFrame {
 
@@ -33,10 +34,10 @@ public class TelaLivro extends javax.swing.JFrame {
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
-        livro = new LivroPersistencia("livro.txt");
-        autor = new AutorPersistencia("autor.txt");
-        editora = new EditoraPersistencia("editora.txt");
-        areaDoLivro = new AreaDoLivroPersistencia("areaDoLivro.txt");
+        livro = new LivroControle("livro.txt");
+        autor = new AutorControle("autor.txt");
+        editora = new EditoraControle("editora.txt");
+        areaDoLivro = new AreaDoLivroControle("areaDoLivro.txt");
 
     }
 
@@ -407,6 +408,7 @@ public class TelaLivro extends javax.swing.JFrame {
 
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
         habilitarBott(true);
+        limparAll();
         incluirOn = true;
     }//GEN-LAST:event_jButtonIncluirActionPerformed
 
@@ -438,7 +440,7 @@ public class TelaLivro extends javax.swing.JFrame {
                     Autor autorIncluir = autor.getNomeAutor((String) jComboBoxAutor.getSelectedItem());
                     AreaDoLivro areaIncluir = areaDoLivro.getDescricaoLivro((String) jComboBoxAreaDoLivro.getSelectedItem());
 
-                    Livro livroIncluir = new Livro(gId.getID(), Integer.parseInt(txtCodigo.getText()), Integer.parseInt(txtIsbn.getText()), txtTitulo.getText(), editoraIncluir, autorIncluir, areaIncluir);
+                    Livro livroIncluir = new Livro(gId.getID(), Integer.parseInt(txtCodigo.getText()), txtIsbn.getText(), txtTitulo.getText(), editoraIncluir, autorIncluir, areaIncluir);
                     livro.incluir(livroIncluir);
                     gId.finalize();
                     habilitarBott(false);
@@ -452,7 +454,7 @@ public class TelaLivro extends javax.swing.JFrame {
                     Autor autorIncluir = autor.getNomeAutor((String) jComboBoxAutor.getModel().getSelectedItem());
                     AreaDoLivro areaIncluir = areaDoLivro.getDescricaoLivro((String) jComboBoxAreaDoLivro.getModel().getSelectedItem());
 
-                    Livro novoLivro = new Livro(antigoLivro.getId(), Integer.parseInt(txtCodigo.getText()), Integer.parseInt(txtIsbn.getText()), txtTitulo.getText(), editoraIncluir, autorIncluir, areaIncluir);
+                    Livro novoLivro = new Livro(antigoLivro.getId(), Integer.parseInt(txtCodigo.getText()), txtIsbn.getText(), txtTitulo.getText(), editoraIncluir, autorIncluir, areaIncluir);
                     livro.alterar(antigoLivro, novoLivro);
                     habilitarBott(false);
                     JOptionPane.showMessageDialog(null, "Livro Alterado Com sucesso!");
@@ -539,7 +541,7 @@ public class TelaLivro extends javax.swing.JFrame {
 
     private void jComboBoxAreaDoLivroPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxAreaDoLivroPopupMenuWillBecomeVisible
         try {
-            jComboBoxAreaDoLivro.removeAllItems();
+            //jComboBoxAreaDoLivro.removeAllItems();
             ArrayList<AreaDoLivro> areaRList = areaDoLivro.listagem();
             String[] areaNaLista = new String[1];
 
@@ -642,8 +644,8 @@ public class TelaLivro extends javax.swing.JFrame {
             String titulo = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn()).toString();
             String codigo = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 1).toString();
             String isbn = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 2).toString();
-            String editora = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 3).toString();
-            String autor = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 4).toString();
+            String autor = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 3).toString();
+            String editora = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 4).toString();
             String area = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 5).toString();
             txtTitulo.setText(titulo);
             txtCodigo.setText(codigo);
@@ -716,4 +718,17 @@ public class TelaLivro extends javax.swing.JFrame {
     private javax.swing.JTextField txtIsbn;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
+
+    private void limparAll() {
+        txtCodigo.setText("");
+        txtTitulo.setText("");
+        txtIsbn.setText("");
+
+        jComboBoxAreaDoLivro.removeAllItems();
+        jComboBoxAreaDoLivro.addItem("Area do Livro");
+        jComboBoxEditora.removeAllItems();
+        jComboBoxEditora.addItem("Editora");
+        jComboBoxAutor.removeAllItems();
+        jComboBoxAutor.addItem("Autor");
+    }
 }

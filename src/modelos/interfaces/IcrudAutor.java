@@ -14,4 +14,6 @@ public interface IcrudAutor {
     Autor getNomeAutor(String nomeAutor) throws Exception;
 
     ArrayList<Autor> listagem() throws Exception;
+
+    public Autor getIdAutor(int idAutor) throws Exception;
 }

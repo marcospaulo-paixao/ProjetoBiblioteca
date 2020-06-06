@@ -109,6 +109,7 @@ public class EditoraPersistencia implements IcrudEditora {
         return null;
     }
 
+    @Override
     public Editora getEditoraId(int idEditora) throws Exception {
         ArrayList<Editora> editoras = listagem();
         for (Editora editoraNaLista : editoras) {

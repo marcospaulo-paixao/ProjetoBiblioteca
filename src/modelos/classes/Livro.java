@@ -4,13 +4,13 @@ public class Livro {
 
     int id = 0;
     int codigo = 0;
-    int isbn = 0;
+    String isbn = "";
     String titulo = "";
     Editora editora = null;
     Autor autor = null;
     AreaDoLivro areaDoLivro = null;
 
-    public Livro(int id, int codigo, int isbn, String titulo, Editora editora, Autor autor, AreaDoLivro areaDoLivro) {
+    public Livro(int id, int codigo, String isbn, String titulo, Editora editora, Autor autor, AreaDoLivro areaDoLivro) {
         this.id = id;
         this.codigo = codigo;
         this.isbn = isbn;
@@ -46,11 +46,11 @@ public class Livro {
         return codigo;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 

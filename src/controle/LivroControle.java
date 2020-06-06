@@ -42,12 +42,29 @@ public class LivroControle implements IcrudLivro {
 
     @Override
     public Livro getTituloLivro(String tituloLivro) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return livroControle.getTituloLivro(tituloLivro);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Override
     public ArrayList<Livro> listagem() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return livroControle.listagem();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public Livro getIdDoLivro(int iLivro) throws Exception {
+        try {
+            return livroControle.getIdDoLivro(iLivro);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }

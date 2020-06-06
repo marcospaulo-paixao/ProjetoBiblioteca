@@ -101,4 +101,10 @@ public class Exemplar {
         this.livro = livro;
     }
 
+    @Override
+    public String toString() {
+        return id + ";" + anoDePublicacao + ";" + precoDeCompra + ";"
+                + dataDeAquisicao + ";" + edicao + ";" + tipoDeStatus + ";" + descricao
+                + ";" + livro.getId() + ";";
+    }
 }

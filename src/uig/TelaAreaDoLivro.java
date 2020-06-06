@@ -1,5 +1,6 @@
 package uig;
 
+import controle.AreaDoLivroControle;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -7,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import modelos.classes.AreaDoLivro;
 import modelos.interfaces.IcrudAreaDoLivro;
 import modelos.utilidades.GeradorID;
-import persistencia.AreaDoLivroPersistencia;
 
 public class TelaAreaDoLivro extends javax.swing.JFrame {
 
@@ -19,7 +19,7 @@ public class TelaAreaDoLivro extends javax.swing.JFrame {
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
-        areaLivro = new AreaDoLivroPersistencia("areaDoLivro.txt");
+        areaLivro = new AreaDoLivroControle("areaDoLivro.txt");
     }
 
     @SuppressWarnings("unchecked")
@@ -407,7 +407,8 @@ public class TelaAreaDoLivro extends javax.swing.JFrame {
             }
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            JOptionPane.showMessageDialog(rootPane, "Erro: 522");
+            // Erro ao listar na grid - metodo listagem
         }
     }
 
