@@ -18,7 +18,7 @@ import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 public class ExemplarPersistencia implements IcrudExemplar {
 
     IcrudLivro livro = new LivroControle("livro.txt");
-    String nomeDoArquivoNoDisco;
+    String nomeDoArquivoNoDisco = null;
 
     public ExemplarPersistencia(String nomeDoArquivoNoDisco) {
         this.nomeDoArquivoNoDisco = nomeDoArquivoNoDisco;
@@ -106,21 +106,20 @@ public class ExemplarPersistencia implements IcrudExemplar {
             while ((linha = br.readLine()) != null) {
                 String[] vetor = linha.split(";");
                 int id = Integer.parseInt(vetor[0]);
-                String anoDePublicacao = vetor[1];
+                String anoDePublicacoa = vetor[1];
                 double preco = Double.parseDouble(vetor[2]);
                 String dataDeAquisicao = vetor[3];
                 int edicao = Integer.parseInt(vetor[4]);
-
                 TipoDeStatus status = TipoDeStatus.valueOf(vetor[5]);
-                TipoDeStatusEmprestimoExemplar statusEmprestimo = TipoDeStatusEmprestimoExemplar.valueOf(vetor[6]);
+                TipoDeStatusEmprestimoExemplar statusEmprestimoExemplar = TipoDeStatusEmprestimoExemplar.valueOf(vetor[6]);
                 String descricao = vetor[7];
-                Livro livroListagem = livro.getIdDoLivro(Integer.parseInt(vetor[8]));
+                Livro livroListado = livro.getIdDoLivro(Integer.parseInt(vetor[8]));
 
-                listaDeExemplar.add(new Exemplar(id, anoDePublicacao, preco, dataDeAquisicao, edicao, status, statusEmprestimo, descricao, livroListagem));
+                listaDeExemplar.add(new Exemplar(id, anoDePublicacoa, preco, dataDeAquisicao, edicao, status, statusEmprestimoExemplar, descricao, livroListado));
             }
             return listaDeExemplar;
         } catch (Exception listarLivros) {
-            throw listarLivros;
+            throw new Exception("Erro no controlador");
         }
     }
 }

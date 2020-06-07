@@ -1,22 +1,22 @@
 package modelos.utilidades;
 
+import controle.ExemplarControle;
+import controle.LivroControle;
 import modelos.classes.Exemplar;
-import modelos.classes.Livro;
+import modelos.interfaces.IcrudExemplar;
+import modelos.interfaces.IcrudLivro;
 
 public class GeradorDeEtiquetas {
 
     String numeroDaEtiqueta = "";
     String armario = "";
-    Exemplar exemplar = null;
-    Livro livro = null;
+    IcrudExemplar exemplar = new ExemplarControle("exemplar.txt");
+    IcrudLivro livro = new LivroControle("livro.txt");
 
-    public GeradorDeEtiquetas(Livro livro, String armario) {
-        this.numeroDaEtiqueta = "00" + exemplar.getLivro().getAreaDoLivro().getId() + "-"
-                + armario + "-" + exemplar.getLivro().getIsbn().toString() + exemplar.getEdicao();
-    }
-
-    public GeradorDeEtiquetas(GeradorDeEtiquetas obj) {
-        this.numeroDaEtiqueta = obj.livro.getCodigo() + "." + obj.armario;
+    public GeradorDeEtiquetas(Exemplar livro, String armario) throws Exception {
+        Exemplar exemplarEtiqueta = exemplar.getExemplar(livro.getId());
+        this.numeroDaEtiqueta = "0." + livro.getId() + " - " + exemplarEtiqueta.getLivro().getAreaDoLivro().getId() + " - "
+                + armario + " - " + exemplarEtiqueta.getLivro().getIsbn() + " - " + exemplarEtiqueta.getEdicao();
     }
 
     public GeradorDeEtiquetas(String codigoDoLivro, String armario) {
@@ -39,11 +39,19 @@ public class GeradorDeEtiquetas {
         this.armario = armario;
     }
 
-    public Livro getLivro() {
+    public IcrudExemplar getExemplar() {
+        return exemplar;
+    }
+
+    public void setExemplar(IcrudExemplar exemplar) {
+        this.exemplar = exemplar;
+    }
+
+    public IcrudLivro getLivro() {
         return livro;
     }
 
-    public void setLivro(Livro livro) {
+    public void setLivro(IcrudLivro livro) {
         this.livro = livro;
     }
 
@@ -51,7 +59,7 @@ public class GeradorDeEtiquetas {
     public String toString() {
         return "\n\n\n\n"
                 + "+--------------------------------------------------------------------+\n"
-                + "|      " + this.numeroDaEtiqueta + "                                 |\n"
+                + "|      " + numeroDaEtiqueta + "                                |\n"
                 + "+--------------------------------------------------------------------+";
     }
 

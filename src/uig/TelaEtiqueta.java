@@ -9,6 +9,8 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelos.classes.Exemplar;
@@ -46,6 +48,13 @@ public class TelaEtiqueta extends javax.swing.JFrame {
         jTextFieldArmario = new javax.swing.JTextField();
         jButtonGerarEtiqueta = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jTextFieldEdicao = new javax.swing.JTextField();
+        jTextFieldDescricao = new javax.swing.JTextField();
+        jTextFieldTitulo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButtonBuscarExemplar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerar Etiqueta");
@@ -53,9 +62,9 @@ public class TelaEtiqueta extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Gerador de Etiquetas"));
 
-        jLabel1.setText("Selecione o Livro");
+        jLabel1.setText("Selecione o Identificador do Exemplar");
 
-        jComboBoxLivrosEtiqueta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o Livro" }));
+        jComboBoxLivrosEtiqueta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         jComboBoxLivrosEtiqueta.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -69,6 +78,7 @@ public class TelaEtiqueta extends javax.swing.JFrame {
         jLabel2.setText("Define a Localização do Livro na Estante");
 
         jButtonGerarEtiqueta.setText("Gerar Etiqueta");
+        jButtonGerarEtiqueta.setEnabled(false);
         jButtonGerarEtiqueta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGerarEtiquetaActionPerformed(evt);
@@ -82,39 +92,89 @@ public class TelaEtiqueta extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldEdicao.setEnabled(false);
+
+        jTextFieldDescricao.setEnabled(false);
+
+        jTextFieldTitulo.setEnabled(false);
+
+        jLabel3.setText("Edição do Exemplar");
+
+        jLabel4.setText("Titulo ");
+
+        jLabel5.setText("Descrição do Exemplar");
+
+        jButtonBuscarExemplar.setText("Buscar Exemplar");
+        jButtonBuscarExemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarExemplarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBoxLivrosEtiqueta, 0, 289, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldArmario)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButtonGerarEtiqueta)
+                        .addComponent(jComboBoxLivrosEtiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextFieldEdicao)
+                            .addComponent(jLabel3))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldDescricao)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextFieldArmario, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButtonGerarEtiqueta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonBuscarExemplar, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxLivrosEtiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxLivrosEtiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldArmario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldArmario, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGerarEtiqueta)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jButtonBuscarExemplar))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,8 +183,8 @@ public class TelaEtiqueta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +215,7 @@ public class TelaEtiqueta extends javax.swing.JFrame {
 
             for (int pos = 0; pos < exemplaresNaLista.size(); pos++) {
                 Exemplar aux = exemplaresNaLista.get(pos);
-                jComboBoxLivrosEtiqueta.addItem(livroSet[0] = aux.getLivro().getTitulo());
+                jComboBoxLivrosEtiqueta.addItem(livroSet[0] = aux.getId() + "");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -165,9 +225,9 @@ public class TelaEtiqueta extends javax.swing.JFrame {
     private void jButtonGerarEtiquetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarEtiquetaActionPerformed
         com.itextpdf.text.Document pdf = new com.itextpdf.text.Document();
         try {
-            if (!jTextFieldArmario.getText().isEmpty() && jComboBoxLivrosEtiqueta.getSelectedItem() != "Selecione o Livro") {
-                gEtiqueta = new GeradorDeEtiquetas(livro.getTituloLivro((String) jComboBoxLivrosEtiqueta.getSelectedItem()), jTextFieldArmario.getText());
-
+            if (!jTextFieldArmario.getText().isEmpty() && jComboBoxLivrosEtiqueta.getSelectedItem() != "Selecione") {
+                Exemplar exemplarBusca = exemplar.getExemplar(Integer.parseInt("" + jComboBoxLivrosEtiqueta.getSelectedItem()));
+                gEtiqueta = new GeradorDeEtiquetas(exemplarBusca, jTextFieldArmario.getText());
                 PdfWriter.getInstance(pdf, new FileOutputStream("etiqueta.pdf"));
 
                 pdf.open();
@@ -177,18 +237,38 @@ public class TelaEtiqueta extends javax.swing.JFrame {
                 pdf.add(new Paragraph("        " + gEtiqueta.toString()));
                 Desktop.getDesktop().open(new File("etiqueta.pdf"));
             } else {
-                JOptionPane.showMessageDialog(null, "Sete o livro e inclua a localização!");
+                JOptionPane.showMessageDialog(null, "Sete o Identificador e inclua a localização!");
             }
         } catch (Exception errorInput) {
-            JOptionPane.showMessageDialog(null, errorInput.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro: " + errorInput.getMessage());
         } finally {
             jTextFieldArmario.setText("");
             jComboBoxLivrosEtiqueta.removeAllItems();
-            jComboBoxLivrosEtiqueta.addItem("Selecione o Livro");
+            jComboBoxLivrosEtiqueta.addItem("Selecione o Identificador");
+            jTextFieldEdicao.setText("");
+            jTextFieldTitulo.setText("");
+            jTextFieldDescricao.setText("");
+            jButtonGerarEtiqueta.setEnabled(false);
             pdf.close();
         }
 
     }//GEN-LAST:event_jButtonGerarEtiquetaActionPerformed
+
+    private void jButtonBuscarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarExemplarActionPerformed
+        if (!jComboBoxLivrosEtiqueta.getSelectedItem().equals("Selecione") || !jComboBoxLivrosEtiqueta.equals("Selecione o Identificador")) {
+            try {
+                jButtonGerarEtiqueta.setEnabled(true);
+                Exemplar exemplarBusca = exemplar.getExemplar(Integer.parseInt("" + jComboBoxLivrosEtiqueta.getSelectedItem()));
+                jTextFieldEdicao.setText(exemplarBusca.getEdicao() + "");
+                jTextFieldTitulo.setText(exemplarBusca.getLivro().getTitulo());
+                jTextFieldDescricao.setText(exemplarBusca.getDescricao());
+            } catch (Exception ex) {
+                Logger.getLogger(TelaEtiqueta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Sete o Identificador e inclua a localização!");
+        }
+    }//GEN-LAST:event_jButtonBuscarExemplarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -224,11 +304,18 @@ public class TelaEtiqueta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonBuscarExemplar;
     private javax.swing.JButton jButtonGerarEtiqueta;
     private javax.swing.JComboBox<String> jComboBoxLivrosEtiqueta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldArmario;
+    private javax.swing.JTextField jTextFieldDescricao;
+    private javax.swing.JTextField jTextFieldEdicao;
+    private javax.swing.JTextField jTextFieldTitulo;
     // End of variables declaration//GEN-END:variables
 }

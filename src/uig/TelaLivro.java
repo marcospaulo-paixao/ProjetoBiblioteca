@@ -541,7 +541,7 @@ public class TelaLivro extends javax.swing.JFrame {
 
     private void jComboBoxAreaDoLivroPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxAreaDoLivroPopupMenuWillBecomeVisible
         try {
-            //jComboBoxAreaDoLivro.removeAllItems();
+            jComboBoxAreaDoLivro.removeAllItems();
             ArrayList<AreaDoLivro> areaRList = areaDoLivro.listagem();
             String[] areaNaLista = new String[1];
 

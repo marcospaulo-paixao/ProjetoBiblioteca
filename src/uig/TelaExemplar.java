@@ -208,7 +208,7 @@ public class TelaExemplar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Identificador", "LIvro", "Edicão", "Data de Aquisição", "Ano de Publicação", "Preço de Compra", "Descrição", "Emprestar", "Status"
+                "Identificador", "LIvro", "Edicão", "Data de Aquisição", "Ano de Publicação", "Preço de Compra", "Descrição", "Emprestimo", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -226,6 +226,7 @@ public class TelaExemplar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableExemplares.setColumnSelectionAllowed(true);
         jTableExemplares.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableExemplaresMouseClicked(evt);
@@ -272,6 +273,11 @@ public class TelaExemplar extends javax.swing.JFrame {
             }
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
                 jComboBoxLivroPopupMenuWillBecomeVisible(evt);
+            }
+        });
+        jComboBoxLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxLivroActionPerformed(evt);
             }
         });
 
@@ -463,7 +469,7 @@ public class TelaExemplar extends javax.swing.JFrame {
             if (jComboBoxLivro.getSelectedItem() != "Selecione" && jComboBoxAnoPublicacao.getSelectedItem() != "jComboBoxLivro" && !txtpreco.getText().isEmpty() && !txtEdicao.getText().isEmpty() && !txtDataDeAquisicao.getText().isEmpty() && !txtDescricao.getText().isEmpty()) {
                 if (incluirOn) {
                     TipoDeStatus status = (jButtonStatus.getText().equals("Ativo") ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
-                    TipoDeStatusEmprestimoExemplar statusEmprestimo = (jButtonStatusEmprestimo.getText().equals("DISPONIVEL") ? TipoDeStatusEmprestimoExemplar.DISPONIVEL : TipoDeStatusEmprestimoExemplar.INDISPONIVEL);
+                    TipoDeStatusEmprestimoExemplar statusEmprestimo = TipoDeStatusEmprestimoExemplar.valueOf(jButtonStatusEmprestimo.getText());
                     GeradorID gId = new GeradorID();
                     Livro livroExemplar = livro.getTituloLivro(jComboBoxLivro.getSelectedItem().toString());
                     exemplar.incluir(new Exemplar(gId.getID(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, txtDescricao.getText(), livroExemplar));
@@ -476,7 +482,7 @@ public class TelaExemplar extends javax.swing.JFrame {
                     Exemplar antigoExemplar = exemplar.getExemplar(Integer.parseInt(idExemplar));
 
                     TipoDeStatus status = (jButtonStatus.getText().equals("Ativo") ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
-                    TipoDeStatusEmprestimoExemplar statusEmprestimo = (jButtonStatusEmprestimo.getText().equals("DISPONIVEL") ? TipoDeStatusEmprestimoExemplar.DISPONIVEL : TipoDeStatusEmprestimoExemplar.INDISPONIVEL);
+                    TipoDeStatusEmprestimoExemplar statusEmprestimo = TipoDeStatusEmprestimoExemplar.valueOf(jButtonStatusEmprestimo.getText());
                     GeradorID gId = new GeradorID();
                     Livro livroExemplar = livro.getTituloLivro(jComboBoxLivro.getSelectedItem().toString());
 
@@ -572,8 +578,11 @@ public class TelaExemplar extends javax.swing.JFrame {
         if (jButtonStatusEmprestimo.getText().equals("DISPONIVEL")) {
             jButtonStatusEmprestimo.setText("INDISPONIVEL");
 
+        } else if (jButtonStatusEmprestimo.getText().equals("INDISPONIVEL")) {
+            jButtonStatusEmprestimo.setText("RESERVADO");
         } else {
             jButtonStatusEmprestimo.setText("DISPONIVEL");
+
         }
 
     }//GEN-LAST:event_jButtonStatusEmprestimoActionPerformed
@@ -589,6 +598,10 @@ public class TelaExemplar extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         imprimirNaGrid();
     }//GEN-LAST:event_formWindowOpened
+
+    private void jComboBoxLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLivroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxLivroActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -725,7 +738,6 @@ public class TelaExemplar extends javax.swing.JFrame {
 
             for (int pos = 0; pos < exemplarLista.size(); pos++) {
                 Exemplar aux = exemplarLista.get(pos);
-                System.out.println(exemplarLista.get(pos).toString());
                 exemplarArray[0] = aux.getId() + "";
                 exemplarArray[1] = aux.getLivro().getTitulo();
                 exemplarArray[2] = aux.getEdicao() + "";
