@@ -11,7 +11,7 @@ public interface IcrudExemplar {
 
     void excluir(int idExemplar) throws Exception;
 
-    Exemplar getExemplar(String descricaoExemplar) throws Exception;
+    Exemplar getExemplar(int idExemplar) throws Exception;
 
     ArrayList<Exemplar> listagem() throws Exception;
 }

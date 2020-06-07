@@ -1,5 +1,3 @@
 2;Direito Penal
 3;Civel
 8;Direito Trabalhista
-24;Feijoadas e cia
-31;zdfghsdfg

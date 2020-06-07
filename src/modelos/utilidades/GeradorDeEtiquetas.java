@@ -1,16 +1,18 @@
 package modelos.utilidades;
 
+import modelos.classes.Exemplar;
 import modelos.classes.Livro;
 
 public class GeradorDeEtiquetas {
 
     String numeroDaEtiqueta = "";
     String armario = "";
+    Exemplar exemplar = null;
     Livro livro = null;
 
     public GeradorDeEtiquetas(Livro livro, String armario) {
-        this.numeroDaEtiqueta = "00" + livro.getAreaDoLivro().getId() + "-"
-                + armario + "-" + livro.getIsbn().toString();
+        this.numeroDaEtiqueta = "00" + exemplar.getLivro().getAreaDoLivro().getId() + "-"
+                + armario + "-" + exemplar.getLivro().getIsbn().toString() + exemplar.getEdicao();
     }
 
     public GeradorDeEtiquetas(GeradorDeEtiquetas obj) {
@@ -49,7 +51,7 @@ public class GeradorDeEtiquetas {
     public String toString() {
         return "\n\n\n\n"
                 + "+--------------------------------------------------------------------+\n"
-                + "|      " + this.numeroDaEtiqueta + "             |\n"
+                + "|      " + this.numeroDaEtiqueta + "                                 |\n"
                 + "+--------------------------------------------------------------------+";
     }
 

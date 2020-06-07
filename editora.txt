@@ -1,4 +1,2 @@
 36;SERVIÇO DA INDUSTRIA;Faculdade da Industria
-43;Eugenio Messala;Messala Books Brasil
-69;Maria das Coves;Coves Books
 23;Brasa leitura;Editora brasileira

@@ -3,6 +3,7 @@ package uig;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import controle.ExemplarControle;
 import controle.LivroControle;
 import java.awt.Desktop;
 import java.io.File;
@@ -10,13 +11,16 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import modelos.classes.Exemplar;
 import modelos.classes.Livro;
+import modelos.interfaces.IcrudExemplar;
 import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorDeEtiquetas;
 
 public class TelaEtiqueta extends javax.swing.JFrame {
 
     IcrudLivro livro = null;
+    IcrudExemplar exemplar = null;
     GeradorDeEtiquetas gEtiqueta = null;
 
     /**
@@ -26,6 +30,7 @@ public class TelaEtiqueta extends javax.swing.JFrame {
         super("Biblioteca System");
         initComponents();
         livro = new LivroControle("livro.txt");
+        exemplar = new ExemplarControle("exemplar.txt");
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
     }
@@ -145,12 +150,12 @@ public class TelaEtiqueta extends javax.swing.JFrame {
     private void jComboBoxLivrosEtiquetaPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxLivrosEtiquetaPopupMenuWillBecomeVisible
         try {
             jComboBoxLivrosEtiqueta.removeAllItems();
-            ArrayList<Livro> livrosNaLista = livro.listagem();
+            ArrayList<Exemplar> exemplaresNaLista = exemplar.listagem();
             String[] livroSet = new String[1];
 
-            for (int pos = 0; pos < livrosNaLista.size(); pos++) {
-                Livro aux = livrosNaLista.get(pos);
-                jComboBoxLivrosEtiqueta.addItem(livroSet[0] = aux.getTitulo());
+            for (int pos = 0; pos < exemplaresNaLista.size(); pos++) {
+                Exemplar aux = exemplaresNaLista.get(pos);
+                jComboBoxLivrosEtiqueta.addItem(livroSet[0] = aux.getLivro().getTitulo());
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());

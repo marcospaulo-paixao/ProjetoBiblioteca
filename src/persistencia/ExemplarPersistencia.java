@@ -13,6 +13,7 @@ import modelos.interfaces.IcrudExemplar;
 import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorID;
 import modelos.utilidades.TipoDeStatus;
+import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 
 public class ExemplarPersistencia implements IcrudExemplar {
 
@@ -40,6 +41,22 @@ public class ExemplarPersistencia implements IcrudExemplar {
 
     @Override
     public void alterar(Exemplar antigoExemplar, Exemplar atualExemplar) throws Exception {
+        try {
+            ArrayList<Exemplar> listaExemplar = listagem();
+            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
+            BufferedWriter bw = new BufferedWriter(fw);
+            atualExemplar.setId(antigoExemplar.getId());
+            for (Exemplar exemplares : listaExemplar) {
+                if (exemplares.getId() != antigoExemplar.getId()) {
+                    bw.write(exemplares.toString() + "\n");
+                } else {
+                    bw.write(atualExemplar.toString() + "\n");
+                }
+            }
+            bw.close();
+        } catch (Exception erroLivroAlterar) {
+            throw erroLivroAlterar;
+        }
     }
 
     @Override
@@ -63,7 +80,17 @@ public class ExemplarPersistencia implements IcrudExemplar {
     }
 
     @Override
-    public Exemplar getExemplar(String descricaoExemplar) throws Exception {
+    public Exemplar getExemplar(int idExemplar) throws Exception {
+        try {
+            ArrayList<Exemplar> exemplaresLista = listagem();
+            for (Exemplar exemplaresNaLista : exemplaresLista) {
+                if (exemplaresNaLista.getId() == idExemplar) {
+                    return exemplaresNaLista;
+                }
+            }
+        } catch (Exception ErroListarNomeLivro) {
+            throw ErroListarNomeLivro;
+        }
         return null;
 
     }
@@ -83,11 +110,13 @@ public class ExemplarPersistencia implements IcrudExemplar {
                 double preco = Double.parseDouble(vetor[2]);
                 String dataDeAquisicao = vetor[3];
                 int edicao = Integer.parseInt(vetor[4]);
-                String descricao = vetor[6];
-                TipoDeStatus status = (vetor[5].equals("Ativo") ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
-                Livro livroListagem = livro.getIdDoLivro(Integer.parseInt(vetor[7]));
 
-                listaDeExemplar.add(new Exemplar(id, anoDePublicacao, preco, dataDeAquisicao, edicao, status, descricao, livroListagem));
+                TipoDeStatus status = TipoDeStatus.valueOf(vetor[5]);
+                TipoDeStatusEmprestimoExemplar statusEmprestimo = TipoDeStatusEmprestimoExemplar.valueOf(vetor[6]);
+                String descricao = vetor[7];
+                Livro livroListagem = livro.getIdDoLivro(Integer.parseInt(vetor[8]));
+
+                listaDeExemplar.add(new Exemplar(id, anoDePublicacao, preco, dataDeAquisicao, edicao, status, statusEmprestimo, descricao, livroListagem));
             }
             return listaDeExemplar;
         } catch (Exception listarLivros) {
