@@ -15,8 +15,8 @@ public class GeradorDeEtiquetas {
 
     public GeradorDeEtiquetas(Exemplar livro, String armario) throws Exception {
         Exemplar exemplarEtiqueta = exemplar.getExemplar(livro.getId());
-        this.numeroDaEtiqueta = "0." + livro.getId() + " - " + exemplarEtiqueta.getLivro().getAreaDoLivro().getId() + " - "
-                + armario + " - " + exemplarEtiqueta.getLivro().getIsbn() + " - " + exemplarEtiqueta.getEdicao();
+        this.numeroDaEtiqueta = "0." + exemplarEtiqueta.getLivro().getAreaDoLivro().getId() + " - "
+                + armario + " - " + exemplarEtiqueta.getLivro().getIsbn();
     }
 
     public GeradorDeEtiquetas(String codigoDoLivro, String armario) {
