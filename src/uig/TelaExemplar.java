@@ -450,7 +450,7 @@ public class TelaExemplar extends javax.swing.JFrame {
             jComboBoxLivro.addItem("Selecione");
             jComboBoxAnoPublicacao.setSelectedIndex(0);
             jButtonStatus.setText("Inativo");
-            jButtonStatusEmprestimo.setText("DISPONIVEL");
+            jButtonStatusEmprestimo.setText("INDISPONIVEL");
             incluirOn = true;
         } catch (Exception e) {
         }
@@ -473,6 +473,7 @@ public class TelaExemplar extends javax.swing.JFrame {
                     GeradorID gId = new GeradorID();
                     Livro livroExemplar = livro.getTituloLivro(jComboBoxLivro.getSelectedItem().toString());
                     exemplar.incluir(new Exemplar(gId.getID(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, txtDescricao.getText(), livroExemplar));
+
                     gId.finalize();
                     habilitarBott(false);
                     JOptionPane.showMessageDialog(null, "Exemplar Incluido!");
@@ -575,16 +576,17 @@ public class TelaExemplar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeletarActionPerformed
 
     private void jButtonStatusEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStatusEmprestimoActionPerformed
-        if (jButtonStatusEmprestimo.getText().equals("DISPONIVEL")) {
+        if (jButtonStatus.getText() == "Inativo") {
             jButtonStatusEmprestimo.setText("INDISPONIVEL");
-
-        } else if (jButtonStatusEmprestimo.getText().equals("INDISPONIVEL")) {
-            jButtonStatusEmprestimo.setText("RESERVADO");
         } else {
-            jButtonStatusEmprestimo.setText("DISPONIVEL");
-
+            if (jButtonStatusEmprestimo.getText().equals("DISPONIVEL")) {
+                jButtonStatusEmprestimo.setText("INDISPONIVEL");
+            } else if (jButtonStatusEmprestimo.getText().equals("INDISPONIVEL")) {
+                jButtonStatusEmprestimo.setText("RESERVADO");
+            } else {
+                jButtonStatusEmprestimo.setText("DISPONIVEL");
+            }
         }
-
     }//GEN-LAST:event_jButtonStatusEmprestimoActionPerformed
 
     private void jTableExemplaresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableExemplaresMouseClicked
