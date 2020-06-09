@@ -44,8 +44,7 @@ public class Usuario {
         this.status = objeto.status;
     }
 
-    public Usuario(int id, String nomeDoUsuario, String login, String senha, TipoDeStatus status) {
-        this.id = id;
+    public Usuario(String nomeDoUsuario, String login, String senha, TipoDeStatus status) {
         this.nomeDoUsuario = nomeDoUsuario;
         this.login = login;
         this.senha = senha;

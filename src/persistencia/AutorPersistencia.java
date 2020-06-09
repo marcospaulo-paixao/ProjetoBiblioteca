@@ -111,4 +111,19 @@ public class AutorPersistencia implements IcrudAutor {
         return null;
     }
 
+    @Override
+    public Autor getIdAutor(int idAutor) throws Exception {
+        try {
+            ArrayList<Autor> autores = listagem();
+            for (Autor autoresNaLista : autores) {
+                if (autoresNaLista.getId() == idAutor) {
+                    return autoresNaLista;
+                }
+            }
+        } catch (Exception ErroListarIdAutor) {
+            throw ErroListarIdAutor;
+        }
+        return null;
+    }
+
 }

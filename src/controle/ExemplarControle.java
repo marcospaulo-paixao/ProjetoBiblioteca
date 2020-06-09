@@ -41,23 +41,21 @@ public class ExemplarControle implements IcrudExemplar {
     }
 
     @Override
-    public Exemplar getExemplar(String descricaoExemplar) throws Exception {
+    public Exemplar getExemplar(int idExemplar) throws Exception {
         try {
-            exemplar.getExemplar(descricaoExemplar);
+            return exemplar.getExemplar(idExemplar);
         } catch (Exception erroGetDes) {
             throw erroGetDes;
         }
-        return null;
     }
 
     @Override
     public ArrayList<Exemplar> listagem() throws Exception {
         try {
-            exemplar.listagem();
+            return exemplar.listagem();
         } catch (Exception erroListagem) {
-            throw erroListagem;
+            throw new Exception("Erro ao Listar" + erroListagem);
         }
-        return null;
     }
 
 }

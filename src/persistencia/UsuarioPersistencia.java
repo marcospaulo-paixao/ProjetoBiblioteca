@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import modelos.classes.Usuario;
 import modelos.interfaces.ICRUDUsuario;
+import modelos.utilidades.GeradorID;
 
 /**
  *
@@ -26,6 +27,8 @@ public class UsuarioPersistencia implements ICRUDUsuario {
 
     /**
      * #Métodos
+     *
+     * @param nomeDoArquivoNoDisco
      */
     public UsuarioPersistencia(String nomeDoArquivoNoDisco) {
         this.nomeDoArquivoNoDisco = nomeDoArquivoNoDisco;
@@ -38,9 +41,12 @@ public class UsuarioPersistencia implements ICRUDUsuario {
      */
     @Override
     public void incluir(Usuario objeto) throws Exception {
+        GeradorID id = new GeradorID();
         FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
         BufferedWriter bw = new BufferedWriter(fw);
+        objeto.setId(id.getID());
         bw.write(objeto.toString() + "\n");
+        id.finalize();
         bw.close();
     }
 
@@ -95,19 +101,65 @@ public class UsuarioPersistencia implements ICRUDUsuario {
     @Override
     public Usuario getUsuario(String nomeDoUsuario) throws Exception {
         try {
-
             ArrayList<Usuario> listaDeUsuario = listar();
-            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
-            BufferedWriter bw = new BufferedWriter(fw);
+
             for (Usuario usuario : listaDeUsuario) {
-                if (!usuario.getNomeDoUsuario().equals(nomeDoUsuario)) {
+                if (usuario.getNomeDoUsuario().equals(nomeDoUsuario)) {
                     return usuario;
                 }
             }
-            bw.close();
         } catch (Exception e) {
             throw e;
         }
         return null;
+    }
+
+    /**
+     *
+     * @param objeto
+     * @throws Exception
+     */
+    @Override
+    public void deletar(Usuario objeto) throws Exception {
+        ArrayList<Usuario> listaDeUsuario = listar();
+        try {
+
+            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (Usuario usuario : listaDeUsuario) {
+                if (usuario.getId() != objeto.getId()) {
+                    bw.write(usuario.toString() + "\n");
+                }
+            }
+            bw.close();
+        } catch (Exception e) {
+        }
+    }
+
+    /**
+     *
+     * @param login
+     * @param senha
+     * @return
+     * @throws java.lang.Exception
+     */
+    @Override
+    public boolean validaUsuario(String login, String senha) throws Exception {
+        try {
+            ArrayList<Usuario> lista = listar();
+            String l = login;
+            String s = senha;
+            for (Usuario usuario : lista) {
+                if (usuario.getLogin().equals(login)) {
+                    if (usuario.getSenha().equals(senha)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return false;
     }
 }

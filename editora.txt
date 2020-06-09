@@ -1,5 +1,2 @@
-31;Marcos Paulo Paixão;Editora Paixão Brasil
-36;Senai Fatesg;Faculdade SEnai
-43;Eugenio Messala;Messala Books Brasil
-66;Anisberto Reis;Of The King
-69;Maria das Coves;Coves Books
+36;SERVIÇO DA INDUSTRIA;Faculdade da Industria
+23;Brasa leitura;Editora brasileira

@@ -1,17 +1,31 @@
 package uig;
 
+import controle.ExemplarControle;
+import controle.LivroControle;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelos.classes.Exemplar;
+import modelos.classes.Livro;
+import modelos.interfaces.IcrudExemplar;
+import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorID;
+import modelos.utilidades.TipoDeStatus;
+import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 
 public class TelaExemplar extends javax.swing.JFrame {
 
+    IcrudLivro livro = null;
+    IcrudExemplar exemplar = null;
     boolean incluirOn = true;
 
     public TelaExemplar() {
         super("Biblioteca System - Exemplares");
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
+        livro = new LivroControle("livro.txt");
+        exemplar = new ExemplarControle("exemplar.txt");
         this.setIconImage(icone.getImage());
     }
 
@@ -35,7 +49,7 @@ public class TelaExemplar extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableColaboradores = new javax.swing.JTable();
+        jTableExemplares = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -50,9 +64,17 @@ public class TelaExemplar extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
         jButtonStatus = new javax.swing.JButton();
+        jButtonStatusEmprestimo = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
 
@@ -70,6 +92,11 @@ public class TelaExemplar extends javax.swing.JFrame {
         jButtonDeletar.setText("Deletar");
         jButtonDeletar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonDeletar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeletarActionPerformed(evt);
+            }
+        });
 
         jButtonAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/papel.png"))); // NOI18N
         jButtonAlterar.setText("Alterar");
@@ -85,6 +112,11 @@ public class TelaExemplar extends javax.swing.JFrame {
         jButtonlistagem.setText("Listar");
         jButtonlistagem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonlistagem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonlistagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonlistagemActionPerformed(evt);
+            }
+        });
 
         jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/salve-.png"))); // NOI18N
         jButtonSalvar.setText("Salvar");
@@ -142,7 +174,7 @@ public class TelaExemplar extends javax.swing.JFrame {
                 .addComponent(jButtonAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonlistagem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
                 .addComponent(jButtonSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCancelar)
@@ -171,23 +203,37 @@ public class TelaExemplar extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Exemplares"));
 
-        jTableColaboradores.setModel(new javax.swing.table.DefaultTableModel(
+        jTableExemplares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "LIvro", "Edicão", "Data de Aquisição", "Ano de Publicação", "Preço de Compra", "Descrição"
+                "Identificador", "LIvro", "Edicão", "Data de Aquisição", "Ano de Publicação", "Preço de Compra", "Descrição", "Emprestimo", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane1.setViewportView(jTableColaboradores);
+        jTableExemplares.setColumnSelectionAllowed(true);
+        jTableExemplares.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableExemplaresMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableExemplares);
+        jTableExemplares.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -202,7 +248,7 @@ public class TelaExemplar extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -227,6 +273,11 @@ public class TelaExemplar extends javax.swing.JFrame {
             }
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
                 jComboBoxLivroPopupMenuWillBecomeVisible(evt);
+            }
+        });
+        jComboBoxLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxLivroActionPerformed(evt);
             }
         });
 
@@ -257,7 +308,7 @@ public class TelaExemplar extends javax.swing.JFrame {
 
         txtDescricao.setEnabled(false);
 
-        jButtonStatus.setText("INATIVO");
+        jButtonStatus.setText("Selecione");
         jButtonStatus.setEnabled(false);
         jButtonStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,58 +316,82 @@ public class TelaExemplar extends javax.swing.JFrame {
             }
         });
 
+        jButtonStatusEmprestimo.setText("Selecione");
+        jButtonStatusEmprestimo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonStatusEmprestimo.setEnabled(false);
+        jButtonStatusEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonStatusEmprestimoActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Situação do Exemplar  (STATUS EMPRESTIMO)");
+
+        jLabel15.setText("Situação do Exemplar (STATUS)");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBoxAnoPublicacao, 0, 216, Short.MAX_VALUE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel8)
-                    .addComponent(jComboBoxLivro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBoxAnoPublicacao, 0, 216, Short.MAX_VALUE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel8)
+                            .addComponent(jComboBoxLivro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(0, 33, Short.MAX_VALUE))
-                            .addComponent(txtpreco))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel13)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(48, 48, 48)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDescricao))
+                        .addContainerGap())
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel15)
+                            .addComponent(jButtonStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(72, 72, 72)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(txtDescricao)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonStatus)
-                        .addGap(22, 22, 22)))
-                .addContainerGap())
+                            .addComponent(jLabel14)
+                            .addComponent(jButtonStatusEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -324,9 +399,16 @@ public class TelaExemplar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxAnoPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonStatus))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonStatus)
+                    .addComponent(jButtonStatusEmprestimo))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -335,11 +417,11 @@ public class TelaExemplar extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,7 +430,7 @@ public class TelaExemplar extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -360,6 +442,16 @@ public class TelaExemplar extends javax.swing.JFrame {
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
         try {
             habilitarBott(true);
+            txtpreco.setText("");
+            txtEdicao.setText("");
+            txtDataDeAquisicao.setText("");
+            txtDescricao.setText("");
+            jComboBoxLivro.removeAllItems();
+            jComboBoxLivro.addItem("Selecione");
+            jComboBoxAnoPublicacao.setSelectedIndex(0);
+            jButtonStatus.setText("Inativo");
+            jButtonStatusEmprestimo.setText("INDISPONIVEL");
+            incluirOn = true;
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonIncluirActionPerformed
@@ -367,26 +459,44 @@ public class TelaExemplar extends javax.swing.JFrame {
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         try {
             habilitarBott(true);
+            incluirOn = false;
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
-            //if (!txtTitulo.getText().isEmpty() && !txtCodigo.getText().isEmpty() && jComboBoxAutor.getSelectedItem() != "Autor" && jComboBoxAreaDoLivro.getSelectedItem() != "Area do Livro" && jComboBoxEditora.getSelectedItem() != "Editora") {
-            if (incluirOn) {
-                GeradorID gId = new GeradorID();
-                //Livro livroIncluir = new Livro(gId.getID(), Integer.parseInt(txtCodigo.getText()), txtTitulo.getText(), editora, autor, areaDoLivro);
-                //livro.incluir(livroIncluir);
-                gId.finalize();
-                habilitarBott(true);
+            if (jComboBoxLivro.getSelectedItem() != "Selecione" && jComboBoxAnoPublicacao.getSelectedItem() != "jComboBoxLivro" && !txtpreco.getText().isEmpty() && !txtEdicao.getText().isEmpty() && !txtDataDeAquisicao.getText().isEmpty() && !txtDescricao.getText().isEmpty()) {
+                if (incluirOn) {
+                    TipoDeStatus status = (jButtonStatus.getText().equals("Ativo") ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
+                    TipoDeStatusEmprestimoExemplar statusEmprestimo = TipoDeStatusEmprestimoExemplar.valueOf(jButtonStatusEmprestimo.getText());
+                    GeradorID gId = new GeradorID();
+                    Livro livroExemplar = livro.getTituloLivro(jComboBoxLivro.getSelectedItem().toString());
+                    exemplar.incluir(new Exemplar(gId.getID(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, txtDescricao.getText(), livroExemplar));
+
+                    gId.finalize();
+                    habilitarBott(false);
+                    JOptionPane.showMessageDialog(null, "Exemplar Incluido!");
+                    imprimirNaGrid();
+                } else {
+                    String idExemplar = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn()).toString();
+                    Exemplar antigoExemplar = exemplar.getExemplar(Integer.parseInt(idExemplar));
+
+                    TipoDeStatus status = (jButtonStatus.getText().equals("Ativo") ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
+                    TipoDeStatusEmprestimoExemplar statusEmprestimo = TipoDeStatusEmprestimoExemplar.valueOf(jButtonStatusEmprestimo.getText());
+                    GeradorID gId = new GeradorID();
+                    Livro livroExemplar = livro.getTituloLivro(jComboBoxLivro.getSelectedItem().toString());
+
+                    Exemplar atualExemplar = new Exemplar(antigoExemplar.getId(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, txtDescricao.getText(), livroExemplar);
+                    exemplar.alterar(antigoExemplar, atualExemplar);
+                    habilitarBott(false);
+                    JOptionPane.showMessageDialog(null, "Exemplar Alterado!");
+                    imprimirNaGrid();
+                }
+
             } else {
-
+                JOptionPane.showMessageDialog(null, "Todos os campos devem ser setados e preenchidos!");
             }
-
-            //} else {
-            //JOptionPane.showMessageDialog(null, "Todos os campos devem ser setados e preenchidos!");
-            //}
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, erro);
         } finally {
@@ -418,9 +528,16 @@ public class TelaExemplar extends javax.swing.JFrame {
 
     private void jComboBoxLivroPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxLivroPopupMenuWillBecomeVisible
         try {
+            jComboBoxLivro.removeAllItems();
+            ArrayList<Livro> livrosNaLista = livro.listagem();
+            String[] livroSet = new String[1];
 
+            for (int pos = 0; pos < livrosNaLista.size(); pos++) {
+                Livro aux = livrosNaLista.get(pos);
+                jComboBoxLivro.addItem(livroSet[0] = aux.getTitulo());
+            }
         } catch (Exception ex) {
-
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jComboBoxLivroPopupMenuWillBecomeVisible
 
@@ -432,6 +549,7 @@ public class TelaExemplar extends javax.swing.JFrame {
         } else {
             jButtonStatus.setText("Ativo");
         }
+
     }//GEN-LAST:event_jButtonStatusActionPerformed
 
     private void jComboBoxAnoPublicacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAnoPublicacaoActionPerformed
@@ -439,10 +557,53 @@ public class TelaExemplar extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxAnoPublicacaoActionPerformed
 
     private void jComboBoxAnoPublicacaoPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxAnoPublicacaoPopupMenuWillBecomeVisible
+        jComboBoxAnoPublicacao.removeAllItems();
+        gerarDatas();
+    }//GEN-LAST:event_jComboBoxAnoPublicacaoPopupMenuWillBecomeVisible
+    public void gerarDatas() {
         for (int i = 2020; i != 1900; i--) {
             jComboBoxAnoPublicacao.addItem("" + i);
         }
-    }//GEN-LAST:event_jComboBoxAnoPublicacaoPopupMenuWillBecomeVisible
+    }
+    private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
+        try {
+            String idExemplar = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn()).toString();
+            exemplar.excluir(Integer.parseInt(idExemplar));
+            habilitarBott(false);
+            imprimirNaGrid();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButtonDeletarActionPerformed
+
+    private void jButtonStatusEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStatusEmprestimoActionPerformed
+        if (jButtonStatus.getText() == "Inativo") {
+            jButtonStatusEmprestimo.setText("INDISPONIVEL");
+        } else {
+            if (jButtonStatusEmprestimo.getText().equals("DISPONIVEL")) {
+                jButtonStatusEmprestimo.setText("INDISPONIVEL");
+            } else if (jButtonStatusEmprestimo.getText().equals("INDISPONIVEL")) {
+                jButtonStatusEmprestimo.setText("RESERVADO");
+            } else {
+                jButtonStatusEmprestimo.setText("DISPONIVEL");
+            }
+        }
+    }//GEN-LAST:event_jButtonStatusEmprestimoActionPerformed
+
+    private void jTableExemplaresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableExemplaresMouseClicked
+        transferirDadosDaGrid();
+    }//GEN-LAST:event_jTableExemplaresMouseClicked
+
+    private void jButtonlistagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonlistagemActionPerformed
+        imprimirNaGrid();
+    }//GEN-LAST:event_jButtonlistagemActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        imprimirNaGrid();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jComboBoxLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLivroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxLivroActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -484,40 +645,27 @@ public class TelaExemplar extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonStatus;
+    private javax.swing.JButton jButtonStatusEmprestimo;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JButton jButtonlistagem;
     private javax.swing.JComboBox<String> jComboBoxAnoPublicacao;
-    private javax.swing.JComboBox<String> jComboBoxAutor;
-    private javax.swing.JComboBox<String> jComboBoxAutor1;
     private javax.swing.JComboBox<String> jComboBoxLivro;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableColaboradores;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtCodigo1;
+    private javax.swing.JTable jTableExemplares;
     private javax.swing.JTextField txtDataDeAquisicao;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtEdicao;
-    private javax.swing.JTextField txtIsbn;
-    private javax.swing.JTextField txtIsbn1;
-    private javax.swing.JTextField txtTitulo;
-    private javax.swing.JTextField txtTitulo1;
     private javax.swing.JTextField txtpreco;
     // End of variables declaration//GEN-END:variables
 
@@ -530,6 +678,7 @@ public class TelaExemplar extends javax.swing.JFrame {
         jComboBoxLivro.setEnabled(habilita);
 
         jButtonStatus.setEnabled(habilita);
+        jButtonStatusEmprestimo.setEnabled(habilita);
         jButtonAlterar.setEnabled(!habilita);
         jButtonDeletar.setEnabled(!habilita);
         jButtonIncluir.setEnabled(!habilita);
@@ -537,12 +686,75 @@ public class TelaExemplar extends javax.swing.JFrame {
         jButtonSalvar.setEnabled(habilita);
         jButtonlistagem.setEnabled(!habilita);
         if (!habilita) {
+            jComboBoxAnoPublicacao.removeAllItems();
+            jComboBoxAnoPublicacao.addItem("Selecione");
             txtpreco.setText("");
             txtEdicao.setText("");
             txtDataDeAquisicao.setText("");
             txtDescricao.setText("");
+            jComboBoxLivro.removeAllItems();
+            jComboBoxLivro.addItem("Selecione");
             jComboBoxAnoPublicacao.setSelectedIndex(0);
             jButtonStatus.setText("Inativo");
+            jButtonStatusEmprestimo.setText("DISPONIVEL");
+        }
+    }
+
+    public void transferirDadosDaGrid() {
+        if (jTableExemplares.getSelectedRow() != 1) {
+            String idExemplar = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn()).toString();
+            String livro = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 1).toString();
+            String edicao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 2).toString();
+            String dataAquisicao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 3).toString();
+            String anoPublicacao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 4).toString();
+            String preco = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 5).toString();
+            String descricao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 6).toString();
+            String statusEmprestimo = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 7).toString();
+            String status = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 8).toString();
+
+            jComboBoxLivro.removeAllItems();
+            jComboBoxLivro.addItem(livro);
+            txtEdicao.setText(edicao);
+            txtDataDeAquisicao.setText(dataAquisicao);
+            txtpreco.setText(preco);
+            jComboBoxAnoPublicacao.removeAllItems();
+            jComboBoxAnoPublicacao.addItem(anoPublicacao);
+            txtDescricao.setText(descricao);
+            jButtonStatusEmprestimo.setText(statusEmprestimo);
+            jButtonStatus.setText(status);
+
+        }
+    }
+
+    public void limparDadosGrid() {
+        DefaultTableModel tabela = (DefaultTableModel) jTableExemplares.getModel();
+        tabela.setRowCount(0);
+    }
+
+    public void imprimirNaGrid() {
+        DefaultTableModel tabela = (DefaultTableModel) jTableExemplares.getModel();
+        try {
+            limparDadosGrid();
+            ArrayList<Exemplar> exemplarLista = exemplar.listagem();
+            String[] exemplarArray = new String[9];
+
+            for (int pos = 0; pos < exemplarLista.size(); pos++) {
+                Exemplar aux = exemplarLista.get(pos);
+                exemplarArray[0] = aux.getId() + "";
+                exemplarArray[1] = aux.getLivro().getTitulo();
+                exemplarArray[2] = aux.getEdicao() + "";
+                exemplarArray[3] = aux.getDataDeAquisicao();
+                exemplarArray[4] = aux.getAnoDePublicacao();
+                exemplarArray[5] = aux.getPrecoDeCompra() + "";
+                exemplarArray[6] = aux.getDescricao();
+                exemplarArray[7] = aux.getStatusEmprestimo() + "";
+                exemplarArray[8] = aux.getTipoDeStatus() + "";
+
+                tabela.addRow(exemplarArray);
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
     }
 }

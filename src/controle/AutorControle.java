@@ -65,4 +65,13 @@ public class AutorControle implements IcrudAutor {
             throw erroControleAutorListarNome;
         }
     }
+
+    @Override
+    public Autor getIdAutor(int idAutor) throws Exception {
+        try {
+            return autorPersistencia.getIdAutor(idAutor);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }

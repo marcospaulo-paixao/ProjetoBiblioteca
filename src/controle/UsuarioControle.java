@@ -15,20 +15,23 @@ import persistencia.UsuarioPersistencia;
  * @author marcos
  */
 public class UsuarioControle implements ICRUDUsuario {
+
     /**
      * #Atributos
      */
     ICRUDUsuario usuarioPersistencia;
+
     /**
      * #Métodos
      */
     /**
-     * 
-     * @param nomeDoArquivoNoDisco 
+     *
+     * @param nomeDoArquivoNoDisco
      */
-    public UsuarioControle(String nomeDoArquivoNoDisco){
+    public UsuarioControle(String nomeDoArquivoNoDisco) {
         this.usuarioPersistencia = new UsuarioPersistencia(nomeDoArquivoNoDisco);
     }
+
     /**
      *
      * @param objeto
@@ -82,6 +85,24 @@ public class UsuarioControle implements ICRUDUsuario {
     public Usuario getUsuario(String nomeDoUsuario) throws Exception {
         try {
             return usuarioPersistencia.getUsuario(nomeDoUsuario);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public void deletar(Usuario objeto) throws Exception {
+        try {
+            usuarioPersistencia.deletar(objeto);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public boolean validaUsuario(String login, String senha)throws Exception  {
+        try {
+            return  usuarioPersistencia.validaUsuario(login, senha);
         } catch (Exception e) {
             throw e;
         }

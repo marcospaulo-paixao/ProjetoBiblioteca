@@ -1,0 +1,13 @@
+90;Alexandre Valle;alexandre;1234;ATIVO;
+91;Amanda Godói;amanda;1234;ATIVO;
+92;Amandio Muñiz;amandio;1234;INATIVO;
+93;Anita Reguera;anita;1234;INATIVO;
+94;Alexandre Valle;alexandre;1234;INATIVO;
+95;Murilo Murici;murilo;1234;INATIVO;
+96;Paula Barboza;paula;1234;INATIVO;
+97;Alexandre Valle;alexandre;1234;INATIVO;
+98;Severino Bento;severino;1234;INATIVO;
+99;Zeferino Sotomayor;zeferino;1234;ATIVO;
+101;Anisberto dos Reis;anisberto;123;ATIVO;
+99;Anisberto Reis;beto@Reis;4321;ATIVO;
+102;Marcos Paulo Paixão;marcos@paixao;1234;ATIVO;

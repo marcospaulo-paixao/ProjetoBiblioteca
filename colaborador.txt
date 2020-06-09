@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 0;12345;Bartolomeu Villaverde;0;contato.bartolomeu@gmail.com;62;944792682;FUNCIONARIO;ATIVO;
 2;12345;Cristóvão Castella;0;contato.cristóvão@gmail.com;62;953658632;ESTAGIARIO;ATIVO;
 3;12345;Cátia Felgueiras;12371;contato.cátia@gmail.com;62;919956591;ADVOGADO;INATIVO;
@@ -22,10 +23,19 @@
 21;1111;Romeu;321019;teste@contato.com;62;994479520;ADVOGADO;ATIVO;
 =======
 2;2020;Anisberto Reis;125;anisbertoos@gmail.com;62;92947507;ESTAGIARIO;ATIVO;
+=======
+2;2020;Anisberto Reis;125;anisbertoos@gmail.com;62;92947507;ESTAGIARIO;INATIVO;
+>>>>>>> master
 5;202025;Marcos Paulo;6555;marcos@gmail.com;62;598595;ADVOGADO;ATIVO;
-12;2021;Daniel Elyads;55886;daniel@contato.com;61;983764255;FUNCIONARIO;INATIVO;
+12;2021;Daniel Elyads;55886;daniel@contato.com;61;983764255;FUNCIONARIO;ATIVO;
 18;45445;Gabriel Anadinho;5464;gabriel@;62;45456;ADVOGADO;ATIVO;
+<<<<<<< HEAD
 19;252454;Eugenio Messala;0;eugenio@gmail.com;62;5655654;ADVOGADO;ATIVO;
 67;707070;Maria de Jesus;25154;maria@jesus.com.cr;62;9295752;ADVOGADO;INATIVO;
 66;32323;adasd;232;asdfasdf;23;23232;FUNCIONARIO;ATIVO;
+>>>>>>> master
+=======
+19;252454;Eugenio Messala;1414452;eugenio@gmail.com;62;5655654;ADVOGADO;ATIVO;
+67;707070;Maria de Jesus;25154;maria@jesus.com.cr;62;9295752;ADVOGADO;ATIVO;
+66;0;-;0;-;0;0;INDEFINIDO;INATIVO;
 >>>>>>> master

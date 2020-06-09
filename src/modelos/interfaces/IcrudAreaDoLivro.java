@@ -14,4 +14,6 @@ public interface IcrudAreaDoLivro {
     AreaDoLivro getDescricaoLivro(String descricao) throws Exception;
 
     ArrayList<AreaDoLivro> listagem() throws Exception;
+
+    public AreaDoLivro getIdLivro(int idArea) throws Exception;
 }

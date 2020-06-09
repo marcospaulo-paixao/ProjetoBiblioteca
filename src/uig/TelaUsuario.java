@@ -7,7 +7,10 @@ package uig;
 
 import controle.UsuarioControle;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import modelos.classes.Usuario;
 import modelos.interfaces.ICRUDUsuario;
+import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.UsuarioTableModel;
 
 /**
@@ -18,6 +21,7 @@ public class TelaUsuario extends javax.swing.JFrame {
 
     private ICRUDUsuario usuarioControle = null;
     private UsuarioTableModel model = null;
+    private boolean incluir = false;
 
     /**
      * Creates new form TelaUsuario
@@ -25,13 +29,17 @@ public class TelaUsuario extends javax.swing.JFrame {
     public TelaUsuario() {
         super("Biblioteca System - Usuários");
         initComponents();
-        ImageIcon icone = new ImageIcon("src/icons/livro.png");
-        this.setIconImage(icone.getImage());
-     
-        usuarioControle = new UsuarioControle("usuario.txt");
-        model = new UsuarioTableModel(new String[]{"Nome", "Login", "Status"});
-        jTable1.setModel(model);
-//        model.update(usuarioControle.listar());
+        try {
+            ImageIcon icone = new ImageIcon("src/icons/livro.png");
+            this.setIconImage(icone.getImage());
+            habilitaFormulario(false);
+            usuarioControle = new UsuarioControle("usuario.txt");
+            model = new UsuarioTableModel(new String[]{"Nome", "Login", "Status"});
+            jTableUsuarios.setModel(model);
+            model.update(usuarioControle.listar());
+        } catch (Exception e) {
+            System.out.println("erro!");
+        }
     }
 
     /**
@@ -53,18 +61,20 @@ public class TelaUsuario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPasswordFieldConfirmarSenha = new javax.swing.JPasswordField();
         jButtonStatus = new javax.swing.JButton();
+        jRadioButtonShowSenha = new javax.swing.JRadioButton();
+        jRadioButtonShowConfirmarSenha = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonIncluir = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
+        jButtonVoltar = new javax.swing.JButton();
+        jButtonListar = new javax.swing.JButton();
+        jButtonDeletar = new javax.swing.JButton();
+        jButtonAlterar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableUsuarios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -86,6 +96,20 @@ public class TelaUsuario extends javax.swing.JFrame {
             }
         });
 
+        jRadioButtonShowSenha.setText("show");
+        jRadioButtonShowSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonShowSenhaActionPerformed(evt);
+            }
+        });
+
+        jRadioButtonShowConfirmarSenha.setText("show");
+        jRadioButtonShowConfirmarSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonShowConfirmarSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,7 +119,10 @@ public class TelaUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordFieldConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPasswordFieldConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonShowConfirmarSenha))
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -105,9 +132,12 @@ public class TelaUsuario extends javax.swing.JFrame {
                             .addComponent(jLabelSenha)
                             .addComponent(jTextFieldNomdeDoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelLogin)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextFieldLogin, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextFieldLogin, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonShowSenha)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -122,82 +152,110 @@ public class TelaUsuario extends javax.swing.JFrame {
                 .addComponent(jLabelLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jLabelSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonShowSenha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPasswordFieldConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonStatus))
+                    .addComponent(jButtonStatus)
+                    .addComponent(jRadioButtonShowConfirmarSenha))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/salve-.png"))); // NOI18N
-        jButton8.setText("Salvar");
-        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/mais.png"))); // NOI18N
-        jButton1.setText("Incluir");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.setFocusPainted(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/salve-.png"))); // NOI18N
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonSalvar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonSalvar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jButtonSalvar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
             }
         });
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/Logout_37127.png"))); // NOI18N
-        jButton6.setText("Sair");
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/cancel_77947.png"))); // NOI18N
-        jButton7.setText("Cancelar");
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setVerifyInputWhenFocusTarget(false);
-        jButton7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/1491254395-returnbackredoarrow_82934.png"))); // NOI18N
-        jButton5.setText("Voltar");
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setIconTextGap(12);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/mais.png"))); // NOI18N
+        jButtonIncluir.setText("Incluir");
+        jButtonIncluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonIncluir.setFocusPainted(false);
+        jButtonIncluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonIncluir.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jButtonIncluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButtonIncluirActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/listing-option_icon-icons.com_73504.png"))); // NOI18N
-        jButton2.setText("Listar");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/Logout_37127.png"))); // NOI18N
+        jButtonSair.setText("Sair");
+        jButtonSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonSair.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jButtonSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSairActionPerformed(evt);
+            }
+        });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/lixo.png"))); // NOI18N
-        jButton4.setText("Deletar");
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/cancel_77947.png"))); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCancelar.setVerifyInputWhenFocusTarget(false);
+        jButtonCancelar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jButtonCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/papel.png"))); // NOI18N
-        jButton3.setText("Alterar");
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/1491254395-returnbackredoarrow_82934.png"))); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonVoltar.setIconTextGap(12);
+        jButtonVoltar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
+
+        jButtonListar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/listing-option_icon-icons.com_73504.png"))); // NOI18N
+        jButtonListar.setText("Listar");
+        jButtonListar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonListar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jButtonListar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jButtonDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/lixo.png"))); // NOI18N
+        jButtonDeletar.setText("Deletar");
+        jButtonDeletar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonDeletar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jButtonDeletar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeletarActionPerformed(evt);
+            }
+        });
+
+        jButtonAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/papel.png"))); // NOI18N
+        jButtonAlterar.setText("Alterar");
+        jButtonAlterar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonAlterar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jButtonAlterar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -205,21 +263,21 @@ public class TelaUsuario extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(jButtonDeletar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(jButtonAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(jButtonListar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
+                .addComponent(jButtonSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
+                .addComponent(jButtonCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(jButtonVoltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
+                .addComponent(jButtonSair)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -227,25 +285,25 @@ public class TelaUsuario extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonListar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jButton1.getAccessibleContext().setAccessibleDescription("");
+        jButtonIncluir.getAccessibleContext().setAccessibleDescription("");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuários"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -253,7 +311,7 @@ public class TelaUsuario extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableUsuarios);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -268,7 +326,7 @@ public class TelaUsuario extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -303,10 +361,15 @@ public class TelaUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+            incluir = true;
+            habilitaFormulario(true);
+            jTableUsuarios.setRowSelectionAllowed(false);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButtonIncluirActionPerformed
 
     private void jButtonStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStatusActionPerformed
         // TODO add your handling code here:
@@ -314,17 +377,154 @@ public class TelaUsuario extends javax.swing.JFrame {
             jButtonStatus.setText("Ativo");
         } else {
             jButtonStatus.setText("Inativo");
-
         }
     }//GEN-LAST:event_jButtonStatusActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
-    public void habilitaFormulario() {
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Deseja Cancelar?", "Cancelar", JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION) {
+            habilitaFormulario(false);
+            if (jPasswordFieldSenha.getEchoChar() != '*') {
+                jPasswordFieldSenha.setEchoChar('*');
+            }
+            if (jPasswordFieldConfirmarSenha.getEchoChar() != '*') {
+                jPasswordFieldConfirmarSenha.setEchoChar('*');
+            }
+            jRadioButtonShowSenha.setSelected(false);
+            jRadioButtonShowConfirmarSenha.setSelected(false);
+        }
+
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        // TODO add your handling code here:
+        try {
+            String nome = jTextFieldNomdeDoUsuario.getText();
+            String login = jTextFieldLogin.getText();
+            if (!(new String(jPasswordFieldConfirmarSenha.getPassword())).equals(new String(jPasswordFieldSenha.getPassword()))) {
+                throw new Exception("Senhas não coincidem, Tente novamente!");
+            }
+            String senha = new String(jPasswordFieldSenha.getPassword());
+            if (incluir) {
+                Usuario usuario = new Usuario(nome, login, senha, (jButtonStatus.getText().equals("Ativo")) ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
+                usuarioControle.incluir(usuario);
+                model.update(usuarioControle.listar());
+                JOptionPane.showMessageDialog(null, "Usuário incluido com sucesso!");
+                habilitaFormulario(false);
+                jTableUsuarios.setRowSelectionAllowed(true);
+            } else {
+                Usuario novoUsuario = new Usuario(nome, login, senha, (jButtonStatus.getText().equals("Ativo")) ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
+                String nomeDoUsuario = (String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0);
+                Usuario velhoUsuario = usuarioControle.getUsuario(nomeDoUsuario);
+                novoUsuario.setId(velhoUsuario.getId());
+                usuarioControle.alterar(velhoUsuario, novoUsuario);
+                model.update(usuarioControle.listar());
+                JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso!");
+                habilitaFormulario(false);
+                jTableUsuarios.setRowSelectionAllowed(true);
+            }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        }
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (jTableUsuarios.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(null, "Selecione o usuário para alterar!");
+            } else {
+                incluir = false;
+                habilitaFormulario(true);
+                String nomeDoUsuario = (String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0);
+                Usuario usuario = usuarioControle.getUsuario(nomeDoUsuario);
+                preencherForm(usuario);
+                jTableUsuarios.setRowSelectionAllowed(false);
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButtonAlterarActionPerformed
+
+    private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (jTableUsuarios.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(null, "Selecione o usuário para deletar!");
+            } else {
+                if (JOptionPane.showConfirmDialog(null, "Deseja Deletar este usuário?", "Deletar Usuário", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    String nomeDoUsuario = (String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0);
+                    Usuario usuario = usuarioControle.getUsuario(nomeDoUsuario);
+                    usuarioControle.deletar(usuario);
+                    model.update(usuarioControle.listar());
+                    JOptionPane.showMessageDialog(null, "Usuario Deletado com Sucesso!");
+                }
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButtonDeletarActionPerformed
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Deseja sair do sistema?", "Sair do sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            dispose();
+        }
+    }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jRadioButtonShowSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonShowSenhaActionPerformed
+        // TODO add your handling code here:
+        if (jPasswordFieldSenha.getEchoChar() == '*') {
+            jPasswordFieldSenha.setEchoChar((char) 0);
+        } else {
+            jPasswordFieldSenha.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jRadioButtonShowSenhaActionPerformed
+
+    private void jRadioButtonShowConfirmarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonShowConfirmarSenhaActionPerformed
+        // TODO add your handling code here:
+        if (jPasswordFieldConfirmarSenha.getEchoChar() == '*') {
+            jPasswordFieldConfirmarSenha.setEchoChar((char) 0);
+        } else {
+            jPasswordFieldConfirmarSenha.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jRadioButtonShowConfirmarSenhaActionPerformed
+
+    public void habilitaFormulario(boolean habilita) {
+        jTextFieldLogin.setEnabled(habilita);
+        jTextFieldNomdeDoUsuario.setEnabled(habilita);
+        jPasswordFieldConfirmarSenha.setEnabled(habilita);
+        jPasswordFieldSenha.setEnabled(habilita);
+        jButtonStatus.setEnabled(habilita);
+        jRadioButtonShowSenha.setEnabled(habilita);
+        jRadioButtonShowConfirmarSenha.setEnabled(habilita);
+        jButtonIncluir.setEnabled(!habilita);
+        jButtonAlterar.setEnabled(!habilita);
+        jButtonDeletar.setEnabled(!habilita);
+        jButtonListar.setEnabled(!habilita);
+        jButtonSalvar.setEnabled(habilita);
+        jButtonCancelar.setEnabled(habilita);
+        jButtonVoltar.setEnabled(!habilita);
+        jButtonSair.setEnabled(!habilita);
+        if (!habilita) {
+            jTextFieldLogin.setText("");
+            jTextFieldNomdeDoUsuario.setText("");
+            jPasswordFieldConfirmarSenha.setText("");
+            jPasswordFieldSenha.setText("");
+        }
+    }
+
+    private void preencherForm(Usuario usuario) {
+        jTextFieldLogin.setText("" + usuario.getLogin());
+        jTextFieldNomdeDoUsuario.setText("" + usuario.getNomeDoUsuario());
+        jPasswordFieldConfirmarSenha.setText("" + usuario.getSenha());
+        jPasswordFieldSenha.setText("" + usuario.getSenha());
+        jButtonStatus.setText((usuario.getStatus().equals(TipoDeStatus.ATIVO)) ? "Ativo" : "Inativo");
 
     }
 
@@ -369,15 +569,15 @@ public class TelaUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButtonAlterar;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonDeletar;
+    private javax.swing.JButton jButtonIncluir;
+    private javax.swing.JButton jButtonListar;
+    private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonStatus;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelNomdeDoUsuario;
@@ -387,8 +587,10 @@ public class TelaUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordFieldConfirmarSenha;
     private javax.swing.JPasswordField jPasswordFieldSenha;
+    private javax.swing.JRadioButton jRadioButtonShowConfirmarSenha;
+    private javax.swing.JRadioButton jRadioButtonShowSenha;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableUsuarios;
     private javax.swing.JTextField jTextFieldLogin;
     private javax.swing.JTextField jTextFieldNomdeDoUsuario;
     // End of variables declaration//GEN-END:variables
