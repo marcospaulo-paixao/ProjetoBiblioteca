@@ -4,4 +4,3 @@
 18;45445;Gabriel Anadinho;5464;gabriel@;62;45456;ADVOGADO;ATIVO;
 19;252454;Eugenio Messala;1414452;eugenio@gmail.com;62;5655654;ADVOGADO;ATIVO;
 67;707070;Maria de Jesus;25154;maria@jesus.com.cr;62;9295752;ADVOGADO;ATIVO;
-66;0;-;0;-;0;0;INDEFINIDO;INATIVO;
