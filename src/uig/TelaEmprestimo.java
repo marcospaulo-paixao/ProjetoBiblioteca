@@ -25,7 +25,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     public TelaEmprestimo() {
         super("Biblioteca System - Emprestimo de Livro");
         try {
-
             initComponents();
             model = new ColaboradorTableModel(new String[]{"Matricula", "Nome"});
             model.update(cc.listagem());
@@ -349,8 +348,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldPesquisarColaboradorKeyReleased
     
     private void pesquisarColaboradores(String texto) throws Exception {
-        try {
-            
+        try {            
             String[][] matrizFiltro = new String[2][cc.listagem().size()];
             String[] matrizS = new String[matrizFiltro[1].length];
             model.update(cc.listagem());
@@ -384,7 +382,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                         }
                     }
                 }
-
                 model.update(matrizS);
             }
 
