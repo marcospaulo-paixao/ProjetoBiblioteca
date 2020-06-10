@@ -85,6 +85,29 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
             throw e;
         }
     }
+    /**
+     * 
+     * @param colaborador
+     * @throws Exception 
+     */
+    @Override
+    public void deletar(Colaborador colaborador) throws Exception {
+        try {
+            ArrayList<Colaborador> lista = listagem();
+            
+            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (Colaborador colaborador1 : lista) {
+                if (colaborador.getId() != colaborador1.getId()) {
+                    bw.write(colaborador1.toString()+"\n");
+                }
+            }
+            bw.close();
+
+        } catch (Exception e) {
+        }
+    }
 
     /**
      *
@@ -108,10 +131,10 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
                 String email = vetor[4];
                 int ddd = Integer.parseInt(vetor[5]);
                 int telefone = Integer.parseInt(vetor[6]);
-                
+
                 TipoDeColadoradores tipoDeColaborador = TipoDeColadoradores.valueOf(vetor[7]);
                 TipoDeStatus tipoDeStatus = TipoDeStatus.valueOf(vetor[8]);
-                Colaborador c = new Colaborador(matricula, nome, OAB, email,ddd, telefone, tipoDeColaborador, tipoDeStatus);
+                Colaborador c = new Colaborador(matricula, nome, OAB, email, ddd, telefone, tipoDeColaborador, tipoDeStatus);
                 c.setId(id);
                 listaDeColaboradores.add(c);
             }
@@ -122,16 +145,15 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
         }
     }
 
-    
     /**
-     * 
+     *
      * @param nome
-     * @param matricula
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
+    @Override
     public Colaborador getColaborador(String nome) throws Exception {
-        try {            
+        try {
 
             ArrayList<Colaborador> listaDeColaboradores = listagem();
             for (Colaborador colaborador : listaDeColaboradores) {
@@ -144,5 +166,6 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
         }
         return null;
     }
+
 
 }

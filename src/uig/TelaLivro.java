@@ -576,7 +576,7 @@ public class TelaLivro extends javax.swing.JFrame {
 
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
         try {
-            DefaultTableModel tabela = (DefaultTableModel) jTableLivros.getModel();
+            
             if (jTableLivros.getSelectedRow() != 1) {
                 String titulo = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn()).toString();
                 int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Exclusão de: " + titulo, titulo, 0);
