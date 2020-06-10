@@ -84,4 +84,13 @@ public class ColaboradorControle implements ICRUDColaborador {
             throw e;
         }
     }
+
+    @Override
+    public void deletar(Colaborador colaborador) throws Exception {
+        try {
+             colaboradorPersistencia.deletar(colaborador);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }

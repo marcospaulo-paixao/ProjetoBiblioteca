@@ -28,7 +28,12 @@ public interface ICRUDColaborador {
      * @throws Exception
      */
     void alterar(Colaborador velhoColaborador, Colaborador novoColaborador) throws Exception;
-
+    /**
+     * 
+     * @param colaborador 
+     */
+    void deletar(Colaborador colaborador) throws Exception;;
+            
     /**
      *
      * @return @throws Exception

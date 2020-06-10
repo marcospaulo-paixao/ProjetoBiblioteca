@@ -19,6 +19,7 @@ import modelos.interfaces.IcrudAutor;
 import modelos.interfaces.IcrudEditora;
 import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorID;
+import modelos.utilidades.LivroTableModel;
 import persistencia.AutorPersistencia;
 
 public class TelaLivro extends javax.swing.JFrame {
@@ -28,10 +29,13 @@ public class TelaLivro extends javax.swing.JFrame {
     IcrudLivro livro = null;
     IcrudEditora editora = null;
     IcrudAreaDoLivro areaDoLivro = null;
+    LivroTableModel model = null;
 
     public TelaLivro() {
         super("Biblioteca System - Livro");
         initComponents();
+        model = new LivroTableModel(new String[]{"Titulo do Livro", "Codigo do Livro", "ISBN", "Autor", "Editora", "Area do Livro"});
+        jTableLivros.setModel(model);
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
         livro = new LivroControle("livro.txt");
@@ -70,6 +74,8 @@ public class TelaLivro extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableLivros = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -169,7 +175,7 @@ public class TelaLivro extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(86, 86, 86)
                 .addComponent(jButtonIncluir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonDeletar)
@@ -177,7 +183,7 @@ public class TelaLivro extends javax.swing.JFrame {
                 .addComponent(jButtonAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonlistagem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCancelar)
@@ -185,7 +191,7 @@ public class TelaLivro extends javax.swing.JFrame {
                 .addComponent(jButtonVoltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSair)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,24 +229,24 @@ public class TelaLivro extends javax.swing.JFrame {
         jComboBoxAutor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         jComboBoxAutor.setEnabled(false);
         jComboBoxAutor.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBoxAutorPopupMenuWillBecomeVisible(evt);
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                jComboBoxAutorPopupMenuWillBecomeVisible(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
 
         jComboBoxEditora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         jComboBoxEditora.setEnabled(false);
         jComboBoxEditora.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBoxEditoraPopupMenuWillBecomeVisible(evt);
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                jComboBoxEditoraPopupMenuWillBecomeVisible(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         jComboBoxEditora.addActionListener(new java.awt.event.ActionListener() {
@@ -252,12 +258,12 @@ public class TelaLivro extends javax.swing.JFrame {
         jComboBoxAreaDoLivro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         jComboBoxAreaDoLivro.setEnabled(false);
         jComboBoxAreaDoLivro.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBoxAreaDoLivroPopupMenuWillBecomeVisible(evt);
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
-                jComboBoxAreaDoLivroPopupMenuWillBecomeVisible(evt);
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
 
@@ -296,7 +302,7 @@ public class TelaLivro extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addGap(0, 184, Short.MAX_VALUE))
+                                .addGap(0, 280, Short.MAX_VALUE))
                             .addComponent(jComboBoxAutor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +327,7 @@ public class TelaLivro extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -343,17 +349,9 @@ public class TelaLivro extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Titulo do Livro", "Codigo do Livro", "ISBN", "Autor", "Editora", "Area do Livro"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         jTableLivros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableLivrosMouseClicked(evt);
@@ -378,6 +376,31 @@ public class TelaLivro extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -385,9 +408,10 @@ public class TelaLivro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -396,10 +420,12 @@ public class TelaLivro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -509,32 +535,14 @@ public class TelaLivro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxEditoraPopupMenuWillBecomeVisible
     public void imprimirNaGrid() {
-        DefaultTableModel tabela = (DefaultTableModel) jTableLivros.getModel();
         try {
-            limparDadosGrid(livro.listagem());
-            ArrayList<Livro> livroLista = livro.listagem();
-            String[] livrosArray = new String[6];
-
-            for (int pos = 0; pos < livroLista.size(); pos++) {
-                Livro aux = livroLista.get(pos);
-                livrosArray[0] = aux.getTitulo();
-                livrosArray[1] = aux.getCodigo() + "";
-                livrosArray[2] = aux.getIsbn() + "";
-                livrosArray[3] = aux.getAutor().getNome();
-                livrosArray[4] = aux.getEditora().getNome();
-                livrosArray[5] = aux.getAreaDoLivro().getDescricao();
-                tabela.addRow(livrosArray);
-            }
-
+            model.update(livro.listagem());
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
     }
 
-    public void limparDadosGrid(ArrayList<Livro> livros) {
-        DefaultTableModel tabela = (DefaultTableModel) jTableLivros.getModel();
-        tabela.setRowCount(0);
-    }
+
     private void jComboBoxEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEditoraActionPerformed
 
     }//GEN-LAST:event_jComboBoxEditoraActionPerformed
@@ -568,7 +576,7 @@ public class TelaLivro extends javax.swing.JFrame {
 
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
         try {
-            DefaultTableModel tabela = (DefaultTableModel) jTableLivros.getModel();
+            
             if (jTableLivros.getSelectedRow() != 1) {
                 String titulo = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn()).toString();
                 int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Exclusão de: " + titulo, titulo, 0);
@@ -594,6 +602,62 @@ public class TelaLivro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, erroNaExclusao);
         }
     }//GEN-LAST:event_jButtonDeletarActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        try {
+            pesquisarLivro(jTextField1.getText().toLowerCase());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    public void pesquisarLivro(String texto) {
+        try {
+
+            String[][] matrizFiltro = new String[6][livro.listagem().size()];
+            String[] matrizS = new String[matrizFiltro[1].length];
+            model.update(livro.listagem());
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                for (int j = 0; j < model.getRowCount(); j++) {
+                    matrizFiltro[i][j] = model.getValueAt(j, i);
+                }
+            }
+            ArrayList<String> matriz = null;
+                if (matrizFiltro.length > 0) {
+                    texto = texto.toLowerCase().trim();
+                    if (texto.length() == 0) {                       
+                        for (int i = 0; i < matrizFiltro[1].length; i++) {
+                                matrizS[i] = matrizFiltro[0][i];
+                        }
+
+                    } else {
+                        matriz = new ArrayList<>();
+
+                        for (int i = 0; i < matrizFiltro[1].length; i++) {
+                            if (matrizFiltro[0][i].toLowerCase().contains(texto)
+                                    || matrizFiltro[1][i].toLowerCase().contains(texto)
+                                    || matrizFiltro[2][i].toLowerCase().contains(texto)
+                                    || matrizFiltro[3][i].toLowerCase().contains(texto)
+                                    || matrizFiltro[4][i].toLowerCase().contains(texto)
+                                    || matrizFiltro[5][i].toLowerCase().contains(texto)) {
+                                matriz.add(matrizFiltro[0][i]);
+                            }
+                        }
+
+                        matrizS = new String[matriz.size()];
+                        for (int i = 0; i < matriz.size(); i++) {
+                            matrizS[i] = matriz.get(i);
+                        }
+                    }
+                }
+
+                model.update(matrizS);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+        }
 
     public void habilitarBott(boolean habilitar) {
         jButtonIncluir.setEnabled(!habilitar);
@@ -711,9 +775,11 @@ public class TelaLivro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableLivros;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtIsbn;
     private javax.swing.JTextField txtTitulo;
