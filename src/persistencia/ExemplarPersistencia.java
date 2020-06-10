@@ -35,7 +35,7 @@ public class ExemplarPersistencia implements IcrudExemplar {
             BufferedWriter bw = new BufferedWriter(fw);
             
             CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem(objExemplar.getClass().getSimpleName(), objExemplar.toString() + "\n");
+            comunicacao.getComunicacao().enviarMensagem("post",objExemplar.getClass().getSimpleName(), objExemplar.toString() + "\n");
             comunicacao.getComunicacao().receberMensagem();
             comunicacao.getComunicacao().fecharConexao();
             

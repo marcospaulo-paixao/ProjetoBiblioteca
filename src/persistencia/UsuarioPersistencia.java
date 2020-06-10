@@ -48,7 +48,7 @@ public class UsuarioPersistencia implements ICRUDUsuario {
         objeto.setId(id.getID());
 
         CreateServer comunicacao = new CreateServer();
-        comunicacao.getComunicacao().enviarMensagem(objeto.getClass().getSimpleName(), objeto.toString() + "\n");
+        comunicacao.getComunicacao().enviarMensagem("post",objeto.getClass().getSimpleName(), objeto.toString() + "\n");
         comunicacao.getComunicacao().receberMensagem();
         comunicacao.getComunicacao().fecharConexao();
 

@@ -46,7 +46,7 @@ public class LivroPersistencia implements IcrudLivro {
             BufferedWriter bw = new BufferedWriter(fw);
             
             CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem(livro.getClass().getSimpleName(), livro.toString() + "\n");
+            comunicacao.getComunicacao().enviarMensagem("post",livro.getClass().getSimpleName(), livro.toString() + "\n");
             comunicacao.getComunicacao().receberMensagem();
             comunicacao.getComunicacao().fecharConexao();
             

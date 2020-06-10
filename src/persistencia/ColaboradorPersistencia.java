@@ -53,7 +53,7 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
             BufferedWriter bw = new BufferedWriter(fw);
             
             CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem(objeto.getClass().getSimpleName(), objeto.toString() + "\n");
+            comunicacao.getComunicacao().enviarMensagem("post",objeto.getClass().getSimpleName(), objeto.toString() + "\n");
             comunicacao.getComunicacao().receberMensagem();
             comunicacao.getComunicacao().fecharConexao();
             

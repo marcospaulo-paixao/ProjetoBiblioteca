@@ -46,8 +46,8 @@ public class ComunicadorTCP {
     //Metodos
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //envia uma mensagem texto utilizando o objeto DataOutpuStream
-    public void enviarMensagem(String tipo, String mensagem) throws IOException {
-        this.enviarMsg.writeUTF(tipo + ";" + mensagem);
+    public void enviarMensagem(String metodo, String tipo, String mensagem) throws IOException {
+        this.enviarMsg.writeUTF(metodo + ";" + tipo + ";" + mensagem);
         this.enviarMsg.flush();
     }
 

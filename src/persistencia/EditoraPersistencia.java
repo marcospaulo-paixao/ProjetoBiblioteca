@@ -30,7 +30,7 @@ public class EditoraPersistencia implements IcrudEditora {
             BufferedWriter bw = new BufferedWriter(fw);
 
             CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem(editoraObjeto.getClass().getSimpleName(), editoraObjeto.toString() + "\n");
+            comunicacao.getComunicacao().enviarMensagem("post",editoraObjeto.getClass().getSimpleName(), editoraObjeto.toString() + "\n");
             comunicacao.getComunicacao().receberMensagem();
             comunicacao.getComunicacao().fecharConexao();
 
