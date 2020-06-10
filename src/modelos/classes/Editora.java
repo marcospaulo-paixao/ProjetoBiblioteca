@@ -44,7 +44,7 @@ public class Editora {
 
     @Override
     public String toString() {
-        return id + ";" + nome + ";" + descricao;
+        return id + ";" + nome + ";" + descricao+";";
     }
 
 }

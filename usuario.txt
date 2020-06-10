@@ -11,3 +11,6 @@
 101;Anisberto dos Reis;anisberto;123;ATIVO;
 99;Anisberto Reis;beto@Reis;4321;ATIVO;
 102;Marcos Paulo Paixão;marcos@paixao;1234;ATIVO;
+94;Anisberto Reis;anisberto;123;ATIVO;
+109;Eugenio Messala;genio;123;ATIVO;
+118;asdfasdfasfd;asdasdfas;123;INATIVO;
