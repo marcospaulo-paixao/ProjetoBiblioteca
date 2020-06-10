@@ -1,7 +1,7 @@
 package modelos.utilidades;
 
 import javax.swing.JFrame;
-import org.jfree.data.category.DefaultCategoryDataset;
+//import org.jfree.data.category.DefaultCategoryDataset;
 
 public class GraficoDeBarras extends JFrame {
 
@@ -14,6 +14,6 @@ public class GraficoDeBarras extends JFrame {
     }
 
     public void estruturarGrafico() {
-        DefaultCategoryDataset barra = new DefaultCategoryDataset();
+//        DefaultCategoryDataset barra = new DefaultCategoryDataset();
     }
 }

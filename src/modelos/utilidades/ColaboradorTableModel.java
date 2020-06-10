@@ -28,7 +28,6 @@ public class ColaboradorTableModel extends AbstractTableModel {
         colunas = null;
     }
 
-
     @Override
     public String getColumnName(int column) {
         return colunas[column];
@@ -48,25 +47,39 @@ public class ColaboradorTableModel extends AbstractTableModel {
     public String getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return (dados.get(rowIndex).getNome().equals("-"))?"":dados.get(rowIndex).getNome();
+                return (dados.get(rowIndex).getMatricula() != 0) ? dados.get(rowIndex).getMatricula() + "" : " ";
             case 1:
-                
-                return(dados.get(rowIndex).getMatricula()!=0)? dados.get(rowIndex).getMatricula()+"":" ";
+                return (dados.get(rowIndex).getNome().equals("-")) ? "" : dados.get(rowIndex).getNome();
+
             case 2:
-                return(dados.get(rowIndex).getOAB()!=0)? dados.get(rowIndex).getOAB()+"":" ";
+                return (dados.get(rowIndex).getOAB() != 0) ? dados.get(rowIndex).getOAB() + "" : " ";
             case 3:
-                return (dados.get(rowIndex).getEmail().equals("-"))?"":dados.get(rowIndex).getEmail();
+                return (dados.get(rowIndex).getEmail().equals("-")) ? "" : dados.get(rowIndex).getEmail();
             case 4:
-                return dados.get(rowIndex).getTelefone().getTelefone()+"";
+                return dados.get(rowIndex).getTelefone().getTelefone() + "";
             case 5:
-                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.ADVOGADO) return "Advogado";
-                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.ESTAGIARIO) return "Estagiario";
-                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.FUNCIONARIO) return "Funcionario";
-                if (dados.get(rowIndex).getTipoDeColaborador()==TipoDeColadoradores.INDEFINIDO) return "Indefinido";
+                if (dados.get(rowIndex).getTipoDeColaborador() == TipoDeColadoradores.ADVOGADO) {
+                    return "Advogado";
+                }
+                if (dados.get(rowIndex).getTipoDeColaborador() == TipoDeColadoradores.ESTAGIARIO) {
+                    return "Estagiario";
+                }
+                if (dados.get(rowIndex).getTipoDeColaborador() == TipoDeColadoradores.FUNCIONARIO) {
+                    return "Funcionario";
+                }
+                if (dados.get(rowIndex).getTipoDeColaborador() == TipoDeColadoradores.INDEFINIDO) {
+                    return "Indefinido";
+                }
             case 6:
-                if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.ATIVO) return "Ativo";
-                if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.INATIVO) return "Inativo";
-                if (dados.get(rowIndex).getTipoDeStatus()==TipoDeStatus.INDEFINIDO) return "Indefinido";
+                if (dados.get(rowIndex).getTipoDeStatus() == TipoDeStatus.ATIVO) {
+                    return "Ativo";
+                }
+                if (dados.get(rowIndex).getTipoDeStatus() == TipoDeStatus.INATIVO) {
+                    return "Inativo";
+                }
+                if (dados.get(rowIndex).getTipoDeStatus() == TipoDeStatus.INDEFINIDO) {
+                    return "Indefinido";
+                }
             default:
                 throw new AssertionError();
         }
@@ -84,6 +97,22 @@ public class ColaboradorTableModel extends AbstractTableModel {
             });
             this.fireTableDataChanged();
         } catch (Exception e) {
+        }
+    }
+
+    public void update(String[] dadosSV) {
+        try {
+            ArrayList<Colaborador> lista = new ArrayList<>();
+            for (int i = 0; i < dados.size(); i++) {
+                for (int j = 0; j < dadosSV.length; j++) {
+                    if (dados.get(i).getNome().equals(dadosSV[j])) {
+                        lista.add(dados.get(i));
+                    }
+                }
+            }
+            update(lista);
+        } catch (Exception e) {
+            throw e;
         }
     }
 }
