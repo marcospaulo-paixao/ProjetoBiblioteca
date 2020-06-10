@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import modelos.classes.Usuario;
 import modelos.interfaces.ICRUDUsuario;
+import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
 
 /**
@@ -45,6 +46,12 @@ public class UsuarioPersistencia implements ICRUDUsuario {
         FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
         BufferedWriter bw = new BufferedWriter(fw);
         objeto.setId(id.getID());
+
+        CreateServer comunicacao = new CreateServer();
+        comunicacao.getComunicacao().enviarMensagem(objeto.getClass().getSimpleName(), objeto.toString() + "\n");
+        comunicacao.getComunicacao().receberMensagem();
+        comunicacao.getComunicacao().fecharConexao();
+
         bw.write(objeto.toString() + "\n");
         id.finalize();
         bw.close();

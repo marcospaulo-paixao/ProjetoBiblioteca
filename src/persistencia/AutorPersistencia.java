@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import modelos.classes.Autor;
 import modelos.interfaces.IcrudAutor;
+import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
 
 public class AutorPersistencia implements IcrudAutor {
@@ -27,7 +28,13 @@ public class AutorPersistencia implements IcrudAutor {
             gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(autorObj.toString() + "\n");
+            
+            CreateServer comunicacao = new CreateServer();
+            comunicacao.getComunicacao().enviarMensagem(autorObj.getClass().getSimpleName(), autorObj.toString() + "\n");
+            comunicacao.getComunicacao().receberMensagem();
+            comunicacao.getComunicacao().fecharConexao();
+            
+            bw.write(autorObj.toString());
             bw.close();
         } catch (IOException errorAutor) {
             throw errorAutor;

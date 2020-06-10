@@ -11,6 +11,7 @@ import modelos.classes.Exemplar;
 import modelos.classes.Livro;
 import modelos.interfaces.IcrudExemplar;
 import modelos.interfaces.IcrudLivro;
+import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
 import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
@@ -32,6 +33,12 @@ public class ExemplarPersistencia implements IcrudExemplar {
             gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
+            
+            CreateServer comunicacao = new CreateServer();
+            comunicacao.getComunicacao().enviarMensagem(objExemplar.getClass().getSimpleName(), objExemplar.toString() + "\n");
+            comunicacao.getComunicacao().receberMensagem();
+            comunicacao.getComunicacao().fecharConexao();
+            
             bw.write(objExemplar.toString() + "\n");
             bw.close();
         } catch (Exception erroIncluir) {

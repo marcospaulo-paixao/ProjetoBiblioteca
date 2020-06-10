@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import modelos.classes.Colaborador;
 import modelos.interfaces.ICRUDColaborador;
+import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
 import modelos.utilidades.TipoDeColadoradores;
 import modelos.utilidades.TipoDeStatus;
@@ -50,6 +51,12 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
             gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
+            
+            CreateServer comunicacao = new CreateServer();
+            comunicacao.getComunicacao().enviarMensagem(objeto.getClass().getSimpleName(), objeto.toString() + "\n");
+            comunicacao.getComunicacao().receberMensagem();
+            comunicacao.getComunicacao().fecharConexao();
+            
             bw.write(objeto.toString() + "\n");
             bw.close();
         } catch (IOException e) {

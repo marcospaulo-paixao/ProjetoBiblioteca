@@ -17,6 +17,7 @@ import modelos.interfaces.IcrudAreaDoLivro;
 import modelos.interfaces.IcrudAutor;
 import modelos.interfaces.IcrudEditora;
 import modelos.interfaces.IcrudLivro;
+import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
 
 public class LivroPersistencia implements IcrudLivro {
@@ -43,6 +44,12 @@ public class LivroPersistencia implements IcrudLivro {
             gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
+            
+            CreateServer comunicacao = new CreateServer();
+            comunicacao.getComunicacao().enviarMensagem(livro.getClass().getSimpleName(), livro.toString() + "\n");
+            comunicacao.getComunicacao().receberMensagem();
+            comunicacao.getComunicacao().fecharConexao();
+            
             bw.write(livro.toString() + "\n");
             bw.close();
         } catch (Exception erroIncluir) {
