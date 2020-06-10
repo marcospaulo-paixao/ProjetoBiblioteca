@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import modelos.classes.Editora;
 import modelos.interfaces.IcrudEditora;
-import modelos.utilidades.ComunicadorTCP;
+import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
 
 public class EditoraPersistencia implements IcrudEditora {
@@ -28,12 +28,12 @@ public class EditoraPersistencia implements IcrudEditora {
             gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            
-            ComunicadorTCP comunicacao = new ComunicadorTCP("127.0.0.1", 6789);
-            comunicacao.enviarMensagem(editoraObjeto.getClass().getSimpleName(),editoraObjeto.toString());
-            comunicacao.receberMensagem();
-            comunicacao.fecharConexao();
-            
+
+            CreateServer comunicacao = new CreateServer();
+            comunicacao.getComunicacao().enviarMensagem(editoraObjeto.getClass().getSimpleName(), editoraObjeto.toString() + "\n");
+            comunicacao.getComunicacao().receberMensagem();
+            comunicacao.getComunicacao().fecharConexao();
+
             bw.write(editoraObjeto.toString() + "\n");
             bw.close();
         } catch (IOException errorEditora) {
