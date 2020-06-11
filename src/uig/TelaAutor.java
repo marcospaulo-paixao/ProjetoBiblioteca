@@ -2,19 +2,19 @@ package uig;
 
 import controle.AutorControle;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelos.classes.Autor;
 import modelos.interfaces.IcrudAutor;
+import modelos.utilidades.AutorTableModel;
 import modelos.utilidades.GeradorID;
 
 public class TelaAutor extends javax.swing.JFrame {
-    
+
     boolean incluirOr = true;
     IcrudAutor autor = null;
+    AutorTableModel model = null;
 
     /**
      * Creates new form TelaAutor
@@ -24,6 +24,8 @@ public class TelaAutor extends javax.swing.JFrame {
         initComponents();
         try {
             autor = new AutorControle("autor.txt");
+            model = new AutorTableModel(new String[]{"Nome do Autor", "Identificador"});
+            gridAutor.setModel(model);
         } catch (Exception e) {
         }
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
@@ -98,17 +100,9 @@ public class TelaAutor extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome Autor"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         gridAutor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 gridAutorMouseClicked(evt);
@@ -259,6 +253,12 @@ public class TelaAutor extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
+        txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -316,8 +316,9 @@ public class TelaAutor extends javax.swing.JFrame {
         jButtonlistagem.setEnabled(false);
         jButtonVoltar.setEnabled(false);
         jButtonSair.setEnabled(false);
+        txtNomeAutor.setText("");
         jButtonCancelar.setEnabled(true);
-        
+
         incluirOr = true;
     }//GEN-LAST:event_jButtonIncluirActionPerformed
 
@@ -326,7 +327,7 @@ public class TelaAutor extends javax.swing.JFrame {
             incluirOr = false;
             txtNomeAutor.setEnabled(true);
             jButtonSalvar.setEnabled(true);
-            
+
             jButtonlistagem.setEnabled(false);
             jButtonDeletar.setEnabled(false);
             jButtonIncluir.setEnabled(false);
@@ -349,17 +350,17 @@ public class TelaAutor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        
+
         txtNomeAutor.setText("");
         txtNomeAutor.setEnabled(false);
-        
+
         jButtonlistagem.setEnabled(true);
         jButtonDeletar.setEnabled(true);
         jButtonIncluir.setEnabled(true);
         jButtonAlterar.setEnabled(true);
         jButtonVoltar.setEnabled(true);
         jButtonSair.setEnabled(true);
-        
+
         jButtonCancelar.setEnabled(false);
         jButtonSalvar.setEnabled(false);
 
@@ -376,14 +377,16 @@ public class TelaAutor extends javax.swing.JFrame {
                     autor.incluir(new Autor(id, nome));
                     gId.finalize();
                     txtNomeAutor.setText("");
+                    imprimirNaGrid();
                     JOptionPane.showMessageDialog(null, "Incluido com Sucesso! ");
-                    
+
                 } else if (!incluirOr) {
                     String nomeAlterar = gridAutor.getValueAt(gridAutor.getSelectedRow(), gridAutor.getSelectedColumn()).toString();
                     Autor antigoAutor = autor.getNomeAutor(nomeAlterar);
-                    
+
                     autor.alterar(antigoAutor, new Autor(antigoAutor.getId(), txtNomeAutor.getText()));
                     JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
+                    imprimirNaGrid();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "O campo nome dever ser preenchido!");
@@ -429,7 +432,7 @@ public class TelaAutor extends javax.swing.JFrame {
 
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
         try {
-            DefaultTableModel tabela = (DefaultTableModel) gridAutor.getModel();
+
             if (gridAutor.getSelectedRow() != 1) {
                 String nomeExcluir = gridAutor.getValueAt(gridAutor.getSelectedRow(), gridAutor.getSelectedColumn()).toString();
                 int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Exclusão de: " + nomeExcluir, nomeExcluir, 0);
@@ -450,13 +453,58 @@ public class TelaAutor extends javax.swing.JFrame {
     private void gridAutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridAutorMouseClicked
         transferirDadosDaGrid();
     }//GEN-LAST:event_gridAutorMouseClicked
+
+    private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
+        try {
+            pesquisarLivro(txtBusca.getText().toLowerCase());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_txtBuscaKeyReleased
     public void transferirDadosDaGrid() {
         if (gridAutor.getSelectedRow() != 1) {
             String nomeExcluir = gridAutor.getValueAt(gridAutor.getSelectedRow(), gridAutor.getSelectedColumn()).toString();
             txtNomeAutor.setText(nomeExcluir);
         }
     }
-    
+
+    public void pesquisarLivro(String texto) {
+        try {
+            String[][] matrizFiltro = new String[2][autor.listagem().size()];
+            String[] matrizS = new String[matrizFiltro[1].length];
+            model.update(autor.listagem());
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                for (int j = 0; j < model.getRowCount(); j++) {
+                    matrizFiltro[i][j] = model.getValueAt(j, i);
+                }
+            }
+            ArrayList<String> matriz = null;
+            if (matrizFiltro.length > 0) {
+                texto = texto.toLowerCase().trim();
+                if (texto.length() == 0) {
+                    for (int i = 0; i < matrizFiltro[1].length; i++) {
+                        matrizS[i] = matrizFiltro[0][i];
+                    }
+                } else {
+                    matriz = new ArrayList<>();
+                    for (int i = 0; i < matrizFiltro[1].length; i++) {
+                        if (matrizFiltro[0][i].toLowerCase().contains(texto)
+                                || matrizFiltro[1][i].toLowerCase().contains(texto)) {
+                            matriz.add(matrizFiltro[0][i]);
+                        }
+                    }
+                    matrizS = new String[matriz.size()];
+                    for (int i = 0; i < matriz.size(); i++) {
+                        matrizS[i] = matriz.get(i);
+                    }
+                }
+            }
+            model.update(matrizS);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
     public void habilitaFormulario(boolean habilita) {
         jButtonSalvar.setEnabled(habilita);
         txtNomeAutor.setEnabled(habilita);
@@ -464,23 +512,11 @@ public class TelaAutor extends javax.swing.JFrame {
             txtNomeAutor.setRequestFocusEnabled(true);
         }
     }
-    
+
     public void imprimirNaGrid() {
-        DefaultTableModel tabela = (DefaultTableModel) gridAutor.getModel();
         try {
-            limparDadosGrid(autor.listagem());
-            ArrayList<Autor> autoresList = autor.listagem();
-            String[] autores = new String[1];
-            
-            for (int pos = 0; pos < autoresList.size(); pos++) {
-                Autor aux = autoresList.get(pos);
-                
-                autores[0] = aux.getNome();
-                tabela.addRow(autores);
-            }
-            
-        } catch (Exception ex) {
-            Logger.getLogger(TelaAutor.class.getName()).log(Level.SEVERE, null, ex);
+            model.update(autor.listagem());
+        } catch (Exception e) {
         }
     }
 

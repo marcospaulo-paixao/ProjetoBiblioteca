@@ -126,7 +126,7 @@ public class ExemplarPersistencia implements IcrudExemplar {
             }
             return listaDeExemplar;
         } catch (Exception listarLivros) {
-            throw new Exception("Erro no controlador");
+            throw new Exception("Erro no controlador" + listarLivros.getMessage());
         }
     }
 }

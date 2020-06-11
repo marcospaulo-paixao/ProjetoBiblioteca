@@ -94,6 +94,6 @@ public class Livro {
     public String toString() {
         return id + ";" + codigo + ";" + isbn + ";" + titulo + ";"
                 + editora.getId() + ";" + autor.getId()
-                + ";" + areaDoLivro.getId() + ";";
+                + ";" + areaDoLivro.getId();
     }
 }

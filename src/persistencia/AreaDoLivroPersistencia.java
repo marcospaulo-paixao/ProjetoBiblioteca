@@ -29,7 +29,7 @@ public class AreaDoLivroPersistencia implements IcrudAreaDoLivro {
             BufferedWriter bw = new BufferedWriter(fw);
 
             CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem("post",areaDoLivro.getClass().getSimpleName(), areaDoLivro.toString() + "\n");
+            comunicacao.getComunicacao().enviarMensagem("post", areaDoLivro.getClass().getSimpleName(), areaDoLivro.toString() + "\n");
             comunicacao.getComunicacao().receberMensagem();
             comunicacao.getComunicacao().fecharConexao();
 
@@ -98,7 +98,7 @@ public class AreaDoLivroPersistencia implements IcrudAreaDoLivro {
     @Override
     public ArrayList<AreaDoLivro> listagem() throws Exception {
         try {
-            AreaDoLivro areasInternas =null;
+            AreaDoLivro areasInternas = null;
             ArrayList<AreaDoLivro> listaAreaDosLivros = new ArrayList<>();
             FileReader fr = new FileReader(nomeDoArquivoNoDisco);
             BufferedReader br = new BufferedReader(fr);
@@ -119,8 +119,8 @@ public class AreaDoLivroPersistencia implements IcrudAreaDoLivro {
 
     @Override
     public AreaDoLivro getIdLivro(int idArea) throws Exception {
+        ArrayList<AreaDoLivro> AreasDosLivros = listagem();
         try {
-            ArrayList<AreaDoLivro> AreasDosLivros = listagem();
             for (AreaDoLivro AreaDoLivroNaLista : AreasDosLivros) {
                 if (AreaDoLivroNaLista.getId() == idArea) {
                     return AreaDoLivroNaLista;

@@ -28,13 +28,13 @@ public class AutorPersistencia implements IcrudAutor {
             gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            
+
             CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem("post",autorObj.getClass().getSimpleName(), autorObj.toString() + "\n");
+            comunicacao.getComunicacao().enviarMensagem("post", autorObj.getClass().getSimpleName(), autorObj.toString() + "\n");
             comunicacao.getComunicacao().receberMensagem();
             comunicacao.getComunicacao().fecharConexao();
-            
-            bw.write(autorObj.toString());
+
+            bw.write(autorObj.toString() + "\n");
             bw.close();
         } catch (IOException errorAutor) {
             throw errorAutor;
@@ -120,8 +120,8 @@ public class AutorPersistencia implements IcrudAutor {
 
     @Override
     public Autor getIdAutor(int idAutor) throws Exception {
+        ArrayList<Autor> autores = listagem();
         try {
-            ArrayList<Autor> autores = listagem();
             for (Autor autoresNaLista : autores) {
                 if (autoresNaLista.getId() == idAutor) {
                     return autoresNaLista;

@@ -10,6 +10,7 @@ import modelos.classes.Exemplar;
 import modelos.classes.Livro;
 import modelos.interfaces.IcrudExemplar;
 import modelos.interfaces.IcrudLivro;
+import modelos.utilidades.ExemplarTableModel;
 import modelos.utilidades.GeradorID;
 import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
@@ -19,6 +20,7 @@ public class TelaExemplar extends javax.swing.JFrame {
     IcrudLivro livro = null;
     IcrudExemplar exemplar = null;
     boolean incluirOn = true;
+    ExemplarTableModel model = null;
 
     public TelaExemplar() {
         super("Biblioteca System - Exemplares");
@@ -27,6 +29,8 @@ public class TelaExemplar extends javax.swing.JFrame {
         livro = new LivroControle("livro.txt");
         exemplar = new ExemplarControle("exemplar.txt");
         this.setIconImage(icone.getImage());
+        model = new ExemplarTableModel(new String[]{"Identificador", "Livro", "Edição", "Data de Aquisição", "Ano de Publicação", "Preço de Compra", "Descrição", "Emprestimo", "Status"});
+        jTableExemplares.setModel(model);
     }
 
     /**
@@ -210,24 +214,9 @@ public class TelaExemplar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Identificador", "LIvro", "Edicão", "Data de Aquisição", "Ano de Publicação", "Preço de Compra", "Descrição", "Emprestimo", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTableExemplares.setColumnSelectionAllowed(true);
         jTableExemplares.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -346,22 +335,23 @@ public class TelaExemplar extends javax.swing.JFrame {
                             .addComponent(jComboBoxLivro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDescricao)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(48, 48, 48)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtDescricao))
+                                    .addComponent(jLabel13)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(28, 28, 28)
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel12)
+                                            .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(48, 48, 48)
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel10)
+                                            .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,13 +361,13 @@ public class TelaExemplar extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
                             .addComponent(jButtonStatusEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 499, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
@@ -386,14 +376,15 @@ public class TelaExemplar extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBoxLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -414,6 +405,12 @@ public class TelaExemplar extends javax.swing.JFrame {
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
+
+        txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -554,11 +551,11 @@ public class TelaExemplar extends javax.swing.JFrame {
         try {
             jComboBoxLivro.removeAllItems();
             ArrayList<Livro> livrosNaLista = livro.listagem();
-            String[] livroSet = new String[1];
+            String[] livroSet = null;
 
             for (int pos = 0; pos < livrosNaLista.size(); pos++) {
                 Livro aux = livrosNaLista.get(pos);
-                jComboBoxLivro.addItem(livroSet[0] = aux.getTitulo());
+                jComboBoxLivro.addItem(aux.getTitulo());
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -628,6 +625,57 @@ public class TelaExemplar extends javax.swing.JFrame {
     private void jComboBoxLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLivroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxLivroActionPerformed
+
+    private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
+        try {
+            pesquisarLivro(txtBusca.getText().toLowerCase());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_txtBuscaKeyReleased
+    public void pesquisarLivro(String texto) {
+        try {
+            String[][] matrizFiltro = new String[9][exemplar.listagem().size()];
+            String[] matrizS = new String[matrizFiltro[2].length];
+            model.update(exemplar.listagem());
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                for (int j = 0; j < model.getRowCount(); j++) {
+                    matrizFiltro[i][j] = model.getValueAt(j, i);
+                }
+            }
+            ArrayList<String> matriz = null;
+            if (matrizFiltro.length > 0) {
+                texto = texto.toLowerCase().trim();
+                if (texto.length() == 0) {
+                    for (int i = 0; i < matrizFiltro[1].length; i++) {
+                        matrizS[i] = matrizFiltro[0][i];
+                    }
+                } else {
+                    matriz = new ArrayList<>();
+                    for (int i = 0; i < matrizFiltro[1].length; i++) {
+                        if (matrizFiltro[0][i].toLowerCase().contains(texto)
+                                || matrizFiltro[1][i].toLowerCase().contains(texto)
+                                || matrizFiltro[2][i].toLowerCase().contains(texto)
+                                || matrizFiltro[3][i].toLowerCase().contains(texto)
+                                || matrizFiltro[4][i].toLowerCase().contains(texto)
+                                || matrizFiltro[5][i].toLowerCase().contains(texto)
+                                || matrizFiltro[6][i].toLowerCase().contains(texto)
+                                || matrizFiltro[7][i].toLowerCase().contains(texto)
+                                || matrizFiltro[8][i].toLowerCase().contains(texto)) {
+                            matriz.add(matrizFiltro[0][i]);
+                        }
+                    }
+                    matrizS = new String[matriz.size()];
+                    for (int i = 0; i < matriz.size(); i++) {
+                        matrizS[i] = matriz.get(i);
+                    }
+                }
+            }
+            model.update(matrizS);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -758,27 +806,8 @@ public class TelaExemplar extends javax.swing.JFrame {
     }
 
     public void imprimirNaGrid() {
-        DefaultTableModel tabela = (DefaultTableModel) jTableExemplares.getModel();
         try {
-            limparDadosGrid();
-            ArrayList<Exemplar> exemplarLista = exemplar.listagem();
-            String[] exemplarArray = new String[9];
-
-            for (int pos = 0; pos < exemplarLista.size(); pos++) {
-                Exemplar aux = exemplarLista.get(pos);
-                exemplarArray[0] = aux.getId() + "";
-                exemplarArray[1] = aux.getLivro().getTitulo();
-                exemplarArray[2] = aux.getEdicao() + "";
-                exemplarArray[3] = aux.getDataDeAquisicao();
-                exemplarArray[4] = aux.getAnoDePublicacao();
-                exemplarArray[5] = aux.getPrecoDeCompra() + "";
-                exemplarArray[6] = aux.getDescricao();
-                exemplarArray[7] = aux.getStatusEmprestimo() + "";
-                exemplarArray[8] = aux.getTipoDeStatus() + "";
-
-                tabela.addRow(exemplarArray);
-            }
-
+            model.update(exemplar.listagem());
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }

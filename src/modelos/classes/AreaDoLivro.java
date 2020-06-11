@@ -37,7 +37,7 @@ public class AreaDoLivro {
 
     @Override
     public String toString() {
-        return id + ";" + descricao+";";
+        return id + ";" + descricao + ";";
     }
 
 }

@@ -537,7 +537,7 @@ public class TelaLivro extends javax.swing.JFrame {
         try {
             model.update(livro.listagem());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage()  +"Erro");
         }
     }
 
