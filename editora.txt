@@ -1,9 +1,3 @@
-36;SERVIÇO DA INDUSTRIA;Faculdade da Industria
-23;Brasa leitura;Editora brasileira12;Rogerio TEste;rogerio;
-13;O seu ta mudo;TEste;
-14;OUTRO TESTE;TESTE OUTRO;
-15;ASDFASDF;ASDFASDFASF;
-16;ASDFASFA;ASDFASDFASD;
-17;aNISBERTO;ANIS;
-18;eDITORA ROGERIOS;ROGERIO;
-25;asdfadsadf;asdfasd;
+48;Marcos;Paixão;
+49;fdgdf;dfgdf|;
+61;Anisberto;Reis;
