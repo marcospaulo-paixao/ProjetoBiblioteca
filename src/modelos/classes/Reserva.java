@@ -72,6 +72,6 @@ public class Reserva {
     @Override
     public String toString() {
         return id + ";" + dataDaReserva + ";" + periodo + ";"
-                + exemplar.getId() + ";" + colaborador.getId() + ";";
+                + exemplar.getId() + ";" + colaborador.getNome() + ";";
     }
 }

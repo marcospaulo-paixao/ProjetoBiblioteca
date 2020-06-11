@@ -245,6 +245,7 @@ public class TelaEditora extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Editoras"));
 
+        gridEditora.setAutoCreateRowSorter(true);
         gridEditora.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

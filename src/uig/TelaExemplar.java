@@ -209,6 +209,7 @@ public class TelaExemplar extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Exemplares"));
 
+        jTableExemplares.setAutoCreateRowSorter(true);
         jTableExemplares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

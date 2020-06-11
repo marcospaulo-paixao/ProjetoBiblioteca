@@ -78,6 +78,7 @@ public class TelaAreaDoLivro extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Areas dos Livros"));
 
+        jTableAreaLivro.setAutoCreateRowSorter(true);
         jTableAreaLivro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

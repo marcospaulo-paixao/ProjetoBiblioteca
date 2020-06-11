@@ -52,11 +52,9 @@ public class TelaMenuLivros extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        relaColaboradores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -79,14 +77,6 @@ public class TelaMenuLivros extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/devolverlivro.png"))); // NOI18N
-        jToggleButton3.setText("Devolução");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Gerar Etiqueta");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,9 +93,7 @@ public class TelaMenuLivros extends javax.swing.JFrame {
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(152, 152, 152)
                 .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -115,7 +103,6 @@ public class TelaMenuLivros extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -124,28 +111,15 @@ public class TelaMenuLivros extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Estatística dos Livros"));
 
-        relaColaboradores.setText("Relação de Colaboradores");
-        relaColaboradores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                relaColaboradoresActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(relaColaboradores)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 571, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(relaColaboradores)
-                .addContainerGap(62, Short.MAX_VALUE))
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,15 +159,6 @@ public class TelaMenuLivros extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        try {
-            TelaDevolucao devolverLivro = new TelaDevolucao();
-            devolverLivro.setVisible(true);
-            dispose();
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
-
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         try {
             TelaMenuPrincipal menuPrincipal = new TelaMenuPrincipal();
@@ -202,35 +167,6 @@ public class TelaMenuLivros extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
-
-    private void relaColaboradoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relaColaboradoresActionPerformed
-//        Document documentoColaboradores = new Document();
-//        try {
-//            PdfWriter.getInstance(documentoColaboradores, new FileOutputStream("Documento.pdf"));
-//            documentoColaboradores.open();
-//            documentoColaboradores.add(new Paragraph("Lista de Colaboradores"));
-//            documentoColaboradores.add(new Paragraph("Nome:"));
-//            ICRUDColaborador colaborador = new ColaboradorPersistencia("colaborador.txt");
-//            for (int i = 0; i < colaborador.listagem().size(); i++) {
-//                ArrayList<Colaborador> auxLista = colaborador.listagem();
-//                Colaborador aux = new Colaborador(auxLista.get(i));
-//                String colaboradoresLista = aux.getNome();
-//                documentoColaboradores.add(new Paragraph(colaboradoresLista));
-//            }
-//        } catch (FileNotFoundException | DocumentException ex) {
-//            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (Exception ex) {
-//            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            documentoColaboradores.close();
-//        }
-
-        try {
-            Desktop.getDesktop().open(new File("Documento.pdf"));
-        } catch (IOException ex) {
-            Logger.getLogger(TelaMenuLivros.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_relaColaboradoresActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
@@ -284,7 +220,5 @@ public class TelaMenuLivros extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JButton relaColaboradores;
     // End of variables declaration//GEN-END:variables
 }

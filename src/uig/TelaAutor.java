@@ -95,6 +95,7 @@ public class TelaAutor extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Autores"));
 
+        gridAutor.setAutoCreateRowSorter(true);
         gridAutor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

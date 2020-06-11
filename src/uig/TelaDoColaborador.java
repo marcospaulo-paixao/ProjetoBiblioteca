@@ -321,6 +321,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Colaboradores"));
 
+        jTableColaboradores.setAutoCreateRowSorter(true);
         jTableColaboradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

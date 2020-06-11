@@ -101,8 +101,8 @@ public class ReservaPersistencia implements IcrudReserva {
                 int periodo = Integer.parseInt(vetor[2]);
 
                 Exemplar exemplarNaLista = exemplar.getExemplar(Integer.parseInt(vetor[3]));
-                //Colaborador colaboradorNaLista = colaborador.getColaboradorId(Integer.parseInt(vetor[4]));
-                //listaDeReservas.add(new Reserva(id, dataDaReserva, periodo, exemplarNaLista, colaboradorNaLista));
+                Colaborador colaboradorNaLista = colaborador.getColaborador((vetor[4]));
+                listaDeReservas.add(new Reserva(id, dataDaReserva, periodo, exemplarNaLista, colaboradorNaLista));
             }
             return listaDeReservas;
         } catch (Exception e) {

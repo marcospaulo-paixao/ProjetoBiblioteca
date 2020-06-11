@@ -1,6 +1,7 @@
 package uig;
 
 import controle.UsuarioControle;
+import javax.accessibility.AccessibleRole;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {

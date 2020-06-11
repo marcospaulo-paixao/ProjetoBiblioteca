@@ -343,6 +343,7 @@ public class TelaLivro extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Livros"));
 
+        jTableLivros.setAutoCreateRowSorter(true);
         jTableLivros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
