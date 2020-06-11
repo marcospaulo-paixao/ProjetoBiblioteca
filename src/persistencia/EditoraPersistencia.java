@@ -80,11 +80,7 @@ public class EditoraPersistencia implements IcrudEditora {
                 editoraLis = new Editora(id, nome, descricao);
                 listaDeEditoras.add(editoraLis);
             }
-            CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem("get",editoraLis.getClass().getSimpleName(), editoraLis.toString() + "\n");
-            comunicacao.getComunicacao().receberMensagem();
-            comunicacao.getComunicacao().fecharConexao();
-            
+           
             return listaDeEditoras;
         } catch (Exception erroConsultaAutor) {
             throw erroConsultaAutor;
