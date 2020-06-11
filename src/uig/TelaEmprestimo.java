@@ -1,23 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uig;
 
 import controle.ColaboradorControle;
+import controle.ExemplarControle;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelos.interfaces.IcrudExemplar;
 import modelos.utilidades.ColaboradorTableModel;
+import modelos.utilidades.ExemplarTableModel;
 
-/**
- *
- * @author Anisb
- */
 public class TelaEmprestimo extends javax.swing.JFrame {
 
     ColaboradorTableModel model = null;
+    ExemplarTableModel modelExemplar = null;
     ColaboradorControle cc = new ColaboradorControle("colaborador.txt");
+    IcrudExemplar exem = new ExemplarControle("exemplar.txt");
 
     /**
      * Creates new form TelaEmprestimo
@@ -27,9 +25,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         try {
 
             initComponents();
-            model = new ColaboradorTableModel(new String[]{"Matricula", "Nome"});
-            model.update(cc.listagem());
+            model = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
             jTableColaborador.setModel(model);
+
+            modelExemplar = new ExemplarTableModel(new String[]{"Identificador", "Titulo"});
+            jTableExemplar.setModel(modelExemplar);
             this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
         } catch (Exception e) {
         }
@@ -60,10 +60,10 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldPesquisarExemplar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        jTableExemplar = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,6 +80,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Empréstimo"));
 
@@ -128,11 +133,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             }
         });
         jTextFieldPesquisarColaborador.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldPesquisarColaboradorKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldPesquisarColaboradorKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldPesquisarColaboradorKeyTyped(evt);
             }
         });
 
@@ -156,7 +161,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextFieldPesquisarColaborador)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -237,9 +242,15 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados Exemplar"));
 
+        jTextFieldPesquisarExemplar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPesquisarExemplarKeyReleased(evt);
+            }
+        });
+
         jLabel2.setText("Pesquisar");
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        jTableExemplar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -247,7 +258,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(jTableExemplar);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -259,7 +270,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextField2)
+                    .addComponent(jTextFieldPesquisarExemplar)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -269,7 +280,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldPesquisarExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
@@ -285,8 +296,8 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -347,10 +358,27 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jTextFieldPesquisarColaboradorKeyReleased
-    
+
+    private void jTextFieldPesquisarExemplarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarExemplarKeyReleased
+        try {
+            pesquisarExemplares(jTextFieldPesquisarExemplar.getText().toLowerCase());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jTextFieldPesquisarExemplarKeyReleased
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            model.update(cc.listagem());
+            modelExemplar.update(exem.listagem());
+        } catch (Exception ex) {
+            Logger.getLogger(TelaEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     private void pesquisarColaboradores(String texto) throws Exception {
         try {
-            
+
             String[][] matrizFiltro = new String[2][cc.listagem().size()];
             String[] matrizS = new String[matrizFiltro[1].length];
             model.update(cc.listagem());
@@ -367,31 +395,64 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                         for (int i = 0; i < matrizFiltro[1].length; i++) {
                             matrizS[i] = matrizFiltro[1][i];
                         }
-
                     } else {
                         matriz = new ArrayList<>();
-                        
-                        for (int i = 0; i < matrizFiltro[1].length; i++) {                            
-                                if (matrizFiltro[0][i].toLowerCase().contains(texto)
-                                        ||matrizFiltro[1][i].toLowerCase().contains(texto)) {
-                                    matriz.add(matrizFiltro[1][i]);
+                        for (int i = 0; i < matrizFiltro[1].length; i++) {
+                            if (matrizFiltro[0][i].toLowerCase().contains(texto)
+                                    || matrizFiltro[1][i].toLowerCase().contains(texto)) {
+                                matriz.add(matrizFiltro[1][i]);
                             }
                         }
-
                         matrizS = new String[matriz.size()];
                         for (int i = 0; i < matriz.size(); i++) {
                             matrizS[i] = matriz.get(i);
                         }
                     }
                 }
-
                 model.update(matrizS);
             }
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
 
+    }
+
+    private void pesquisarExemplares(String texto) throws Exception {
+        try {
+            String[][] matrizFiltro = new String[9][exem.listagem().size()];
+            String[] matrizS = new String[matrizFiltro[2].length];
+            modelExemplar.update(exem.listagem());
+            for (int i = 0; i < modelExemplar.getColumnCount(); i++) {
+                for (int j = 0; j < modelExemplar.getRowCount(); j++) {
+                    matrizFiltro[i][j] = modelExemplar.getValueAt(j, i);
+                }
+            }
+            ArrayList<String> matriz = null;
+            if (matrizFiltro.length > 0) {
+                texto = texto.toLowerCase().trim();
+                if (texto.length() == 0) {
+                    for (int i = 0; i < matrizFiltro[1].length; i++) {
+                        matrizS[i] = matrizFiltro[0][i];
+                    }
+                } else {
+                    matriz = new ArrayList<>();
+                    for (int i = 0; i < matrizFiltro[1].length; i++) {
+                        if (matrizFiltro[0][i].toLowerCase().contains(texto)
+                                || matrizFiltro[0][i].toLowerCase().contains(texto)
+                                || matrizFiltro[1][i].toLowerCase().contains(texto)) {
+                            matriz.add(matrizFiltro[1][i]);
+                        }
+                    }
+                    matrizS = new String[matriz.size()];
+                    for (int i = 0; i < matriz.size(); i++) {
+                        matrizS[i] = matriz.get(i);
+                    }
+                }
+            }
+            modelExemplar.update(matrizS);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     /**
@@ -446,9 +507,9 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable5;
     private javax.swing.JTable jTableColaborador;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable jTableExemplar;
     private javax.swing.JTextField jTextFieldPesquisarColaborador;
+    private javax.swing.JTextField jTextFieldPesquisarExemplar;
     // End of variables declaration//GEN-END:variables
 }
