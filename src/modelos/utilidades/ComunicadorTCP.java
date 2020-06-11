@@ -51,6 +51,11 @@ public class ComunicadorTCP {
         this.enviarMsg.flush();
     }
 
+    public void enviarMensagem(String metodo, String tipo) throws IOException {
+        this.enviarMsg.writeUTF(metodo + ";" + tipo);
+        this.enviarMsg.flush();
+    }
+
     //recebe uma mensagem texto utilizando o objeto DataInputStream
     public String receberMensagem() throws IOException {
         String msg = this.receberMsg.readUTF();

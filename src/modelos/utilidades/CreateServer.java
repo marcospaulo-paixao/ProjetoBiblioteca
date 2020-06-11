@@ -13,5 +13,4 @@ public class CreateServer {
     public ComunicadorTCP getComunicacao() {
         return comunicacao;
     }
-    
 }

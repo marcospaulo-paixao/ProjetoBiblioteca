@@ -98,6 +98,7 @@ public class AreaDoLivroPersistencia implements IcrudAreaDoLivro {
     @Override
     public ArrayList<AreaDoLivro> listagem() throws Exception {
         try {
+            AreaDoLivro areasInternas =null;
             ArrayList<AreaDoLivro> listaAreaDosLivros = new ArrayList<>();
             FileReader fr = new FileReader(nomeDoArquivoNoDisco);
             BufferedReader br = new BufferedReader(fr);
@@ -107,7 +108,7 @@ public class AreaDoLivroPersistencia implements IcrudAreaDoLivro {
                 String[] vetor = linha.split(";");
                 int id = Integer.parseInt(vetor[0]);
                 String descricao = vetor[1];
-                AreaDoLivro areasInternas = new AreaDoLivro(id, descricao);
+                areasInternas = new AreaDoLivro(id, descricao);
                 listaAreaDosLivros.add(areasInternas);
             }
             return listaAreaDosLivros;
