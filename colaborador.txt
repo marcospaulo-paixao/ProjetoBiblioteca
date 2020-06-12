@@ -1,10 +1,7 @@
-2;2020;Anisberto Reis;125;anisbertoos@gmail.com;62;92947507;ESTAGIARIO;INATIVO;
-5;202025;Marcos Paulo;6555;marcos@gmail.com;62;598595;ADVOGADO;ATIVO;
-12;2021;Daniel Elyads;55886;daniel@contato.com;61;983764255;FUNCIONARIO;ATIVO;
-18;45445;Gabriel Anadinho;5464;gabriel@;62;45456;ADVOGADO;ATIVO;
-19;252454;Eugenio Messala;1414452;eugenio@gmail.com;62;5655654;ADVOGADO;ATIVO;
-67;707070;Maria de Jesus;25154;maria@jesus.com.cr;62;9295752;ADVOGADO;ATIVO;
-99;232323;Eugenio merssala;2323;asdfasd;23;2323;ADVOGADO;ATIVO;
-116;2323;asdfasdfas;2323;asfasdfasdf;32;232323;ESTAGIARIO;ATIVO;
-117;32323;sdfasdfasdf;2323;asdfasdfasdf;23;232323;FUNCIONARIO;ATIVO;
-118;2323;asdfasdfasdf;2323;adsfasdfasdfas;32;23232323;ADVOGADO;ATIVO;2;32323;sdafsdfasdfas;232323;asdfasdfasf;23;2323;ADVOGADO;ATIVO;
+2;2020;Anisberto Reis;0;anisbertoos@gmail.com;62;992947507;ESTAGIARIO;INATIVO;
+5;202025;Marcos Paulo;6555;marcos@gmail.com;62;941598595;ADVOGADO;ATIVO;
+12;2021;Daniel Elyads;0;daniel@contato.com;61;983764255;ESTAGIARIO;ATIVO;
+18;45445;Gabriel Anadinho;5464;gabriel@contato.com;62;984457844;ADVOGADO;ATIVO;
+19;252454;Eugenio Messala;12;eugenio@gmail.com;62;955466412;ADVOGADO;ATIVO;
+67;707070;Maria de Jesus;25154;maria@jesus.com.cr;62;929575212;ADVOGADO;ATIVO;
+99;232323;Eugenio merssala;123243;eugenio@contato.com;22;955654522;ADVOGADO;ATIVO;
