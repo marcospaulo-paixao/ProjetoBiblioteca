@@ -29,7 +29,7 @@ public class TelaExemplar extends javax.swing.JFrame {
         livro = new LivroControle("livro.txt");
         exemplar = new ExemplarControle("exemplar.txt");
         this.setIconImage(icone.getImage());
-        model = new ExemplarTableModel(new String[]{"Identificador", "Livro", "Edição", "Data de Aquisição", "Ano de Publicação", "Preço de Compra", "Descrição", "Emprestimo", "Status"});
+        model = new ExemplarTableModel(new String[]{"Livro", "Identificador", "Edição", "Data de Aquisição", "Ano de Publicação", "Preço de Compra", "Descrição", "Emprestimo", "Status"});
         jTableExemplares.setModel(model);
     }
 
@@ -777,8 +777,8 @@ public class TelaExemplar extends javax.swing.JFrame {
 
     public void transferirDadosDaGrid() {
         if (jTableExemplares.getSelectedRow() != 1) {
-            String idExemplar = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn()).toString();
-            String livro = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 1).toString();
+            String livro = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn()).toString();
+            String idExemplar = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 1).toString();
             String edicao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 2).toString();
             String dataAquisicao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 3).toString();
             String anoPublicacao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 4).toString();

@@ -28,7 +28,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             model = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
             jTableColaborador.setModel(model);
 
-            modelExemplar = new ExemplarTableModel(new String[]{"Identificador", "Titulo"});
+            modelExemplar = new ExemplarTableModel(new String[]{"Titulo","Identificador"});
             jTableExemplar.setModel(modelExemplar);
             this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
         } catch (Exception e) {
@@ -400,7 +400,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     private void jButtonFinalizarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarEmprestimoActionPerformed
         try {
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonFinalizarEmprestimoActionPerformed

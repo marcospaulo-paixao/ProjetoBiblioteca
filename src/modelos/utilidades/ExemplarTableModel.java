@@ -38,9 +38,9 @@ public class ExemplarTableModel extends AbstractTableModel {
     public String getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return dados.get(rowIndex).getId() + "";
-            case 1:
                 return dados.get(rowIndex).getLivro().getTitulo();
+            case 1:
+                return dados.get(rowIndex).getId() + "";
             case 2:
                 return dados.get(rowIndex).getEdicao() + "";
             case 3:

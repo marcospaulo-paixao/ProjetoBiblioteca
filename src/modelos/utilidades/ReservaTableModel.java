@@ -38,9 +38,9 @@ public class ReservaTableModel extends AbstractTableModel {
     public String getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return dados.get(rowIndex).getExemplar().getLivro().getTitulo();
-            case 1:
                 return dados.get(rowIndex).getColaborador().getNome();
+            case 1:
+                return dados.get(rowIndex).getExemplar().getLivro().getTitulo();
             case 2:
                 return dados.get(rowIndex).getPeriodo() + "";
             default:
