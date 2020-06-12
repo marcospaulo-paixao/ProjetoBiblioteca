@@ -27,7 +27,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         try {
 
             initComponents();
-            model = new ColaboradorTableModel(new String[]{"Matricula", "Nome"});
+            model = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
             model.update(cc.listagem());
             jTableColaborador.setModel(model);
             this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
@@ -114,7 +114,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -224,7 +224,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(jButtonFinalizarEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRealizarReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -347,10 +347,10 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jTextFieldPesquisarColaboradorKeyReleased
-    
+
     private void pesquisarColaboradores(String texto) throws Exception {
         try {
-            
+
             String[][] matrizFiltro = new String[2][cc.listagem().size()];
             String[] matrizS = new String[matrizFiltro[1].length];
             model.update(cc.listagem());
@@ -365,16 +365,16 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                     texto = texto.toLowerCase().trim();
                     if (texto.length() == 0) {
                         for (int i = 0; i < matrizFiltro[1].length; i++) {
-                            matrizS[i] = matrizFiltro[1][i];
+                            matrizS[i] = matrizFiltro[0][i];
                         }
 
                     } else {
                         matriz = new ArrayList<>();
-                        
-                        for (int i = 0; i < matrizFiltro[1].length; i++) {                            
-                                if (matrizFiltro[0][i].toLowerCase().contains(texto)
-                                        ||matrizFiltro[1][i].toLowerCase().contains(texto)) {
-                                    matriz.add(matrizFiltro[1][i]);
+
+                        for (int i = 0; i < matrizFiltro[1].length; i++) {
+                            if (matrizFiltro[0][i].toLowerCase().contains(texto)
+                                    || matrizFiltro[1][i].toLowerCase().contains(texto)) {
+                                matriz.add(matrizFiltro[0][i]);
                             }
                         }
 

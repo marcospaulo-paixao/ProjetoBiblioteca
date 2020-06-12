@@ -559,8 +559,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
             jTextFieldOAB.setEnabled(false);
             jTextFieldOAB.setText("");
         } else {
-            jTextFieldOAB.setEnabled(true);
-            jTextFieldOAB.setText("");
+            jTextFieldOAB.setEnabled(true);            
         }
     }
 
