@@ -26,7 +26,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
             initComponents();
             model = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
-
             jTableColaborador.setModel(model);
 
             modelExemplar = new ExemplarTableModel(new String[]{"Titulo","Identificador"});
@@ -122,8 +121,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -249,7 +247,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-
                 .addGap(8, 8, 8)
                 .addComponent(jButtonFinalizarEmprestimo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -384,7 +381,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldPesquisarColaboradorKeyReleased
 
-
     private void jTextFieldPesquisarExemplarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarExemplarKeyReleased
         try {
             pesquisarExemplares(jTextFieldPesquisarExemplar.getText().toLowerCase());
@@ -418,7 +414,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
-
     private void pesquisarColaboradores(String texto) throws Exception {
         try {
 
@@ -440,11 +435,10 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                         }
                     } else {
                         matriz = new ArrayList<>();
-
                         for (int i = 0; i < matrizFiltro[1].length; i++) {
                             if (matrizFiltro[0][i].toLowerCase().contains(texto)
                                     || matrizFiltro[1][i].toLowerCase().contains(texto)) {
-                                matriz.add(matrizFiltro[1][i]);
+                                matriz.add(matrizFiltro[0][i]);
                             }
                         }
                         matrizS = new String[matriz.size()];
@@ -484,7 +478,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                         if (matrizFiltro[0][i].toLowerCase().contains(texto)
                                 || matrizFiltro[0][i].toLowerCase().contains(texto)
                                 || matrizFiltro[1][i].toLowerCase().contains(texto)) {
-                            matriz.add(matrizFiltro[1][i]);
+                            matriz.add(matrizFiltro[0][i]);
                         }
                     }
                     matrizS = new String[matriz.size()];
@@ -558,3 +552,4 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton3;
     // End of variables declaration//GEN-END:variables
 }
+

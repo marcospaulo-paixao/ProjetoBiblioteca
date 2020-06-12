@@ -106,11 +106,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
                   <Component id="jScrollPane2" pref="219" max="32767" attributes="0"/>
-=======
-                  <Component id="jScrollPane2" pref="236" max="32767" attributes="0"/>
->>>>>>> TableModel
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -288,7 +284,6 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-<<<<<<< HEAD
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Component id="jButtonFinalizarEmprestimo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -299,16 +294,6 @@
                   <Component id="jButtonVoltar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="jButtonSair" min="-2" max="-2" attributes="0"/>
-=======
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButtonFinalizarEmprestimo" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonRealizarReserva" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonVoltar" pref="61" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonSair" max="32767" attributes="0"/>
->>>>>>> TableModel
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
