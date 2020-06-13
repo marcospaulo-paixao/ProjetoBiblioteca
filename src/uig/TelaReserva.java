@@ -132,7 +132,12 @@ public class TelaReserva extends javax.swing.JFrame {
         });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/cancel_77947.png"))); // NOI18N
-        jButton2.setText("Cancelar Reserva");
+        jButton2.setText("Deletar Reserva");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Crud/Logout_37127.png"))); // NOI18N
         jButton3.setText("Sair");
@@ -455,7 +460,7 @@ public class TelaReserva extends javax.swing.JFrame {
                                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jPanelReservas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -555,7 +560,7 @@ public class TelaReserva extends javax.swing.JFrame {
     public void setValuesJTextFields(Colaborador colaboradorobj, Exemplar exemplarobj) {
         txtDadosColaborador.setText(colaboradorobj.getNome());
         txtDadosMatricula.setText(colaboradorobj.getMatricula() + "");
-        
+
         txtDadosTituloExemplar.setText(exemplarobj.getLivro().getTitulo());
         txtDadosIdentificador.setText(exemplarobj.getId() + "");
     }
@@ -633,6 +638,28 @@ public class TelaReserva extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_txtBuscaKeyReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            if (!txtDadosColaborador.getText().isEmpty() && !txtDadosMatricula.getText().isEmpty()
+                    && !txtDadosIdentificador.getText().isEmpty() && !txtDadosTituloExemplar.getText().isEmpty()) {
+                int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Deleção da Reserva Para:  " + txtDadosColaborador.getText(), null, 0);
+                if (config == 0) {
+                    reserva.excluir(txtDadosColaborador.getText());
+                    JOptionPane.showMessageDialog(null, "Deleção Concluida! ");
+                    Exemplar exemplarNaoAlterado = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
+                    Exemplar exemplarAlterado = new Exemplar(exemplarNaoAlterado.getId(), exemplarNaoAlterado.getAnoDePublicacao(), exemplarNaoAlterado.getPrecoDeCompra(), exemplarNaoAlterado.getAnoDePublicacao(), exemplarNaoAlterado.getEdicao(), exemplarNaoAlterado.getTipoDeStatus(), TipoDeStatusEmprestimoExemplar.DISPONIVEL, exemplarNaoAlterado.getDescricao(), exemplarNaoAlterado.getLivro());
+                    exem.alterar(exemplarNaoAlterado, exemplarAlterado);
+                    imprimirNaGrid();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Deleção Cancelada! ");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "O Colaborador e o Exemplar devem ser Setados!");
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void pesquisarColaboradores(String texto) throws Exception {
         try {

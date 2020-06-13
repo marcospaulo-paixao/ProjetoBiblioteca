@@ -67,20 +67,19 @@ public class ReservaPersistencia implements IcrudReserva {
     }
 
     @Override
-    public void alterar(Reserva velhaReserva, Reserva novaReserva) throws Exception {
+    public void excluir(String nome) throws Exception {
         try {
-            ArrayList<Reserva> listaReservas = listagem();
-            FileWriter fw = new FileWriter(nomeDoAquivoNoDisco);
-            BufferedWriter bw = new BufferedWriter(fw);
-            novaReserva.setId(velhaReserva.getId());
-            for (Reserva reservas : listaReservas) {
-                if (velhaReserva.getId() != reservas.getId()) {
-                    bw.write(reservas.toString() + "\n");
-                } else {
-                    bw.write(novaReserva.toString() + "\n");
+            ArrayList<Reserva> listaReserva = listagem();
+            FileWriter fr = new FileWriter(nomeDoAquivoNoDisco);
+            BufferedWriter br = new BufferedWriter(fr);
+
+            for (int pos = 0; pos < listaReserva.size(); pos++) {
+                Reserva aux = listaReserva.get(pos);
+                if (!nome.equalsIgnoreCase(aux.getColaborador().getNome())) {
+                    br.write(aux.toString() + "\n");
                 }
             }
-            bw.close();
+            br.close();
         } catch (Exception e) {
             throw e;
         }

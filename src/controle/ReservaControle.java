@@ -31,9 +31,9 @@ public class ReservaControle implements IcrudReserva {
     }
 
     @Override
-    public void alterar(Reserva velhaReserva, Reserva novaReserva) throws Exception {
+    public void excluir(String nome) throws Exception {
         try {
-            reservaIcrud.alterar(velhaReserva, novaReserva);
+            reservaIcrud.excluir(nome);
         } catch (Exception e) {
             throw e;
         }

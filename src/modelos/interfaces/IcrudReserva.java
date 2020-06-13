@@ -7,7 +7,7 @@ public interface IcrudReserva {
 
     void incluir(Reserva objeto) throws Exception;
 
-    void alterar(Reserva velhaReserva, Reserva novaReserva) throws Exception;
+    void excluir(String nome) throws Exception;
 
     ArrayList<Reserva> listagem() throws Exception;
 
