@@ -44,14 +44,18 @@ public class LivroPersistencia implements IcrudLivro {
             gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            
-            CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem("post",livro.getClass().getSimpleName(), livro.toString() + "\n");
-            comunicacao.getComunicacao().receberMensagem();
-            comunicacao.getComunicacao().fecharConexao();
-            
-            bw.write(livro.toString() + "\n");
-            bw.close();
+            try {
+                CreateServer comunicacao = new CreateServer();
+                comunicacao.getComunicacao().enviarMensagem("post", livro.getClass().getSimpleName(), livro.toString() + "\n");
+                comunicacao.getComunicacao().receberMensagem();
+                comunicacao.getComunicacao().fecharConexao();
+            } catch (Exception e) {
+                bw.write(livro.toString() + "\n");
+            } finally {
+                bw.close();
+
+            }
+
         } catch (Exception erroIncluir) {
             throw erroIncluir;
         }

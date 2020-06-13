@@ -33,14 +33,16 @@ public class ExemplarPersistencia implements IcrudExemplar {
             gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            
-            CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem("post",objExemplar.getClass().getSimpleName(), objExemplar.toString() + "\n");
-            comunicacao.getComunicacao().receberMensagem();
-            comunicacao.getComunicacao().fecharConexao();
-            
-            bw.write(objExemplar.toString() + "\n");
-            bw.close();
+            try {
+                CreateServer comunicacao = new CreateServer();
+                comunicacao.getComunicacao().enviarMensagem("post", objExemplar.getClass().getSimpleName(), objExemplar.toString() + "\n");
+                comunicacao.getComunicacao().receberMensagem();
+                comunicacao.getComunicacao().fecharConexao();
+            } catch (Exception e) {
+                bw.write(objExemplar.toString() + "\n");
+            } finally {
+                bw.close();
+            }
         } catch (Exception erroIncluir) {
             throw erroIncluir;
         }
