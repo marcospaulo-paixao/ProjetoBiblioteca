@@ -42,7 +42,11 @@ public class ReservaTableModel extends AbstractTableModel {
             case 1:
                 return dados.get(rowIndex).getExemplar().getLivro().getTitulo();
             case 2:
-                return dados.get(rowIndex).getPeriodo() + "";
+                return dados.get(rowIndex).getExemplar().getId() + "";
+            case 3:
+                return dados.get(rowIndex).getDataDaReserva();
+            case 4:
+                return dados.get(rowIndex).getPeriodo() + " Dias";
             default:
                 throw new AssertionError();
         }

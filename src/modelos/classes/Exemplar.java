@@ -120,7 +120,7 @@ public class Exemplar {
                 + anoDePublicacao + ";" + precoDeCompra + ";"
                 + dataDeAquisicao + ";" + edicao + ";" 
                 + tipoDeStatus + ";" + statusEmprestimo + ";"
-                + descricao + ";" + livro.getId() + ";";
+                + descricao + ";" + livro.getId();
     }
 
     @Override

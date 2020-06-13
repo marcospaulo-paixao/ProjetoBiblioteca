@@ -54,7 +54,7 @@ public class ExemplarControle implements IcrudExemplar {
         try {
             return exemplar.listagem();
         } catch (Exception erroListagem) {
-            throw new Exception("Erro ao Listar" + erroListagem);
+            throw new Exception(" Erro ao Listar " + erroListagem);
         }
     }
 
