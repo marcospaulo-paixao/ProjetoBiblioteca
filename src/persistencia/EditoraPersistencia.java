@@ -28,14 +28,18 @@ public class EditoraPersistencia implements IcrudEditora {
             gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
+            try {
+                CreateServer comunicacao = new CreateServer();
+                comunicacao.getComunicacao().enviarMensagem("post", editoraObjeto.getClass().getSimpleName(), editoraObjeto.toString() + "\n");
+                comunicacao.getComunicacao().receberMensagem();
+                comunicacao.getComunicacao().fecharConexao();
+            } catch (Exception e) {
+                bw.write(editoraObjeto.toString() + "\n");
+            } finally {
+                bw.close();
 
-            CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem("post",editoraObjeto.getClass().getSimpleName(), editoraObjeto.toString() + "\n");
-            comunicacao.getComunicacao().receberMensagem();
-            comunicacao.getComunicacao().fecharConexao();
+            }
 
-            bw.write(editoraObjeto.toString() + "\n");
-            bw.close();
         } catch (IOException errorEditora) {
             throw errorEditora;
         }
@@ -80,7 +84,7 @@ public class EditoraPersistencia implements IcrudEditora {
                 editoraLis = new Editora(id, nome, descricao);
                 listaDeEditoras.add(editoraLis);
             }
-           
+
             return listaDeEditoras;
         } catch (Exception erroConsultaAutor) {
             throw erroConsultaAutor;

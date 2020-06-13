@@ -118,9 +118,9 @@ public class Exemplar {
     public String toString() {
         return id + ";"
                 + anoDePublicacao + ";" + precoDeCompra + ";"
-                + dataDeAquisicao + ";" + edicao + ";" 
+                + dataDeAquisicao + ";" + edicao + ";"
                 + tipoDeStatus + ";" + statusEmprestimo + ";"
-                + descricao + ";" + livro.getId();
+                + descricao + ";" + livro.getId() + ";";
     }
 
     @Override
