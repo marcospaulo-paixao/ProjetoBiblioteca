@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import modelos.classes.Reserva;
 
-public class ReservaTableModel extends AbstractTableModel {
+public class DevolucaoTableModel extends AbstractTableModel {
 
     ArrayList<Reserva> dados = null;
     String[] colunas = null;
 
-    public ReservaTableModel(String[] colunas) {
+    public DevolucaoTableModel(String[] colunas) {
         this.dados = new ArrayList<>();
         this.colunas = colunas;
     }
 
-    private ReservaTableModel() {
+    private DevolucaoTableModel() {
         dados = null;
         colunas = null;
     }
@@ -46,6 +46,8 @@ public class ReservaTableModel extends AbstractTableModel {
             case 3:
                 return dados.get(rowIndex).getDataDaReserva();
             case 4:
+                return dados.get(rowIndex).getExemplar().getEdicao() + "";
+            case 5:
                 return dados.get(rowIndex).getPeriodo() + " Dias";
             default:
                 throw new AssertionError();

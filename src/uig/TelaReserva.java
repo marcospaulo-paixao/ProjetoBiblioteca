@@ -16,7 +16,7 @@ import modelos.interfaces.IcrudReserva;
 import modelos.utilidades.ColaboradorTableModel;
 import modelos.utilidades.ExemplarTableModel;
 import modelos.utilidades.GeradorID;
-import modelos.utilidades.ReservaTableModel;
+import modelos.utilidades.DevolucaoTableModel;
 import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 
@@ -27,7 +27,7 @@ public class TelaReserva extends javax.swing.JFrame {
     IcrudExemplar exem = null;
     ColaboradorTableModel model = null;
     ExemplarTableModel modelExemplar = null;
-    ReservaTableModel modelReserva = null;
+    DevolucaoTableModel modelReserva = null;
 
     /**
      * Creates new form TelaReserva
@@ -43,7 +43,7 @@ public class TelaReserva extends javax.swing.JFrame {
 
         modelExemplar = new ExemplarTableModel(new String[]{"Titulo", "Identificador"});
         jTableExemplar.setModel(modelExemplar);
-        modelReserva = new ReservaTableModel(new String[]{"Colaboraor", "Titulo do Exemplar", "Identificador", "Data da Reserva", "Periodo de Reserva"});
+        modelReserva = new DevolucaoTableModel(new String[]{"Colaboraor", "Titulo do Exemplar", "Identificador", "Data da Reserva", "Periodo de Reserva"});
         jTableReservas.setModel(modelReserva);
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }

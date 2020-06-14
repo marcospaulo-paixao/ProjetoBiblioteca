@@ -461,7 +461,7 @@ public class TelaExemplar extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,8 +590,10 @@ public class TelaExemplar extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jButtonStatus.getText().equals("Ativo")) {
             jButtonStatus.setText("Inativo");
+            jButtonStatusEmprestimo.setText(TipoDeStatusEmprestimoExemplar.INDISPONIVEL.toString());
 
         } else {
+            jButtonStatusEmprestimo.setText(TipoDeStatusEmprestimoExemplar.DISPONIVEL.toString());
             jButtonStatus.setText("Ativo");
         }
 
@@ -655,7 +657,7 @@ public class TelaExemplar extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jComboBoxLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLivroActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jComboBoxLivroActionPerformed
 
     private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
@@ -784,7 +786,6 @@ public class TelaExemplar extends javax.swing.JFrame {
         jComboBoxLivro.setEnabled(habilita);
 
         jButtonStatus.setEnabled(habilita);
-        jButtonStatusEmprestimo.setEnabled(habilita);
         jButtonAlterar.setEnabled(!habilita);
         jButtonDeletar.setEnabled(!habilita);
         jButtonIncluir.setEnabled(!habilita);
@@ -808,15 +809,15 @@ public class TelaExemplar extends javax.swing.JFrame {
 
     public void transferirDadosDaGrid() {
         if (jTableExemplares.getSelectedRow() != 1) {
-            String livro = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn()).toString();
-            String idExemplar = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 1).toString();
-            String edicao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 2).toString();
-            String dataAquisicao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 3).toString();
-            String anoPublicacao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 4).toString();
-            String preco = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 5).toString();
-            String descricao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 6).toString();
-            String statusEmprestimo = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 7).toString();
-            String status = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), jTableExemplares.getSelectedColumn() + 8).toString();
+            String livro = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), 0).toString();
+            String idExemplar = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), 1).toString();
+            String edicao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), 2).toString();
+            String dataAquisicao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), 3).toString();
+            String anoPublicacao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), 4).toString();
+            String preco = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), 5).toString();
+            String descricao = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), 6).toString();
+            String statusEmprestimo = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), 7).toString();
+            String status = jTableExemplares.getValueAt(jTableExemplares.getSelectedRow(), 8).toString();
 
             jComboBoxLivro.removeAllItems();
             jComboBoxLivro.addItem(livro);
