@@ -49,4 +49,11 @@ public interface ICRUDColaborador {
      * @throws Exception 
      */
     Colaborador getColaborador(String nome) throws Exception;
+        /**
+     * 
+     * @param id
+     * @return
+     * @throws Exception 
+     */
+    Colaborador getColaborador(int id) throws Exception;
 }

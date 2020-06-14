@@ -3,15 +3,15 @@ package modelos.utilidades;
 import controle.ExemplarControle;
 import controle.LivroControle;
 import modelos.classes.Exemplar;
-import modelos.interfaces.IcrudExemplar;
-import modelos.interfaces.IcrudLivro;
+import modelos.interfaces.ICRUDExemplar;
+import modelos.interfaces.ICRUDLivro;
 
 public class GeradorDeEtiquetas {
 
     String numeroDaEtiqueta = "";
     String armario = "";
-    IcrudExemplar exemplar = new ExemplarControle("exemplar.txt");
-    IcrudLivro livro = new LivroControle("livro.txt");
+    ICRUDExemplar exemplar = new ExemplarControle("exemplar.txt");
+    ICRUDLivro livro = new LivroControle("livro.txt");
 
     public GeradorDeEtiquetas(Exemplar livro, String armario) throws Exception {
         Exemplar exemplarEtiqueta = exemplar.getExemplar(livro.getId());
@@ -39,19 +39,19 @@ public class GeradorDeEtiquetas {
         this.armario = armario;
     }
 
-    public IcrudExemplar getExemplar() {
+    public ICRUDExemplar getExemplar() {
         return exemplar;
     }
 
-    public void setExemplar(IcrudExemplar exemplar) {
+    public void setExemplar(ICRUDExemplar exemplar) {
         this.exemplar = exemplar;
     }
 
-    public IcrudLivro getLivro() {
+    public ICRUDLivro getLivro() {
         return livro;
     }
 
-    public void setLivro(IcrudLivro livro) {
+    public void setLivro(ICRUDLivro livro) {
         this.livro = livro;
     }
 

@@ -2,22 +2,22 @@ package controle;
 
 import java.util.ArrayList;
 import modelos.classes.AreaDoLivro;
-import modelos.interfaces.IcrudAreaDoLivro;
 import persistencia.AreaDoLivroPersistencia;
+import modelos.interfaces.ICRUDAreaDoLivro;
 
-public class AreaDoLivroControle implements IcrudAreaDoLivro {
+public class AreaDoLivroControle implements ICRUDAreaDoLivro {
 
-    IcrudAreaDoLivro areaDoLivro = null;
+    ICRUDAreaDoLivro areaDoLivro = null;
 
     public AreaDoLivroControle(String caminhoDoArquivo) {
         areaDoLivro = new AreaDoLivroPersistencia(caminhoDoArquivo);
     }
 
-    public IcrudAreaDoLivro getAreaDoLivro() {
+    public ICRUDAreaDoLivro getAreaDoLivro() {
         return areaDoLivro;
     }
 
-    public void setAreaDoLivro(IcrudAreaDoLivro areaDoLivro) {
+    public void setAreaDoLivro(ICRUDAreaDoLivro areaDoLivro) {
         this.areaDoLivro = areaDoLivro;
     }
 

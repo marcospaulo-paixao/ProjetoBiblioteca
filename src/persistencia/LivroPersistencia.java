@@ -13,18 +13,18 @@ import modelos.classes.AreaDoLivro;
 import modelos.classes.Autor;
 import modelos.classes.Editora;
 import modelos.classes.Livro;
-import modelos.interfaces.IcrudAreaDoLivro;
-import modelos.interfaces.IcrudAutor;
-import modelos.interfaces.IcrudEditora;
-import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
+import modelos.interfaces.ICRUDAreaDoLivro;
+import modelos.interfaces.ICRUDAutor;
+import modelos.interfaces.ICRUDEditora;
+import modelos.interfaces.ICRUDLivro;
 
-public class LivroPersistencia implements IcrudLivro {
+public class LivroPersistencia implements ICRUDLivro {
 
-    IcrudAutor autor = new AutorControle("autor.txt");
-    IcrudEditora editora = new EditoraControle("editora.txt");
-    IcrudAreaDoLivro areaDoLivro = new AreaDoLivroControle("areaDoLivro.txt");
+    ICRUDAutor autor = new AutorControle("autor.txt");
+    ICRUDEditora editora = new EditoraControle("editora.txt");
+    ICRUDAreaDoLivro areaDoLivro = new AreaDoLivroControle("areaDoLivro.txt");
 
     String nomeDoArquivoNoDisco = "";
 

@@ -15,14 +15,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelos.classes.Exemplar;
 import modelos.classes.Livro;
-import modelos.interfaces.IcrudExemplar;
-import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorDeEtiquetas;
+import modelos.interfaces.ICRUDExemplar;
+import modelos.interfaces.ICRUDLivro;
 
 public class TelaEtiqueta extends javax.swing.JFrame {
 
-    IcrudLivro livro = null;
-    IcrudExemplar exemplar = null;
+    ICRUDLivro livro = null;
+    ICRUDExemplar exemplar = null;
     GeradorDeEtiquetas gEtiqueta = null;
 
     /**

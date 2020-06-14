@@ -2,12 +2,12 @@ package controle;
 
 import java.util.ArrayList;
 import modelos.classes.Autor;
-import modelos.interfaces.IcrudAutor;
 import persistencia.AutorPersistencia;
+import modelos.interfaces.ICRUDAutor;
 
-public class AutorControle implements IcrudAutor {
+public class AutorControle implements ICRUDAutor {
 
-    IcrudAutor autorPersistencia = null;
+    ICRUDAutor autorPersistencia = null;
 
     public AutorControle(String nomeDoArquivoNoDisco) {
         autorPersistencia = new AutorPersistencia(nomeDoArquivoNoDisco);

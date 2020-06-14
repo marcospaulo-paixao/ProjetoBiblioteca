@@ -3,7 +3,7 @@ package modelos.interfaces;
 import java.util.ArrayList;
 import modelos.classes.Reserva;
 
-public interface IcrudReserva {
+public interface ICRUDReserva {
 
     void incluir(Reserva objeto) throws Exception;
 

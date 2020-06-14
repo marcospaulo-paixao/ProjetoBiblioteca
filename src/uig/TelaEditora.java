@@ -8,14 +8,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelos.classes.Editora;
-import modelos.interfaces.IcrudEditora;
 import modelos.utilidades.EditoraTableModel;
 import modelos.utilidades.GeradorID;
+import modelos.interfaces.ICRUDEditora;
 
 public class TelaEditora extends javax.swing.JFrame {
 
     boolean incluirOn;
-    IcrudEditora editora = null;
+    ICRUDEditora editora = null;
     EditoraTableModel model = null;
 
     /**

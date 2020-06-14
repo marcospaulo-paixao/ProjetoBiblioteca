@@ -8,11 +8,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import modelos.classes.Autor;
-import modelos.interfaces.IcrudAutor;
 import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
+import modelos.interfaces.ICRUDAutor;
 
-public class AutorPersistencia implements IcrudAutor {
+public class AutorPersistencia implements ICRUDAutor {
 
     private String nomeDoArquivoNoDisco = "";
 

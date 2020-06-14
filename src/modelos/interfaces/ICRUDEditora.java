@@ -3,7 +3,7 @@ package modelos.interfaces;
 import java.util.ArrayList;
 import modelos.classes.Editora;
 
-public interface IcrudEditora {
+public interface ICRUDEditora {
 
     void incluir(Editora editoraObjeto) throws Exception;
 

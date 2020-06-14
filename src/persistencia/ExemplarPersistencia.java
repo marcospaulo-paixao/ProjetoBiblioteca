@@ -9,16 +9,16 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import modelos.classes.Exemplar;
 import modelos.classes.Livro;
-import modelos.interfaces.IcrudExemplar;
-import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
 import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
+import modelos.interfaces.ICRUDExemplar;
+import modelos.interfaces.ICRUDLivro;
 
-public class ExemplarPersistencia implements IcrudExemplar {
+public class ExemplarPersistencia implements ICRUDExemplar {
 
-    IcrudLivro livro = new LivroControle("livro.txt");
+    ICRUDLivro livro = new LivroControle("livro.txt");
     String nomeDoArquivoNoDisco = null;
 
     public ExemplarPersistencia(String nomeDoArquivoNoDisco) {
@@ -131,4 +131,19 @@ public class ExemplarPersistencia implements IcrudExemplar {
             throw new Exception("Erro no controlador" + listarLivros.getMessage());
         }
     }
+
+    @Override
+    public Exemplar getExemplar(String titulo) throws Exception {
+          try {
+            ArrayList<Exemplar> exemplaresLista = listagem();
+            for (Exemplar exemplaresNaLista : exemplaresLista) {
+                if (exemplaresNaLista.getLivro().getTitulo().equals(titulo)) {
+                    return exemplaresNaLista;
+                }
+            }
+        } catch (Exception ErroListarNomeLivro) {
+            throw ErroListarNomeLivro;
+        }
+        return null;
+  }
 }

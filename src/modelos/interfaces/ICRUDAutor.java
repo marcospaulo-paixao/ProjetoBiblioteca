@@ -3,7 +3,7 @@ package modelos.interfaces;
 import java.util.ArrayList;
 import modelos.classes.Autor;
 
-public interface IcrudAutor {
+public interface ICRUDAutor {
 
     void incluir(Autor autorObj) throws Exception;
 

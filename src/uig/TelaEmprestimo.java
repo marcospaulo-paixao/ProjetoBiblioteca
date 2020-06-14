@@ -1,23 +1,30 @@
 package uig;
 
 import controle.ColaboradorControle;
+import controle.EmprestimoControle;
 import controle.ExemplarControle;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelos.classes.Colaborador;
+import modelos.classes.Emprestimo;
 import modelos.classes.Exemplar;
-import modelos.interfaces.IcrudExemplar;
+import modelos.interfaces.ICRUDColaborador;
+import modelos.interfaces.ICRUDEmprestimo;
 import modelos.utilidades.ColaboradorTableModel;
+import modelos.utilidades.EmprestimosTableModel;
 import modelos.utilidades.ExemplarTableModel;
+import modelos.interfaces.ICRUDExemplar;
 
 public class TelaEmprestimo extends javax.swing.JFrame {
 
-    ColaboradorTableModel model = null;
+    ICRUDColaborador controleColaborador = null;
+    ICRUDExemplar controleExemplar = null;
+    ICRUDEmprestimo controleEmprestimo = null;
+    ColaboradorTableModel modelColaborador = null;
     ExemplarTableModel modelExemplar = null;
-    ColaboradorControle cc = new ColaboradorControle("colaborador.txt");
-    IcrudExemplar exem = new ExemplarControle("exemplar.txt");
+    EmprestimosTableModel modelEmprestimo = null;
 
     /**
      * Creates new form TelaEmprestimo
@@ -27,13 +34,23 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         try {
 
             initComponents();
-            model = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
-            jTableColaborador.setModel(model);
+            controleColaborador = new ColaboradorControle("colaborador.txt");
+            controleExemplar = new ExemplarControle("exemplar.txt");
+            controleEmprestimo = new EmprestimoControle("emprestimo.txt");
+
+            modelColaborador = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
+            jTableColaborador.setModel(modelColaborador);
 
             modelExemplar = new ExemplarTableModel(new String[]{"Titulo", "Identificador"});
             jTableExemplar.setModel(modelExemplar);
+
+            modelEmprestimo = new EmprestimosTableModel(new String[]{"Identificador","Colaborador", "Exemplar", "Data de Empréstimo", "Data de Devolução"});
+            jTableDadosEmprestimos.setModel(modelEmprestimo);
+            
+            habilitaForm(false);
             this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -58,13 +75,14 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableColaborador = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jButtonFinalizarEmprestimo = new javax.swing.JButton();
         jButtonRealizarReserva = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
         jToggleButton3 = new javax.swing.JToggleButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
+        jButtonEmprestar = new javax.swing.JButton();
+        jButtonDeletar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jTextFieldPesquisarExemplar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -75,6 +93,8 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jTextFieldNomeColaborador = new javax.swing.JTextField();
         jLabelTituloDoExemplar = new javax.swing.JLabel();
         jTextFieldTituloDoExemplar = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        jTextFieldPesquisarEmprestimo = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -105,17 +125,9 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Colaborador", "Cod.: ISBN", "Data do Emprestimo", "Data de Devolução", "Multa"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         jScrollPane2.setViewportView(jTableDadosEmprestimos);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -131,11 +143,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados Colaborador"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dado do Colaborador"));
 
         jLabel1.setText("Pesquisar");
 
@@ -145,11 +157,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             }
         });
         jTextFieldPesquisarColaborador.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldPesquisarColaboradorKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextFieldPesquisarColaboradorKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPesquisarColaboradorKeyReleased(evt);
             }
         });
 
@@ -189,21 +201,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldPesquisarColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Menu"));
-
-        jButtonFinalizarEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Emprestar.png"))); // NOI18N
-        jButtonFinalizarEmprestimo.setText("Emprestar");
-        jButtonFinalizarEmprestimo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButtonFinalizarEmprestimo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButtonFinalizarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFinalizarEmprestimoActionPerformed(evt);
-            }
-        });
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
 
         jButtonRealizarReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Reserva.png"))); // NOI18N
         jButtonRealizarReserva.setText("Reservar");
@@ -245,11 +247,40 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Cancelar");
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/salve-24.png"))); // NOI18N
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonSalvar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Salvar");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fechar.png"))); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
+        jButtonEmprestar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Emprestar.png"))); // NOI18N
+        jButtonEmprestar.setText("Emprestar");
+        jButtonEmprestar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonEmprestar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonEmprestar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEmprestarActionPerformed(evt);
+            }
+        });
+
+        jButtonDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lixo-24.png"))); // NOI18N
+        jButtonDeletar.setText("Deletar");
+        jButtonDeletar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButtonDeletar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -258,36 +289,39 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonFinalizarEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonRealizarReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonRealizarReserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEmprestar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jButtonFinalizarEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jButtonEmprestar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonDeletar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRealizarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGap(18, 99, Short.MAX_VALUE)
+                .addComponent(jButtonSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonSair)
-                .addGap(24, 24, 24))
+                .addContainerGap())
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados Exemplar"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Exemplar"));
 
         jTextFieldPesquisarExemplar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -336,19 +370,13 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldPesquisarExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Emprestimo"));
 
         jLabel3.setText("Nome do Colaborador");
-
-        jTextFieldNomeColaborador.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldNomeColaboradorKeyReleased(evt);
-            }
-        });
 
         jLabelTituloDoExemplar.setText("Titulo do Exemplar");
 
@@ -359,27 +387,53 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldNomeColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTituloDoExemplar)
-                    .addComponent(jTextFieldTituloDoExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelTituloDoExemplar)
+                        .addGap(204, 204, 204))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jTextFieldNomeColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldTituloDoExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabelTituloDoExemplar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldTituloDoExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNomeColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabelTituloDoExemplar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNomeColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTituloDoExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
+
+        jTextFieldPesquisarEmprestimo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPesquisarEmprestimoKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextFieldPesquisarEmprestimo)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextFieldPesquisarEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -389,17 +443,16 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -408,15 +461,17 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -473,19 +528,13 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            model.update(cc.listagem());
-            modelExemplar.update(exem.listagem());
+            modelColaborador.update(controleColaborador.listagem());
+            modelExemplar.update(controleExemplar.listagem());
+             modelEmprestimo.update(controleEmprestimo.listagem());
         } catch (Exception ex) {
             Logger.getLogger(TelaEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowOpened
-
-    private void jButtonFinalizarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarEmprestimoActionPerformed
-        try {
-            habilitaForm(true);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButtonFinalizarEmprestimoActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         try {
@@ -496,16 +545,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
-    private void jTextFieldNomeColaboradorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNomeColaboradorKeyReleased
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jTextFieldNomeColaboradorKeyReleased
-
     private void jTableColaboradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableColaboradorMouseClicked
         // TODO add your handling code here:
         try {
 
-            Colaborador c = cc.getColaborador(model.getValueAt(jTableColaborador.getSelectedRow(), 0));
+            Colaborador c = controleColaborador.getColaborador(modelColaborador.getValueAt(jTableColaborador.getSelectedRow(), 0));
             jTextFieldNomeColaborador.setText(c.getNome());
         } catch (Exception e) {
         }
@@ -515,35 +559,73 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     private void jTableExemplarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableExemplarMouseClicked
         // TODO add your handling code here:
-         try {  
-             
-            
-             Exemplar ex = exem.getExemplar(Integer.parseInt(modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 1)));
-            jTextFieldTituloDoExemplar.setText(ex.getLivro().getTitulo()+"");
+        try {
+
+            Exemplar ex = controleExemplar.getExemplar(Integer.parseInt(modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 1)));
+            jTextFieldTituloDoExemplar.setText(ex.getLivro().getTitulo() + "");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTableExemplarMouseClicked
+
+    private void jButtonEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmprestarActionPerformed
+        // TODO add your handling code here:
+        habilitaForm(true);
+    }//GEN-LAST:event_jButtonEmprestarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        habilitaForm(false);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        // TODO add your handling code here: 
+        try {
+            Exemplar e = controleExemplar.getExemplar(jTextFieldTituloDoExemplar.getText());
+            Colaborador c = controleColaborador.getColaborador(jTextFieldNomeColaborador.getText());
+            controleEmprestimo.incluir(new Emprestimo(c, e));
+            JOptionPane.showMessageDialog(null, "Emprestimo realizado com sucesso!");
+            habilitaForm(false);
+            modelEmprestimo.update(controleEmprestimo.listagem());
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jTextFieldPesquisarEmprestimoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarEmprestimoKeyReleased
+        // TODO add your handling code here:
+        try {
+            pesquisarEmprestimos(jTextFieldPesquisarEmprestimo.getText().toLowerCase());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jTextFieldPesquisarEmprestimoKeyReleased
     public void habilitaForm(boolean habilita) {
         jTextFieldNomeColaborador.setEnabled(habilita);
         jTextFieldTituloDoExemplar.setEnabled(habilita);
         jTableColaborador.setRowSelectionAllowed(habilita);
         jTableExemplar.setRowSelectionAllowed(habilita);
+        jButtonEmprestar.setEnabled(!habilita);
+        jButtonDeletar.setEnabled(!habilita);
+        jButtonSalvar.setEnabled(habilita);
+        jButtonCancelar.setEnabled(habilita);
+        jButtonRealizarReserva.setEnabled(!habilita);
+        jToggleButton3.setEnabled(!habilita);
 
     }
 
     private void pesquisarColaboradores(String texto) throws Exception {
         try {
 
-            String[][] matrizFiltro = new String[2][cc.listagem().size()];
+            String[][] matrizFiltro = new String[2][controleColaborador.listagem().size()];
             String[] matrizS = new String[matrizFiltro[1].length];
-            model.update(cc.listagem());
-            for (int i = 0; i < model.getColumnCount(); i++) {
-                for (int j = 0; j < model.getRowCount(); j++) {
-                    matrizFiltro[i][j] = model.getValueAt(j, i);
+            modelColaborador.update(controleColaborador.listagem());
+            for (int i = 0; i < modelColaborador.getColumnCount(); i++) {
+                for (int j = 0; j < modelColaborador.getRowCount(); j++) {
+                    matrizFiltro[i][j] = modelColaborador.getValueAt(j, i);
                 }
             }
             ArrayList<String> matriz = null;
-            if (model != null) {
+            if (modelColaborador != null) {
                 if (matrizFiltro.length > 0) {
                     texto = texto.toLowerCase().trim();
                     if (texto.length() == 0) {
@@ -564,7 +646,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                         }
                     }
                 }
-                model.update(matrizS);
+                modelColaborador.update(matrizS);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -574,9 +656,9 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     private void pesquisarExemplares(String texto) throws Exception {
         try {
-            String[][] matrizFiltro = new String[9][exem.listagem().size()];
+            String[][] matrizFiltro = new String[9][controleExemplar.listagem().size()];
             String[] matrizS = new String[matrizFiltro[2].length];
-            modelExemplar.update(exem.listagem());
+            modelExemplar.update(controleExemplar.listagem());
             for (int i = 0; i < modelExemplar.getColumnCount(); i++) {
                 for (int j = 0; j < modelExemplar.getRowCount(); j++) {
                     matrizFiltro[i][j] = modelExemplar.getValueAt(j, i);
@@ -605,6 +687,46 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 }
             }
             modelExemplar.update(matrizS);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+  private void pesquisarEmprestimos(String texto) throws Exception {
+        try {
+            String[][] matrizFiltro = new String[9][controleEmprestimo.listagem().size()];
+            String[] matrizS = new String[matrizFiltro[2].length];
+            modelEmprestimo.update(controleEmprestimo.listagem());
+            for (int i = 0; i < modelEmprestimo.getColumnCount(); i++) {
+                for (int j = 0; j < modelEmprestimo.getRowCount(); j++) {
+                    matrizFiltro[i][j] = modelEmprestimo.getValueAt(j, i);
+                }
+            }
+            ArrayList<String> matriz = null;
+            if (matrizFiltro.length > 0) {
+                texto = texto.toLowerCase().trim();
+                if (texto.length() == 0) {
+                    for (int i = 0; i < matrizFiltro[1].length; i++) {
+                        matrizS[i] = matrizFiltro[0][i];
+                    }
+                } else {
+                    matriz = new ArrayList<>();
+                    for (int i = 0; i < matrizFiltro[1].length; i++) {
+                        if (matrizFiltro[0][i].toLowerCase().contains(texto)
+                                || matrizFiltro[0][i].toLowerCase().contains(texto)
+                                || matrizFiltro[1][i].toLowerCase().contains(texto)
+                                || matrizFiltro[2][i].toLowerCase().contains(texto)
+                                || matrizFiltro[3][i].toLowerCase().contains(texto)
+                                || matrizFiltro[4][i].toLowerCase().contains(texto)) {
+                            matriz.add(matrizFiltro[0][i]);
+                        }
+                    }
+                    matrizS = new String[matriz.size()];
+                    for (int i = 0; i < matriz.size(); i++) {
+                        matrizS[i] = matriz.get(i);
+                    }
+                }
+            }
+            modelEmprestimo.update(matrizS);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -646,11 +768,12 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButtonFinalizarEmprestimo;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonDeletar;
+    private javax.swing.JButton jButtonEmprestar;
     private javax.swing.JButton jButtonRealizarReserva;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButtonSalvar;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -661,6 +784,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -672,6 +796,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private javax.swing.JTable jTableExemplar;
     private javax.swing.JTextField jTextFieldNomeColaborador;
     private javax.swing.JTextField jTextFieldPesquisarColaborador;
+    private javax.swing.JTextField jTextFieldPesquisarEmprestimo;
     private javax.swing.JTextField jTextFieldPesquisarExemplar;
     private javax.swing.JTextField jTextFieldTituloDoExemplar;
     private javax.swing.JToggleButton jToggleButton3;

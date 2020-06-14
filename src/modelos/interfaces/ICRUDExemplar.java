@@ -3,7 +3,7 @@ package modelos.interfaces;
 import java.util.ArrayList;
 import modelos.classes.Exemplar;
 
-public interface IcrudExemplar {
+public interface ICRUDExemplar {
 
     void incluir(Exemplar objExemplar) throws Exception;
 
@@ -13,5 +13,7 @@ public interface IcrudExemplar {
 
     Exemplar getExemplar(int idExemplar) throws Exception;
 
+    Exemplar getExemplar(String titulo) throws Exception;
+    
     ArrayList<Exemplar> listagem() throws Exception;
 }

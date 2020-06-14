@@ -7,12 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import modelos.classes.AreaDoLivro;
-import modelos.interfaces.IcrudAreaDoLivro;
 import modelos.utilidades.ComunicadorTCP;
 import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
+import modelos.interfaces.ICRUDAreaDoLivro;
 
-public class AreaDoLivroPersistencia implements IcrudAreaDoLivro {
+public class AreaDoLivroPersistencia implements ICRUDAreaDoLivro {
 
     private String nomeDoArquivoNoDisco = "";
 

@@ -2,22 +2,22 @@ package controle;
 
 import java.util.ArrayList;
 import modelos.classes.Reserva;
-import modelos.interfaces.IcrudReserva;
 import persistencia.ReservaPersistencia;
+import modelos.interfaces.ICRUDReserva;
 
-public class ReservaControle implements IcrudReserva {
+public class ReservaControle implements ICRUDReserva {
 
-    IcrudReserva reservaIcrud = null;
+    ICRUDReserva reservaIcrud = null;
 
     public ReservaControle(String nomeDoArquivoNoDisco) {
         reservaIcrud = new ReservaPersistencia(nomeDoArquivoNoDisco);
     }
 
-    public IcrudReserva getReservaIcrud() {
+    public ICRUDReserva getReservaIcrud() {
         return reservaIcrud;
     }
 
-    public void setReservaIcrud(IcrudReserva reservaIcrud) {
+    public void setReservaIcrud(ICRUDReserva reservaIcrud) {
         this.reservaIcrud = reservaIcrud;
     }
 

@@ -12,15 +12,15 @@ import modelos.classes.Colaborador;
 import modelos.classes.Exemplar;
 import modelos.classes.Reserva;
 import modelos.interfaces.ICRUDColaborador;
-import modelos.interfaces.IcrudExemplar;
-import modelos.interfaces.IcrudReserva;
 import modelos.utilidades.GeradorID;
+import modelos.interfaces.ICRUDExemplar;
+import modelos.interfaces.ICRUDReserva;
 
-public class ReservaPersistencia implements IcrudReserva {
+public class ReservaPersistencia implements ICRUDReserva {
 
     SimpleDateFormat data = new SimpleDateFormat("dd/mm/yyyy");
     String nomeDoAquivoNoDisco = "";
-    IcrudExemplar exemplar = new ExemplarControle("exemplar.txt");
+    ICRUDExemplar exemplar = new ExemplarControle("exemplar.txt");
     ICRUDColaborador colaborador = new ColaboradorControle("colaborador.txt");
 
     public ReservaPersistencia(String nomeDoAquivoNoDisco) {
@@ -35,11 +35,11 @@ public class ReservaPersistencia implements IcrudReserva {
         this.nomeDoAquivoNoDisco = nomeDoAquivoNoDisco;
     }
 
-    public IcrudExemplar getExemplar() {
+    public ICRUDExemplar getExemplar() {
         return exemplar;
     }
 
-    public void setExemplar(IcrudExemplar exemplar) {
+    public void setExemplar(ICRUDExemplar exemplar) {
         this.exemplar = exemplar;
     }
 
