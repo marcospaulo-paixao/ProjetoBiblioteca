@@ -2,12 +2,12 @@ package controle;
 
 import java.util.ArrayList;
 import modelos.classes.Livro;
-import modelos.interfaces.IcrudLivro;
 import persistencia.LivroPersistencia;
+import modelos.interfaces.ICRUDLivro;
 
-public class LivroControle implements IcrudLivro {
+public class LivroControle implements ICRUDLivro {
 
-    IcrudLivro livroControle = null;
+    ICRUDLivro livroControle = null;
 
     public LivroControle(String nomeDoArquivoNoDisco) {
         this.livroControle = new LivroPersistencia(nomeDoArquivoNoDisco);

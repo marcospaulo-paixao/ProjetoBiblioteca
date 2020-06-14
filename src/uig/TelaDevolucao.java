@@ -9,13 +9,13 @@ import javax.swing.JOptionPane;
 import modelos.classes.Colaborador;
 import modelos.classes.Exemplar;
 import modelos.interfaces.ICRUDColaborador;
-import modelos.interfaces.IcrudExemplar;
 import modelos.utilidades.DevolucaoTableModel;
+import modelos.interfaces.ICRUDExemplar;
 
 public class TelaDevolucao extends javax.swing.JFrame {
 
     ICRUDColaborador colaborador = new ColaboradorControle("colaborador.txt");
-    IcrudExemplar exemplar = new ExemplarControle("exemplar.txt");
+    ICRUDExemplar exemplar = new ExemplarControle("exemplar.txt");
     DevolucaoTableModel modelDevo = null;
 
     //IcrudEmprestimo emprestimo = new 

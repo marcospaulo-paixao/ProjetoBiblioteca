@@ -164,10 +164,24 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
     @Override
     public Colaborador getColaborador(String nome) throws Exception {
         try {
-
             ArrayList<Colaborador> listaDeColaboradores = listagem();
             for (Colaborador colaborador : listaDeColaboradores) {
                 if (colaborador.getNome().equals(nome)) {
+                    return colaborador;
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
+    }
+
+    @Override
+    public Colaborador getColaborador(int id) throws Exception {
+        try {
+            ArrayList<Colaborador> listaDeColaboradores = listagem();
+            for (Colaborador colaborador : listaDeColaboradores) {
+                if (colaborador.getId() == (id)) {
                     return colaborador;
                 }
             }

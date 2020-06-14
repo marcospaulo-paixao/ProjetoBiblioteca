@@ -8,17 +8,17 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelos.classes.Exemplar;
 import modelos.classes.Livro;
-import modelos.interfaces.IcrudExemplar;
-import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.ExemplarTableModel;
 import modelos.utilidades.GeradorID;
 import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
+import modelos.interfaces.ICRUDExemplar;
+import modelos.interfaces.ICRUDLivro;
 
 public class TelaExemplar extends javax.swing.JFrame {
 
-    IcrudLivro livro = null;
-    IcrudExemplar exemplar = null;
+    ICRUDLivro livro = null;
+    ICRUDExemplar exemplar = null;
     boolean incluirOn = true;
     ExemplarTableModel model = null;
 

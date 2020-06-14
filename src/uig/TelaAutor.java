@@ -6,14 +6,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelos.classes.Autor;
-import modelos.interfaces.IcrudAutor;
 import modelos.utilidades.AutorTableModel;
 import modelos.utilidades.GeradorID;
+import modelos.interfaces.ICRUDAutor;
 
 public class TelaAutor extends javax.swing.JFrame {
 
     boolean incluirOr = true;
-    IcrudAutor autor = null;
+    ICRUDAutor autor = null;
     AutorTableModel model = null;
 
     /**

@@ -3,7 +3,7 @@ package modelos.interfaces;
 import java.util.ArrayList;
 import modelos.classes.Livro;
 
-public interface IcrudLivro {
+public interface ICRUDLivro {
 
     void incluir(Livro livro) throws Exception;
 

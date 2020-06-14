@@ -13,21 +13,21 @@ import modelos.classes.AreaDoLivro;
 import modelos.classes.Autor;
 import modelos.classes.Editora;
 import modelos.classes.Livro;
-import modelos.interfaces.IcrudAreaDoLivro;
-import modelos.interfaces.IcrudAutor;
-import modelos.interfaces.IcrudEditora;
-import modelos.interfaces.IcrudLivro;
 import modelos.utilidades.GeradorID;
 import modelos.utilidades.LivroTableModel;
 import persistencia.AutorPersistencia;
+import modelos.interfaces.ICRUDAreaDoLivro;
+import modelos.interfaces.ICRUDAutor;
+import modelos.interfaces.ICRUDEditora;
+import modelos.interfaces.ICRUDLivro;
 
 public class TelaLivro extends javax.swing.JFrame {
 
-    IcrudAutor autor = new AutorPersistencia("autor.txt");
+    ICRUDAutor autor = new AutorPersistencia("autor.txt");
     boolean incluirOn = false;
-    IcrudLivro livro = null;
-    IcrudEditora editora = null;
-    IcrudAreaDoLivro areaDoLivro = null;
+    ICRUDLivro livro = null;
+    ICRUDEditora editora = null;
+    ICRUDAreaDoLivro areaDoLivro = null;
     LivroTableModel model = null;
 
     public TelaLivro() {

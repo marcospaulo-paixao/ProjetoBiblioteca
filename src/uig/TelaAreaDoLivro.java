@@ -6,14 +6,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelos.classes.AreaDoLivro;
-import modelos.interfaces.IcrudAreaDoLivro;
 import modelos.utilidades.AreaDoLivroTableModel;
 import modelos.utilidades.GeradorID;
+import modelos.interfaces.ICRUDAreaDoLivro;
 
 public class TelaAreaDoLivro extends javax.swing.JFrame {
 
     boolean incluirOn = true;
-    IcrudAreaDoLivro areaLivro = null;
+    ICRUDAreaDoLivro areaLivro = null;
     AreaDoLivroTableModel model = null;
 
     public TelaAreaDoLivro() {

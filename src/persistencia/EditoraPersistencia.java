@@ -8,11 +8,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import modelos.classes.Editora;
-import modelos.interfaces.IcrudEditora;
 import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
+import modelos.interfaces.ICRUDEditora;
 
-public class EditoraPersistencia implements IcrudEditora {
+public class EditoraPersistencia implements ICRUDEditora {
 
     private String nomeDoArquivoNoDisco;
 

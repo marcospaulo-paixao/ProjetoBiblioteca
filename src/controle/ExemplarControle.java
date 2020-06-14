@@ -2,12 +2,12 @@ package controle;
 
 import java.util.ArrayList;
 import modelos.classes.Exemplar;
-import modelos.interfaces.IcrudExemplar;
 import persistencia.ExemplarPersistencia;
+import modelos.interfaces.ICRUDExemplar;
 
-public class ExemplarControle implements IcrudExemplar {
+public class ExemplarControle implements ICRUDExemplar {
 
-    private IcrudExemplar exemplar = null;
+    private ICRUDExemplar exemplar = null;
 
     public ExemplarControle(String nomeDoArquivoNoDisco) {
         this.exemplar = new ExemplarPersistencia(nomeDoArquivoNoDisco);
@@ -55,6 +55,17 @@ public class ExemplarControle implements IcrudExemplar {
             return exemplar.listagem();
         } catch (Exception erroListagem) {
             throw new Exception(" Erro ao Listar " + erroListagem);
+        }
+    }
+
+    @Override
+    public Exemplar getExemplar(String titulo) throws Exception {
+
+        try {
+
+            return exemplar.getExemplar(titulo);
+        } catch (Exception e) {
+            throw e;
         }
     }
 

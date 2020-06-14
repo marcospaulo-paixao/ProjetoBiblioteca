@@ -3,7 +3,7 @@ package modelos.interfaces;
 import java.util.ArrayList;
 import modelos.classes.Emprestimo;
 
-public interface IcrudEmprestimo {
+public interface ICRUDEmprestimo {
 
     void incluir(Emprestimo objEmprestimo) throws Exception;
 
