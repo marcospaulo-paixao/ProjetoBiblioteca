@@ -47,14 +47,16 @@ public class UsuarioPersistencia implements ICRUDUsuario {
         BufferedWriter bw = new BufferedWriter(fw);
         objeto.setId(id.getID());
 
-        CreateServer comunicacao = new CreateServer();
-        comunicacao.getComunicacao().enviarMensagem("post",objeto.getClass().getSimpleName(), objeto.toString() + "\n");
-        comunicacao.getComunicacao().receberMensagem();
-        comunicacao.getComunicacao().fecharConexao();
-
-        bw.write(objeto.toString() + "\n");
+        try {
+            CreateServer comunicacao = new CreateServer();
+            comunicacao.getComunicacao().enviarMensagem("post", objeto.getClass().getSimpleName(), objeto.toString() + "\n");
+            comunicacao.getComunicacao().receberMensagem();
+            comunicacao.getComunicacao().fecharConexao();
+        } catch (Exception e) {
+            bw.write(objeto.toString() + "\n");
+            bw.close();
+        }
         id.finalize();
-        bw.close();
     }
 
     /**

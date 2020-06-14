@@ -37,9 +37,7 @@ public class EditoraPersistencia implements IcrudEditora {
                 bw.write(editoraObjeto.toString() + "\n");
             } finally {
                 bw.close();
-
             }
-
         } catch (IOException errorEditora) {
             throw errorEditora;
         }

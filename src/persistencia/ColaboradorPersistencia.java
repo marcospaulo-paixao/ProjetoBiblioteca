@@ -51,14 +51,16 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
             gId.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            
-            CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem("post",objeto.getClass().getSimpleName(), objeto.toString() + "\n");
-            comunicacao.getComunicacao().receberMensagem();
-            comunicacao.getComunicacao().fecharConexao();
-            
-            bw.write(objeto.toString() + "\n");
-            bw.close();
+
+            try {
+                CreateServer comunicacao = new CreateServer();
+                comunicacao.getComunicacao().enviarMensagem("post", objeto.getClass().getSimpleName(), objeto.toString() + "\n");
+                comunicacao.getComunicacao().receberMensagem();
+                comunicacao.getComunicacao().fecharConexao();
+            } catch (Exception e) {
+                bw.write(objeto.toString() + "\n");
+                bw.close();
+            }
         } catch (IOException e) {
             throw e;
         }
@@ -92,22 +94,23 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
             throw e;
         }
     }
+
     /**
-     * 
+     *
      * @param colaborador
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void deletar(Colaborador colaborador) throws Exception {
         try {
             ArrayList<Colaborador> lista = listagem();
-            
+
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
             BufferedWriter bw = new BufferedWriter(fw);
 
             for (Colaborador colaborador1 : lista) {
                 if (colaborador.getId() != colaborador1.getId()) {
-                    bw.write(colaborador1.toString()+"\n");
+                    bw.write(colaborador1.toString() + "\n");
                 }
             }
             bw.close();
@@ -173,6 +176,5 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
         }
         return null;
     }
-
 
 }

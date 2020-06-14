@@ -29,12 +29,12 @@ public class AreaDoLivroPersistencia implements IcrudAreaDoLivro {
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            if (new CreateServer().getComunicacao().getSocket().getKeepAlive()) {
+            try {
                 CreateServer comunicacao = new CreateServer();
                 comunicacao.getComunicacao().enviarMensagem("post", areaDoLivro.getClass().getSimpleName(), areaDoLivro.toString() + "\n");
                 comunicacao.getComunicacao().receberMensagem();
                 comunicacao.getComunicacao().fecharConexao();
-            } else {
+            } catch (Exception e) {
                 bw.write(areaDoLivro.toString() + "\n");
                 bw.close();
             }

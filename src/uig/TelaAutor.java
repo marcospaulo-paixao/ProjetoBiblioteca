@@ -470,7 +470,7 @@ public class TelaAutor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscaKeyReleased
     public void transferirDadosDaGrid() {
         if (gridAutor.getSelectedRow() != 1) {
-            String nomeExcluir = gridAutor.getValueAt(gridAutor.getSelectedRow(), gridAutor.getSelectedColumn()).toString();
+            String nomeExcluir = gridAutor.getValueAt(gridAutor.getSelectedRow(), 0).toString();
             txtNomeAutor.setText(nomeExcluir);
         }
     }

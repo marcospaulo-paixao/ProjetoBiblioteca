@@ -407,7 +407,7 @@ public class TelaAreaDoLivro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscaKeyReleased
     public void transferirDadosDaGrid() {
         if (jTableAreaLivro.getSelectedRow() != 1) {
-            String descricaoExcluir = jTableAreaLivro.getValueAt(jTableAreaLivro.getSelectedRow(), jTableAreaLivro.getSelectedColumn()).toString();
+            String descricaoExcluir = jTableAreaLivro.getValueAt(jTableAreaLivro.getSelectedRow(), 0).toString();
             txtDescricao.setText(descricaoExcluir);
         }
     }

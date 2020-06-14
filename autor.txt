@@ -1,4 +1,4 @@
-79;Anisberto Reis;
-80;Marcos Paualo;
-86;EDITORA SARAIVA;
-117;Francisco Ferreira Jorge Neto;
+79;Anisberto Reis
+80;Marcos Paualo
+86;Maria das Coves
+117;Francisco Ferreira Jorge Neto

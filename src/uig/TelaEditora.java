@@ -512,9 +512,9 @@ public class TelaEditora extends javax.swing.JFrame {
 
     public void transferirDadosDaGrid() {
         if (gridEditora.getSelectedRow() != 1) {
-            String nomeExcluir = gridEditora.getValueAt(gridEditora.getSelectedRow(), gridEditora.getSelectedColumn()).toString();
+            String nomeExcluir = gridEditora.getValueAt(gridEditora.getSelectedRow(), 0).toString();
             txtNomeEditora.setText(nomeExcluir);
-            String descricaoExcluir = gridEditora.getValueAt(gridEditora.getSelectedRow(), gridEditora.getSelectedColumn() + 1).toString();
+            String descricaoExcluir = gridEditora.getValueAt(gridEditora.getSelectedRow(), 1).toString();
             txtDescricaoEditora.setText(descricaoExcluir);
         }
     }

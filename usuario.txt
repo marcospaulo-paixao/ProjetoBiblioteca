@@ -1,7 +1,6 @@
 90;Alexandre Valle;alexandre;1234;ATIVO;
 91;Amanda Godói;amanda;1234;ATIVO;
 92;Amandio Muñiz;amandio;1234;INATIVO;
-93;Anita Reguera;anita;1234;INATIVO;
 94;Alexandre Valle;alexandre;1234;INATIVO;
 95;Murilo Murici;murilo;1234;INATIVO;
 96;Paula Barboza;paula;1234;INATIVO;
@@ -13,13 +12,6 @@
 102;Marcos Paulo Paixão;marcos@paixao;1234;ATIVO;
 94;Anisberto Reis;anisberto;123;ATIVO;
 109;Eugenio Messala;genio;123;ATIVO;
-118;asdfasdfasfd;asdasdfas;123;INATIVO;
 8;Estrela Nova;estrela;123;ATIVO;
-9;Outro Teste;25;28;INATIVO;
 21;Professor Eugenio;porfessor;123;ATIVO;
-32;rewtret;rrerter;12;ATIVO;
-34;safsdfasdfa;asdfasdfasdf;23;INATIVO;
-36;zxcvzxcv;zxcvxcvzxcvxc;12;ATIVO;
-37;cvbxcbvxcv;cxbcvbx;vc;ATIVO;
-38;safsdfasdf;ssd;sd;ATIVO;
-93;sdfasdf;sdfasdfs;12;ATIVO;
+129;Uncle Boby;uncle;bb;ATIVO;

@@ -1,2 +1,4 @@
 82;Alfa;Elaboração de livros;
 120;Saraiva;Elaboração de livros;
+126;Editora Gente;Editora Gente (25 de janeiro de 2019);
+127;Alta Books;Alta Books (8 de setembro de 2009);

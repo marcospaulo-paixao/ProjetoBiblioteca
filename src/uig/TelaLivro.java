@@ -538,7 +538,7 @@ public class TelaLivro extends javax.swing.JFrame {
         try {
             model.update(livro.listagem());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage()  +"Erro");
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage() + "Erro");
         }
     }
 
@@ -576,7 +576,7 @@ public class TelaLivro extends javax.swing.JFrame {
 
     private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
         try {
-            
+
             if (jTableLivros.getSelectedRow() != 1) {
                 String titulo = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn()).toString();
                 int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Exclusão de: " + titulo, titulo, 0);
@@ -624,40 +624,40 @@ public class TelaLivro extends javax.swing.JFrame {
                 }
             }
             ArrayList<String> matriz = null;
-                if (matrizFiltro.length > 0) {
-                    texto = texto.toLowerCase().trim();
-                    if (texto.length() == 0) {                       
-                        for (int i = 0; i < matrizFiltro[1].length; i++) {
-                                matrizS[i] = matrizFiltro[0][i];
-                        }
+            if (matrizFiltro.length > 0) {
+                texto = texto.toLowerCase().trim();
+                if (texto.length() == 0) {
+                    for (int i = 0; i < matrizFiltro[1].length; i++) {
+                        matrizS[i] = matrizFiltro[0][i];
+                    }
 
-                    } else {
-                        matriz = new ArrayList<>();
+                } else {
+                    matriz = new ArrayList<>();
 
-                        for (int i = 0; i < matrizFiltro[1].length; i++) {
-                            if (matrizFiltro[0][i].toLowerCase().contains(texto)
-                                    || matrizFiltro[1][i].toLowerCase().contains(texto)
-                                    || matrizFiltro[2][i].toLowerCase().contains(texto)
-                                    || matrizFiltro[3][i].toLowerCase().contains(texto)
-                                    || matrizFiltro[4][i].toLowerCase().contains(texto)
-                                    || matrizFiltro[5][i].toLowerCase().contains(texto)) {
-                                matriz.add(matrizFiltro[0][i]);
-                            }
-                        }
-
-                        matrizS = new String[matriz.size()];
-                        for (int i = 0; i < matriz.size(); i++) {
-                            matrizS[i] = matriz.get(i);
+                    for (int i = 0; i < matrizFiltro[1].length; i++) {
+                        if (matrizFiltro[0][i].toLowerCase().contains(texto)
+                                || matrizFiltro[1][i].toLowerCase().contains(texto)
+                                || matrizFiltro[2][i].toLowerCase().contains(texto)
+                                || matrizFiltro[3][i].toLowerCase().contains(texto)
+                                || matrizFiltro[4][i].toLowerCase().contains(texto)
+                                || matrizFiltro[5][i].toLowerCase().contains(texto)) {
+                            matriz.add(matrizFiltro[0][i]);
                         }
                     }
-                }
 
-                model.update(matrizS);
+                    matrizS = new String[matriz.size()];
+                    for (int i = 0; i < matriz.size(); i++) {
+                        matrizS[i] = matriz.get(i);
+                    }
+                }
+            }
+
+            model.update(matrizS);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
 
-        }
+    }
 
     public void habilitarBott(boolean habilitar) {
         jButtonIncluir.setEnabled(!habilitar);
@@ -705,12 +705,12 @@ public class TelaLivro extends javax.swing.JFrame {
 
     public void transferirDadosDaGrid() {
         if (jTableLivros.getSelectedRow() != 1) {
-            String titulo = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn()).toString();
-            String codigo = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 1).toString();
-            String isbn = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 2).toString();
-            String autor = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 3).toString();
-            String editora = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 4).toString();
-            String area = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), jTableLivros.getSelectedColumn() + 5).toString();
+            String titulo = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), 0).toString();
+            String codigo = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), 1).toString();
+            String isbn = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), 2).toString();
+            String autor = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), 3).toString();
+            String editora = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), 4).toString();
+            String area = jTableLivros.getValueAt(jTableLivros.getSelectedRow(), 5).toString();
             txtTitulo.setText(titulo);
             txtCodigo.setText(codigo);
             txtIsbn.setText(isbn);

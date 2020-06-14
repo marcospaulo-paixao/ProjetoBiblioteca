@@ -29,13 +29,15 @@ public class AutorPersistencia implements IcrudAutor {
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            CreateServer comunicacao = new CreateServer();
-            comunicacao.getComunicacao().enviarMensagem("post", autorObj.getClass().getSimpleName(), autorObj.toString() + "\n");
-            comunicacao.getComunicacao().receberMensagem();
-            comunicacao.getComunicacao().fecharConexao();
-
-            bw.write(autorObj.toString() + "\n");
-            bw.close();
+            try {
+                CreateServer comunicacao = new CreateServer();
+                comunicacao.getComunicacao().enviarMensagem("post", autorObj.getClass().getSimpleName(), autorObj.toString() + "\n");
+                comunicacao.getComunicacao().receberMensagem();
+                comunicacao.getComunicacao().fecharConexao();
+            } catch (Exception e) {
+                bw.write(autorObj.toString() + "\n");
+                bw.close();
+            }
         } catch (IOException errorAutor) {
             throw errorAutor;
         }
