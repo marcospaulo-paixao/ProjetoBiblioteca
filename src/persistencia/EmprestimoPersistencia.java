@@ -109,7 +109,7 @@ public class EmprestimoPersistencia implements ICRUDEmprestimo {
             BufferedWriter bw = new BufferedWriter(fw);
             for (Emprestimo emprestimo : lista) {
                 if (emprestimo.getId() != objEmprestimo.getId()) {
-                    bw.write(emprestimo.toString());
+                    bw.write(emprestimo.toString() + "\n");
                 }
             }
             bw.close();

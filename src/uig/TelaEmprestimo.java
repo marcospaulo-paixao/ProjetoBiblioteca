@@ -16,6 +16,7 @@ import modelos.utilidades.ColaboradorTableModel;
 import modelos.utilidades.EmprestimosTableModel;
 import modelos.utilidades.ExemplarTableModel;
 import modelos.interfaces.ICRUDExemplar;
+import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 
 public class TelaEmprestimo extends javax.swing.JFrame {
 
@@ -42,7 +43,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             modelColaborador = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
             jTableColaborador.setModel(modelColaborador);
 
-            modelExemplar = new ExemplarTableModel(new String[]{"Titulo", "Identificador"});
+            modelExemplar = new ExemplarTableModel(new String[]{"Titulo", "Identificador", "Status"});
             jTableExemplar.setModel(modelExemplar);
 
             modelEmprestimo = new EmprestimosTableModel(new String[]{"Identificador", "Colaborador", "Exemplar", "Data de Empréstimo", "Data de Devolução"});
@@ -129,7 +130,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
             }
         ));
-        jTableDadosEmprestimos.setEnabled(false);
         jTableDadosEmprestimos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableDadosEmprestimosMouseClicked(evt);
@@ -556,6 +556,9 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private void jButtonEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmprestarActionPerformed
         // TODO add your handling code here:
         habilitaForm(true);
+        jTextFieldNomeColaborador.setText("");
+        jTextFieldTituloDoExemplar.setText("");
+
     }//GEN-LAST:event_jButtonEmprestarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -568,18 +571,30 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         try {
             if (!jTextFieldNomeColaborador.getText().equals("")) {
                 if (!jTextFieldTituloDoExemplar.getText().equals("")) {
-                    Exemplar e = controleExemplar.getExemplar(jTextFieldTituloDoExemplar.getText());
-                    Colaborador c = controleColaborador.getColaborador(jTextFieldNomeColaborador.getText());
-                    controleEmprestimo.incluir(new Emprestimo(c, e));
-                    JOptionPane.showMessageDialog(null, "Emprestimo realizado com sucesso!");
-                    JOptionPane.showMessageDialog(null, "O COMPROVANTE DO EMPRESTIMO FOI ENVIADO POR E-MAIL\n"
-                            + "--------------------------------------------------------------------------------------\n"
-                            + "# Titulo do Exemplar :... " + e.getLivro().getTitulo() + "\n"
-                            + "# Colaborador :.......... " + c.getNome() + "\n# E-mail:... " + c.getEmail() + "\n"
-                            + "                \n\n####  Biblioteca System  ###");
+                    Exemplar exemplar = controleExemplar.getExemplar(jTextFieldTituloDoExemplar.getText());
+                    if (exemplar.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.INDISPONIVEL)) {
+                        JOptionPane.showMessageDialog(null, "Este exemplar está indisponível para impréstimo!");
+                    } else {
+                        if (exemplar.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.RESERVADO)) {
+                            JOptionPane.showMessageDialog(null, "Este exemplar está reservado!");
+                        } else {
+                            Exemplar novoExemplar = new Exemplar(exemplar);
+                            novoExemplar.setStatusEmprestimo(TipoDeStatusEmprestimoExemplar.INDISPONIVEL);
+                            modelExemplar.update(controleExemplar.listagem());
+                            controleExemplar.alterar(exemplar, novoExemplar);
+                            Colaborador c = controleColaborador.getColaborador(jTextFieldNomeColaborador.getText());
+                            controleEmprestimo.incluir(new Emprestimo(c, exemplar));
+                            JOptionPane.showMessageDialog(null, "Emprestimo realizado com sucesso!");
+                            JOptionPane.showMessageDialog(null, "O COMPROVANTE DO EMPRESTIMO FOI ENVIADO POR E-MAIL\n"
+                                    + "--------------------------------------------------------------------------------------\n"
+                                    + "# Titulo do Exemplar :... " + exemplar.getLivro().getTitulo() + "\n"
+                                    + "# Colaborador :.......... " + c.getNome() + "\n# E-mail:... " + c.getEmail() + "\n"
+                                    + "                \n\n####  Biblioteca System  ###");
 
-                    habilitaForm(false);
-                    modelEmprestimo.update(controleEmprestimo.listagem());
+                            habilitaForm(false);
+                            modelEmprestimo.update(controleEmprestimo.listagem());
+                        }
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecione o Exemplar!");
 
@@ -610,9 +625,14 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             if (jTableDadosEmprestimos.getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(null, "Selcione o empréstimo a ser Deletado");
             } else {
-                controleEmprestimo.deletar(controleEmprestimo.getEmprestimo(Integer.parseInt(modelEmprestimo.getValueAt(jTableDadosEmprestimos.getSelectedRow(), 0))));
-                JOptionPane.showMessageDialog(null, "Empréstimo deletado com Sucesso!");
-                modelEmprestimo.update(controleEmprestimo.listagem());
+                if (JOptionPane.showConfirmDialog(null, "Deseja deletar este emprestimo?", "Deletar", JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, "Selcione o empréstimo a ser Deletado");
+                    controleEmprestimo.deletar(controleEmprestimo.getEmprestimo(Integer.parseInt(modelEmprestimo.getValueAt(jTableDadosEmprestimos.getSelectedRow(), 0))));
+                    JOptionPane.showMessageDialog(null, "Empréstimo deletado com Sucesso!");
+                    modelEmprestimo.update(controleEmprestimo.listagem());
+                    jTextFieldNomeColaborador.setText("");
+                    jTextFieldTituloDoExemplar.setText("");
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -631,18 +651,19 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     private void jTableDadosEmprestimosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDadosEmprestimosMouseClicked
         try {
-            jTextFieldNomeColaborador.setText(jTableDadosEmprestimos.getValueAt(jTableDadosEmprestimos.getSelectedRow(), 1).toString());
-            jTextFieldTituloDoExemplar.setText(jTableDadosEmprestimos.getValueAt(jTableDadosEmprestimos.getSelectedRow(), 2).toString());
+            if (editar) {
+                jTextFieldNomeColaborador.setText(jTableDadosEmprestimos.getValueAt(jTableDadosEmprestimos.getSelectedRow(), 1).toString());
+                jTextFieldTituloDoExemplar.setText(jTableDadosEmprestimos.getValueAt(jTableDadosEmprestimos.getSelectedRow(), 2).toString());
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTableDadosEmprestimosMouseClicked
     public void habilitaForm(boolean habilita) {
-        jTextFieldNomeColaborador.setEnabled(habilita);
-        jTextFieldTituloDoExemplar.setEnabled(habilita);
         jTextFieldNomeColaborador.setEditable(false);
         jTextFieldTituloDoExemplar.setEditable(false);
         jTableColaborador.setRowSelectionAllowed(habilita);
         jTableExemplar.setRowSelectionAllowed(habilita);
+        jTableDadosEmprestimos.setRowSelectionAllowed(!habilita);
         jButtonEmprestar.setEnabled(!habilita);
         jButtonDeletar.setEnabled(!habilita);
         jButtonSalvar.setEnabled(habilita);
@@ -651,6 +672,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jToggleButton3.setEnabled(!habilita);
         jTableColaborador.setEnabled(habilita);
         jTableExemplar.setEnabled(habilita);
+        jTableDadosEmprestimos.setEnabled(!habilita);
         editar = !habilita;
         if (!habilita) {
             jTableColaborador.clearSelection();
