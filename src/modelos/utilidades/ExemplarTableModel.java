@@ -42,7 +42,11 @@ public class ExemplarTableModel extends AbstractTableModel {
             case 1:
                 return dados.get(rowIndex).getId() + "";
             case 2:
-                return dados.get(rowIndex).getEdicao() + "";
+                if (colunas[2].equals("Status")) {
+                    return dados.get(rowIndex).getStatusEmprestimo() + "";
+                } else {
+                    return dados.get(rowIndex).getEdicao() + "";
+                }
             case 3:
                 return dados.get(rowIndex).getDataDeAquisicao();
             case 4:

@@ -29,7 +29,7 @@ public class Emprestimo {
         saida += colaborador.getId() + ";";
         saida += exemplar.getId() + ";";
         saida += dataDoEmprestimo + ";";
-        saida += dataDeDevolucao;
+        saida += dataDeDevolucao+";";
         return saida;
     }
 
