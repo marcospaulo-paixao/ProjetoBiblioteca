@@ -4,26 +4,29 @@ import controle.ColaboradorControle;
 import controle.ExemplarControle;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelos.classes.Colaborador;
 import modelos.classes.Exemplar;
 import modelos.interfaces.ICRUDColaborador;
-import modelos.utilidades.DevolucaoTableModel;
+import modelos.interfaces.ICRUDEmprestimo;
 import modelos.interfaces.ICRUDExemplar;
+import modelos.utilidades.EmprestimosTableModel;
 
 public class TelaDevolucao extends javax.swing.JFrame {
 
     ICRUDColaborador colaborador = new ColaboradorControle("colaborador.txt");
     ICRUDExemplar exemplar = new ExemplarControle("exemplar.txt");
-    DevolucaoTableModel modelDevo = null;
-
-    //IcrudEmprestimo emprestimo = new 
+    EmprestimosTableModel modelDevo = null;
+    ICRUDEmprestimo emprestimo = null;
+    
     public TelaDevolucao() {
         super("Biblioteca System - Devolução");
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
-        modelDevo = new DevolucaoTableModel(new String[]{"Colaboraor", "Titulo do Exemplar", "Identificador", "Data do Emprestimo", "Periodo de Reserva"});
+        modelDevo = new EmprestimosTableModel(new String[]{"Identificador", "Colaborador", "Exemplar", "Data de Empréstimo", "Data Prevista de Devolução"});
         jTableDevolucao.setModel(modelDevo);
         this.setIconImage(icone.getImage());
     }
@@ -111,7 +114,7 @@ public class TelaDevolucao extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
-                        .addGap(0, 79, Short.MAX_VALUE)))
+                        .addGap(0, 115, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -181,10 +184,11 @@ public class TelaDevolucao extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataDevolucao)
-                    .addComponent(txtDataEmprestimo))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDataEmprestimo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDataDevolucao)))
                 .addContainerGap())
         );
 
@@ -394,13 +398,13 @@ public class TelaDevolucao extends javax.swing.JFrame {
         try {
             if (!txtDadosColaborador.getText().isEmpty() && !txtDadosMatricula.getText().isEmpty()
                     && !txtDadosIdentificador.getText().isEmpty() && !txtDadosTituloExemplar.getText().isEmpty()) {
-                
+
                 SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/YYYY");
                 Date dataAtual = new Date();
                 String multa = dataFormatada.format(dataAtual);
-                String []periodos = multa.split("/");
-                
-            }else {
+                String[] periodos = multa.split("/");
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Para Realizar a Devolução Você deve Selecionar o Colabordor");
             }
         } catch (Exception e) {
@@ -409,6 +413,11 @@ public class TelaDevolucao extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         txtDataDevolucao.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        try {
+            modelDevo.update(emprestimo.listagem());
+        } catch (Exception ex) {
+            Logger.getLogger(TelaDevolucao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     public static void main(String args[]) {

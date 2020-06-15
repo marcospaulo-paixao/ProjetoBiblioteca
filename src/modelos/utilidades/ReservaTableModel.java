@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import modelos.classes.Reserva;
 
-public class DevolucaoTableModel extends AbstractTableModel {
+public class ReservaTableModel extends AbstractTableModel {
 
     ArrayList<Reserva> dados = null;
     String[] colunas = null;
 
-    public DevolucaoTableModel(String[] colunas) {
+    public ReservaTableModel(String[] colunas) {
         this.dados = new ArrayList<>();
         this.colunas = colunas;
     }
 
-    private DevolucaoTableModel() {
+    private ReservaTableModel() {
         dados = null;
         colunas = null;
     }
