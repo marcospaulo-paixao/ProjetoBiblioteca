@@ -1,16 +1,21 @@
 package uig;
 
 import controle.ColaboradorControle;
+import controle.DevolucaoControle;
 import controle.EmprestimoControle;
 import controle.ExemplarControle;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelos.classes.Colaborador;
+import modelos.classes.Devolucao;
 import modelos.classes.Emprestimo;
 import modelos.classes.Exemplar;
 import modelos.interfaces.ICRUDColaborador;
+import modelos.interfaces.ICRUDDevolucao;
 import modelos.interfaces.ICRUDEmprestimo;
 import modelos.utilidades.ColaboradorTableModel;
 import modelos.utilidades.EmprestimosTableModel;
@@ -20,13 +25,16 @@ import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 
 public class TelaEmprestimo extends javax.swing.JFrame {
 
-    ICRUDColaborador controleColaborador = null;
-    ICRUDExemplar controleExemplar = null;
-    ICRUDEmprestimo controleEmprestimo = null;
-    ColaboradorTableModel modelColaborador = null;
-    ExemplarTableModel modelExemplar = null;
-    EmprestimosTableModel modelEmprestimo = null;
-    boolean editar = false;
+    private ICRUDColaborador controleColaborador = null;
+    private ICRUDExemplar controleExemplar = null;
+    private ICRUDEmprestimo controleEmprestimo = null;
+    private ICRUDDevolucao controleDevolucao = null;
+    private ColaboradorTableModel modelColaborador = null;
+    private ExemplarTableModel modelExemplar = null;
+    private EmprestimosTableModel modelEmprestimo = null;
+
+    private boolean editar = false;
+    private boolean salvarEmprestimo = false;
 
     /**
      * Creates new form TelaEmprestimo
@@ -39,11 +47,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             controleColaborador = new ColaboradorControle("colaborador.txt");
             controleExemplar = new ExemplarControle("exemplar.txt");
             controleEmprestimo = new EmprestimoControle("emprestimo.txt");
-
+            controleDevolucao = new DevolucaoControle("devolucao.txt");
             modelColaborador = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
             jTableColaborador.setModel(modelColaborador);
 
-            modelExemplar = new ExemplarTableModel(new String[]{"Titulo", "Identificador", "Status"});
+            modelExemplar = new ExemplarTableModel(new String[]{"Identificador", "Titulo", "Status"});
             jTableExemplar.setModel(modelExemplar);
 
             modelEmprestimo = new EmprestimosTableModel(new String[]{"Identificador", "Colaborador", "Exemplar", "Data de Empréstimo", "Data de Devolução"});
@@ -521,9 +529,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            modelColaborador.update(controleColaborador.listagem());
-            modelExemplar.update(controleExemplar.listagem());
-            modelEmprestimo.update(controleEmprestimo.listagem());
+            atualizaTables();
         } catch (Exception ex) {
             Logger.getLogger(TelaEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -546,7 +552,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (!editar) {
-                Exemplar ex = controleExemplar.getExemplar(Integer.parseInt(modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 1)));
+                Exemplar ex = controleExemplar.getExemplar(Integer.parseInt(modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 0)));
                 jTextFieldTituloDoExemplar.setText(ex.getLivro().getTitulo() + "");
             }
         } catch (Exception e) {
@@ -558,6 +564,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         habilitaForm(true);
         jTextFieldNomeColaborador.setText("");
         jTextFieldTituloDoExemplar.setText("");
+        salvarEmprestimo = true;
 
     }//GEN-LAST:event_jButtonEmprestarActionPerformed
 
@@ -568,42 +575,10 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here: 
-        try {
-            if (!jTextFieldNomeColaborador.getText().equals("")) {
-                if (!jTextFieldTituloDoExemplar.getText().equals("")) {
-                    Exemplar exemplar = controleExemplar.getExemplar(jTextFieldTituloDoExemplar.getText());
-                    if (exemplar.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.INDISPONIVEL)) {
-                        JOptionPane.showMessageDialog(null, "Este exemplar está indisponível para impréstimo!");
-                    } else {
-                        if (exemplar.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.RESERVADO)) {
-                            JOptionPane.showMessageDialog(null, "Este exemplar está reservado!");
-                        } else {
-                            Exemplar novoExemplar = new Exemplar(exemplar);
-                            novoExemplar.setStatusEmprestimo(TipoDeStatusEmprestimoExemplar.INDISPONIVEL);
-                            modelExemplar.update(controleExemplar.listagem());
-                            controleExemplar.alterar(exemplar, novoExemplar);
-                            Colaborador c = controleColaborador.getColaborador(jTextFieldNomeColaborador.getText());
-                            controleEmprestimo.incluir(new Emprestimo(c, exemplar));
-                            JOptionPane.showMessageDialog(null, "Emprestimo realizado com sucesso!");
-                            JOptionPane.showMessageDialog(null, "O COMPROVANTE DO EMPRESTIMO FOI ENVIADO POR E-MAIL\n"
-                                    + "--------------------------------------------------------------------------------------\n"
-                                    + "# Titulo do Exemplar :... " + exemplar.getLivro().getTitulo() + "\n"
-                                    + "# Colaborador :.......... " + c.getNome() + "\n# E-mail:... " + c.getEmail() + "\n"
-                                    + "                \n\n####  Biblioteca System  ###");
+        if (salvarEmprestimo) {
+            emprestarExemplar();
+        } else {
 
-                            habilitaForm(false);
-                            modelEmprestimo.update(controleEmprestimo.listagem());
-                        }
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Selecione o Exemplar!");
-
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Selecione o Colaborador!");
-
-            }
-        } catch (Exception e) {
         }
 
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -641,10 +616,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         try {
-            habilitaForm(true);
-            jTableColaborador.setEnabled(false);
-            jTableExemplar.setEnabled(false);
-            jTableDadosEmprestimos.setEnabled(true);
+            devolverExemplar();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jToggleButton3ActionPerformed
@@ -658,6 +630,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTableDadosEmprestimosMouseClicked
+
     public void habilitaForm(boolean habilita) {
         jTextFieldNomeColaborador.setEditable(false);
         jTextFieldTituloDoExemplar.setEditable(false);
@@ -747,7 +720,8 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                     for (int i = 0; i < matrizFiltro[1].length; i++) {
                         if (matrizFiltro[0][i].toLowerCase().contains(texto)
                                 || matrizFiltro[0][i].toLowerCase().contains(texto)
-                                || matrizFiltro[1][i].toLowerCase().contains(texto)) {
+                                || matrizFiltro[1][i].toLowerCase().contains(texto)
+                                || matrizFiltro[2][i].toLowerCase().contains(texto)) {
                             matriz.add(matrizFiltro[0][i]);
                         }
                     }
@@ -801,6 +775,85 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             modelEmprestimo.update(matrizS);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    private void emprestarExemplar() {
+        try {
+            if (!jTextFieldNomeColaborador.getText().equals("")) {
+                if (!jTextFieldTituloDoExemplar.getText().equals("")) {
+                    Exemplar exemplar = controleExemplar.getExemplar(Integer.parseInt(modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 0)));
+                    if (exemplar.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.INDISPONIVEL)) {
+                        JOptionPane.showMessageDialog(null, "Este exemplar está indisponível para impréstimo!");
+                    } else {
+                        if (exemplar.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.RESERVADO)) {
+                            JOptionPane.showMessageDialog(null, "Este exemplar está reservado!");
+                        } else {
+                            Exemplar novoExemplar = new Exemplar(exemplar);
+                            novoExemplar.setStatusEmprestimo(TipoDeStatusEmprestimoExemplar.INDISPONIVEL);
+                            controleExemplar.alterar(exemplar, novoExemplar);
+                            Colaborador c = controleColaborador.getColaborador(jTextFieldNomeColaborador.getText());
+                            controleEmprestimo.incluir(new Emprestimo(c, exemplar));
+                            habilitaForm(false);
+                            atualizaTables();
+                            JOptionPane.showMessageDialog(null, "Emprestimo realizado com sucesso!");
+                            JOptionPane.showMessageDialog(null, "O COMPROVANTE DO EMPRESTIMO FOI ENVIADO POR E-MAIL\n"
+                                    + "--------------------------------------------------------------------------------------\n"
+                                    + "# Titulo do Exemplar :... " + exemplar.getLivro().getTitulo() + "\n"
+                                    + "# Colaborador :.......... " + c.getNome() + "\n# E-mail:... " + c.getEmail() + "\n"
+                                    + "                \n\n####  Biblioteca System  ###");
+
+                        }
+                    }
+                } else {
+                    Icon figura = new ImageIcon(getToolkit().createImage(getClass().getResource("/icons/livro.png")));
+                    JOptionPane.showMessageDialog(null, "Selecione o Exemplar", "Selecione", JOptionPane.PLAIN_MESSAGE, figura);
+//                    JOptionPane.showMessageDialog(null, "Selecione o Exemplar!","",JOptionPane.ERROR_MESSAGE,new ImageIcon("c:\minhafoto.png"));
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione o Colaborador!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    public void devolverExemplar() throws Exception {
+        try {
+            if (jTableDadosEmprestimos.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(null, "Selecione o emprestimo a ser devolvido!");
+            } else {
+                Emprestimo emprestimo = controleEmprestimo.getEmprestimo(Integer.parseInt(modelEmprestimo.getValueAt(jTableDadosEmprestimos.getSelectedRow(), 0)));
+                Exemplar exemplar = emprestimo.getExemplar();
+                Exemplar atualExemplar = new Exemplar(exemplar);
+
+                atualExemplar.setStatusEmprestimo(TipoDeStatusEmprestimoExemplar.DISPONIVEL);
+
+                controleExemplar.alterar(exemplar, atualExemplar);
+                controleEmprestimo.deletar(emprestimo);
+
+                Devolucao dev = new Devolucao(emprestimo);
+                controleDevolucao.incluir(dev);
+
+                atualizaTables();
+                jTextFieldNomeColaborador.setText("");
+                jTextFieldTituloDoExemplar.setText("");
+                JOptionPane.showMessageDialog(null, "Exemplar devolvido com sucesso!");
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    public void atualizaTables() throws Exception {
+        try {
+            modelColaborador.update(controleColaborador.listagem());
+            modelExemplar.update(controleExemplar.listagem());
+            modelEmprestimo.update(controleEmprestimo.listagem());
+        } catch (Exception e) {
+            throw e;
         }
     }
 

@@ -38,9 +38,17 @@ public class ExemplarTableModel extends AbstractTableModel {
     public String getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return dados.get(rowIndex).getLivro().getTitulo();
+                if (colunas[0].equals("Identificador")) {
+                    return dados.get(rowIndex).getId() + "";
+                } else {
+                    return dados.get(rowIndex).getLivro().getTitulo();
+                }
             case 1:
-                return dados.get(rowIndex).getId() + "";
+                if (colunas[1].equals("Titulo")) {
+                    return dados.get(rowIndex).getLivro().getTitulo();
+                } else {
+                    return dados.get(rowIndex).getId() + "";
+                }
             case 2:
                 if (colunas[2].equals("Status")) {
                     return dados.get(rowIndex).getStatusEmprestimo() + "";
@@ -84,7 +92,7 @@ public class ExemplarTableModel extends AbstractTableModel {
             ArrayList<Exemplar> lista = new ArrayList<>();
             for (int i = 0; i < dados.size(); i++) {
                 for (int j = 0; j < dadosDoExemplar.length; j++) {
-                    if (dados.get(i).getLivro().getTitulo().equals(dadosDoExemplar[j])) {
+                    if (dados.get(i).getId() == Integer.parseInt(dadosDoExemplar[j])) {
                         lista.add(dados.get(i));
                     }
                 }
