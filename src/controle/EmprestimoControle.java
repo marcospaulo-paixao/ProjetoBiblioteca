@@ -49,4 +49,22 @@ public class EmprestimoControle implements ICRUDEmprestimo {
         }
     }
 
+    @Override
+    public void deletar(Emprestimo objEmprestimo) throws Exception {
+        try {
+            emprestimoPersistencia.deletar(objEmprestimo);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public void altera(Emprestimo velhoObjEmprestimo, Emprestimo novoObjEmprestimo) throws Exception {
+        try {
+            emprestimoPersistencia.altera(velhoObjEmprestimo, novoObjEmprestimo);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 }

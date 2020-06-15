@@ -25,6 +25,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     ColaboradorTableModel modelColaborador = null;
     ExemplarTableModel modelExemplar = null;
     EmprestimosTableModel modelEmprestimo = null;
+    boolean editar = false;
 
     /**
      * Creates new form TelaEmprestimo
@@ -44,9 +45,9 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             modelExemplar = new ExemplarTableModel(new String[]{"Titulo", "Identificador"});
             jTableExemplar.setModel(modelExemplar);
 
-            modelEmprestimo = new EmprestimosTableModel(new String[]{"Identificador","Colaborador", "Exemplar", "Data de Empréstimo", "Data de Devolução"});
+            modelEmprestimo = new EmprestimosTableModel(new String[]{"Identificador", "Colaborador", "Exemplar", "Data de Empréstimo", "Data de Devolução"});
             jTableDadosEmprestimos.setModel(modelEmprestimo);
-            
+
             habilitaForm(false);
             this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
         } catch (Exception e) {
@@ -151,15 +152,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
 
         jLabel1.setText("Pesquisar");
 
-        jTextFieldPesquisarColaborador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPesquisarColaboradorActionPerformed(evt);
-            }
-        });
         jTextFieldPesquisarColaborador.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextFieldPesquisarColaboradorKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldPesquisarColaboradorKeyReleased(evt);
             }
@@ -281,6 +274,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jButtonDeletar.setText("Deletar");
         jButtonDeletar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonDeletar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButtonDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeletarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -500,15 +498,6 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButtonSairActionPerformed
 
-    private void jTextFieldPesquisarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarColaboradorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPesquisarColaboradorActionPerformed
-
-    private void jTextFieldPesquisarColaboradorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarColaboradorKeyTyped
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jTextFieldPesquisarColaboradorKeyTyped
-
     private void jTextFieldPesquisarColaboradorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarColaboradorKeyReleased
         // TODO add your handling code here:
         try {
@@ -530,7 +519,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         try {
             modelColaborador.update(controleColaborador.listagem());
             modelExemplar.update(controleExemplar.listagem());
-             modelEmprestimo.update(controleEmprestimo.listagem());
+            modelEmprestimo.update(controleEmprestimo.listagem());
         } catch (Exception ex) {
             Logger.getLogger(TelaEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -548,9 +537,10 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private void jTableColaboradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableColaboradorMouseClicked
         // TODO add your handling code here:
         try {
-
-            Colaborador c = controleColaborador.getColaborador(modelColaborador.getValueAt(jTableColaborador.getSelectedRow(), 0));
-            jTextFieldNomeColaborador.setText(c.getNome());
+            if (!editar) {
+                Colaborador c = controleColaborador.getColaborador(modelColaborador.getValueAt(jTableColaborador.getSelectedRow(), 0));
+                jTextFieldNomeColaborador.setText(c.getNome());
+            }
         } catch (Exception e) {
         }
 
@@ -560,9 +550,10 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private void jTableExemplarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableExemplarMouseClicked
         // TODO add your handling code here:
         try {
-
-            Exemplar ex = controleExemplar.getExemplar(Integer.parseInt(modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 1)));
-            jTextFieldTituloDoExemplar.setText(ex.getLivro().getTitulo() + "");
+            if (!editar) {
+                Exemplar ex = controleExemplar.getExemplar(Integer.parseInt(modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 1)));
+                jTextFieldTituloDoExemplar.setText(ex.getLivro().getTitulo() + "");
+            }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTableExemplarMouseClicked
@@ -580,12 +571,22 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here: 
         try {
-            Exemplar e = controleExemplar.getExemplar(jTextFieldTituloDoExemplar.getText());
-            Colaborador c = controleColaborador.getColaborador(jTextFieldNomeColaborador.getText());
-            controleEmprestimo.incluir(new Emprestimo(c, e));
-            JOptionPane.showMessageDialog(null, "Emprestimo realizado com sucesso!");
-            habilitaForm(false);
-            modelEmprestimo.update(controleEmprestimo.listagem());
+            if (!jTextFieldNomeColaborador.getText().equals("")) {
+                if (!jTextFieldTituloDoExemplar.getText().equals("")) {
+                    Exemplar e = controleExemplar.getExemplar(jTextFieldTituloDoExemplar.getText());
+                    Colaborador c = controleColaborador.getColaborador(jTextFieldNomeColaborador.getText());
+                    controleEmprestimo.incluir(new Emprestimo(c, e));
+                    JOptionPane.showMessageDialog(null, "Emprestimo realizado com sucesso!");
+                    habilitaForm(false);
+                    modelEmprestimo.update(controleEmprestimo.listagem());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione o Exemplar!");
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione o Colaborador!");
+
+            }
         } catch (Exception e) {
         }
 
@@ -599,9 +600,28 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jTextFieldPesquisarEmprestimoKeyReleased
+
+    private void jButtonDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeletarActionPerformed
+        // TODO add your handling code here:
+
+        try {
+
+            if (jTableDadosEmprestimos.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(null, "Selcione o empréstimo a ser Deletado");
+            } else {
+                controleEmprestimo.deletar(controleEmprestimo.getEmprestimo(Integer.parseInt(modelEmprestimo.getValueAt(jTableDadosEmprestimos.getSelectedRow(), 0))));
+                JOptionPane.showMessageDialog(null, "Empréstimo deletado com Sucesso!");
+                modelEmprestimo.update(controleEmprestimo.listagem());
+            }
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_jButtonDeletarActionPerformed
     public void habilitaForm(boolean habilita) {
         jTextFieldNomeColaborador.setEnabled(habilita);
         jTextFieldTituloDoExemplar.setEnabled(habilita);
+        jTextFieldNomeColaborador.setEditable(false);
+        jTextFieldTituloDoExemplar.setEditable(false);
         jTableColaborador.setRowSelectionAllowed(habilita);
         jTableExemplar.setRowSelectionAllowed(habilita);
         jButtonEmprestar.setEnabled(!habilita);
@@ -610,6 +630,15 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         jButtonCancelar.setEnabled(habilita);
         jButtonRealizarReserva.setEnabled(!habilita);
         jToggleButton3.setEnabled(!habilita);
+        jTableColaborador.setEnabled(habilita);
+        jTableExemplar.setEnabled(habilita);
+        editar = !habilita;
+        if (!habilita) {
+            jTableColaborador.clearSelection();
+            jTableExemplar.clearSelection();
+            jTextFieldNomeColaborador.setText("");
+            jTextFieldTituloDoExemplar.setText("");
+        }
 
     }
 
@@ -691,7 +720,8 @@ public class TelaEmprestimo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-  private void pesquisarEmprestimos(String texto) throws Exception {
+
+    private void pesquisarEmprestimos(String texto) throws Exception {
         try {
             String[][] matrizFiltro = new String[9][controleEmprestimo.listagem().size()];
             String[] matrizS = new String[matrizFiltro[2].length];
