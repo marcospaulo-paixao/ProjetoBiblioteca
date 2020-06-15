@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
     
     UsuarioControle uc = null;
-
+    char caract = 'a';
     /**
      * Creates new form Login
      */
@@ -162,6 +162,8 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
+
+
         try {
             if (uc.validaUsuario(jTextFieldLogin.getText(), new String(jTextFieldSenha.getPassword()))) {
                 TelaMenuPrincipal menu = new TelaMenuPrincipal();

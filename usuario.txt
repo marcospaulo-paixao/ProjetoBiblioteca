@@ -15,3 +15,4 @@
 8;Estrela Nova;estrela;123;ATIVO;
 21;Professor Eugenio;porfessor;123;ATIVO;
 129;Uncle Boby;uncle;bb;ATIVO;
+137;David;david;123;ATIVO;
