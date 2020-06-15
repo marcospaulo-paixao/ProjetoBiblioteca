@@ -130,7 +130,7 @@ public class TelaReserva extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Menu"));
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/salve-24.png"))); // NOI18N
-        btnSalvar.setText("Salvar Reserva");
+        btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
         btnSalvar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSalvar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -762,6 +762,9 @@ public class TelaReserva extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        jTableColaborador.clearSelection();
+        jTableExemplar.clearSelection();
+        jTableReservas.clearSelection();
         habilitarCampos(false);
         limparDadosColaborador();
         jTableColaborador.setEnabled(false);
