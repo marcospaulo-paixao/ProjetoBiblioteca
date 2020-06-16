@@ -19,7 +19,7 @@ import modelos.utilidades.StatusReserva;
 
 public class ExemplarPersistencia implements ICRUDExemplar {
 
-    ICRUDLivro livro = new LivroControle("livro.txt");
+    ICRUDLivro livro = new LivroControle("./database/livro.txt");
     String nomeDoArquivoNoDisco = null;
 
     public ExemplarPersistencia(String nomeDoArquivoNoDisco) {

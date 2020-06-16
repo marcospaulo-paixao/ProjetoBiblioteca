@@ -22,7 +22,7 @@ public class GeradorID {
      * #Atributos
      */
     private int id = 0;
-    private String nomeDoArquivo = "IdGerado.txt";
+    private String nomeDoArquivo = "./database/IdGerado.txt";
 
     /**
      * #Métodos

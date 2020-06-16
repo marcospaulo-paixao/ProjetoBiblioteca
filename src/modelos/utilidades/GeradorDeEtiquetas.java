@@ -10,8 +10,8 @@ public class GeradorDeEtiquetas {
 
     String numeroDaEtiqueta = "";
     String armario = "";
-    ICRUDExemplar exemplar = new ExemplarControle("exemplar.txt");
-    ICRUDLivro livro = new LivroControle("livro.txt");
+    ICRUDExemplar exemplar = new ExemplarControle("./database/exemplar.txt");
+    ICRUDLivro livro = new LivroControle("./database/livro.txt");
 
     public GeradorDeEtiquetas(Exemplar livro, String armario) throws Exception {
         Exemplar exemplarEtiqueta = exemplar.getExemplar(livro.getId());

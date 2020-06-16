@@ -42,10 +42,10 @@ public class TelaReserva extends javax.swing.JFrame {
         super("Biblioteca System - Reserva de Exemplares");
         initComponents();
 
-        exem = new ExemplarControle("exemplar.txt");
-        cc = new ColaboradorControle("colaborador.txt");
-        reserva = new ReservaControle("reservas.txt");
-        emprestimo = new EmprestimoControle("emprestimo.txt");
+        exem = new ExemplarControle("./database/exemplar.txt");
+        cc = new ColaboradorControle("./database/colaborador.txt");
+        reserva = new ReservaControle("./database/reservas.txt");
+        emprestimo = new EmprestimoControle("./database/emprestimo.txt");
         model = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
         jTableColaborador.setModel(model);
 

@@ -28,7 +28,7 @@ public class TelaEditora extends javax.swing.JFrame {
 
         this.setIconImage(icone.getImage());
         try {
-            editora = new EditoraControle("editora.txt");
+            editora = new EditoraControle("./database/editora.txt");
             model = new EditoraTableModel(new String[]{"Nome", "Descrição"});
             gridEditora.setModel(model);
         } catch (Exception errer) {

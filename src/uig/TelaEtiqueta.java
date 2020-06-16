@@ -32,8 +32,8 @@ public class TelaEtiqueta extends javax.swing.JFrame {
     public TelaEtiqueta() {
         super("Biblioteca System");
         initComponents();
-        livro = new LivroControle("livro.txt");
-        exemplar = new ExemplarControle("exemplar.txt");
+        livro = new LivroControle("./database/livro.txt");
+        exemplar = new ExemplarControle("./database/exemplar.txt");
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
     }

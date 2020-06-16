@@ -1,7 +1,6 @@
 package uig;
 
 import controle.UsuarioControle;
-import javax.accessibility.AccessibleRole;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
@@ -13,7 +12,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        uc = new UsuarioControle("usuario.txt");
+        uc = new UsuarioControle("./database/usuario.txt");
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }
 

@@ -22,9 +22,9 @@ import modelos.interfaces.ICRUDLivro;
 
 public class LivroPersistencia implements ICRUDLivro {
 
-    ICRUDAutor autor = new AutorControle("autor.txt");
-    ICRUDEditora editora = new EditoraControle("editora.txt");
-    ICRUDAreaDoLivro areaDoLivro = new AreaDoLivroControle("areaDoLivro.txt");
+    ICRUDAutor autor = new AutorControle("./database/autor.txt");
+    ICRUDEditora editora = new EditoraControle("./database/editora.txt");
+    ICRUDAreaDoLivro areaDoLivro = new AreaDoLivroControle("./database/areaDoLivro.txt");
 
     String nomeDoArquivoNoDisco = "";
 

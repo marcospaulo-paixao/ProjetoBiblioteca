@@ -77,8 +77,8 @@ public class EmprestimoPersistencia implements ICRUDEmprestimo {
     @Override
     public ArrayList<Emprestimo> listagem() throws Exception {
         try {
-            ICRUDColaborador cc = new ColaboradorControle("colaborador.txt");
-            ICRUDExemplar ec = new ExemplarControle("exemplar.txt");
+            ICRUDColaborador cc = new ColaboradorControle("./database/colaborador.txt");
+            ICRUDExemplar ec = new ExemplarControle("./database/exemplar.txt");
 
             ArrayList<Emprestimo> lista = new ArrayList<>();
             FileReader fr = new FileReader(nomeDoArquivoNoDisco);

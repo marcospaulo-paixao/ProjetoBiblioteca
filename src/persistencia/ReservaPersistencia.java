@@ -21,8 +21,8 @@ public class ReservaPersistencia implements ICRUDReserva {
 
     SimpleDateFormat data = new SimpleDateFormat("dd/mm/yyyy");
     String nomeDoAquivoNoDisco = "";
-    ICRUDExemplar exemplar = new ExemplarControle("exemplar.txt");
-    ICRUDColaborador colaborador = new ColaboradorControle("colaborador.txt");
+    ICRUDExemplar exemplar = new ExemplarControle("./database/exemplar.txt");
+    ICRUDColaborador colaborador = new ColaboradorControle("./database/colaborador.txt");
 
     public ReservaPersistencia(String nomeDoAquivoNoDisco) {
         this.nomeDoAquivoNoDisco = nomeDoAquivoNoDisco;

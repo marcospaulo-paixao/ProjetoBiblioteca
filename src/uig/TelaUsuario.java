@@ -33,7 +33,7 @@ public class TelaUsuario extends javax.swing.JFrame {
             ImageIcon icone = new ImageIcon("src/icons/livro.png");
             this.setIconImage(icone.getImage());
             habilitaFormulario(false);
-            usuarioControle = new UsuarioControle("usuario.txt");
+            usuarioControle = new UsuarioControle("./database/usuario.txt");
             model = new UsuarioTableModel(new String[]{"Nome", "Login", "Status"});
             jTableUsuarios.setModel(model);
             model.update(usuarioControle.listar());
