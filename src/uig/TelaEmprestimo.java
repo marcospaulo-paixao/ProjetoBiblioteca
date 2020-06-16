@@ -820,11 +820,10 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                                     + "# Titulo do Exemplar :....... " + newEmprestimo.getExemplar().getLivro().getTitulo() + "\n"
                                     + "# Colaborador :................ " + newEmprestimo.getColaborador().getNome() + "\n"
                                     + "# E-mail:........................... " + newEmprestimo.getColaborador().getEmail() + "\n"
-                                    + "# Data da Renovação:..... " + newEmprestimo.getDataDoEmprestimo() + "\n"
+                                    + "# Data da Emprestimo:..... " + newEmprestimo.getDataDoEmprestimo() + "\n"
                                     + "# Data da Devoluçao:...... " + newEmprestimo.getDataDeDevolucao() + "\n"
                                     + "--------------------------------------------------------------------------------------------------------------------\n"
                                     + "\n----------------------------------«««« Biblioteca System »»»»---------------------------------------\n\n", "Comprovante", JOptionPane.PLAIN_MESSAGE);
-
                         }
                     }
                 } else {

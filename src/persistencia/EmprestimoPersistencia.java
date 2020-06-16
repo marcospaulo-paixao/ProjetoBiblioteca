@@ -135,5 +135,19 @@ public class EmprestimoPersistencia implements ICRUDEmprestimo {
             throw e;
         }
     }
+    @Override
+    public Emprestimo getEmprestimoExe(int id) throws Exception {
+        try {
 
+            ArrayList<Emprestimo> lista = listagem();
+            for (Emprestimo emprestimo : lista) {
+                if (emprestimo.getExemplar().getId() == id) {
+                    return emprestimo;
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
+    }
 }

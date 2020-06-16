@@ -67,4 +67,13 @@ public class EmprestimoControle implements ICRUDEmprestimo {
         }
     }
 
+    @Override
+    public Emprestimo getEmprestimoExe(int id) throws Exception {
+        try {
+            return emprestimoPersistencia.getEmprestimoExe(id);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 }

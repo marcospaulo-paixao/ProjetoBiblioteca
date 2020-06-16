@@ -67,7 +67,7 @@ public class ReservaPersistencia implements ICRUDReserva {
     }
 
     @Override
-    public void excluir(String nome) throws Exception {
+    public void excluir(int id) throws Exception {
         try {
             ArrayList<Reserva> listaReserva = listagem();
             FileWriter fr = new FileWriter(nomeDoAquivoNoDisco);
@@ -75,7 +75,7 @@ public class ReservaPersistencia implements ICRUDReserva {
 
             for (int pos = 0; pos < listaReserva.size(); pos++) {
                 Reserva aux = listaReserva.get(pos);
-                if (!nome.equalsIgnoreCase(aux.getColaborador().getNome())) {
+                if (id != aux.getId()) {
                     br.write(aux.toString() + "\n");
                 }
             }

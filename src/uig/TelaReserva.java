@@ -22,6 +22,8 @@ import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.interfaces.ICRUDReserva;
+import modelos.utilidades.CalculoDeMulta;
+import modelos.utilidades.Data;
 import modelos.utilidades.StatusReserva;
 
 public class TelaReserva extends javax.swing.JFrame {
@@ -47,9 +49,9 @@ public class TelaReserva extends javax.swing.JFrame {
         model = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
         jTableColaborador.setModel(model);
 
-        modelExemplar = new ExemplarTableModel(new String[]{"Titulo", "Identificador","Status"});
+        modelExemplar = new ExemplarTableModel(new String[]{"Identificador", "Titulo", "Status"});
         jTableExemplar.setModel(modelExemplar);
-        modelReserva = new ReservaTableModel(new String[]{"Colaboraor", "Titulo do Exemplar", "Identificador", "Data da Reserva", "Periodo de Reserva"});
+        modelReserva = new ReservaTableModel(new String[]{"Identificador", "Colaboraor", "Titulo do Exemplar", "Id Exemplar", "Periodo de Reserva", "Data da Reserva", "Edição"});
         jTableReservas.setModel(modelReserva);
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }
@@ -248,6 +250,7 @@ public class TelaReserva extends javax.swing.JFrame {
 
             }
         ));
+        jTableReservas.setEnabled(false);
         jTableReservas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableReservasMouseClicked(evt);
@@ -530,24 +533,43 @@ public class TelaReserva extends javax.swing.JFrame {
                         String nome = model.getValueAt(jTableColaborador.getSelectedRow(), 0);
                         String matricula = model.getValueAt(jTableColaborador.getSelectedRow(), 1);
                         SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/YYYY");
+
                         Date dataDaRerserva = new Date();
                         Exemplar exemplarVerificar = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
                         Colaborador colaboradorVerificar = cc.getColaborador(nome);
-                        if (exemplarVerificar.getStatusEmprestimo() == TipoDeStatusEmprestimoExemplar.DISPONIVEL) {
+
+                        //Emprestimo VerificarReserva = emprestimo.getEmprestimoExe(Integer.parseInt(txtDadosIdentificador.getText()));
+                        //CalculoDeMulta diaControle = new CalculoDeMulta();
+                        //int controle = (int) diaControle.diasParaReserva(dataFormatada.parse(VerificarReserva.getDataDoEmprestimo()), dataFormatada.parse(VerificarReserva.getDataDeDevolucao()));
+
+                        if (true) {
                             if (colaboradorVerificar.getTipoDeStatus().ATIVO == TipoDeStatus.ATIVO) {
-                                int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Reserva do Exemplar Para:  " + nome, null, 0);
+                                int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Reserva do Exemplar Para:  " + nome, null, JOptionPane.PLAIN_MESSAGE);
                                 if (config == 0) {
                                     GeradorID igId = new GeradorID();
-                                    reserva.incluir(new Reserva(igId.getID(), dataFormatada.format(dataDaRerserva), 5, exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText())), cc.getColaborador(txtDadosColaborador.getText())));
+                                    Reserva newReserva = new Reserva(igId.getID(), dataFormatada.format(dataDaRerserva), 5, exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText())), cc.getColaborador(txtDadosColaborador.getText()));
+                                    reserva.incluir(newReserva);
                                     igId.finalize();
                                     Exemplar exemplarNaoAlterado = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
                                     Exemplar exemplarAlterado = new Exemplar(exemplarNaoAlterado);
                                     exemplarAlterado.setStatusReserva(StatusReserva.RESERVADO);
                                     exem.alterar(exemplarNaoAlterado, exemplarAlterado);
                                     JOptionPane.showMessageDialog(null, "Exemplar Reservado");
+                                    JOptionPane.showMessageDialog(null, "O COMPROVANTE DA RESERVA FOI ENVIADO POR E-MAIL\n"
+                                            + "--------------------------------------------------------------------------------------------------------------------\n"
+                                            + "# Titulo do Exemplar :....... " + newReserva.getExemplar().getLivro().getTitulo() + "\n"
+                                            + "# Colaborador :................ " + newReserva.getColaborador().getNome() + "\n"
+                                            + "# E-mail:........................... " + newReserva.getColaborador().getEmail() + "\n"
+                                            + "# Data da Reserva:..... " + newReserva.getDataDaReserva() + "\n"
+                                            + "# Periodo de Reserva:...... " + newReserva.getPeriodo() + "\n"
+                                            + "--------------------------------------------------------------------------------------------------------------------\n"
+                                            + "\n----------------------------------«««« Biblioteca System »»»»---------------------------------------\n\n", "Comprovante", JOptionPane.PLAIN_MESSAGE);
+
                                     imprimirNaGrid();
                                     limparDadosColaborador();
                                     limparDadosExeplar();
+
+                                    //JOptionPane.showMessageDialog(rootPane, controle);
                                 } else {
                                     limparDadosColaborador();
                                     limparDadosExeplar();
@@ -571,28 +593,47 @@ public class TelaReserva extends javax.swing.JFrame {
                     }
                 } else {
                     jTableReservas.setEnabled(true);
+
                     if (!txtDadosColaborador.getText().isEmpty() && !txtDadosMatricula.getText().isEmpty()
                             && !txtDadosIdentificador.getText().isEmpty() && !txtDadosTituloExemplar.getText().isEmpty()) {
                         int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Emprestimo?  ", null, 0);
                         if (config == 0) {
-                            Reserva reservaDos = reserva.getReservaColaborador(txtDadosColaborador.getText());
-                            Colaborador colaboradorConversao = reservaDos.getColaborador();
-                            Exemplar exemplarConversao = reservaDos.getExemplar();
+                            Exemplar exemplarteste = exem.getExemplar(Integer.parseInt(modelReserva.getValueAt(jTableReservas.getSelectedRow(), 3)));
+                            if (exemplarteste.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.INDISPONIVEL)) {
+                                JOptionPane.showMessageDialog(null, "Este exemplar está indisponível para impréstimo!", "Indisponível", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                Reserva reservaDos = reserva.getReservaColaborador(txtDadosColaborador.getText());
+                                Colaborador colaboradorConversao = reservaDos.getColaborador();
+                                Exemplar exemplarConversao = reservaDos.getExemplar();
 
-                            Exemplar exemplarAtualizado = new Exemplar(exemplarConversao);
-                            exemplarAtualizado.setStatusEmprestimo(TipoDeStatusEmprestimoExemplar.INDISPONIVEL);
-                            exem.alterar(exemplarConversao, exemplarAtualizado);
-                            emprestimo.incluir(new Emprestimo(colaboradorConversao, exemplarAtualizado));
-                            reserva.excluir(colaboradorConversao.getNome());
-                            imprimirNaGrid();
-                            JOptionPane.showMessageDialog(null, "Reserva Atendida com Sucesso! ");
-                            JOptionPane.showMessageDialog(null, "O COMPROVANTE DO EMPRESTIMO FOI ENVIADO POR E-MAIL\n"
-                                    + "--------------------------------------------------------------------------------------\n"
-                                    + "# Titulo do Exemplar :... " + exemplarConversao.getLivro().getTitulo() + "\n"
-                                    + "# Colaborador :.......... " + colaboradorConversao.getNome() + "\n# E-mail:... " + colaboradorConversao.getEmail() + "\n"
-                                    + "                \n\n####  Biblioteca System  ###");
-                            limparDadosColaborador();
-                            limparDadosExeplar();
+                                Exemplar exemplarAtualizado = new Exemplar(exemplarConversao);
+                                exemplarAtualizado.setStatusEmprestimo(TipoDeStatusEmprestimoExemplar.INDISPONIVEL);
+                                exem.alterar(exemplarConversao, exemplarAtualizado);
+                                Data data = new Data();
+                                Emprestimo newEmprestimo = new Emprestimo(colaboradorConversao, exemplarAtualizado);
+                                newEmprestimo.setDataDoEmprestimo(data.getData());
+                                newEmprestimo.setDataDeDevolucao(data.somarData(7));
+                                
+                                exemplarAtualizado.setStatusReserva(StatusReserva.LIVRE);
+                                emprestimo.incluir(newEmprestimo);
+                                reserva.excluir(reservaDos.getId());
+                                imprimirNaGrid();
+                                JOptionPane.showMessageDialog(null, "Reserva Atendida com Sucesso! ");
+                                JOptionPane.showMessageDialog(null, "O COMPROVANTE DO EMPRÉSTIMO FOI ENVIADO POR E-MAIL\n"
+                                        + "--------------------------------------------------------------------------------------------------------------------\n"
+                                        + "# Titulo do Exemplar :....... " + newEmprestimo.getExemplar().getLivro().getTitulo() + "\n"
+                                        + "# Colaborador :................ " + newEmprestimo.getColaborador().getNome() + "\n"
+                                        + "# E-mail:........................... " + newEmprestimo.getColaborador().getEmail() + "\n"
+                                        + "# Data do Emprestimo:..... " + newEmprestimo.getDataDoEmprestimo() + "\n"
+                                        + "# Data da Devoluçao:...... " + newEmprestimo.getDataDeDevolucao() + "\n"
+                                        + "--------------------------------------------------------------------------------------------------------------------\n"
+                                        + "\n----------------------------------«««« Biblioteca System »»»»---------------------------------------\n\n", "Comprovante", JOptionPane.PLAIN_MESSAGE);
+                                Exemplar exemplarNaoAlterado = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
+                                Exemplar exemplarAlterado = new Exemplar(exemplarNaoAlterado);
+                                exemplarAlterado.setStatusReserva(StatusReserva.LIVRE);
+                                limparDadosColaborador();
+                                limparDadosExeplar();
+                            }
                         } else {
                             limparDadosColaborador();
                             limparDadosExeplar();
@@ -605,11 +646,13 @@ public class TelaReserva extends javax.swing.JFrame {
                         && !txtDadosIdentificador.getText().isEmpty() && !txtDadosTituloExemplar.getText().isEmpty()) {
                     int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Deleção da Reserva Para:  " + txtDadosColaborador.getText(), null, 0);
                     if (config == 0) {
-                        reserva.excluir(txtDadosColaborador.getText());
+                        reserva.excluir(Integer.parseInt(modelReserva.getValueAt(jTableReservas.getSelectedRow(),0)));
                         JOptionPane.showMessageDialog(null, "Deleção Concluida! ");
                         Exemplar exemplarNaoAlterado = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
                         Exemplar exemplarAlterado = new Exemplar(exemplarNaoAlterado.getId(), exemplarNaoAlterado.getAnoDePublicacao(), exemplarNaoAlterado.getPrecoDeCompra(), exemplarNaoAlterado.getAnoDePublicacao(), exemplarNaoAlterado.getEdicao(), exemplarNaoAlterado.getTipoDeStatus(), TipoDeStatusEmprestimoExemplar.DISPONIVEL, exemplarNaoAlterado.getStatusReserva(), exemplarNaoAlterado.getDescricao(), exemplarNaoAlterado.getLivro());
+                        exemplarAlterado.setStatusReserva(StatusReserva.LIVRE);
                         exem.alterar(exemplarNaoAlterado, exemplarAlterado);
+
                         imprimirNaGrid();
                     } else {
                         JOptionPane.showMessageDialog(null, "Deleção Cancelada! ");
@@ -619,12 +662,13 @@ public class TelaReserva extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Não foi Possivel Finalizar.");
         } finally {
             habilitarCampos(false);
             jTableColaborador.setEnabled(false);
             jTableExemplar.setEnabled(false);
             jTableReservas.setEnabled(false);
+            jTableReservas.clearSelection();
             limparDadosColaborador();
             limparDadosExeplar();
         }
@@ -648,8 +692,8 @@ public class TelaReserva extends javax.swing.JFrame {
             limparDadosColaborador();
             limparDadosExeplar();
 
-            Colaborador colaboradorSet = cc.getColaborador(modelReserva.getValueAt(jTableReservas.getSelectedRow(), 0));
-            Exemplar exemplarSet = exem.getExemplar(Integer.parseInt(modelReserva.getValueAt(jTableReservas.getSelectedRow(), 2)));
+            Colaborador colaboradorSet = cc.getColaborador(modelReserva.getValueAt(jTableReservas.getSelectedRow(), 1));
+            Exemplar exemplarSet = exem.getExemplar(Integer.parseInt(modelReserva.getValueAt(jTableReservas.getSelectedRow(), 3)));
             setValuesJTextFields(colaboradorSet, exemplarSet);
         } catch (Exception e) {
         }
@@ -733,8 +777,8 @@ public class TelaReserva extends javax.swing.JFrame {
     private void jTableExemplarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableExemplarMouseClicked
         try {
             limparDadosExeplar();
-            String titulo = modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 0);
-            String identificador = modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 1);
+            String titulo = modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 1);
+            String identificador = modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 0);
             txtDadosTituloExemplar.setText(titulo);
             txtDadosIdentificador.setText(identificador);
         } catch (Exception e) {
@@ -756,8 +800,8 @@ public class TelaReserva extends javax.swing.JFrame {
             btnDeletar.setEnabled(false);
             btnSalvar.setEnabled(true);
             btnCancelar.setEnabled(true);
-            jTableColaborador.setEnabled(true);
-            jTableExemplar.setEnabled(true);
+
+            jTableReservas.setEnabled(true);
             excluir = true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
@@ -776,6 +820,7 @@ public class TelaReserva extends javax.swing.JFrame {
         btnCancelar.setEnabled(true);
         jTableColaborador.setEnabled(true);
         jTableExemplar.setEnabled(true);
+        excluir = false;
         incluirOR = true;
     }//GEN-LAST:event_btnReservarActionPerformed
 

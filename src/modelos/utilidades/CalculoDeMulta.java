@@ -49,4 +49,19 @@ public class CalculoDeMulta {
         double multa = (diaRealDeDevolucao - diaProjetado) * this.taxaPorAtraso;
         return multa;
     }
+
+    public double diasParaReserva(Date dataEmprestimo, Date dataDevolucao) {
+
+        Calendar calDev = Calendar.getInstance();
+        calDev.setTime(dataDevolucao);
+
+        int diaProjetado = calDev.get(Calendar.DATE);
+
+        Calendar empres = Calendar.getInstance();
+        empres.setTime(dataEmprestimo);
+        int diaRealDeDevolucao = empres.get(Calendar.DATE);
+
+        int dataDias = (diaRealDeDevolucao - diaProjetado) - 5;
+        return dataDias;
+    }
 }
