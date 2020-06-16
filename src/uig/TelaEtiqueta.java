@@ -258,7 +258,7 @@ public class TelaEtiqueta extends javax.swing.JFrame {
     private void jButtonBuscarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarExemplarActionPerformed
         if (!jComboBoxLivrosEtiqueta.getSelectedItem().equals("Selecione") || !jComboBoxLivrosEtiqueta.equals("Selecione o Identificador")) {
             try {
-                jButtonGerarEtiqueta.setEnabled(true);
+                jButtonGerarEtiqueta.setEnabled(true)  ;
                 String indexSelect = (String) jComboBoxLivrosEtiqueta.getSelectedItem();
                 String iten[] = indexSelect.split("-");
                 Exemplar exemplarBusca = exemplar.getExemplar(Integer.parseInt(iten[0]));
