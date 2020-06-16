@@ -40,11 +40,6 @@ public class EmprestimoPersistencia implements ICRUDEmprestimo {
             GeradorID gd = new GeradorID();
             objeto.setId(gd.getID());
             gd.finalize();
-
-            Data data = new Data();
-            objeto.setDataDoEmprestimo(data.getData());
-            objeto.setDataDeDevolucao(data.somarData(3));
-
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(objeto.toString() + "\n");
@@ -122,7 +117,20 @@ public class EmprestimoPersistencia implements ICRUDEmprestimo {
     public void altera(Emprestimo velhoObjEmprestimo, Emprestimo novoObjEmprestimo) throws Exception {
 
         try {
+            ArrayList<Emprestimo> lista = listagem();
+            FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
 
+            for (Emprestimo emprestimo : lista) {
+                if (emprestimo.getId() != velhoObjEmprestimo.getId()) {
+                    bw.write(emprestimo.toString() + "\n");
+                } else {
+                    bw.write(novoObjEmprestimo.toString() + "\n");
+
+                }
+            }
+            bw.close();
         } catch (Exception e) {
             throw e;
         }

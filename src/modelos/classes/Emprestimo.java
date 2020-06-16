@@ -13,14 +13,10 @@ public class Emprestimo {
         this.exemplar = exemplar;
     }
 
-    public Emprestimo(String linha) {
-        String[] vetor = linha.split(";");
-        id = Integer.parseInt(vetor[0]);
-        exemplar = null;
-        colaborador = null;
-        dataDoEmprestimo = vetor[3];
-        dataDeDevolucao = vetor[4];
-
+     public Emprestimo(Emprestimo emprestimo) {
+        id = emprestimo.getId();
+        exemplar = emprestimo.getExemplar();
+        colaborador = emprestimo.getColaborador();
     }
 
     @Override
