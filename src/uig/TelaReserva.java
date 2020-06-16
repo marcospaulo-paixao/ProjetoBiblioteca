@@ -22,10 +22,12 @@ import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.interfaces.ICRUDReserva;
+import modelos.utilidades.StatusReserva;
 
 public class TelaReserva extends javax.swing.JFrame {
-    
+
     boolean incluirOR = true;
+    boolean excluir = false;
     ICRUDColaborador cc = null;
     ICRUDReserva reserva = null;
     ICRUDExemplar exem = null;
@@ -33,19 +35,19 @@ public class TelaReserva extends javax.swing.JFrame {
     ExemplarTableModel modelExemplar = null;
     ReservaTableModel modelReserva = null;
     ICRUDEmprestimo emprestimo = null;
-    
+
     public TelaReserva() {
         super("Biblioteca System - Reserva de Exemplares");
         initComponents();
-        
+
         exem = new ExemplarControle("exemplar.txt");
         cc = new ColaboradorControle("colaborador.txt");
         reserva = new ReservaControle("reservas.txt");
         emprestimo = new EmprestimoControle("emprestimo.txt");
         model = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
         jTableColaborador.setModel(model);
-        
-        modelExemplar = new ExemplarTableModel(new String[]{"Titulo", "Identificador"});
+
+        modelExemplar = new ExemplarTableModel(new String[]{"Titulo", "Identificador","Status"});
         jTableExemplar.setModel(modelExemplar);
         modelReserva = new ReservaTableModel(new String[]{"Colaboraor", "Titulo do Exemplar", "Identificador", "Data da Reserva", "Periodo de Reserva"});
         jTableReservas.setModel(modelReserva);
@@ -246,7 +248,6 @@ public class TelaReserva extends javax.swing.JFrame {
 
             }
         ));
-        jTableReservas.setEnabled(false);
         jTableReservas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableReservasMouseClicked(evt);
@@ -522,76 +523,99 @@ public class TelaReserva extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
-            if (incluirOR) {
-                if (!txtDadosColaborador.getText().isEmpty() && !txtDadosMatricula.getText().isEmpty()
-                        && !txtDadosIdentificador.getText().isEmpty() && !txtDadosTituloExemplar.getText().isEmpty()) {
-                    String nome = model.getValueAt(jTableColaborador.getSelectedRow(), 0);
-                    String matricula = model.getValueAt(jTableColaborador.getSelectedRow(), 1);
-                    SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/YYYY");
-                    Date dataDaRerserva = new Date();
-                    Exemplar exemplarVerificar = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
-                    Colaborador colaboradorVerificar = cc.getColaborador(nome);
-                    if (exemplarVerificar.getStatusEmprestimo() == TipoDeStatusEmprestimoExemplar.DISPONIVEL) {
-                        if (colaboradorVerificar.getTipoDeStatus().ATIVO == TipoDeStatus.ATIVO) {
-                            int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Reserva do Exemplar Para:  " + nome, null, 0);
-                            if (config == 0) {
-                                GeradorID igId = new GeradorID();
-                                reserva.incluir(new Reserva(igId.getID(), dataFormatada.format(dataDaRerserva), 5, exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText())), cc.getColaborador(txtDadosColaborador.getText())));
-                                igId.finalize();
-                                Exemplar exemplarNaoAlterado = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
-                                Exemplar exemplarAlterado = new Exemplar(exemplarNaoAlterado.getId(), exemplarNaoAlterado.getAnoDePublicacao(), exemplarNaoAlterado.getPrecoDeCompra(), exemplarNaoAlterado.getAnoDePublicacao(), exemplarNaoAlterado.getEdicao(), exemplarNaoAlterado.getTipoDeStatus(), TipoDeStatusEmprestimoExemplar.RESERVADO, exemplarNaoAlterado.getDescricao(), exemplarNaoAlterado.getLivro());
-                                exem.alterar(exemplarNaoAlterado, exemplarAlterado);
-                                JOptionPane.showMessageDialog(null, "Exemplar Reservado");
-                                imprimirNaGrid();
-                                limparDadosColaborador();
-                                limparDadosExeplar();
+            if (!excluir) {
+                if (incluirOR) {
+                    if (!txtDadosColaborador.getText().isEmpty() && !txtDadosMatricula.getText().isEmpty()
+                            && !txtDadosIdentificador.getText().isEmpty() && !txtDadosTituloExemplar.getText().isEmpty()) {
+                        String nome = model.getValueAt(jTableColaborador.getSelectedRow(), 0);
+                        String matricula = model.getValueAt(jTableColaborador.getSelectedRow(), 1);
+                        SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/YYYY");
+                        Date dataDaRerserva = new Date();
+                        Exemplar exemplarVerificar = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
+                        Colaborador colaboradorVerificar = cc.getColaborador(nome);
+                        if (exemplarVerificar.getStatusEmprestimo() == TipoDeStatusEmprestimoExemplar.DISPONIVEL) {
+                            if (colaboradorVerificar.getTipoDeStatus().ATIVO == TipoDeStatus.ATIVO) {
+                                int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Reserva do Exemplar Para:  " + nome, null, 0);
+                                if (config == 0) {
+                                    GeradorID igId = new GeradorID();
+                                    reserva.incluir(new Reserva(igId.getID(), dataFormatada.format(dataDaRerserva), 5, exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText())), cc.getColaborador(txtDadosColaborador.getText())));
+                                    igId.finalize();
+                                    Exemplar exemplarNaoAlterado = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
+                                    Exemplar exemplarAlterado = new Exemplar(exemplarNaoAlterado);
+                                    exemplarAlterado.setStatusReserva(StatusReserva.RESERVADO);
+                                    exem.alterar(exemplarNaoAlterado, exemplarAlterado);
+                                    JOptionPane.showMessageDialog(null, "Exemplar Reservado");
+                                    imprimirNaGrid();
+                                    limparDadosColaborador();
+                                    limparDadosExeplar();
+                                } else {
+                                    limparDadosColaborador();
+                                    limparDadosExeplar();
+                                    habilitarCampos(false);
+                                }
                             } else {
+                                JOptionPane.showMessageDialog(null, "Para Realizar a Reserva o Colaborador ATIVO! ");
                                 limparDadosColaborador();
                                 limparDadosExeplar();
                                 habilitarCampos(false);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Para Realizar a Reserva o Colaborador ATIVO! ");
+                            JOptionPane.showMessageDialog(null, "Para Realizar a Reserva o Exemplar Deve estar DISPONIVEL");
                             limparDadosColaborador();
                             limparDadosExeplar();
                             habilitarCampos(false);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Para Realizar a Reserva o Exemplar Deve estar DISPONIVEL");
-                        limparDadosColaborador();
-                        limparDadosExeplar();
+                        JOptionPane.showMessageDialog(null, "Para Realizar a Reservar Você deve Selecionar o Colabordor e o Exemplar !");
                         habilitarCampos(false);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Para Realizar a Reservar Você deve Selecionar o Colabordor e o Exemplar !");
-                    habilitarCampos(false);
+                    jTableReservas.setEnabled(true);
+                    if (!txtDadosColaborador.getText().isEmpty() && !txtDadosMatricula.getText().isEmpty()
+                            && !txtDadosIdentificador.getText().isEmpty() && !txtDadosTituloExemplar.getText().isEmpty()) {
+                        int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Emprestimo?  ", null, 0);
+                        if (config == 0) {
+                            Reserva reservaDos = reserva.getReservaColaborador(txtDadosColaborador.getText());
+                            Colaborador colaboradorConversao = reservaDos.getColaborador();
+                            Exemplar exemplarConversao = reservaDos.getExemplar();
+
+                            Exemplar exemplarAtualizado = new Exemplar(exemplarConversao);
+                            exemplarAtualizado.setStatusEmprestimo(TipoDeStatusEmprestimoExemplar.INDISPONIVEL);
+                            exem.alterar(exemplarConversao, exemplarAtualizado);
+                            emprestimo.incluir(new Emprestimo(colaboradorConversao, exemplarAtualizado));
+                            reserva.excluir(colaboradorConversao.getNome());
+                            imprimirNaGrid();
+                            JOptionPane.showMessageDialog(null, "Reserva Atendida com Sucesso! ");
+                            JOptionPane.showMessageDialog(null, "O COMPROVANTE DO EMPRESTIMO FOI ENVIADO POR E-MAIL\n"
+                                    + "--------------------------------------------------------------------------------------\n"
+                                    + "# Titulo do Exemplar :... " + exemplarConversao.getLivro().getTitulo() + "\n"
+                                    + "# Colaborador :.......... " + colaboradorConversao.getNome() + "\n# E-mail:... " + colaboradorConversao.getEmail() + "\n"
+                                    + "                \n\n####  Biblioteca System  ###");
+                            limparDadosColaborador();
+                            limparDadosExeplar();
+                        } else {
+                            limparDadosColaborador();
+                            limparDadosExeplar();
+                            JOptionPane.showMessageDialog(null, "Realização de Reserva Cancelada!");
+                        }
+                    }
                 }
             } else {
-                jTableReservas.setEnabled(true);
                 if (!txtDadosColaborador.getText().isEmpty() && !txtDadosMatricula.getText().isEmpty()
                         && !txtDadosIdentificador.getText().isEmpty() && !txtDadosTituloExemplar.getText().isEmpty()) {
-                    int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Emprestimo?  ", null, 0);
+                    int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Deleção da Reserva Para:  " + txtDadosColaborador.getText(), null, 0);
                     if (config == 0) {
-                        Reserva reservaDos = reserva.getReservaColaborador(txtDadosColaborador.getText());
-                        Colaborador colaboradorConversao = reservaDos.getColaborador();
-                        Exemplar exemplarConversao = reservaDos.getExemplar();
-                        emprestimo.incluir(new Emprestimo(colaboradorConversao, exemplarConversao));
-                        reserva.excluir(colaboradorConversao.getNome());
+                        reserva.excluir(txtDadosColaborador.getText());
+                        JOptionPane.showMessageDialog(null, "Deleção Concluida! ");
+                        Exemplar exemplarNaoAlterado = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
+                        Exemplar exemplarAlterado = new Exemplar(exemplarNaoAlterado.getId(), exemplarNaoAlterado.getAnoDePublicacao(), exemplarNaoAlterado.getPrecoDeCompra(), exemplarNaoAlterado.getAnoDePublicacao(), exemplarNaoAlterado.getEdicao(), exemplarNaoAlterado.getTipoDeStatus(), TipoDeStatusEmprestimoExemplar.DISPONIVEL, exemplarNaoAlterado.getStatusReserva(), exemplarNaoAlterado.getDescricao(), exemplarNaoAlterado.getLivro());
+                        exem.alterar(exemplarNaoAlterado, exemplarAlterado);
                         imprimirNaGrid();
-                        JOptionPane.showMessageDialog(null, "Reserva Atendida com Sucesso! ");
-                        JOptionPane.showMessageDialog(null, "O COMPROVANTE DO EMPRESTIMO FOI ENVIADO POR E-MAIL\n"
-                                + "--------------------------------------------------------------------------------------\n"
-                                + "# Titulo do Exemplar :... " + exemplarConversao.getLivro().getTitulo() + "\n"
-                                + "# Colaborador :.......... " + colaboradorConversao.getNome() + "\n# E-mail:... " + colaboradorConversao.getEmail() + "\n"
-                                + "                \n\n####  Biblioteca System  ###");
-                        
-                        limparDadosColaborador();
-                        limparDadosExeplar();
                     } else {
-                        limparDadosColaborador();
-                        limparDadosExeplar();
-                        JOptionPane.showMessageDialog(null, "Realização de Reserva Cancelada!");
+                        JOptionPane.showMessageDialog(null, "Deleção Cancelada! ");
                     }
+                } else {
+                    JOptionPane.showMessageDialog(null, "O Colaborador e o Exemplar devem ser Setados!");
                 }
             }
         } catch (Exception e) {
@@ -601,6 +625,8 @@ public class TelaReserva extends javax.swing.JFrame {
             jTableColaborador.setEnabled(false);
             jTableExemplar.setEnabled(false);
             jTableReservas.setEnabled(false);
+            limparDadosColaborador();
+            limparDadosExeplar();
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -621,14 +647,14 @@ public class TelaReserva extends javax.swing.JFrame {
         try {
             limparDadosColaborador();
             limparDadosExeplar();
-            
+
             Colaborador colaboradorSet = cc.getColaborador(modelReserva.getValueAt(jTableReservas.getSelectedRow(), 0));
             Exemplar exemplarSet = exem.getExemplar(Integer.parseInt(modelReserva.getValueAt(jTableReservas.getSelectedRow(), 2)));
             setValuesJTextFields(colaboradorSet, exemplarSet);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTableReservasMouseClicked
-    
+
     public void setValuesJTextFields(Colaborador colaboradorobj, Exemplar exemplarobj) {
         txtDadosColaborador.setText(colaboradorobj.getNome());
         txtDadosMatricula.setText(colaboradorobj.getMatricula() + "");
@@ -724,22 +750,15 @@ public class TelaReserva extends javax.swing.JFrame {
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         try {
-            if (!txtDadosColaborador.getText().isEmpty() && !txtDadosMatricula.getText().isEmpty()
-                    && !txtDadosIdentificador.getText().isEmpty() && !txtDadosTituloExemplar.getText().isEmpty()) {
-                int config = JOptionPane.showConfirmDialog(rootPane, "Confirmar Deleção da Reserva Para:  " + txtDadosColaborador.getText(), null, 0);
-                if (config == 0) {
-                    reserva.excluir(txtDadosColaborador.getText());
-                    JOptionPane.showMessageDialog(null, "Deleção Concluida! ");
-                    Exemplar exemplarNaoAlterado = exem.getExemplar(Integer.parseInt(txtDadosIdentificador.getText()));
-                    Exemplar exemplarAlterado = new Exemplar(exemplarNaoAlterado.getId(), exemplarNaoAlterado.getAnoDePublicacao(), exemplarNaoAlterado.getPrecoDeCompra(), exemplarNaoAlterado.getAnoDePublicacao(), exemplarNaoAlterado.getEdicao(), exemplarNaoAlterado.getTipoDeStatus(), TipoDeStatusEmprestimoExemplar.DISPONIVEL, exemplarNaoAlterado.getDescricao(), exemplarNaoAlterado.getLivro());
-                    exem.alterar(exemplarNaoAlterado, exemplarAlterado);
-                    imprimirNaGrid();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Deleção Cancelada! ");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "O Colaborador e o Exemplar devem ser Setados!");
-            }
+            btnAtender.setEnabled(false);
+            btnDeletar.setEnabled(false);
+            btnReservar.setEnabled(false);
+            btnDeletar.setEnabled(false);
+            btnSalvar.setEnabled(true);
+            btnCancelar.setEnabled(true);
+            jTableColaborador.setEnabled(true);
+            jTableExemplar.setEnabled(true);
+            excluir = true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
         } finally {
@@ -771,10 +790,10 @@ public class TelaReserva extends javax.swing.JFrame {
         jTableExemplar.setEnabled(false);
         limparDadosExeplar();
     }//GEN-LAST:event_btnCancelarActionPerformed
-    
+
     private void pesquisarColaboradores(String texto) throws Exception {
         try {
-            
+
             String[][] matrizFiltro = new String[2][cc.listagem().size()];
             String[] matrizS = new String[matrizFiltro[1].length];
             model.update(cc.listagem());
@@ -811,7 +830,7 @@ public class TelaReserva extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     private void pesquisarExemplares(String texto) throws Exception {
         try {
             String[][] matrizFiltro = new String[9][exem.listagem().size()];
@@ -849,7 +868,7 @@ public class TelaReserva extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     private void pesquisarReservas(String texto) throws Exception {
         try {
             String[][] matrizFiltro = new String[9][reserva.listagem().size()];
@@ -887,7 +906,7 @@ public class TelaReserva extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -964,19 +983,19 @@ public class TelaReserva extends javax.swing.JFrame {
         txtDadosTituloExemplar.setText("");
         txtDadosIdentificador.setText("");
     }
-    
+
     private void limparDadosColaborador() {
         txtDadosColaborador.setText("");
         txtDadosMatricula.setText("");
     }
-    
+
     private void imprimirNaGrid() {
         try {
             modelReserva.update(reserva.listagem());
         } catch (Exception e) {
         }
     }
-    
+
     public void habilitarCampos(boolean iten) {
         btnAtender.setEnabled(false);
         btnDeletar.setEnabled(false);
@@ -984,13 +1003,14 @@ public class TelaReserva extends javax.swing.JFrame {
         btnDeletar.setEnabled(false);
         btnSalvar.setEnabled(true);
         btnCancelar.setEnabled(true);
-        
+
         if (!iten) {
             btnAtender.setEnabled(true);
             btnDeletar.setEnabled(true);
             btnReservar.setEnabled(true);
             btnDeletar.setEnabled(true);
-            
+            jTableColaborador.clearSelection();
+            jTableExemplar.clearSelection();
             btnSalvar.setEnabled(false);
             btnCancelar.setEnabled(false);
         }

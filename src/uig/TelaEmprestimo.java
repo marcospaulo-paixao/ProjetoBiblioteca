@@ -21,6 +21,7 @@ import modelos.utilidades.ColaboradorTableModel;
 import modelos.utilidades.EmprestimosTableModel;
 import modelos.utilidades.ExemplarTableModel;
 import modelos.interfaces.ICRUDExemplar;
+import modelos.utilidades.StatusReserva;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 
 public class TelaEmprestimo extends javax.swing.JFrame {
@@ -786,7 +787,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                     if (exemplar.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.INDISPONIVEL)) {
                         JOptionPane.showMessageDialog(null, "Este exemplar está indisponível para impréstimo!");
                     } else {
-                        if (exemplar.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.RESERVADO)) {
+                        if (exemplar.getStatusEmprestimo().equals(StatusReserva.RESERVADO)) {
                             JOptionPane.showMessageDialog(null, "Este exemplar está reservado!");
                         } else {
                             Exemplar novoExemplar = new Exemplar(exemplar);
