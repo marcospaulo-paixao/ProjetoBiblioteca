@@ -15,6 +15,7 @@ import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.interfaces.ICRUDLivro;
+import modelos.utilidades.StatusReserva;
 
 public class ExemplarPersistencia implements ICRUDExemplar {
 
@@ -121,10 +122,11 @@ public class ExemplarPersistencia implements ICRUDExemplar {
                 int edicao = Integer.parseInt(vetor[4]);
                 TipoDeStatus status = TipoDeStatus.valueOf(vetor[5]);
                 TipoDeStatusEmprestimoExemplar statusEmprestimoExemplar = TipoDeStatusEmprestimoExemplar.valueOf(vetor[6]);
-                String descricao = vetor[7];
-                Livro livroListado = livro.getIdDoLivro(Integer.parseInt(vetor[8]));
+                StatusReserva statusReserva = StatusReserva.valueOf(vetor[7]);
+                String descricao = vetor[8];
+                Livro livroListado = livro.getIdDoLivro(Integer.parseInt(vetor[9]));
 
-                listaDeExemplar.add(new Exemplar(id, anoDePublicacoa, preco, dataDeAquisicao, edicao, status, statusEmprestimoExemplar, descricao, livroListado));
+                listaDeExemplar.add(new Exemplar(id, anoDePublicacoa, preco, dataDeAquisicao, edicao, status, statusEmprestimoExemplar, statusReserva, descricao, livroListado));
             }
             return listaDeExemplar;
         } catch (Exception listarLivros) {
@@ -134,7 +136,7 @@ public class ExemplarPersistencia implements ICRUDExemplar {
 
     @Override
     public Exemplar getExemplar(String titulo) throws Exception {
-          try {
+        try {
             ArrayList<Exemplar> exemplaresLista = listagem();
             for (Exemplar exemplaresNaLista : exemplaresLista) {
                 if (exemplaresNaLista.getLivro().getTitulo().equals(titulo)) {
@@ -145,5 +147,5 @@ public class ExemplarPersistencia implements ICRUDExemplar {
             throw ErroListarNomeLivro;
         }
         return null;
-  }
+    }
 }

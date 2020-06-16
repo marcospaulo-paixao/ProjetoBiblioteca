@@ -7,8 +7,6 @@ import controle.ExemplarControle;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelos.classes.Colaborador;
 import modelos.classes.Devolucao;
@@ -22,7 +20,9 @@ import modelos.utilidades.EmprestimosTableModel;
 import modelos.utilidades.ExemplarTableModel;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.utilidades.Data;
+import modelos.utilidades.StatusReserva;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
+
 
 public class TelaEmprestimo extends javax.swing.JFrame {
 
@@ -797,10 +797,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 if (!jTextFieldTituloDoExemplar.getText().equals("")) {
                     Exemplar exemplar = controleExemplar.getExemplar(Integer.parseInt(modelExemplar.getValueAt(jTableExemplar.getSelectedRow(), 0)));
                     if (exemplar.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.INDISPONIVEL)) {
-                        JOptionPane.showMessageDialog(null, "Este exemplar está indisponível para impréstimo!","Indisponível", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Este exemplar está indisponível para impréstimo!", "Indisponível", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        if (exemplar.getStatusEmprestimo().equals(TipoDeStatusEmprestimoExemplar.RESERVADO)) {
-                            JOptionPane.showMessageDialog(null, "Este exemplar está reservado!","Reservado", JOptionPane.ERROR_MESSAGE);
+
+                        if (exemplar.getStatusReserva().equals(StatusReserva.RESERVADO)) {
+                            JOptionPane.showMessageDialog(null, "Este exemplar está reservado!", "Reservado", JOptionPane.ERROR_MESSAGE);
                         } else {
                             Exemplar novoExemplar = new Exemplar(exemplar);
                             novoExemplar.setStatusEmprestimo(TipoDeStatusEmprestimoExemplar.INDISPONIVEL);
@@ -840,7 +841,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     public void devolverExemplar() throws Exception {
         try {
             if (jTableDadosEmprestimos.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(null, "Selecione o emprestimo a ser devolvido!","Selecione", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Selecione o emprestimo a ser devolvido!", "Selecione", JOptionPane.ERROR_MESSAGE);
             } else {
                 Emprestimo emprestimo = controleEmprestimo.getEmprestimo(Integer.parseInt(modelEmprestimo.getValueAt(jTableDadosEmprestimos.getSelectedRow(), 0)));
                 Exemplar exemplar = emprestimo.getExemplar();

@@ -17,7 +17,7 @@ public class Reserva {
         this.periodo = 1;
         this.exemplar = new Exemplar(exemplar.getId(), exemplar.getAnoDePublicacao(), exemplar.getPrecoDeCompra(),
                 exemplar.getDataDeAquisicao(), exemplar.getEdicao(), exemplar.getTipoDeStatus(), exemplar.getStatusEmprestimo(),
-                exemplar.getDescricao(), exemplar.getLivro());
+                exemplar.getStatusReserva(), exemplar.getDescricao(), exemplar.getLivro());
         this.colaborador = new Colaborador(colaborador);
     }
 

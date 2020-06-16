@@ -14,6 +14,7 @@ import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.interfaces.ICRUDLivro;
+import modelos.utilidades.StatusReserva;
 
 public class TelaExemplar extends javax.swing.JFrame {
 
@@ -517,7 +518,7 @@ public class TelaExemplar extends javax.swing.JFrame {
                     TipoDeStatusEmprestimoExemplar statusEmprestimo = TipoDeStatusEmprestimoExemplar.valueOf(jButtonStatusEmprestimo.getText());
                     GeradorID gId = new GeradorID();
                     Livro livroExemplar = livro.getTituloLivro(jComboBoxLivro.getSelectedItem().toString());
-                    exemplar.incluir(new Exemplar(gId.getID(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, txtDescricao.getText(), livroExemplar));
+                    exemplar.incluir(new Exemplar(gId.getID(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, StatusReserva.LIVRE, txtDescricao.getText(), livroExemplar));
 
                     gId.finalize();
                     habilitarBott(false);
@@ -532,7 +533,7 @@ public class TelaExemplar extends javax.swing.JFrame {
                     GeradorID gId = new GeradorID();
                     Livro livroExemplar = livro.getTituloLivro(jComboBoxLivro.getSelectedItem().toString());
 
-                    Exemplar atualExemplar = new Exemplar(antigoExemplar.getId(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, txtDescricao.getText(), livroExemplar);
+                    Exemplar atualExemplar = new Exemplar(antigoExemplar.getId(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, antigoExemplar.getStatusReserva(), txtDescricao.getText(), livroExemplar);
                     exemplar.alterar(antigoExemplar, atualExemplar);
                     habilitarBott(false);
                     JOptionPane.showMessageDialog(null, "Exemplar Alterado!");
@@ -636,10 +637,6 @@ public class TelaExemplar extends javax.swing.JFrame {
         } else {
             if (jButtonStatusEmprestimo.getText().equals("DISPONIVEL")) {
                 jButtonStatusEmprestimo.setText("INDISPONIVEL");
-            } else if (jButtonStatusEmprestimo.getText().equals("INDISPONIVEL")) {
-                jButtonStatusEmprestimo.setText("RESERVADO");
-            } else {
-                jButtonStatusEmprestimo.setText("DISPONIVEL");
             }
         }
     }//GEN-LAST:event_jButtonStatusEmprestimoActionPerformed
@@ -669,7 +666,7 @@ public class TelaExemplar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscaKeyReleased
     public void pesquisarLivro(String texto) {
         try {
-            String[][] matrizFiltro = new String[9][exemplar.listagem().size()];
+            String[][] matrizFiltro = new String[10][exemplar.listagem().size()];
             String[] matrizS = new String[matrizFiltro[2].length];
             model.update(exemplar.listagem());
             for (int i = 0; i < model.getColumnCount(); i++) {

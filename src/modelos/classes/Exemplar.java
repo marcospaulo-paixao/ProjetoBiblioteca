@@ -1,6 +1,7 @@
 package modelos.classes;
 
 import java.util.Objects;
+import modelos.utilidades.StatusReserva;
 import modelos.utilidades.TipoDeStatus;
 import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
 
@@ -13,11 +14,12 @@ public class Exemplar {
     private int edicao = 0;
     private TipoDeStatus tipoDeStatus = null;
     private TipoDeStatusEmprestimoExemplar statusEmprestimo = null;
+    private StatusReserva statusReserva =  null;
     private String descricao = "";
     private Livro livro = null;
 
     public Exemplar(int id, String anoDePublicacao, double precoDeCompra, String dataDeAquisicao,
-            int edicao, TipoDeStatus tipoDeStatus, TipoDeStatusEmprestimoExemplar statusEmprestimo, String descricao, Livro livro) {
+            int edicao, TipoDeStatus tipoDeStatus, TipoDeStatusEmprestimoExemplar statusEmprestimo, StatusReserva statusReserva, String descricao, Livro livro) {
         this.id = id;
         this.anoDePublicacao = anoDePublicacao;
         this.precoDeCompra = precoDeCompra;
@@ -25,6 +27,7 @@ public class Exemplar {
         this.edicao = edicao;
         this.tipoDeStatus = tipoDeStatus;
         this.statusEmprestimo = statusEmprestimo;
+        this.statusReserva = statusReserva;
         this.descricao = descricao;
         this.livro = new Livro(livro.getId(), livro.getCodigo(), livro.getIsbn(), livro.getTitulo(),
                 livro.getEditora(), livro.getAutor(), livro.getAreaDoLivro());
@@ -38,6 +41,7 @@ public class Exemplar {
         this.edicao = objExemplar.getEdicao();
         this.tipoDeStatus = objExemplar.tipoDeStatus;
         this.statusEmprestimo = objExemplar.statusEmprestimo;
+        this.statusReserva = objExemplar.getStatusReserva();
         this.descricao = objExemplar.getDescricao();
         this.livro = objExemplar.getLivro();
     }
@@ -68,6 +72,14 @@ public class Exemplar {
 
     public String getDataDeAquisicao() {
         return dataDeAquisicao;
+    }
+
+    public StatusReserva getStatusReserva() {
+        return statusReserva;
+    }
+
+    public void setStatusReserva(StatusReserva statusReserva) {
+        this.statusReserva = statusReserva;
     }
 
     public void setDataDeAquisicao(String dataDeAquisicao) {
@@ -120,7 +132,7 @@ public class Exemplar {
                 + anoDePublicacao + ";" + precoDeCompra + ";"
                 + dataDeAquisicao + ";" + edicao + ";"
                 + tipoDeStatus + ";" + statusEmprestimo + ";"
-                + descricao + ";" + livro.getId() + ";";
+                + statusReserva + ";" + descricao + ";" + livro.getId() + ";";
     }
 
     @Override
