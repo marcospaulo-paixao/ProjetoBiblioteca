@@ -608,13 +608,13 @@ public class TelaReserva extends javax.swing.JFrame {
 
                                 Exemplar exemplarAtualizado = new Exemplar(exemplarConversao);
                                 exemplarAtualizado.setStatusEmprestimo(TipoDeStatusEmprestimoExemplar.INDISPONIVEL);
+                                exemplarAtualizado.setStatusReserva(StatusReserva.LIVRE);
                                 exem.alterar(exemplarConversao, exemplarAtualizado);
                                 Data data = new Data();
                                 Emprestimo newEmprestimo = new Emprestimo(colaboradorConversao, exemplarAtualizado);
                                 newEmprestimo.setDataDoEmprestimo(data.getData());
                                 newEmprestimo.setDataDeDevolucao(data.somarData(7));
                                 
-                                exemplarAtualizado.setStatusReserva(StatusReserva.LIVRE);
                                 emprestimo.incluir(newEmprestimo);
                                 reserva.excluir(reservaDos.getId());
                                 imprimirNaGrid();

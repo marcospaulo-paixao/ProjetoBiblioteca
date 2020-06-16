@@ -3,6 +3,7 @@ package uig;
 //import com.itextpdf.text.Element;
 //import com.itextpdf.text.Paragraph;
 //import com.itextpdf.text.pdf.PdfWriter;
+
 import controle.ExemplarControle;
 import controle.LivroControle;
 import java.awt.Desktop;
@@ -215,7 +216,7 @@ public class TelaEtiqueta extends javax.swing.JFrame {
 
             for (int pos = 0; pos < exemplaresNaLista.size(); pos++) {
                 Exemplar aux = exemplaresNaLista.get(pos);
-                jComboBoxLivrosEtiqueta.addItem(livroSet[0] = aux.getId() + "");
+                jComboBoxLivrosEtiqueta.addItem(livroSet[0] = aux.getId() + "-" + aux.getLivro().getTitulo());
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -258,7 +259,9 @@ public class TelaEtiqueta extends javax.swing.JFrame {
         if (!jComboBoxLivrosEtiqueta.getSelectedItem().equals("Selecione") || !jComboBoxLivrosEtiqueta.equals("Selecione o Identificador")) {
             try {
                 jButtonGerarEtiqueta.setEnabled(true);
-                Exemplar exemplarBusca = exemplar.getExemplar(Integer.parseInt("" + jComboBoxLivrosEtiqueta.getSelectedItem()));
+                String indexSelect = (String) jComboBoxLivrosEtiqueta.getSelectedItem();
+                String iten[] = indexSelect.split("-");
+                Exemplar exemplarBusca = exemplar.getExemplar(Integer.parseInt(iten[0]));
                 jTextFieldEdicao.setText(exemplarBusca.getEdicao() + "");
                 jTextFieldTitulo.setText(exemplarBusca.getLivro().getTitulo());
                 jTextFieldDescricao.setText(exemplarBusca.getDescricao());
