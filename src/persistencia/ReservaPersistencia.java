@@ -15,6 +15,7 @@ import modelos.interfaces.ICRUDColaborador;
 import modelos.utilidades.GeradorID;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.interfaces.ICRUDReserva;
+import modelos.utilidades.CreateServer;
 
 public class ReservaPersistencia implements ICRUDReserva {
 
@@ -59,8 +60,18 @@ public class ReservaPersistencia implements ICRUDReserva {
             igId.finalize();
             FileWriter fw = new FileWriter(nomeDoAquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(objeto.toString() + "\n");
-            bw.close();
+
+            try {
+                CreateServer comunicacao = new CreateServer();
+                comunicacao.getComunicacao().enviarMensagem("post", objeto.getClass().getSimpleName(), objeto.toString() + "\n");
+                comunicacao.getComunicacao().fecharConexao();
+                bw.write(objeto.toString() + "\n");
+            } catch (Exception e) {
+                bw.write(objeto.toString() + "\n");
+            } finally {
+                bw.close();
+            }
+
         } catch (Exception e) {
             throw e;
         }

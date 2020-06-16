@@ -17,9 +17,9 @@ import modelos.classes.Emprestimo;
 import modelos.classes.Exemplar;
 import modelos.interfaces.ICRUDColaborador;
 import modelos.interfaces.ICRUDEmprestimo;
-import modelos.utilidades.Data;
 import modelos.utilidades.GeradorID;
 import modelos.interfaces.ICRUDExemplar;
+import modelos.utilidades.CreateServer;
 
 /**
  *
@@ -42,9 +42,17 @@ public class EmprestimoPersistencia implements ICRUDEmprestimo {
             gd.finalize();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(objeto.toString() + "\n");
-            bw.close();
 
+            try {
+                CreateServer comunicacao = new CreateServer();
+                comunicacao.getComunicacao().enviarMensagem("post", objeto.getClass().getSimpleName(), objeto.toString() + "\n");
+                comunicacao.getComunicacao().fecharConexao();
+                bw.write(objeto.toString() + "\n");
+                bw.close();
+            } catch (Exception e) {
+                bw.write(objeto.toString() + "\n");
+                bw.close();
+            }
         } catch (Exception e) {
             throw e;
         }
@@ -120,7 +128,6 @@ public class EmprestimoPersistencia implements ICRUDEmprestimo {
             ArrayList<Emprestimo> lista = listagem();
             FileWriter fw = new FileWriter(nomeDoArquivoNoDisco);
             BufferedWriter bw = new BufferedWriter(fw);
-            
 
             for (Emprestimo emprestimo : lista) {
                 if (emprestimo.getId() != velhoObjEmprestimo.getId()) {
@@ -135,6 +142,7 @@ public class EmprestimoPersistencia implements ICRUDEmprestimo {
             throw e;
         }
     }
+
     @Override
     public Emprestimo getEmprestimoExe(int id) throws Exception {
         try {

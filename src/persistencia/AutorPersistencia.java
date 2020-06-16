@@ -32,8 +32,9 @@ public class AutorPersistencia implements ICRUDAutor {
             try {
                 CreateServer comunicacao = new CreateServer();
                 comunicacao.getComunicacao().enviarMensagem("post", autorObj.getClass().getSimpleName(), autorObj.toString() + "\n");
-                comunicacao.getComunicacao().receberMensagem();
                 comunicacao.getComunicacao().fecharConexao();
+                bw.write(autorObj.toString() + "\n");
+                bw.close();
             } catch (Exception e) {
                 bw.write(autorObj.toString() + "\n");
                 bw.close();

@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import modelos.classes.AreaDoLivro;
-import modelos.utilidades.ComunicadorTCP;
 import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
 import modelos.interfaces.ICRUDAreaDoLivro;
@@ -32,8 +31,9 @@ public class AreaDoLivroPersistencia implements ICRUDAreaDoLivro {
             try {
                 CreateServer comunicacao = new CreateServer();
                 comunicacao.getComunicacao().enviarMensagem("post", areaDoLivro.getClass().getSimpleName(), areaDoLivro.toString() + "\n");
-                comunicacao.getComunicacao().receberMensagem();
                 comunicacao.getComunicacao().fecharConexao();
+                bw.write(areaDoLivro.toString() + "\n");
+                bw.close();
             } catch (Exception e) {
                 bw.write(areaDoLivro.toString() + "\n");
                 bw.close();

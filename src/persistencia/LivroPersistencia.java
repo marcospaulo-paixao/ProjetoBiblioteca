@@ -47,13 +47,12 @@ public class LivroPersistencia implements ICRUDLivro {
             try {
                 CreateServer comunicacao = new CreateServer();
                 comunicacao.getComunicacao().enviarMensagem("post", livro.getClass().getSimpleName(), livro.toString() + "\n");
-                comunicacao.getComunicacao().receberMensagem();
                 comunicacao.getComunicacao().fecharConexao();
+                bw.write(  livro.toString() + "\n");
             } catch (Exception e) {
                 bw.write(livro.toString() + "\n");
             } finally {
                 bw.close();
-
             }
 
         } catch (Exception erroIncluir) {

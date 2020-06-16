@@ -16,3 +16,4 @@
 21;Professor Eugenio;porfessor;123;ATIVO;
 129;Uncle Boby;uncle;bb;ATIVO;
 137;David;david;123;ATIVO;
+265;Estrela;estrela;12;ATIVO;

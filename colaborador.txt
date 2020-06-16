@@ -29,3 +29,4 @@
 118;1504;Regina Alcântara;13242;regina@contato.com;62;990389927;ADVOGADO;INATIVO;
 119;6020;Sonia Coitinho;0;sonia@contato.com;62;989851840;FUNCIONARIO;ATIVO;
 120;5479;Veridiana Vieira;0;veridiana@contato.com;62;982556962;FUNCIONARIO;INATIVO;
+272;2165554;Ujeverson Ujferson;64546;puts@gmail.com;25;645465465;ADVOGADO;ATIVO;

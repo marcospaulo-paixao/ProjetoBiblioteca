@@ -31,7 +31,6 @@ public class EditoraPersistencia implements ICRUDEditora {
             try {
                 CreateServer comunicacao = new CreateServer();
                 comunicacao.getComunicacao().enviarMensagem("post", editoraObjeto.getClass().getSimpleName(), editoraObjeto.toString() + "\n");
-                comunicacao.getComunicacao().receberMensagem();
                 comunicacao.getComunicacao().fecharConexao();
             } catch (Exception e) {
                 bw.write(editoraObjeto.toString() + "\n");
