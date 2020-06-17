@@ -23,7 +23,7 @@ public class TelaAutor extends javax.swing.JFrame {
         super("Biblioteca System - Autor");
         initComponents();
         try {
-            autor = new AutorControle("autor.txt");
+            autor = new AutorControle("./database/autor.txt");
             model = new AutorTableModel(new String[]{"Nome do Autor", "Identificador"});
             gridAutor.setModel(model);
         } catch (Exception e) {

@@ -31,9 +31,9 @@ public class ReservaControle implements ICRUDReserva {
     }
 
     @Override
-    public void excluir(String nome) throws Exception {
+    public void excluir(int id) throws Exception {
         try {
-            reservaIcrud.excluir(nome);
+            reservaIcrud.excluir(id);
         } catch (Exception e) {
             throw e;
         }

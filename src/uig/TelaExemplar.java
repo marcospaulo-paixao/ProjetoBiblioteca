@@ -27,8 +27,8 @@ public class TelaExemplar extends javax.swing.JFrame {
         super("Biblioteca System - Exemplares");
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
-        livro = new LivroControle("livro.txt");
-        exemplar = new ExemplarControle("exemplar.txt");
+        livro = new LivroControle("./database/livro.txt");
+        exemplar = new ExemplarControle("./database/exemplar.txt");
         this.setIconImage(icone.getImage());
         model = new ExemplarTableModel(new String[]{"Livro", "Identificador", "Edição", "Data de Aquisição", "Ano de Publicação", "Preço de Compra", "Descrição", "Emprestimo", "Status"});
         jTableExemplares.setModel(model);
@@ -49,13 +49,11 @@ public class TelaExemplar extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtpreco = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jComboBoxLivro = new javax.swing.JComboBox<>();
         jComboBoxAnoPublicacao = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        txtEdicao = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtDataDeAquisicao = new javax.swing.JFormattedTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -63,6 +61,8 @@ public class TelaExemplar extends javax.swing.JFrame {
         jButtonStatusEmprestimo = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
+        jFormattedTextFieldPreco = new javax.swing.JFormattedTextField();
+        txtEdicao = new javax.swing.JFormattedTextField();
         jPanel6 = new javax.swing.JPanel();
         txtBusca = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -125,8 +125,6 @@ public class TelaExemplar extends javax.swing.JFrame {
 
         jLabel9.setText("Preço de Compra");
 
-        txtpreco.setEnabled(false);
-
         jLabel10.setText("Data de Aquisição");
 
         jComboBoxLivro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
@@ -167,8 +165,6 @@ public class TelaExemplar extends javax.swing.JFrame {
 
         jLabel12.setText("Edição");
 
-        txtEdicao.setEnabled(false);
-
         jLabel13.setText("Descrição");
 
         try {
@@ -200,6 +196,20 @@ public class TelaExemplar extends javax.swing.JFrame {
         jLabel14.setText("Situação do Exemplar  (STATUS EMPRESTIMO)");
 
         txtDescricao.setEnabled(false);
+
+        try {
+            jFormattedTextFieldPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextFieldPreco.setEnabled(false);
+
+        try {
+            txtEdicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtEdicao.setEnabled(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -240,16 +250,19 @@ public class TelaExemplar extends javax.swing.JFrame {
                             .addComponent(txtDescricao, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtpreco)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(32, 32, 32)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(50, 50, 50))
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(jFormattedTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(110, 110, 110))
-                                    .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -281,10 +294,10 @@ public class TelaExemplar extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDataDeAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -488,7 +501,7 @@ public class TelaExemplar extends javax.swing.JFrame {
     private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
         try {
             habilitarBott(true);
-            txtpreco.setText("");
+            jFormattedTextFieldPreco.setText("");
             txtEdicao.setText("");
             txtDataDeAquisicao.setText("");
             txtDescricao.setText("");
@@ -512,13 +525,13 @@ public class TelaExemplar extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         try {
-            if (jComboBoxLivro.getSelectedItem() != "Selecione" && jComboBoxAnoPublicacao.getSelectedItem() != "jComboBoxLivro" && !txtpreco.getText().isEmpty() && !txtEdicao.getText().isEmpty() && !txtDataDeAquisicao.getText().isEmpty() && !txtDescricao.getText().isEmpty()) {
+            if (jComboBoxLivro.getSelectedItem() != "Selecione" && jComboBoxAnoPublicacao.getSelectedItem() != "jComboBoxLivro" && !jFormattedTextFieldPreco.getText().isEmpty() && !txtEdicao.getText().isEmpty() && !txtDataDeAquisicao.getText().isEmpty() && !txtDescricao.getText().isEmpty()) {
                 if (incluirOn) {
                     TipoDeStatus status = (jButtonStatus.getText().equals("Ativo") ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO);
                     TipoDeStatusEmprestimoExemplar statusEmprestimo = TipoDeStatusEmprestimoExemplar.valueOf(jButtonStatusEmprestimo.getText());
                     GeradorID gId = new GeradorID();
                     Livro livroExemplar = livro.getTituloLivro(jComboBoxLivro.getSelectedItem().toString());
-                    exemplar.incluir(new Exemplar(gId.getID(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, StatusReserva.LIVRE, txtDescricao.getText(), livroExemplar));
+                    exemplar.incluir(new Exemplar(gId.getID(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(jFormattedTextFieldPreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, StatusReserva.LIVRE, txtDescricao.getText(), livroExemplar));
 
                     gId.finalize();
                     habilitarBott(false);
@@ -533,7 +546,7 @@ public class TelaExemplar extends javax.swing.JFrame {
                     GeradorID gId = new GeradorID();
                     Livro livroExemplar = livro.getTituloLivro(jComboBoxLivro.getSelectedItem().toString());
 
-                    Exemplar atualExemplar = new Exemplar(antigoExemplar.getId(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(txtpreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, antigoExemplar.getStatusReserva(), txtDescricao.getText(), livroExemplar);
+                    Exemplar atualExemplar = new Exemplar(antigoExemplar.getId(), "" + jComboBoxAnoPublicacao.getSelectedItem(), Double.parseDouble(jFormattedTextFieldPreco.getText()), txtDataDeAquisicao.getText(), Integer.parseInt(txtEdicao.getText()), status, statusEmprestimo, antigoExemplar.getStatusReserva(), txtDescricao.getText(), livroExemplar);
                     exemplar.alterar(antigoExemplar, atualExemplar);
                     habilitarBott(false);
                     JOptionPane.showMessageDialog(null, "Exemplar Alterado!");
@@ -753,6 +766,7 @@ public class TelaExemplar extends javax.swing.JFrame {
     private javax.swing.JButton jButtonlistagem;
     private javax.swing.JComboBox<String> jComboBoxAnoPublicacao;
     private javax.swing.JComboBox<String> jComboBoxLivro;
+    private javax.swing.JFormattedTextField jFormattedTextFieldPreco;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -770,12 +784,11 @@ public class TelaExemplar extends javax.swing.JFrame {
     private javax.swing.JTextField txtBusca;
     private javax.swing.JFormattedTextField txtDataDeAquisicao;
     private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtEdicao;
-    private javax.swing.JTextField txtpreco;
+    private javax.swing.JFormattedTextField txtEdicao;
     // End of variables declaration//GEN-END:variables
 
     private void habilitarBott(boolean habilita) {
-        txtpreco.setEnabled(habilita);
+        jFormattedTextFieldPreco.setEnabled(habilita);
         txtDataDeAquisicao.setEnabled(habilita);
         txtEdicao.setEnabled(habilita);
         txtDescricao.setEnabled(habilita);
@@ -792,7 +805,7 @@ public class TelaExemplar extends javax.swing.JFrame {
         if (!habilita) {
             jComboBoxAnoPublicacao.removeAllItems();
             jComboBoxAnoPublicacao.addItem("Selecione");
-            txtpreco.setText("");
+            jFormattedTextFieldPreco.setText("");
             txtEdicao.setText("");
             txtDataDeAquisicao.setText("");
             txtDescricao.setText("");
@@ -820,7 +833,7 @@ public class TelaExemplar extends javax.swing.JFrame {
             jComboBoxLivro.addItem(livro);
             txtEdicao.setText(edicao);
             txtDataDeAquisicao.setText(dataAquisicao);
-            txtpreco.setText(preco);
+            jFormattedTextFieldPreco.setText(preco);
             jComboBoxAnoPublicacao.removeAllItems();
             jComboBoxAnoPublicacao.addItem(anoPublicacao);
             txtDescricao.setText(descricao);

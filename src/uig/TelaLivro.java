@@ -23,7 +23,7 @@ import modelos.interfaces.ICRUDLivro;
 
 public class TelaLivro extends javax.swing.JFrame {
 
-    ICRUDAutor autor = new AutorPersistencia("autor.txt");
+    ICRUDAutor autor = null;
     boolean incluirOn = false;
     ICRUDLivro livro = null;
     ICRUDEditora editora = null;
@@ -37,10 +37,10 @@ public class TelaLivro extends javax.swing.JFrame {
         jTableLivros.setModel(model);
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
-        livro = new LivroControle("livro.txt");
-        autor = new AutorControle("autor.txt");
-        editora = new EditoraControle("editora.txt");
-        areaDoLivro = new AreaDoLivroControle("areaDoLivro.txt");
+        livro = new LivroControle("./database/livro.txt");
+        autor = new AutorControle("./database/autor.txt");
+        editora = new EditoraControle("./database/editora.txt");
+        areaDoLivro = new AreaDoLivroControle("./database/areaDoLivro.txt");
 
     }
 

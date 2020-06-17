@@ -35,7 +35,7 @@ public class TelaUsuario extends javax.swing.JFrame {
             ImageIcon icone = new ImageIcon("src/icons/livro.png");
             this.setIconImage(icone.getImage());
             habilitaFormulario(false);
-            usuarioControle = new UsuarioControle("usuario.txt");
+            usuarioControle = new UsuarioControle("./database/usuario.txt");
             model = new UsuarioTableModel(new String[]{"Nome", "Login", "Status", "Tipo"});
             jTableUsuarios.setModel(model);
             model.update(usuarioControle.listagem());
@@ -111,9 +111,7 @@ public class TelaUsuario extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jLabelMensagemErroNome))
+                    .addComponent(jLabelMensagemErroNome)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabelNomdeDoUsuario)
                         .addComponent(jTextFieldNomdeDoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -520,7 +518,9 @@ public class TelaUsuario extends javax.swing.JFrame {
             habilitaFormulario(true);
             jTextFieldNomdeDoUsuario.setEditable(true);
             jTextFieldLogin.setEditable(true);
-            jTableUsuarios.setRowSelectionAllowed(false);
+            jTableUsuarios.setEnabled(false);
+            jTableUsuarios.getSelectionModel().removeSelectionInterval(0, jTableUsuarios.getRowCount());
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonIncluirActionPerformed
@@ -545,6 +545,8 @@ public class TelaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (JOptionPane.showConfirmDialog(null, "Deseja Cancelar?", "Cancelar", JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION) {
             habilitaFormulario(false);
+            jTableUsuarios.setEnabled(true);
+            jTableUsuarios.getSelectionModel().removeSelectionInterval(0, jTableUsuarios.getRowCount());
             if (jPasswordFieldSenha.getEchoChar() != '*') {
                 jPasswordFieldSenha.setEchoChar('*');
             }
@@ -573,7 +575,7 @@ public class TelaUsuario extends javax.swing.JFrame {
                 model.update(usuarioControle.listagem());
                 JOptionPane.showMessageDialog(null, "Usuário incluido com sucesso!");
                 habilitaFormulario(false);
-                jTableUsuarios.setRowSelectionAllowed(true);
+                jTableUsuarios.setEnabled(true);
             } else {
                 Usuario novoUsuario = new Usuario(nome, login, senha, (jButtonStatus.getText().equals("Ativo")) ? TipoDeStatus.ATIVO : TipoDeStatus.INATIVO, (jButtonTipoDeUsuario.getText().equals("Administrador")) ? TipoDeUsuario.ADMINISTRADOR : TipoDeUsuario.USUARIO);
                 String nomeDoUsuario = (String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0);
@@ -583,7 +585,9 @@ public class TelaUsuario extends javax.swing.JFrame {
                 model.update(usuarioControle.listagem());
                 JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso!");
                 habilitaFormulario(false);
-                jTableUsuarios.setRowSelectionAllowed(true);
+                jTableUsuarios.setEnabled(true);
+                jTableUsuarios.getSelectionModel().removeSelectionInterval(0, jTableUsuarios.getRowCount());
+
             }
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
@@ -600,11 +604,12 @@ public class TelaUsuario extends javax.swing.JFrame {
                 habilitaFormulario(true);
                 jTextFieldNomdeDoUsuario.setEditable(false);
                 jTextFieldLogin.setEditable(false);
+                jTableUsuarios.setEnabled(false);
 
                 String nomeDoUsuario = (String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0);
                 Usuario usuario = usuarioControle.getUsuario(nomeDoUsuario);
                 preencherForm(usuario);
-                jTableUsuarios.setRowSelectionAllowed(false);
+
             }
         } catch (Exception e) {
         }
@@ -618,6 +623,7 @@ public class TelaUsuario extends javax.swing.JFrame {
             } else {
                 if (JOptionPane.showConfirmDialog(null, "Deseja Deletar este usuário?", "Deletar Usuário", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     String nomeDoUsuario = (String) model.getValueAt(jTableUsuarios.getSelectedRow(), 0);
+                    jTableUsuarios.getSelectionModel().removeSelectionInterval(0, jTableUsuarios.getRowCount());
                     Usuario usuario = usuarioControle.getUsuario(nomeDoUsuario);
                     usuarioControle.deletar(usuario);
                     model.update(usuarioControle.listagem());
@@ -695,6 +701,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNomdeDoUsuarioKeyReleased
 
     public void habilitaFormulario(boolean habilita) {
+
         jTextFieldLogin.setEnabled(habilita);
         jTextFieldNomdeDoUsuario.setEnabled(habilita);
         jPasswordFieldConfirmarSenha.setEnabled(habilita);

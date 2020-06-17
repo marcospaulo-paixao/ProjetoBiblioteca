@@ -19,7 +19,7 @@ import modelos.utilidades.enums.StatusReserva;
 
 public class ExemplarPersistencia implements ICRUDExemplar {
 
-    ICRUDLivro livro = new LivroControle("livro.txt");
+    ICRUDLivro livro = new LivroControle("./database/livro.txt");
     String nomeDoArquivoNoDisco = null;
 
     public ExemplarPersistencia(String nomeDoArquivoNoDisco) {
@@ -37,8 +37,8 @@ public class ExemplarPersistencia implements ICRUDExemplar {
             try {
                 CreateServer comunicacao = new CreateServer();
                 comunicacao.getComunicacao().enviarMensagem("post", objExemplar.getClass().getSimpleName(), objExemplar.toString() + "\n");
-                comunicacao.getComunicacao().receberMensagem();
                 comunicacao.getComunicacao().fecharConexao();
+                bw.write(objExemplar.toString() + "\n");
             } catch (Exception e) {
                 bw.write(objExemplar.toString() + "\n");
             } finally {

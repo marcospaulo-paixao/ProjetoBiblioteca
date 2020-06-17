@@ -45,11 +45,11 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         try {
 
             initComponents();
-            controleColaborador = new ColaboradorControle("colaborador.txt");
-            controleExemplar = new ExemplarControle("exemplar.txt");
-            controleEmprestimo = new EmprestimoControle("emprestimo.txt");
-            controleDevolucao = new DevolucaoControle("devolucao.txt");
-            
+
+            controleColaborador = new ColaboradorControle("./database/colaborador.txt");
+            controleExemplar = new ExemplarControle("./database/exemplar.txt");
+            controleEmprestimo = new EmprestimoControle("./database/emprestimo.txt");
+            controleDevolucao = new DevolucaoControle("./database/devolucao.txt");
             modelColaborador = new ColaboradorTableModel(new String[]{"Nome", "Matricula"});
             jTableColaborador.setModel(modelColaborador);
 
@@ -821,11 +821,10 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                                     + "# Titulo do Exemplar :....... " + newEmprestimo.getExemplar().getLivro().getTitulo() + "\n"
                                     + "# Colaborador :................ " + newEmprestimo.getColaborador().getNome() + "\n"
                                     + "# E-mail:........................... " + newEmprestimo.getColaborador().getEmail() + "\n"
-                                    + "# Data da Renovação:..... " + newEmprestimo.getDataDoEmprestimo() + "\n"
+                                    + "# Data da Emprestimo:..... " + newEmprestimo.getDataDoEmprestimo() + "\n"
                                     + "# Data da Devoluçao:...... " + newEmprestimo.getDataDeDevolucao() + "\n"
                                     + "--------------------------------------------------------------------------------------------------------------------\n"
                                     + "\n----------------------------------«««« Biblioteca System »»»»---------------------------------------\n\n", "Comprovante", JOptionPane.PLAIN_MESSAGE);
-
                         }
                     }
                 } else {

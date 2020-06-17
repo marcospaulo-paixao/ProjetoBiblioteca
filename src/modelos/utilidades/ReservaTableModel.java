@@ -38,17 +38,22 @@ public class ReservaTableModel extends AbstractTableModel {
     public String getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return dados.get(rowIndex).getColaborador().getNome();
+                return dados.get(rowIndex).getId() + "";
             case 1:
-                return dados.get(rowIndex).getExemplar().getLivro().getTitulo();
+                return dados.get(rowIndex).getColaborador().getNome();
             case 2:
-                return dados.get(rowIndex).getExemplar().getId() + "";
+                return dados.get(rowIndex).getExemplar().getLivro().getTitulo();
             case 3:
-                return dados.get(rowIndex).getDataDaReserva();
+                return dados.get(rowIndex).getExemplar().getId()+"";
             case 4:
-                return dados.get(rowIndex).getExemplar().getEdicao() + "";
+                return dados.get(rowIndex).getPeriodo() + "";
             case 5:
-                return dados.get(rowIndex).getPeriodo() + " Dias";
+                return dados.get(rowIndex).getDataDaReserva();
+            case 6:
+                return dados.get(rowIndex).getExemplar().getEdicao() + "";
+            case 7:
+                return dados.get(rowIndex).getExemplar().getEdicao() + "";
+
             default:
                 throw new AssertionError();
         }

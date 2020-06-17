@@ -21,7 +21,7 @@ public class TelaAreaDoLivro extends javax.swing.JFrame {
         initComponents();
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
-        areaLivro = new AreaDoLivroControle("areaDoLivro.txt");
+        areaLivro = new AreaDoLivroControle("./database/areaDoLivro.txt");
         model = new AreaDoLivroTableModel(new String[]{"Descricao","Identificador"});
         jTableAreaLivro.setModel(model);
     }

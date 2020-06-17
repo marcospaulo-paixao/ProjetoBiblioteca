@@ -34,7 +34,7 @@ public class TelaDoColaborador extends javax.swing.JFrame {
         ImageIcon icone = new ImageIcon("src/icons/livro.png");
         this.setIconImage(icone.getImage());
         try {
-            colaboradorControler = new ColaboradorControle("colaborador.txt");
+            colaboradorControler = new ColaboradorControle("./database/colaborador.txt");
             model = new ColaboradorTableModel(new String[]{"Nome", "Matricula", "OAB", "E-mail", "Telefone", "Tipo De Colaborador", "Status"});
             jTableColaboradores.setModel(model);
 

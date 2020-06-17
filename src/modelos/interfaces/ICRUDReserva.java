@@ -7,7 +7,7 @@ public interface ICRUDReserva {
 
     void incluir(Reserva objeto) throws Exception;
 
-    void excluir(String nome) throws Exception;
+    void excluir(int id) throws Exception;
 
     ArrayList<Reserva> listagem() throws Exception;
 

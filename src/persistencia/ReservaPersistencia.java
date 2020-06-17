@@ -15,13 +15,14 @@ import modelos.interfaces.ICRUDColaborador;
 import modelos.utilidades.GeradorID;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.interfaces.ICRUDReserva;
+import modelos.utilidades.CreateServer;
 
 public class ReservaPersistencia implements ICRUDReserva {
 
     SimpleDateFormat data = new SimpleDateFormat("dd/mm/yyyy");
     String nomeDoAquivoNoDisco = "";
-    ICRUDExemplar exemplar = new ExemplarControle("exemplar.txt");
-    ICRUDColaborador colaborador = new ColaboradorControle("colaborador.txt");
+    ICRUDExemplar exemplar = new ExemplarControle("./database/exemplar.txt");
+    ICRUDColaborador colaborador = new ColaboradorControle("./database/colaborador.txt");
 
     public ReservaPersistencia(String nomeDoAquivoNoDisco) {
         this.nomeDoAquivoNoDisco = nomeDoAquivoNoDisco;
@@ -59,15 +60,25 @@ public class ReservaPersistencia implements ICRUDReserva {
             igId.finalize();
             FileWriter fw = new FileWriter(nomeDoAquivoNoDisco, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(objeto.toString() + "\n");
-            bw.close();
+
+            try {
+                CreateServer comunicacao = new CreateServer();
+                comunicacao.getComunicacao().enviarMensagem("post", objeto.getClass().getSimpleName(), objeto.toString() + "\n");
+                comunicacao.getComunicacao().fecharConexao();
+                bw.write(objeto.toString() + "\n");
+            } catch (Exception e) {
+                bw.write(objeto.toString() + "\n");
+            } finally {
+                bw.close();
+            }
+
         } catch (Exception e) {
             throw e;
         }
     }
 
     @Override
-    public void excluir(String nome) throws Exception {
+    public void excluir(int id) throws Exception {
         try {
             ArrayList<Reserva> listaReserva = listagem();
             FileWriter fr = new FileWriter(nomeDoAquivoNoDisco);
@@ -75,7 +86,7 @@ public class ReservaPersistencia implements ICRUDReserva {
 
             for (int pos = 0; pos < listaReserva.size(); pos++) {
                 Reserva aux = listaReserva.get(pos);
-                if (!nome.equalsIgnoreCase(aux.getColaborador().getNome())) {
+                if (id != aux.getId()) {
                     br.write(aux.toString() + "\n");
                 }
             }

@@ -22,9 +22,9 @@ import modelos.interfaces.ICRUDLivro;
 
 public class LivroPersistencia implements ICRUDLivro {
 
-    ICRUDAutor autor = new AutorControle("autor.txt");
-    ICRUDEditora editora = new EditoraControle("editora.txt");
-    ICRUDAreaDoLivro areaDoLivro = new AreaDoLivroControle("areaDoLivro.txt");
+    ICRUDAutor autor = new AutorControle("./database/autor.txt");
+    ICRUDEditora editora = new EditoraControle("./database/editora.txt");
+    ICRUDAreaDoLivro areaDoLivro = new AreaDoLivroControle("./database/areaDoLivro.txt");
 
     String nomeDoArquivoNoDisco = "";
 
@@ -47,13 +47,12 @@ public class LivroPersistencia implements ICRUDLivro {
             try {
                 CreateServer comunicacao = new CreateServer();
                 comunicacao.getComunicacao().enviarMensagem("post", livro.getClass().getSimpleName(), livro.toString() + "\n");
-                comunicacao.getComunicacao().receberMensagem();
                 comunicacao.getComunicacao().fecharConexao();
+                bw.write(  livro.toString() + "\n");
             } catch (Exception e) {
                 bw.write(livro.toString() + "\n");
             } finally {
                 bw.close();
-
             }
 
         } catch (Exception erroIncluir) {

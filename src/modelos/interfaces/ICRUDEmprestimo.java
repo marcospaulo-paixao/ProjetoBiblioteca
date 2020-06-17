@@ -39,4 +39,5 @@ public interface ICRUDEmprestimo {
      * @return @throws Exception
      */
     ArrayList<Emprestimo> listagem() throws Exception;
+    public Emprestimo getEmprestimoExe(int id) throws Exception;
 }

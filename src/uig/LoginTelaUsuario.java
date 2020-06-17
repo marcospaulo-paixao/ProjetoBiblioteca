@@ -22,7 +22,7 @@ public class LoginTelaUsuario extends javax.swing.JFrame {
      */
     public LoginTelaUsuario() {
         initComponents();
-         uc = new UsuarioControle("usuario.txt");
+         uc = new UsuarioControle("./database/usuario.txt");
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/icons/livro.png")).getImage());
     }
 
