@@ -54,7 +54,7 @@ public class ColaboradorTableModel extends AbstractTableModel {
                 return dados.get(rowIndex).getMatricula()+"";
 
             case 2:
-                return (dados.get(rowIndex).getOAB() != 0)? dados.get(rowIndex).getOAB() + "":"";
+                return (dados.get(rowIndex).getOAB() != 0)?dados.get(rowIndex).getUf() +dados.get(rowIndex).getOAB() + "":"";
             case 3:
                 return dados.get(rowIndex).getEmail();
             case 4:

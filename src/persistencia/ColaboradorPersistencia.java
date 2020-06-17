@@ -142,10 +142,11 @@ public class ColaboradorPersistencia implements ICRUDColaborador {
                 String email = vetor[4];
                 int ddd = Integer.parseInt(vetor[5]);
                 int telefone = Integer.parseInt(vetor[6]);
-
                 TipoDeColadoradores tipoDeColaborador = TipoDeColadoradores.valueOf(vetor[7]);
                 TipoDeStatus tipoDeStatus = TipoDeStatus.valueOf(vetor[8]);
-                Colaborador c = new Colaborador(matricula, nome, OAB, email, ddd, telefone, tipoDeColaborador, tipoDeStatus);
+                String uf = vetor[9];
+                Colaborador c = new Colaborador(matricula, nome, OAB, email, ddd, telefone, tipoDeColaborador, tipoDeStatus,uf);
+                
                 c.setId(id);
                 listaDeColaboradores.add(c);
             }
