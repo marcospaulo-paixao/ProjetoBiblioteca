@@ -1,9 +1,9 @@
 package modelos.classes;
 
 import java.util.Objects;
-import modelos.utilidades.StatusReserva;
-import modelos.utilidades.TipoDeStatus;
-import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
+import modelos.utilidades.enums.StatusReserva;
+import modelos.utilidades.enums.TipoDeStatus;
+import modelos.utilidades.enums.TipoDeStatusEmprestimoExemplar;
 
 public class Exemplar {
 
