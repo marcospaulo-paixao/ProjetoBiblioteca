@@ -9,6 +9,7 @@ import modelos.classes.AreaDoLivro;
 import modelos.utilidades.AreaDoLivroTableModel;
 import modelos.utilidades.GeradorID;
 import modelos.interfaces.ICRUDAreaDoLivro;
+import modelos.utilidades.CreateServer;
 
 public class TelaAreaDoLivro extends javax.swing.JFrame {
 
@@ -369,6 +370,13 @@ public class TelaAreaDoLivro extends javax.swing.JFrame {
 
     private void jButtonlistagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonlistagemActionPerformed
         imprimirNaGrid();
+        try {
+                CreateServer comunicacao = new CreateServer();
+                comunicacao.getComunicacao().enviarMensagem("get", areaLivro.getClass().getSimpleName(), areaLivro.toString() + "\n");
+                comunicacao.getComunicacao().receberMensagem();
+                comunicacao.getComunicacao().fecharConexao();
+            } catch (Exception e) {
+            }
     }//GEN-LAST:event_jButtonlistagemActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

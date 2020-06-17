@@ -7,7 +7,7 @@ public class CreateServer {
    private final ComunicadorTCP comunicacao;
 
     public CreateServer() throws IOException {
-        this.comunicacao = new ComunicadorTCP("127.0.0.1", 6789);
+        this.comunicacao = new ComunicadorTCP("192.168.1.5", 6789);
     }
 
     public ComunicadorTCP getComunicacao() {

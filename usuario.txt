@@ -1,4 +1,4 @@
-101;Anisberto dos Reis;anisberto;MTIz;ATIVO;USUARIO;
+101;Anisberto dos Reis;anisberto;MTIz;ATIVO;ADMINISTRADOR;
 101;Anisberto dos Reis;anisberto;TVRJeg==;ATIVO;USUARIO;
 137;David;david;WkdGMmFXUXVNVEl6;ATIVO;USUARIO;
 137;David;david;V2tkR01tRlhVWFZOVkVsNg==;ATIVO;USUARIO;

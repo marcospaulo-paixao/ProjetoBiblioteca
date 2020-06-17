@@ -1,4 +1,4 @@
-101;Anisberto dos Reis;anisberto;;ATIVO;ADMINISTRADOR;
+101;Anisberto dos Reis;anisberto;MTIz;ATIVO;ADMINISTRADOR;
 137;David;david;WkdGMmFXUXVNVEl6;ATIVO;USUARIO;
 265;Estrela;estrela;MTI=;ATIVO;USUARIO;
 109;Eugenio Messala;genio;MTIz;ATIVO;USUARIO;
