@@ -1,0 +1,5 @@
+203;Maria Candida;maria;;ATIVO;USUARIO;
+204;Anisberto Reis;anisberto;MTIzNA==;ATIVO;ADMINISTRADOR;
+205;Daniel Elyads;daniel;MTIzNA==;ATIVO;ADMINISTRADOR;
+206;Silvano Costa;silvano;MTIzNA==;INATIVO;USUARIO;
+209;Marcos Paulo Paixão;marcos;bXAzMDQwNDU=;ATIVO;ADMINISTRADOR;

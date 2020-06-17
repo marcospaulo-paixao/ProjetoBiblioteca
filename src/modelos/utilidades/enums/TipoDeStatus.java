@@ -3,22 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelos.utilidades;
+package modelos.utilidades.enums;
 
 /**
  *
  * @author marcos
  */
-public enum TipoDeColadoradores {
-    ADVOGADO(1), ESTAGIARIO(2),
-    FUNCIONARIO(3), INDEFINIDO(0);
-
+public enum TipoDeStatus {
+    /**
+     * #Atributos
+     */
+    ATIVO(0), INATIVO(1), INDEFINIDO(2);
+    
     int valor;
 
-    TipoDeColadoradores(int valor) {
+    /**
+     * #Metodos
+     */
+    /**
+     *
+     * @param valor
+     */
+    TipoDeStatus(int valor) {
         this.valor = valor;
     }
 
+    /**
+     *
+     * @return valor
+     */
     public int getValor() {
         return valor;
     }

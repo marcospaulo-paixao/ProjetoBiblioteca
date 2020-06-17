@@ -5,7 +5,8 @@
  */
 package modelos.classes;
 
-import modelos.utilidades.TipoDeStatus;
+import modelos.utilidades.enums.TipoDeStatus;
+import modelos.utilidades.enums.TipoDeUsuario;
 
 /**
  *
@@ -16,11 +17,12 @@ public class Usuario {
     /**
      * #Atributos
      */
-    private int id = 0;
-    private String nomeDoUsuario = "";
-    private String login = "";
-    private String senha = "";
-    private TipoDeStatus status = null;
+    protected int id = 0;
+    protected String nomeDoUsuario = "";
+    protected String login = "";
+    protected String senha = "";
+    protected TipoDeStatus status = null;
+    private TipoDeUsuario tipoDeUsuario =null;
 
     /**
      * #Métodos
@@ -34,23 +36,39 @@ public class Usuario {
         login = "";
         senha = "";
         status = null;
+        tipoDeUsuario =null;
     }
-
+    /**
+     * 
+     * @param objeto 
+     */
     public Usuario(Usuario objeto) {
         this.id = objeto.id;
         this.nomeDoUsuario = objeto.nomeDoUsuario;
         this.login = objeto.login;
         this.senha = objeto.senha;
         this.status = objeto.status;
+        tipoDeUsuario = objeto.tipoDeUsuario;
     }
-
-    public Usuario(String nomeDoUsuario, String login, String senha, TipoDeStatus status) {
+    /**
+     * 
+     * @param nomeDoUsuario
+     * @param login
+     * @param senha
+     * @param status 
+     * @param tipoDeUsuario 
+     */
+    public Usuario(String nomeDoUsuario, String login, String senha, TipoDeStatus status, TipoDeUsuario tipoDeUsuario) {
         this.nomeDoUsuario = nomeDoUsuario;
         this.login = login;
         this.senha = senha;
         this.status = status;
+        this.tipoDeUsuario =tipoDeUsuario;
     }
-
+    /**
+     * 
+     * @param toString 
+     */
     public Usuario(String toString) {
         String[] vetor = toString.split(";");
         this.id = Integer.parseInt(vetor[0]);
@@ -58,6 +76,7 @@ public class Usuario {
         this.login = vetor[2];
         this.senha = vetor[3];
         this.status = TipoDeStatus.valueOf(vetor[4]);
+        this.tipoDeUsuario = TipoDeUsuario.valueOf(vetor[5]);
     }
 
     /**
@@ -138,7 +157,22 @@ public class Usuario {
         saida += login + ";";
         saida += senha + ";";
         saida += status + ";";
+        saida += tipoDeUsuario.name()+ ";";
         return saida;
+    }
+
+    /**
+     * @return the tipoDeUsuario
+     */
+    public TipoDeUsuario getTipoDeUsuario() {
+        return tipoDeUsuario;
+    }
+
+    /**
+     * @param tipoDeUsuario the tipoDeUsuario to set
+     */
+    public void setTipoDeUsuario(TipoDeUsuario tipoDeUsuario) {
+        this.tipoDeUsuario = tipoDeUsuario;
     }
 
 }

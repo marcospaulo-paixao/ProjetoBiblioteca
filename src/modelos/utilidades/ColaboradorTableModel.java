@@ -5,6 +5,8 @@
  */
 package modelos.utilidades;
 
+import modelos.utilidades.enums.TipoDeStatus;
+import modelos.utilidades.enums.TipoDeColadoradores;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import modelos.classes.Colaborador;

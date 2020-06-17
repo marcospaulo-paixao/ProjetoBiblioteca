@@ -11,11 +11,11 @@ import modelos.classes.Exemplar;
 import modelos.classes.Livro;
 import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
-import modelos.utilidades.TipoDeStatus;
-import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
+import modelos.utilidades.enums.TipoDeStatus;
+import modelos.utilidades.enums.TipoDeStatusEmprestimoExemplar;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.interfaces.ICRUDLivro;
-import modelos.utilidades.StatusReserva;
+import modelos.utilidades.enums.StatusReserva;
 
 public class ExemplarPersistencia implements ICRUDExemplar {
 

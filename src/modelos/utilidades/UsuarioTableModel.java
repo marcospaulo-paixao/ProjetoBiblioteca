@@ -68,14 +68,16 @@ public class UsuarioTableModel extends AbstractTableModel {
      * @return
      */
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public String getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
             case 0:
                 return dados.get(rowIndex).getNomeDoUsuario();
             case 1:
                 return dados.get(rowIndex).getLogin();
             case 2:
-                return (dados.get(rowIndex).getStatus());
+                return dados.get(rowIndex).getStatus()+"";
+            case 3:
+                return dados.get(rowIndex).getTipoDeUsuario()+"";
             default:
                 throw new AssertionError();
         }
@@ -91,6 +93,21 @@ public class UsuarioTableModel extends AbstractTableModel {
             dados.add(usuario);
         }
         this.fireTableDataChanged();
+    }
+       public void update(String[] dadosSV) {
+        try {
+            ArrayList<Usuario> lista = new ArrayList<>();
+            for (int i = 0; i < dados.size(); i++) {
+                for (int j = 0; j < dadosSV.length; j++) {
+                    if (dados.get(i).getNomeDoUsuario().equals(dadosSV[j])) {
+                        lista.add(dados.get(i));
+                    }
+                }
+            }
+            update(lista);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }

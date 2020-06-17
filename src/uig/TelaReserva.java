@@ -18,11 +18,11 @@ import modelos.utilidades.ColaboradorTableModel;
 import modelos.utilidades.ExemplarTableModel;
 import modelos.utilidades.GeradorID;
 import modelos.utilidades.ReservaTableModel;
-import modelos.utilidades.TipoDeStatus;
-import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
+import modelos.utilidades.enums.TipoDeStatus;
+import modelos.utilidades.enums.TipoDeStatusEmprestimoExemplar;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.interfaces.ICRUDReserva;
-import modelos.utilidades.StatusReserva;
+import modelos.utilidades.enums.StatusReserva;
 
 public class TelaReserva extends javax.swing.JFrame {
 

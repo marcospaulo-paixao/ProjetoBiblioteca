@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import modelos.classes.Colaborador;
 import modelos.utilidades.ColaboradorTableModel;
 import modelos.interfaces.ICRUDColaborador;
-import modelos.utilidades.TipoDeColadoradores;
-import modelos.utilidades.TipoDeStatus;
+import modelos.utilidades.enums.TipoDeColadoradores;
+import modelos.utilidades.enums.TipoDeStatus;
 
 /**
  *

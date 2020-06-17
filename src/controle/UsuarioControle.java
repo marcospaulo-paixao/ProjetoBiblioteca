@@ -6,6 +6,8 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import modelos.classes.Usuario;
 import modelos.interfaces.ICRUDUsuario;
 import persistencia.UsuarioPersistencia;
@@ -67,9 +69,14 @@ public class UsuarioControle implements ICRUDUsuario {
      * @throws Exception
      */
     @Override
-    public ArrayList<Usuario> listar() throws Exception {
+    public ArrayList<Usuario> listagem() throws Exception {
         try {
-            return usuarioPersistencia.listar();
+            ArrayList<Usuario> listaDeUsuario = usuarioPersistencia.listagem();;
+            //Comparador de Strings
+            Comparator c = (Comparator<Usuario>) (Usuario o1, Usuario o2) -> o1.getNomeDoUsuario().compareToIgnoreCase(o2.getNomeDoUsuario());
+            //Biblioteca para ordenar por ordem alfabética
+            Collections.sort(listaDeUsuario, c);
+            return listaDeUsuario;
         } catch (Exception e) {
             throw e;
         }
@@ -100,9 +107,37 @@ public class UsuarioControle implements ICRUDUsuario {
     }
 
     @Override
-    public boolean validaUsuario(String login, String senha)throws Exception  {
+    public boolean validaUsuario(String login, String senha) throws Exception {
         try {
-            return  usuarioPersistencia.validaUsuario(login, senha);
+            return usuarioPersistencia.validaUsuario(login, senha);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public boolean validaAdministrador(String login, String senha) throws Exception {
+        try {
+            return usuarioPersistencia.validaAdministrador(login, senha);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public boolean verificarLogin(String login) throws Exception {
+        try {
+            return usuarioPersistencia.verificarLogin(login);
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    @Override
+    public boolean verificarNomeDoUsuario(String nome) throws Exception {
+         try {
+            return usuarioPersistencia.verificarNomeDoUsuario(nome);
         } catch (Exception e) {
             throw e;
         }
