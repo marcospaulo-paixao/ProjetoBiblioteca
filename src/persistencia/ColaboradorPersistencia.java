@@ -15,8 +15,8 @@ import modelos.classes.Colaborador;
 import modelos.interfaces.ICRUDColaborador;
 import modelos.utilidades.CreateServer;
 import modelos.utilidades.GeradorID;
-import modelos.utilidades.TipoDeColadoradores;
-import modelos.utilidades.TipoDeStatus;
+import modelos.utilidades.enums.TipoDeColadoradores;
+import modelos.utilidades.enums.TipoDeStatus;
 
 /**
  *

@@ -3,35 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelos.utilidades;
+package modelos.utilidades.enums;
 
 /**
  *
  * @author marcos
  */
-public enum TipoDeStatus {
-    /**
-     * #Atributos
-     */
-    ATIVO(0), INATIVO(1), INDEFINIDO(2);
-    
+public enum TipoDeUsuario {
+    USUARIO(1), ADMINISTRADOR(2);
+
     int valor;
 
-    /**
-     * #Metodos
-     */
-    /**
-     *
-     * @param valor
-     */
-    TipoDeStatus(int valor) {
+    TipoDeUsuario(int valor) {
         this.valor = valor;
     }
 
-    /**
-     *
-     * @return valor
-     */
     public int getValor() {
         return valor;
     }

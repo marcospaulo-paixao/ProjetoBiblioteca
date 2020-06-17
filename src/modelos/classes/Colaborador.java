@@ -6,8 +6,8 @@
 package modelos.classes;
 
 import modelos.utilidades.Telefone;
-import modelos.utilidades.TipoDeColadoradores;
-import modelos.utilidades.TipoDeStatus;
+import modelos.utilidades.enums.TipoDeColadoradores;
+import modelos.utilidades.enums.TipoDeStatus;
 
 /**
  *

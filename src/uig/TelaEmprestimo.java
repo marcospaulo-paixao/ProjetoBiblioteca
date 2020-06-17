@@ -20,8 +20,8 @@ import modelos.utilidades.EmprestimosTableModel;
 import modelos.utilidades.ExemplarTableModel;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.utilidades.Data;
-import modelos.utilidades.StatusReserva;
-import modelos.utilidades.TipoDeStatusEmprestimoExemplar;
+import modelos.utilidades.enums.StatusReserva;
+import modelos.utilidades.enums.TipoDeStatusEmprestimoExemplar;
 
 
 public class TelaEmprestimo extends javax.swing.JFrame {
@@ -45,6 +45,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         try {
 
             initComponents();
+
             controleColaborador = new ColaboradorControle("./database/colaborador.txt");
             controleExemplar = new ExemplarControle("./database/exemplar.txt");
             controleEmprestimo = new EmprestimoControle("./database/emprestimo.txt");

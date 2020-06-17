@@ -41,7 +41,7 @@ public interface ICRUDUsuario {
      * @return ArrayList<Usuario>
      * @throws Exception
      */
-    ArrayList<Usuario> listar() throws Exception;
+    ArrayList<Usuario> listagem() throws Exception;
 
     /**
      *
@@ -58,4 +58,27 @@ public interface ICRUDUsuario {
      * @return 
      */
     boolean validaUsuario(String login,String senha)throws Exception;
+   
+    /**
+     * 
+     * @param login
+     * @param senha
+     * @return
+     * @throws Exception 
+     */
+    boolean validaAdministrador(String login,String senha)throws Exception;
+    /**
+     * 
+     * @param  login
+     * @return 
+     * @throws Exception 
+     */ 
+    public boolean verificarLogin(String login) throws Exception ;
+    /**
+     * 
+     * @param nome
+     * @return 
+     * @throws Exception 
+     */ 
+    public boolean verificarNomeDoUsuario(String nome) throws Exception ;
 }
