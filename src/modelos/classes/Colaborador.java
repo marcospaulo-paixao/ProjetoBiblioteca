@@ -26,7 +26,7 @@ public class Colaborador {
     private Telefone telefone = null;
     private TipoDeColadoradores tipoDeColaborador = null;
     private TipoDeStatus tipoDeStatus = null;
-
+    private String uf = null; 
     /**
      * #Métedos
      */
@@ -50,19 +50,24 @@ public class Colaborador {
      * @param nome
      * @param OAB
      * @param email
+     * @param ddd
      * @param telefone
      * @param tipoDeColaborador
      * @param tipoDeStatus
+     * @param uf
      */
     public Colaborador(int matricula, String nome, int OAB, String email,
-            int ddd,int telefone, TipoDeColadoradores tipoDeColaborador, TipoDeStatus tipoDeStatus) {
+            int ddd,int telefone, TipoDeColadoradores tipoDeColaborador, TipoDeStatus tipoDeStatus,String uf) throws Exception{
+
+         this.OAB = OAB;
         this.matricula = matricula;
         this.nome = nome;
-        this.OAB = OAB;
+       
         this.email = email;
         this.telefone =new Telefone(ddd,telefone);
         this.tipoDeColaborador = tipoDeColaborador;
         this.tipoDeStatus = tipoDeStatus;
+        this.uf = uf;
     }
 
     /**
@@ -78,6 +83,7 @@ public class Colaborador {
         this.telefone = objeto.telefone;
         this.tipoDeColaborador = objeto.tipoDeColaborador;
         this.tipoDeStatus = objeto.tipoDeStatus;
+        this.uf = objeto.uf;
 
     }
 
@@ -162,7 +168,7 @@ public class Colaborador {
      * @param telefone the telefone to set
      */
     public void setTelefone(int ddd,int telefone) {
-        this.telefone = new Telefone(ddd,telefone);
+        this.setTelefone(new Telefone(ddd,telefone));
     }
 
     /**
@@ -204,8 +210,31 @@ public class Colaborador {
         saida += telefone.getNumero() + ";";
         saida += tipoDeColaborador + ";";
         saida += tipoDeStatus + ";";
+        saida += getUf() + ";";
 
         return saida;
     }
 
-}
+    /**
+     * @param telefone the telefone to set
+     */
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
+    }
+
+    /**
+     * @return the uf
+     */
+    public String getUf() {
+        return uf;
+    }
+
+    /**
+     * @param uf the uf to set
+     */
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+    
+
+    }

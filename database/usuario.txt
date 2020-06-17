@@ -2,7 +2,7 @@
 137;David;david;WkdGMmFXUXVNVEl6;ATIVO;USUARIO;
 265;Estrela;estrela;MTI=;ATIVO;USUARIO;
 109;Eugenio Messala;genio;MTIz;ATIVO;USUARIO;
-102;Marcos Paulo Paixão;marcos;MTIzNA==;ATIVO;ADMINISTRADOR;
+102;Marcos Paulo Paixão;marcos;bXAzMDQwNDU=;ATIVO;ADMINISTRADOR;
 95;Murilo Murici;murilo;MTIzNA==;INATIVO;USUARIO;
 96;Paula Barboza;paula;MTIzNA==;INATIVO;USUARIO;
 21;Professor Eugenio;porfessor;MTIz;ATIVO;USUARIO;
