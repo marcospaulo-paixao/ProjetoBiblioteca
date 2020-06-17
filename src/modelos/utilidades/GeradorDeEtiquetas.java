@@ -14,9 +14,8 @@ public class GeradorDeEtiquetas {
     ICRUDLivro livro = new LivroControle("./database/livro.txt");
 
     public GeradorDeEtiquetas(Exemplar livro, String armario) throws Exception {
-        Exemplar exemplarEtiqueta = exemplar.getExemplar(livro.getId());
-        this.numeroDaEtiqueta = "0." + exemplarEtiqueta.getLivro().getAreaDoLivro().getId() + " - "
-                + armario + " - " + exemplarEtiqueta.getLivro().getIsbn();
+        this.numeroDaEtiqueta = "0." + livro.getLivro().getAreaDoLivro().getId() + " - "
+                + armario + " - " + livro.getLivro().getIsbn();
     }
 
     public GeradorDeEtiquetas(String codigoDoLivro, String armario) {

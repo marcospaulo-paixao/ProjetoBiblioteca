@@ -138,7 +138,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Selecione o Identificador do Exemplar"/>
+            <Property name="text" type="java.lang.String" value="Selecione o  Exemplar"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxLivrosEtiqueta">

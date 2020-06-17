@@ -4,6 +4,7 @@ import controle.ColaboradorControle;
 import controle.DevolucaoControle;
 import controle.EmprestimoControle;
 import controle.ExemplarControle;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,10 +20,10 @@ import modelos.utilidades.ColaboradorTableModel;
 import modelos.utilidades.EmprestimosTableModel;
 import modelos.utilidades.ExemplarTableModel;
 import modelos.interfaces.ICRUDExemplar;
+import modelos.utilidades.CalculoDeMulta;
 import modelos.utilidades.Data;
 import modelos.utilidades.enums.StatusReserva;
 import modelos.utilidades.enums.TipoDeStatusEmprestimoExemplar;
-
 
 public class TelaEmprestimo extends javax.swing.JFrame {
 
@@ -839,6 +840,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
     }
 
     public void devolverExemplar() throws Exception {
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
         try {
             if (jTableDadosEmprestimos.getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(null, "Selecione o emprestimo a ser devolvido!", "Selecione", JOptionPane.ERROR_MESSAGE);
@@ -858,7 +860,23 @@ public class TelaEmprestimo extends javax.swing.JFrame {
                 atualizaTables();
                 jTextFieldNomeColaborador.setText("");
                 jTextFieldTituloDoExemplar.setText("");
-                JOptionPane.showMessageDialog(null, "Exemplar devolvido com sucesso!");
+                CalculoDeMulta multa = new CalculoDeMulta(2, 7);
+                double multaEmprestimo = multa.taxaPorAtraso(formatDate.parse(emprestimo.getDataDoEmprestimo()));
+                if (multaEmprestimo < 0) {
+                    multaEmprestimo = 0;
+                    JOptionPane.showMessageDialog(null, "Exemplar devolvido com sucesso!");
+                    JOptionPane.showMessageDialog(null, "O COMPROVANTE DO EMPRÉSTIMO FOI ENVIADO POR E-MAIL\n"
+                            + "--------------------------------------------------------------------------------------------------------------------\n"
+                            + "# Titulo do Exemplar :....... " + emprestimo.getExemplar().getLivro().getTitulo() + "\n"
+                            + "# Colaborador :................ " + emprestimo.getColaborador().getNome() + "\n"
+                            + "# E-mail:........................... " + emprestimo.getColaborador().getEmail() + "\n"
+                            + "# Data da Emprestimo:..... " + emprestimo.getDataDoEmprestimo() + "\n"
+                            + "# Data da Devoluçao:...... " + emprestimo.getDataDeDevolucao() + "\n"
+                            + "# VALOR DA MULTA:..... " + multaEmprestimo + "\n"
+                            + "--------------------------------------------------------------------------------------------------------------------\n"
+                            + "\n----------------------------------«««« Biblioteca System »»»»---------------------------------------\n\n", "Comprovante", JOptionPane.PLAIN_MESSAGE);
+
+                }
             }
         } catch (Exception e) {
             throw e;

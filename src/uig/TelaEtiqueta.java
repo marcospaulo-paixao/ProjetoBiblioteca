@@ -4,6 +4,8 @@ package uig;
 //import com.itextpdf.text.Paragraph;
 //import com.itextpdf.text.pdf.PdfWriter;
 
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import controle.ExemplarControle;
 import controle.LivroControle;
 import java.awt.Desktop;
@@ -15,7 +17,6 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelos.classes.Exemplar;
-import modelos.classes.Livro;
 import modelos.utilidades.GeradorDeEtiquetas;
 import modelos.interfaces.ICRUDExemplar;
 import modelos.interfaces.ICRUDLivro;
@@ -63,7 +64,7 @@ public class TelaEtiqueta extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Gerador de Etiquetas"));
 
-        jLabel1.setText("Selecione o Identificador do Exemplar");
+        jLabel1.setText("Selecione o  Exemplar");
 
         jComboBoxLivrosEtiqueta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         jComboBoxLivrosEtiqueta.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
@@ -224,19 +225,23 @@ public class TelaEtiqueta extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxLivrosEtiquetaPopupMenuWillBecomeVisible
 
     private void jButtonGerarEtiquetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarEtiquetaActionPerformed
-//        com.itextpdf.text.Document pdf = new com.itextpdf.text.Document();
+        com.itextpdf.text.Document pdf = new com.itextpdf.text.Document();
         try {
             if (!jTextFieldArmario.getText().isEmpty() && jComboBoxLivrosEtiqueta.getSelectedItem() != "Selecione") {
-//                Exemplar exemplarBusca = exemplar.getExemplar(Integer.parseInt("" + jComboBoxLivrosEtiqueta.getSelectedItem()));
-//                gEtiqueta = new GeradorDeEtiquetas(exemplarBusca, jTextFieldArmario.getText());
-//                PdfWriter.getInstance(pdf, new FileOutputStream("etiqueta.pdf"));
-//
-//                pdf.open();
-//                pdf.add(new Paragraph("                                                      Biblioteca System - SENAI FATESG"));
-//                pdf.add(new Paragraph("                                                                PROJETO INTEGRADOR"));
-//                pdf.add(new Paragraph("          Sistema Gestor de Biblioteca do Escritório de Advocacia e Associados (SGBEA)            "));
-//                pdf.add(new Paragraph("        " + gEtiqueta.toString()));
-//                Desktop.getDesktop().open(new File("etiqueta.pdf"));
+
+                String indexSelect = (String) jComboBoxLivrosEtiqueta.getSelectedItem();
+                String iten[] = indexSelect.split("-");
+                Exemplar exemplarBusca = exemplar.getExemplar(Integer.parseInt(iten[0]));
+
+                gEtiqueta = new GeradorDeEtiquetas(exemplarBusca, jTextFieldArmario.getText());
+                PdfWriter.getInstance(pdf, new FileOutputStream("etiqueta.pdf"));
+
+                pdf.open();
+                pdf.add(new Paragraph("                                                      Biblioteca System - SENAI FATESG"));
+                pdf.add(new Paragraph("                                                                PROJETO INTEGRADOR"));
+                pdf.add(new Paragraph("          Sistema Gestor de Biblioteca do Escritório de Advocacia e Associados (SGBEA)            "));
+                pdf.add(new Paragraph("        " + gEtiqueta.toString()));
+                Desktop.getDesktop().open(new File("etiqueta.pdf"));
             } else {
                 JOptionPane.showMessageDialog(null, "Sete o Identificador e inclua a localização!");
             }
@@ -250,7 +255,7 @@ public class TelaEtiqueta extends javax.swing.JFrame {
             jTextFieldTitulo.setText("");
             jTextFieldDescricao.setText("");
             jButtonGerarEtiqueta.setEnabled(false);
-//            pdf.close();
+            pdf.close();
         }
 
     }//GEN-LAST:event_jButtonGerarEtiquetaActionPerformed
@@ -258,7 +263,7 @@ public class TelaEtiqueta extends javax.swing.JFrame {
     private void jButtonBuscarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarExemplarActionPerformed
         if (!jComboBoxLivrosEtiqueta.getSelectedItem().equals("Selecione") || !jComboBoxLivrosEtiqueta.equals("Selecione o Identificador")) {
             try {
-                jButtonGerarEtiqueta.setEnabled(true)  ;
+                jButtonGerarEtiqueta.setEnabled(true);
                 String indexSelect = (String) jComboBoxLivrosEtiqueta.getSelectedItem();
                 String iten[] = indexSelect.split("-");
                 Exemplar exemplarBusca = exemplar.getExemplar(Integer.parseInt(iten[0]));
